@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- 環境設定ファイル -->
+  <config-file file="common.config" />
+  <config-file file="env.config" />
+
+  <!-- データベース設定 -->
+  <import file="nablarch/core/db-base.xml" />
+  <import file="data-source.xml" />
+
+  <!-- スレッドコンテキストハンドラ -->
+  <import file="nablarch/webui/threadcontext-for-webui-in-sessionstore.xml"/>
+
+  <!--パッケージマッピングの設定 -->
+  <component name="packageMapping" class="nablarch.integration.router.PathOptionsProviderRoutesMapping">
+    <property name="pathOptionsProvider">
+      <component class="nablarch.integration.router.jaxrs.JaxRsPathOptionsProvider">
+        <property name="applicationPath" value="${nablarch.webApi.applicationPath}"/>
+        <property name="basePackage" value="${nablarch.commonProperty.basePackage}"/>
+      </component>
+    </property>
+    <property name="methodBinderFactory">
+      <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
+        <property name="handlerList">
+          <component class="nablarch.integration.jaxrs.jersey.JerseyJaxRsHandlerListFactory"/>
+        </property>
+      </component>
+    </property>
+    <property name="delegateFactory">
+      <component class="nablarch.fw.handler.SystemRepositoryDelegateFactory"/>
+    </property>
+  </component>
+
+  <!-- Bean Validationのメッセージ構築 -->
+  <component name="messageInterpolator" class="org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator"/>
+
+  <!-- Flyway設定 -->
+  <component name="dbMigration" class="com.example.system.nablarch.FlywayExecutor">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="locations" value="${flyway.locations}" />
+    <property name="cleanBeforeMigrate" value="${flyway.cleanBeforeMigrate}"/>
+  </component>
+
+  <!-- ハンドラキュー構成 -->
+  <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
+    <property name="handlerQueue">
+      <list>
+        <component class="nablarch.fw.web.handler.HttpCharacterEncodingHandler"/>
+
+        <component class="nablarch.fw.handler.GlobalErrorHandler"/>
+
+        <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
+
+        <component class="nablarch.fw.jaxrs.JaxRsResponseHandler"/>
+
+        <component-ref name="threadContextHandler"/>
+
+        <component-ref name="dbConnectionManagementHandler"/>
+
+        <component-ref name="transactionManagementHandler"/>
+
+        <component-ref name="packageMapping"/>
+      </list>
+    </property>
+  </component>
+
+  <!-- 初期化が必要なコンポーネント -->
+  <component name="initializer" class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <component-ref name="packageMapping" />
+        <component-ref name="dbMigration" />
+      </list>
+    </property>
+  </component>
+
+  <!-- 廃棄が必要なコンポーネント -->
+  <component name="disposer" class="nablarch.core.repository.disposal.BasicApplicationDisposer">
+    <property name="disposableList">
+      <list>
+        <component class="nablarch.core.repository.disposal.DisposableAdaptor">
+          <property name="target" ref="dataSource" />
+        </component>
+      </list>
+    </property>
+  </component>
+
+</component-configuration>

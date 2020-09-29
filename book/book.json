@@ -1,0 +1,18 @@
+{
+  "root": "./source",
+  "structure": {
+    "readme": "index.md",
+    "summary": "README.md"
+  },
+  "plugins": [
+    "page-toc-button",
+    "anchors",
+    "hints"
+  ],
+  "pluginsConfig": {
+    "page-toc-button": {
+      "maxTocDepth": 2,
+      "minTocSize": 2
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.openapi-generator-ignore
+apis/TodosApi.ts
+apis/UsersApi.ts
+apis/index.ts
+index.ts
+models/InlineObject.ts
+models/InlineObject1.ts
+models/InlineObject2.ts
+models/InlineObject3.ts
+models/InlineResponse200.ts
+models/Todo.ts
+models/index.ts
+runtime.ts

@@ -1,0 +1,19 @@
+{
+  "name": "book",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "honkit serve",
+    "build": "honkit build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gitbook-plugin-anchors": "^0.7.1",
+    "gitbook-plugin-hints": "^1.0.2",
+    "gitbook-plugin-page-toc-button": "^0.1.1",
+    "honkit": "^3.6.5"
+  },
+  "dependencies": {}
+}

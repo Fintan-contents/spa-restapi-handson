@@ -1,0 +1,61 @@
+.Login_content {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  text-align: center;
+}
+.Login_box {
+  width: 50%;
+}
+.Login_title {
+  height: 70px;
+}
+.Login_title h1 {
+  margin: 10px 0;
+}
+.Login_form {
+  width: 50%;
+  padding: 0 25%;
+}
+
+.Login_item {
+  margin: 20px 0;
+  height: 75px;
+}
+.Login_item input {
+  width: 100%;
+  border-radius: 5px;
+  padding: 8px;
+  border: solid 1px lightgray;
+  background-color: #fafbfc;
+  font-size: 16px;
+  margin-top: 10px;
+  outline: none;
+}
+.Login_item input:focus {
+  background-color: white;
+}
+.Login_label {
+  text-align: left;
+}
+
+.Login_buttonGruop {
+  text-align: center;
+  margin-top: 40px;
+}
+.Login_button {
+  width: 175px;
+  cursor: pointer;
+  line-height: 1;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  background-color: darkgreen;
+  border-radius: 5px;
+  padding: 15px 30px;
+}
+.Login_button:hover {
+  background-color: green;
+}

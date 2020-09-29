@@ -1,0 +1,36 @@
+.PageHeader_header {
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  border-bottom: solid 1px black;
+  background: black;
+}
+.PageHeader_title {
+  color: white;
+  font-size: 1.5rem;
+}
+.PageHeader_header a {
+  text-decoration: none;
+}
+.PageHeader_nav {
+  display: flex;
+  list-style: none;
+}
+.PageHeader_nav li {
+  margin-left: 30px;
+  color: white;
+}
+.PageHeader_nav a {
+  color: white;
+}
+.PageHeader_nav button,
+.PageHeader_nav button:active,
+.PageHeader_nav button:hover
+{
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  color: white;
+}

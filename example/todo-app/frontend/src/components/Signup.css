@@ -1,0 +1,61 @@
+.Signup_content {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  text-align: center;
+}
+.Signup_box {
+  width: 50%;
+}
+.Signup_title {
+  height: 70px;
+}
+.Signup_title h1 {
+  margin: 10px 0;
+}
+.Signup_form {
+  width: 50%;
+  padding: 0 25%;
+}
+
+.Signup_item {
+  margin: 20px 0;
+  height: 75px;
+}
+.Signup_item input {
+  width: 100%;
+  border-radius: 5px;
+  padding: 8px;
+  border: solid 1px lightgray;
+  background-color: #fafbfc;
+  font-size: 16px;
+  margin-top: 10px;
+  outline: none;
+}
+.Signup_item input:focus {
+  background-color: white;
+}
+.Signup_label {
+  text-align: left;
+}
+
+.Signup_buttonGroup {
+  text-align: center;
+  margin-top: 40px;
+}
+.Signup_button {
+  width: 175px;
+  cursor: pointer;
+  line-height: 1;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  background-color: darkgreen;
+  border-radius: 5px;
+  padding: 15px 30px;
+}
+.Signup_button:hover {
+  background-color: green;
+}

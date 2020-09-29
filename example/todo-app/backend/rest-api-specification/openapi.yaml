@@ -1,0 +1,286 @@
+openapi: 3.0.3
+info:
+  title: ToDo REST API
+  version: '1.0.0'
+  description: サービス開発ハンズオンで作成するToDoアプリのREST API。
+tags:
+  - name: users
+    description: ユーザー認証
+  - name: todos
+    description: ToDo管理
+servers:
+  - url: 'http://localhost:9080'
+paths:
+  /api/todos:
+    get:
+      summary: ToDo一覧の取得
+      description: >
+        登録しているToDoを全て取得する。
+      tags:
+        - todos
+      operationId: getTodos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+              examples:
+                example:
+                  value:
+                    - id: 2001
+                      text: やること１
+                      completed: true
+                    - id: 2002
+                      text: やること２
+                      completed: false
+        '403':
+          description: Forbidden
+    post:
+      summary: ToDoの登録
+      tags:
+        - todos
+      description: >
+        ToDoを登録する。
+      operationId: postTodo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: ToDoのタイトル
+              required:
+                - text
+              additionalProperties: false
+            examples:
+              example:
+                value:
+                  text: やること３
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+              examples:
+                example:
+                  value:
+                    id: 2003
+                    text: やること３
+                    completed: false
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+  '/api/todos/{todoId}':
+    parameters:
+      - name: todoId
+        in: path
+        description: ToDoのID
+        required: true
+        schema:
+          type: number
+        example: '2002'
+    put:
+      summary: ToDoステータスの更新
+      description: >
+        ToDoのステータスを更新する。
+      tags:
+        - todos
+      operationId: putTodo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                completed:
+                  type: boolean
+                  description: ToDoのステータス
+              required:
+                - completed
+              additionalProperties: false
+            examples:
+              example:
+                value:
+                  completed: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+              examples:
+                example:
+                  value:
+                    id: 2002
+                    text: やること２
+                    completed: true
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+    delete:
+      summary: ToDoの削除
+      description: >
+        登録しているToDoを削除する。
+      tags:
+        - todos
+      operationId: deleteTodo
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+  /api/signup:
+    post:
+      summary: アカウントの登録
+      description: >
+        ToDoアプリを利用するのに必要となるユーザーアカウントを登録する。
+        **ユーザー名**は識別できるように一意である必要がある。
+      tags:
+        - users
+      operationId: signup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  description: ユーザー名
+                password:
+                  type: string
+                  description: パスワード
+              required:
+                - userName
+                - password
+              additionalProperties: false
+            examples:
+              example:
+                value:
+                  userName: test1
+                  password: password
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '409':
+          description: Conflict
+  /api/login:
+    post:
+      summary: ログイン
+      description: >
+        ユーザー情報で認証を行い、認証に成功した場合はログインする。
+        一部のREST APIを利用するためには、このREST APIを利用して事前にログインしておく必要がある。
+        ログイン状態は、ログアウトするREST APIを呼び出すか、一定時間が経過するまで継続する。
+      tags:
+        - users
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  description: ユーザー名
+                password:
+                  type: string
+                  description: パスワード
+              required:
+                - userName
+                - password
+              additionalProperties: false
+            examples:
+              example:
+                value:
+                  userName: test1
+                  password: password
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+  /api/logout:
+    post:
+      summary: ログアウト
+      description: >
+        ログイン中である場合、ログアウトする。
+      tags:
+        - users
+      operationId: logout
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+  /api/csrf_token:
+    get:
+      summary: CSRFトークンの取得
+      description: >
+        HTTPヘッダに設定するためのCSRFトークンを取得する。
+      tags:
+        - users
+      operationId: getCsrfToken
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  csrfTokenHeaderName:
+                    type: string
+                    description: CSRFトークン送信用ヘッダー名
+                  csrfTokenValue:
+                    type: string
+                    description: CSRFトークン値
+                required:
+                  - csrfTokenHeaderName
+                  - csrfTokenValue
+              examples:
+                example:
+                  value:
+                    csrfTokenHeaderName: X-CSRF-TOKEN
+                    csrfTokenValue: xxxxxxxxxxxxxx
+components:
+  schemas:
+    Todo:
+      title: Todo
+      type: object
+      description: ToDo情報
+      properties:
+        id:
+          type: integer
+          description: ToDoのID
+        text:
+          type: string
+          description: ToDoのタイトル
+        completed:
+          type: boolean
+          description: ToDoのステータス
+      required:
+        - id
+        - text
+        - completed
+      additionalProperties: false
+  securitySchemes: {}

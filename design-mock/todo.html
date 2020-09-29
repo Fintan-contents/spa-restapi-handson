@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDoアプリ</title>
+  <link rel="stylesheet" type="text/css" href="todo.css" />
+</head>
+<body>
+  <header class="PageHeader_header">
+    <h1 class="PageHeader_title">Todoアプリ</h1>
+    <nav>
+      <ul class="PageHeader_nav">
+        <li>テストユーザさん</li>
+        <li>ログアウト</li>
+      </ul>
+    </nav>
+  </header>
+  <div class="TodoBoard_content">
+    <div class="TodoForm_content">
+      <form class="TodoForm_form">
+        <div class="TodoForm_input">
+          <input type="text" placeholder="タスクを入力してください"/>
+        </div>
+        <div class="TodoForm_button">
+          <button type="button">追加</button>
+        </div>
+      </form>
+    </div>
+    <div class="TodoFilter_content">
+      <button class="TodoFilter_buttonSelected">全て</button>
+      <button class="TodoFilter_buttonUnselected">未完了のみ</button>
+      <button class="TodoFilter_buttonUnselected">完了のみ</button>
+    </div>
+
+    <ul class="TodoList_list">
+      <li class="TodoItem_item">
+        <div class="TodoItem_todo">
+          <label>
+            <input type="checkbox" class="TodoItem_checkbox" checked="checked" />
+            <span>洗い物をする</span>
+          </label>
+        </div>
+        <div class="TodoItem_delete">
+          <button class="TodoItem_button">x</button>
+        </div>
+      </li>
+      <li class="TodoItem_item">
+        <div class="TodoItem_todo">
+          <label>
+            <input type="checkbox" class="TodoItem_checkbox" />
+            <span>洗濯物を干す</span>
+          </label>
+        </div>
+        <div class="TodoItem_delete">
+          <button class="TodoItem_button">x</button>
+        </div>
+      </li>
+      <li class="TodoItem_item">
+        <div class="TodoItem_todo">
+          <label>
+            <input type="checkbox" class="TodoItem_checkbox" />
+            <span>買い物へ行く</span>
+          </label>
+        </div>
+        <div class="TodoItem_delete">
+          <button class="TodoItem_button">x</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+.Welcome_content {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+.Welcome_title {
+  font-size: 60px;
+}
+
+.Welcome_buttonGroup {
+  text-align: center;
+}
+.Welcome_button {
+  width: 175px;
+  cursor: pointer;
+  line-height: 1;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  background-color: darkgreen;
+  border-radius: 5px;
+  padding: 15px 30px;
+}
+.Welcome_button:hover {
+  background-color: green;
+}

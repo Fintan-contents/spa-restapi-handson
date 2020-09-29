@@ -1,0 +1,12 @@
+pages:
+    image: node:12.18.2-slim
+    only:
+      - master
+    script:
+      - cd book
+      - npm ci
+      - npm run build
+      - mv _book ../public
+    artifacts:
+      paths:
+        - public
