@@ -1,0 +1,997 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>ToDo状態の更新 · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.5">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../todo-filter/" />
+    
+    
+    <link rel="prev" href="../todo-add/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    この資料について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../intro/">
+            
+                <a href="../../../intro/">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../setup/">
+            
+                <a href="../../../setup/">
+            
+                    
+                    ハンズオンの準備
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../setup/install/">
+            
+                <a href="../../../setup/install/">
+            
+                    
+                    開発環境の準備
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../setup/download/">
+            
+                <a href="../../../setup/download/">
+            
+                    
+                    資料のダウンロード
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../todo-spec/">
+            
+                <a href="../../../todo-spec/">
+            
+                    
+                    ToDoアプリの仕様説明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../todo-project/">
+            
+                <a href="../../../todo-project/">
+            
+                    
+                    ToDoアプリプロジェクトの作成
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../todo-project/project/">
+            
+                <a href="../../../todo-project/project/">
+            
+                    
+                    プロジェクトの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../todo-project/frontend/">
+            
+                <a href="../../../todo-project/frontend/">
+            
+                    
+                    フロントエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../todo-project/backend/">
+            
+                <a href="../../../todo-project/backend/">
+            
+                    
+                    バックエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../openapi/">
+            
+                <a href="../../../openapi/">
+            
+                    
+                    OpenAPIドキュメントの利用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../openapi/document/">
+            
+                <a href="../../../openapi/document/">
+            
+                    
+                    ドキュメントの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../../openapi/client/">
+            
+                <a href="../../../openapi/client/">
+            
+                    
+                    クライアントコードの生成
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    ToDo管理の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="../todo-page/">
+            
+                <a href="../todo-page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="../component/">
+            
+                <a href="../component/">
+            
+                    
+                    コンポーネントの分割
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.3" data-path="../api/">
+            
+                <a href="../api/">
+            
+                    
+                    REST APIクライアントの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.4" data-path="../cors/">
+            
+                <a href="../cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.5" data-path="../mock/">
+            
+                <a href="../mock/">
+            
+                    
+                    モックサーバの起動
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.6" data-path="../todo-list/">
+            
+                <a href="../todo-list/">
+            
+                    
+                    ToDoの一覧表示
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.7" data-path="../todo-add/">
+            
+                <a href="../todo-add/">
+            
+                    
+                    ToDoの登録
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.1.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    ToDo状態の更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.9" data-path="../todo-filter/">
+            
+                <a href="../todo-filter/">
+            
+                    
+                    ToDo一覧の絞り込み
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../backend/">
+            
+                <a href="../../backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../../backend/todo-list/">
+            
+                <a href="../../backend/todo-list/">
+            
+                    
+                    ToDo一覧取得のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../../backend/todo-add/">
+            
+                <a href="../../backend/todo-add/">
+            
+                    
+                    ToDo登録のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="../../backend/todo-update/">
+            
+                <a href="../../backend/todo-update/">
+            
+                    
+                    ToDo状態更新のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4" data-path="../../backend/cors/">
+            
+                <a href="../../backend/cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../../e2e/">
+            
+                <a href="../../e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../todo-delete/">
+            
+                <a href="../../../todo-delete/">
+            
+                    
+                    ToDoを削除する（演習）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../../auth/">
+            
+                <a href="../../../auth/">
+            
+                    
+                    ユーザー認証の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../../auth/frontend/">
+            
+                <a href="../../../auth/frontend/">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1.1" data-path="../../../auth/frontend/page/">
+            
+                <a href="../../../auth/frontend/page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.2" data-path="../../../auth/frontend/routing/">
+            
+                <a href="../../../auth/frontend/routing/">
+            
+                    
+                    ルーティングの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.3" data-path="../../../auth/frontend/context/">
+            
+                <a href="../../../auth/frontend/context/">
+            
+                    
+                    ユーザーコンテクストの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.4" data-path="../../../auth/frontend/header/">
+            
+                <a href="../../../auth/frontend/header/">
+            
+                    
+                    ナビゲーションメニューの切替
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.5" data-path="../../../auth/frontend/signup/">
+            
+                <a href="../../../auth/frontend/signup/">
+            
+                    
+                    サインアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.6" data-path="../../../auth/frontend/login/">
+            
+                <a href="../../../auth/frontend/login/">
+            
+                    
+                    ログイン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.7" data-path="../../../auth/frontend/logout/">
+            
+                <a href="../../../auth/frontend/logout/">
+            
+                    
+                    ログアウト
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../../auth/backend/">
+            
+                <a href="../../../auth/backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.2.1" data-path="../../../auth/backend/signup/">
+            
+                <a href="../../../auth/backend/signup/">
+            
+                    
+                    サインアップのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.2" data-path="../../../auth/backend/login/">
+            
+                <a href="../../../auth/backend/login/">
+            
+                    
+                    ログインのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.3" data-path="../../../auth/backend/logout/">
+            
+                <a href="../../../auth/backend/logout/">
+            
+                    
+                    ログアウトのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.4" data-path="../../../auth/backend/check/">
+            
+                <a href="../../../auth/backend/check/">
+            
+                    
+                    REST APIへのアクセス制限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.5" data-path="../../../auth/backend/todo/">
+            
+                <a href="../../../auth/backend/todo/">
+            
+                    
+                    ToDo管理でのユーザー取得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../../auth/e2e/">
+            
+                <a href="../../../auth/e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../../csrf/">
+            
+                <a href="../../../csrf/">
+            
+                    
+                    CSRF対策
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >ToDo状態の更新</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="todo&#x72B6;&#x614B;&#x306E;&#x66F4;&#x65B0;"><a name="todo&#x72B6;&#x614B;&#x306E;&#x66F4;&#x65B0;" class="plugin-anchor" href="#todo&#x72B6;&#x614B;&#x306E;&#x66F4;&#x65B0;"><i class="fa fa-link" aria-hidden="true"></i></a>ToDo&#x72B6;&#x614B;&#x306E;&#x66F4;&#x65B0;</h1>
+<p>ToDo&#x30DA;&#x30FC;&#x30B8;&#x3067;ToDo&#x306E;&#x72B6;&#x614B;&#x3092;&#x66F4;&#x65B0;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="state&#x306E;&#x8A2D;&#x8A08;"><a name="state&#x306E;&#x8A2D;&#x8A08;" class="plugin-anchor" href="#state&#x306E;&#x8A2D;&#x8A08;"><i class="fa fa-link" aria-hidden="true"></i></a>state&#x306E;&#x8A2D;&#x8A08;</h2>
+<p>ToDo&#x306E;&#x72B6;&#x614B;&#x3092;&#x66F4;&#x65B0;&#x3059;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3067;&#x3001;&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x72B6;&#x614B;&#x304C;&#x5FC5;&#x8981;&#x306B;&#x306A;&#x308B;&#x304B;&#x3092;&#x8003;&#x3048;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>ToDo&#x306E;&#x72B6;&#x614B;&#x3092;&#x66F4;&#x65B0;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x30DC;&#x30C3;&#x30AF;&#x30B9;&#x304C;&#x3042;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306F;&#x3001;<code>TodoItem</code>&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;ToDo&#x306E;state&#x306F;<code>TodoBoard</code>&#x306B;&#x914D;&#x7F6E;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;ToDo&#x306E;&#x767B;&#x9332;&#x3068;&#x540C;&#x3058;&#x3088;&#x3046;&#x306B;&#x3001;<code>TodoBoard</code>&#x304B;&#x3089;&#x66F4;&#x65B0;&#x7528;&#x306E;&#x30B3;&#x30FC;&#x30EB;&#x30D0;&#x30C3;&#x30AF;&#x95A2;&#x6570;&#x3092;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3067;&#x6E21;&#x3059;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="rest-api&#x306E;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3068;state&#x306E;&#x66F4;&#x65B0;"><a name="rest-api&#x306E;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3068;state&#x306E;&#x66F4;&#x65B0;" class="plugin-anchor" href="#rest-api&#x306E;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3068;state&#x306E;&#x66F4;&#x65B0;"><i class="fa fa-link" aria-hidden="true"></i></a>REST API&#x306E;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3068;state&#x306E;&#x66F4;&#x65B0;</h2>
+<p>&#x767B;&#x9332;&#x306E;&#x3068;&#x304D;&#x3068;&#x540C;&#x69D8;&#x306B;&#x3001;state&#x306E;&#x66F4;&#x65B0;&#x7528;&#x306E;&#x30B3;&#x30FC;&#x30EB;&#x30D0;&#x30C3;&#x30AF;&#x95A2;&#x6570;&#x3092;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3067;&#x6E21;&#x3059;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x767B;&#x9332;&#x306E;&#x3068;&#x304D;&#x306F;&#x3001;<code>TodoForm</code>&#x3067;REST API&#x3092;&#x547C;&#x3073;&#x51FA;&#x3057;&#x305F;&#x5F8C;&#x306B;&#x3001;&#x7D50;&#x679C;&#x3092;&#x30B3;&#x30FC;&#x30EB;&#x30D0;&#x30C3;&#x30AF;&#x95A2;&#x6570;&#x306B;&#x6E21;&#x3057;&#x3066;&#x5B9F;&#x884C;&#x3057;&#x3066;&#x3044;&#x307E;&#x3057;&#x305F;&#x3002;<code>TodoForm</code>&#x3067;&#x306E;&#x5B9F;&#x88C5;&#x306F;&#x7C21;&#x6613;&#x3055;&#x3092;&#x91CD;&#x8996;&#x3057;&#x3066;&#x305D;&#x306E;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3057;&#x305F;&#x304C;&#x3001;ToDo&#x306E;state&#x3068;&#x66F4;&#x65B0;&#x51E6;&#x7406;&#x306F;&#x95A2;&#x9023;&#x304C;&#x6DF1;&#x304F;&#x3001;&#x672C;&#x6765;&#x306F;&#x8FD1;&#x3044;&#x3068;&#x3053;&#x308D;&#x306B;&#x3042;&#x308B;&#x65B9;&#x304C;&#x671B;&#x307E;&#x3057;&#x304F;&#x3082;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x3053;&#x3053;&#x3067;&#x306F;<code>TodoBoard</code>&#x3067;&#x5B9F;&#x88C5;&#x3059;&#x308B;&#x95A2;&#x6570;&#x5185;&#x3067;REST API&#x306E;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3082;&#x884C;&#x3046;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="todoitem&#x306E;&#x5B9F;&#x88C5;"><a name="todoitem&#x306E;&#x5B9F;&#x88C5;" class="plugin-anchor" href="#todoitem&#x306E;&#x5B9F;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoItem</code>&#x306E;&#x5B9F;&#x88C5;</h3>
+<p><code>TodoItem</code>&#x3067;&#x306F;&#x3001;<code>TodoList</code>&#x304B;&#x3089;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x304C;&#x3055;&#x308C;&#x308B;&#x305F;&#x3073;&#x306B;&#x72B6;&#x614B;&#x3092;&#x53CD;&#x8EE2;&#x3057;&#x3066;&#x66F4;&#x65B0;&#x3059;&#x308B;&#x95A2;&#x6570;&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308B;&#x3088;&#x3046;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;&#x53D7;&#x3051;&#x53D6;&#x3063;&#x305F;&#x95A2;&#x6570;&#x306F;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3055;&#x308C;&#x308B;&#x305F;&#x3073;&#x306B;&#x5B9F;&#x884C;&#x3057;&#x305F;&#x3044;&#x305F;&#x3081;&#x3001;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x30DC;&#x30C3;&#x30AF;&#x30B9;&#x306E;<code>onChange</code>&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoItem.css&apos;</span>;
+
+type Props = {
+  <span class="hljs-attr">id</span>: number
+  text: string
+  completed: boolean
+  toggleTodoCompletion: <span class="hljs-function">(<span class="hljs-params">id: number</span>) =&gt;</span> <span class="hljs-keyword">void</span>
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoItem: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{id, text, completed, toggleTodoCompletion}</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_item&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_todo&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span>
+                 <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_checkbox&quot;</span>
+                 <span class="hljs-attr">checked</span>=<span class="hljs-string">{completed}</span>
+                 <span class="hljs-attr">onChange</span>=<span class="hljs-string">{()</span> =&gt;</span> toggleTodoCompletion(id)} /&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{text}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_delete&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_button&quot;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  );
+};
+</span></code></pre>
+<h3 id="todolist&#x306E;&#x5B9F;&#x88C5;"><a name="todolist&#x306E;&#x5B9F;&#x88C5;" class="plugin-anchor" href="#todolist&#x306E;&#x5B9F;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoList</code>&#x306E;&#x5B9F;&#x88C5;</h3>
+<p><code>TodoList</code>&#x3067;&#x3082;&#x3001;&#x540C;&#x69D8;&#x306B;&#x95A2;&#x6570;&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308B;&#x305F;&#x3081;&#x306E;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;&#x53D7;&#x3051;&#x53D6;&#x3063;&#x305F;&#x95A2;&#x6570;&#x306F;<code>TodoItem</code>&#x306B;&#x305D;&#x306E;&#x307E;&#x307E;&#x6E21;&#x3059;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoList.css&apos;</span>;
+<span class="hljs-keyword">import</span> { TodoItem } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoItem&apos;</span>;
+
+type Todo = {
+  <span class="hljs-attr">id</span>: number
+  text: string
+  completed: boolean
+}
+
+type Props = {
+  <span class="hljs-attr">todos</span>: Todo[],
+  <span class="hljs-attr">toggleTodoCompletion</span>: <span class="hljs-function">(<span class="hljs-params">id: number</span>) =&gt;</span> <span class="hljs-keyword">void</span>
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoList: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{todos, toggleTodoCompletion}</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoList_list&quot;</span>&gt;</span>
+      {todos.map(todo =&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">TodoItem</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{todo.id}</span> <span class="hljs-attr">id</span>=<span class="hljs-string">{todo.id}</span> <span class="hljs-attr">text</span>=<span class="hljs-string">{todo.text}</span> <span class="hljs-attr">completed</span>=<span class="hljs-string">{todo.completed}</span> <span class="hljs-attr">toggleTodoCompletion</span>=<span class="hljs-string">{toggleTodoCompletion}/</span>&gt;</span>
+      )}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+  );
+};
+</span></code></pre>
+<h3 id="todoboard&#x306E;&#x5B9F;&#x88C5;"><a name="todoboard&#x306E;&#x5B9F;&#x88C5;" class="plugin-anchor" href="#todoboard&#x306E;&#x5B9F;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoBoard</code>&#x306E;&#x5B9F;&#x88C5;</h3>
+<p><code>TodoBoard</code>&#x3067;&#x306F;&#x3001;ToDo&#x306E;&#x72B6;&#x614B;&#x3092;&#x66F4;&#x65B0;&#x3059;&#x308B;REST API&#x3092;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3001;&#x305D;&#x306E;&#x7D50;&#x679C;&#x304B;&#x3089;state&#x3092;&#x66F4;&#x65B0;&#x3059;&#x308B;&#x95A2;&#x6570;&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x95A2;&#x6570;&#x306F;&#x3001;&#x5148;&#x307B;&#x3069;&#x8FFD;&#x52A0;&#x3057;&#x305F;<code>TodoList</code>&#x306E;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x306B;&#x6E21;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoBoard: React.FC = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+...
+  const toggleTodoCompletion = <span class="hljs-function">(<span class="hljs-params">id: number</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> target = todos.find(<span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> todo.id === id);
+    <span class="hljs-keyword">if</span> (!target) {
+      <span class="hljs-keyword">return</span>;
+    }
+    BackendService.putTodo(id, !target.completed)
+      .then(<span class="hljs-function"><span class="hljs-params">returnedTodo</span> =&gt;</span> setTodos(
+        todos.map(<span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> todo.id === id ? returnedTodo : todo)
+      ));
+  };
+
+  <span class="hljs-keyword">return</span> (
+...
+      &lt;TodoList todos={todos} toggleTodoCompletion={toggleTodoCompletion}/&gt;
+...
+</code></pre>
+<p><code>addTodo</code>&#x3068;&#x306F;&#x9055;&#x3044;&#x3001;ToDo&#x306E;&#x66F4;&#x65B0;&#x624B;&#x6BB5;&#x306B;&#x3064;&#x3044;&#x3066;&#x3082;<code>TodoBoard</code>&#x307E;&#x3067;&#x5F15;&#x304D;&#x4E0A;&#x3052;&#x305F;&#x5F62;&#x306B;&#x306A;&#x308A;&#x307E;&#x3057;&#x305F;&#x3002;</p>
+<h2 id="&#x30E2;&#x30C3;&#x30AF;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x305F;&#x52D5;&#x4F5C;&#x78BA;&#x8A8D;"><a name="&#x30E2;&#x30C3;&#x30AF;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x305F;&#x52D5;&#x4F5C;&#x78BA;&#x8A8D;" class="plugin-anchor" href="#&#x30E2;&#x30C3;&#x30AF;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x305F;&#x52D5;&#x4F5C;&#x78BA;&#x8A8D;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30E2;&#x30C3;&#x30AF;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x305F;&#x52D5;&#x4F5C;&#x78BA;&#x8A8D;</h2>
+<p>ToDo&#x30DA;&#x30FC;&#x30B8;&#x3092;&#x8868;&#x793A;&#x3057;&#x3066;&#x3001;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x30DC;&#x30C3;&#x30AF;&#x30B9;&#x3092;&#x30AF;&#x30EA;&#x30C3;&#x30AF;&#x3057;&#x3066;ToDo&#x3092;&#x5B8C;&#x4E86;&#x306B;&#x3067;&#x304D;&#x308B;&#x304B;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;OpenAPI&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x306E;<code>example</code>&#x306B;&#x306F;<code>id</code>&#x304C;<code>2002</code>&#x3067;&#x5B9A;&#x7FA9;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x4E8C;&#x884C;&#x76EE;&#x306E;&#x300C;&#x3084;&#x308B;&#x3053;&#x3068;&#xFF12;&#x300D;&#x306E;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x30DC;&#x30C3;&#x30AF;&#x30B9;&#x306B;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3092;&#x5165;&#x308C;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x308B;&#x304B;&#x3069;&#x3046;&#x304B;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x78BA;&#x8A8D;&#x304C;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x5B9F;&#x88C5;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../todo-add/" class="navigation navigation-prev " aria-label="Previous page: ToDoの登録">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../todo-filter/" class="navigation navigation-next " aria-label="Next page: ToDo一覧の絞り込み">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"ToDo状態の更新","level":"1.7.1.8","depth":3,"next":{"title":"ToDo一覧の絞り込み","level":"1.7.1.9","depth":3,"path":"todo/frontend/todo-filter/README.md","ref":"todo/frontend/todo-filter/README.md","articles":[]},"previous":{"title":"ToDoの登録","level":"1.7.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-update/README.md","mtime":"2020-09-29T00:29:01.184Z","type":"markdown"},"gitbook":{"version":"3.6.5","time":"2020-09-29T01:29:59.133Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

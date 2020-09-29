@@ -1,0 +1,1173 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>ログインのREST API · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.5">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../logout/" />
+    
+    
+    <link rel="prev" href="../signup/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    この資料について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../intro/">
+            
+                <a href="../../../intro/">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../setup/">
+            
+                <a href="../../../setup/">
+            
+                    
+                    ハンズオンの準備
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../setup/install/">
+            
+                <a href="../../../setup/install/">
+            
+                    
+                    開発環境の準備
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../setup/download/">
+            
+                <a href="../../../setup/download/">
+            
+                    
+                    資料のダウンロード
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../todo-spec/">
+            
+                <a href="../../../todo-spec/">
+            
+                    
+                    ToDoアプリの仕様説明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../todo-project/">
+            
+                <a href="../../../todo-project/">
+            
+                    
+                    ToDoアプリプロジェクトの作成
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../todo-project/project/">
+            
+                <a href="../../../todo-project/project/">
+            
+                    
+                    プロジェクトの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../todo-project/frontend/">
+            
+                <a href="../../../todo-project/frontend/">
+            
+                    
+                    フロントエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../todo-project/backend/">
+            
+                <a href="../../../todo-project/backend/">
+            
+                    
+                    バックエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../openapi/">
+            
+                <a href="../../../openapi/">
+            
+                    
+                    OpenAPIドキュメントの利用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../openapi/document/">
+            
+                <a href="../../../openapi/document/">
+            
+                    
+                    ドキュメントの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../../openapi/client/">
+            
+                <a href="../../../openapi/client/">
+            
+                    
+                    クライアントコードの生成
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../../todo/">
+            
+                <a href="../../../todo/">
+            
+                    
+                    ToDo管理の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../../todo/frontend/">
+            
+                <a href="../../../todo/frontend/">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="../../../todo/frontend/todo-page/">
+            
+                <a href="../../../todo/frontend/todo-page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="../../../todo/frontend/component/">
+            
+                <a href="../../../todo/frontend/component/">
+            
+                    
+                    コンポーネントの分割
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.3" data-path="../../../todo/frontend/api/">
+            
+                <a href="../../../todo/frontend/api/">
+            
+                    
+                    REST APIクライアントの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.4" data-path="../../../todo/frontend/cors/">
+            
+                <a href="../../../todo/frontend/cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.5" data-path="../../../todo/frontend/mock/">
+            
+                <a href="../../../todo/frontend/mock/">
+            
+                    
+                    モックサーバの起動
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.6" data-path="../../../todo/frontend/todo-list/">
+            
+                <a href="../../../todo/frontend/todo-list/">
+            
+                    
+                    ToDoの一覧表示
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.7" data-path="../../../todo/frontend/todo-add/">
+            
+                <a href="../../../todo/frontend/todo-add/">
+            
+                    
+                    ToDoの登録
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.8" data-path="../../../todo/frontend/todo-update/">
+            
+                <a href="../../../todo/frontend/todo-update/">
+            
+                    
+                    ToDo状態の更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.9" data-path="../../../todo/frontend/todo-filter/">
+            
+                <a href="../../../todo/frontend/todo-filter/">
+            
+                    
+                    ToDo一覧の絞り込み
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../../todo/backend/">
+            
+                <a href="../../../todo/backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../../../todo/backend/todo-list/">
+            
+                <a href="../../../todo/backend/todo-list/">
+            
+                    
+                    ToDo一覧取得のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../../../todo/backend/todo-add/">
+            
+                <a href="../../../todo/backend/todo-add/">
+            
+                    
+                    ToDo登録のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="../../../todo/backend/todo-update/">
+            
+                <a href="../../../todo/backend/todo-update/">
+            
+                    
+                    ToDo状態更新のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4" data-path="../../../todo/backend/cors/">
+            
+                <a href="../../../todo/backend/cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../../../todo/e2e/">
+            
+                <a href="../../../todo/e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../todo-delete/">
+            
+                <a href="../../../todo-delete/">
+            
+                    
+                    ToDoを削除する（演習）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    ユーザー認証の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../frontend/">
+            
+                <a href="../../frontend/">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1.1" data-path="../../frontend/page/">
+            
+                <a href="../../frontend/page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.2" data-path="../../frontend/routing/">
+            
+                <a href="../../frontend/routing/">
+            
+                    
+                    ルーティングの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.3" data-path="../../frontend/context/">
+            
+                <a href="../../frontend/context/">
+            
+                    
+                    ユーザーコンテクストの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.4" data-path="../../frontend/header/">
+            
+                <a href="../../frontend/header/">
+            
+                    
+                    ナビゲーションメニューの切替
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.5" data-path="../../frontend/signup/">
+            
+                <a href="../../frontend/signup/">
+            
+                    
+                    サインアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.6" data-path="../../frontend/login/">
+            
+                <a href="../../frontend/login/">
+            
+                    
+                    ログイン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.7" data-path="../../frontend/logout/">
+            
+                <a href="../../frontend/logout/">
+            
+                    
+                    ログアウト
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.2.1" data-path="../signup/">
+            
+                <a href="../signup/">
+            
+                    
+                    サインアップのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.9.2.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    ログインのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.3" data-path="../logout/">
+            
+                <a href="../logout/">
+            
+                    
+                    ログアウトのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.4" data-path="../check/">
+            
+                <a href="../check/">
+            
+                    
+                    REST APIへのアクセス制限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.5" data-path="../todo/">
+            
+                <a href="../todo/">
+            
+                    
+                    ToDo管理でのユーザー取得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../e2e/">
+            
+                <a href="../../e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../../csrf/">
+            
+                <a href="../../../csrf/">
+            
+                    
+                    CSRF対策
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >ログインのREST API</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x306E;rest-api"><a name="&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x306E;rest-api" class="plugin-anchor" href="#&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x306E;rest-api"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x306E;REST API</h1>
+<p>&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x306B;&#x4F7F;&#x7528;&#x3059;&#x308B;REST API&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x6A5F;&#x80FD;&#x3092;&#x5B9F;&#x88C5;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x306F;&#x3001;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x72B6;&#x614B;&#x3092;&#x4F55;&#x3089;&#x304B;&#x306E;&#x4ED5;&#x7D44;&#x307F;&#x3067;&#x4FDD;&#x6301;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3092;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x3001;Nablarch&#x306E;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/session_store.html" target="_blank">&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2; | Nablarch</a>&#xFF09;</p>
+<p>&#x307E;&#x305F;&#x3001;Nablarch&#x3067;&#x306F;&#x30E6;&#x30FC;&#x30B6;&#x30FC;ID&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x30B9;&#x30EC;&#x30C3;&#x30C9;&#x30B3;&#x30F3;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x6A5F;&#x80FD;&#x3084;&#x30ED;&#x30B0;&#x51FA;&#x529B;&#x6A5F;&#x80FD;&#x7B49;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/common/thread_context_handler.html#thread-context-handler-user-id-attribute-setting" target="_blank">&#x30E6;&#x30FC;&#x30B6;&#x30FC;ID&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B; | Nablarch</a>&#xFF09;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x4E2D;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x30FC;ID&#x304C;Nablarch&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x30FC;ID&#x3068;&#x3057;&#x3066;&#x8A2D;&#x5B9A;&#x3055;&#x308C;&#x308B;&#x3088;&#x3046;&#x306B;&#x3001;&#x898F;&#x5B9A;&#x306E;&#x30AD;&#x30FC;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306B;&#x4FDD;&#x6301;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306E;&#x8A2D;&#x5B9A;"><a name="&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306E;&#x8A2D;&#x5B9A;" class="plugin-anchor" href="#&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306E;&#x8A2D;&#x5B9A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306E;&#x8A2D;&#x5B9A;</h2>
+<p>&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x3092;&#x4F7F;&#x3046;&#x305F;&#x3081;&#x306B;&#x3001;&#x3044;&#x304F;&#x3064;&#x304B;&#x306E;&#x8A2D;&#x5B9A;&#x304C;&#x5FC5;&#x8981;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="sessionmanager&#x306E;&#x8A2D;&#x5B9A;"><a name="sessionmanager&#x306E;&#x8A2D;&#x5B9A;" class="plugin-anchor" href="#sessionmanager&#x306E;&#x8A2D;&#x5B9A;"><i class="fa fa-link" aria-hidden="true"></i></a>SessionManager&#x306E;&#x8A2D;&#x5B9A;</h3>
+<p>&#x307E;&#x305A;&#x3001;SessionManager&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5B9A;&#x7FA9;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x3001;<code>rest-component-configuration.xml</code>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306B;&#x6B21;&#x306E;&#x5B9A;&#x7FA9;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">import</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;nablarch/webui/session-store.xml&quot;</span> /&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sessionManager&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nablarch.common.web.session.SessionManager&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;defaultStoreName&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${nablarch.sessionManager.defaultStoreName}&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;availableStores&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">list</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">component-ref</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;httpSessionStore&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">list</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">component</span>&gt;</span>
+</code></pre>
+<p><code>nablarch/webui/session-store.xml</code>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;&#x3001;Nablarch&#x304C;&#x63D0;&#x4F9B;&#x3057;&#x3066;&#x3044;&#x308B;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x8A2D;&#x5B9A;&#x306E;&#x4E00;&#x3064;&#x3067;&#x3042;&#x308A;&#x3001;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306B;&#x95A2;&#x9023;&#x3059;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x90E1;&#x304C;&#x5B9A;&#x7FA9;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x3053;&#x308C;&#x3092;&#x8AAD;&#x307F;&#x8FBC;&#x307F;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/configuration/index.html" target="_blank">&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x8A2D;&#x5B9A;&#x4E00;&#x89A7; | Nablarch</a>&#xFF09;</p>
+<p>&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306E;&#x4FDD;&#x5B58;&#x5148;&#x306F;&#x8907;&#x6570;&#x3042;&#x308A;&#x3001;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x8A2D;&#x5B9A;&#x3067;&#x306F;&#x5168;&#x3066;&#x306E;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x3092;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x8A2D;&#x5B9A;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/session_store.html#session-store-future-of-store" target="_blank">&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306E;&#x7279;&#x5FB4;&#x3068;&#x9078;&#x629E;&#x57FA;&#x6E96; | Nablarch</a>&#xFF09;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;HTTP&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306E;&#x307F;&#x5229;&#x7528;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>sessionManager</code>&#x540D;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5B9A;&#x7FA9;&#x3092;&#x4E0A;&#x66F8;&#x304D;&#x3057;&#x3001;HTTP&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306E;&#x307F;&#x4F7F;&#x7528;&#x3067;&#x304D;&#x308B;&#x8A2D;&#x5B9A;&#x306B;&#x5909;&#x66F4;&#x3057;&#x3066;&#x304A;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x5909;&#x6570;&#x4FDD;&#x5B58;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x8A2D;&#x5B9A;"><a name="&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x5909;&#x6570;&#x4FDD;&#x5B58;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x8A2D;&#x5B9A;" class="plugin-anchor" href="#&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x5909;&#x6570;&#x4FDD;&#x5B58;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x8A2D;&#x5B9A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x5909;&#x6570;&#x4FDD;&#x5B58;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x8A2D;&#x5B9A;</h3>
+<p>&#x6B21;&#x306B;&#x3001;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x5909;&#x6570;&#x4FDD;&#x5B58;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>webFrontController</code>&#x540D;&#x3067;&#x5B9A;&#x7FA9;&#x3057;&#x3066;&#x3044;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;<code>handlerQueue</code>&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x306B;&#x3001;REST API&#x306E;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x3053;&#x3053;&#x306B;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x5909;&#x6570;&#x4FDD;&#x5B58;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x7BA1;&#x7406;&#x4FDD;&#x5B58;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306F;&#x3001;&#x5148;&#x307B;&#x3069;&#x8AAD;&#x307F;&#x8FBC;&#x3093;&#x3060;Nablarch&#x306E;&#x30C7;&#x30D5;&#x30A9;&#x30EB;&#x30C8;&#x8A2D;&#x5B9A;&#x306E;&#x4E2D;&#x3067;<code>sessionStoreHandler</code>&#x540D;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3068;&#x3057;&#x3066;&#x5B9A;&#x7FA9;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;<code>corsHandler</code>&#x306E;&#x5F8C;&#x308D;&#x306B;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;webFrontController&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nablarch.fw.web.servlet.WebFrontController&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;handlerQueue&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">list</span>&gt;</span>
+...
+      <span class="hljs-tag">&lt;<span class="hljs-name">component-ref</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;corsHandler&quot;</span>/&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">component-ref</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sessionStoreHandler&quot;</span> /&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">component-ref</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;threadContextHandler&quot;</span>/&gt;</span>
+...
+</code></pre>
+<p>&#x3053;&#x308C;&#x3067;&#x3001;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306E;&#x8A2D;&#x5B9A;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+<h2 id="&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x51E6;&#x7406;&#x306E;&#x5B9F;&#x88C5;"><a name="&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x51E6;&#x7406;&#x306E;&#x5B9F;&#x88C5;" class="plugin-anchor" href="#&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x51E6;&#x7406;&#x306E;&#x5B9F;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x51E6;&#x7406;&#x306E;&#x5B9F;&#x88C5;</h2>
+<p>&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3067;&#x306F;&#x540D;&#x524D;&#x3068;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x305F;&#x8A8D;&#x8A3C;&#x3092;&#x884C;&#x3046;&#x305F;&#x3081;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x51E6;&#x7406;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x540D;&#x524D;&#x3067;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x691C;&#x7D22;&#x3059;&#x308B;sql&#x306E;&#x4F5C;&#x6210;"><a name="&#x540D;&#x524D;&#x3067;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x691C;&#x7D22;&#x3059;&#x308B;sql&#x306E;&#x4F5C;&#x6210;" class="plugin-anchor" href="#&#x540D;&#x524D;&#x3067;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x691C;&#x7D22;&#x3059;&#x308B;sql&#x306E;&#x4F5C;&#x6210;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x540D;&#x524D;&#x3067;&#x30A2;&#x30AB;&#x30A6;&#x30F3;&#x30C8;&#x691C;&#x7D22;&#x3059;&#x308B;SQL&#x306E;&#x4F5C;&#x6210;</h3>
+<p>&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x3067;&#x306F;&#x540D;&#x524D;&#x3068;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#x304C;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x30C6;&#x30FC;&#x30D6;&#x30EB;&#x304C;&#x5206;&#x304B;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x30E6;&#x30CB;&#x30D0;&#x30FC;&#x30B5;&#x30EB;DAO&#x3067;&#x306F;&#x3001;&#x30C6;&#x30FC;&#x30D6;&#x30EB;&#x3092;&#x7D50;&#x5408;&#x3057;&#x3066;&#x691C;&#x7D22;&#x3059;&#x308B;&#x5834;&#x5408;&#x306F;SQL&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/database/universal_dao.html#join" target="_blank">&#x30C6;&#x30FC;&#x30D6;&#x30EB;&#x3092;JOIN&#x3057;&#x305F;&#x691C;&#x7D22;&#x7D50;&#x679C;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B; | Nablarch</a>&#xFF09;</p>
+<p>&#x5148;&#x307B;&#x3069;&#x4F5C;&#x6210;&#x3057;&#x305F;<code>AccountEntity</code>&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x5BFE;&#x5FDC;&#x3059;&#x308B;<code>AccountEntity.sql</code>&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3001;SQL&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/main/resources/com/example/authentication/application/entity/AccountEntity.sql</code></p>
+<pre><code class="lang-sql">FIND_BY_USERNAME =
+<span class="hljs-keyword">select</span>
+    account.user_id,
+    account.password
+<span class="hljs-keyword">FROM</span>
+    <span class="hljs-keyword">account</span>
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> user_profile
+    <span class="hljs-keyword">ON</span> account.user_id = user_profile.user_id
+<span class="hljs-keyword">WHERE</span>
+    user_profile.name = :userName
+</code></pre>
+<h3 id="&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x4F5C;&#x6210;"><a name="&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x4F5C;&#x6210;" class="plugin-anchor" href="#&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x4F5C;&#x6210;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x4F5C;&#x6210;</h3>
+<p>&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x51E6;&#x7406;&#x3092;&#x5B9F;&#x88C5;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x307E;&#x305A;&#x306F;&#x8A8D;&#x8A3C;&#x7D50;&#x679C;&#x3092;&#x8868;&#x3059;<code>AuthenticationResult</code>&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.example.authentication.application;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthenticationResult</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Status status;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String userId;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">AuthenticationResult</span><span class="hljs-params">(Status status, String userId)</span> </span>{
+        <span class="hljs-keyword">this</span>.status = status;
+        <span class="hljs-keyword">this</span>.userId = userId;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> AuthenticationResult <span class="hljs-title">success</span><span class="hljs-params">(String userId)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AuthenticationResult(Status.SUCCESS, userId);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> AuthenticationResult <span class="hljs-title">passwordMismatch</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AuthenticationResult(Status.PASSWORD_MISMATCH, <span class="hljs-keyword">null</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isFailed</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> status != Status.SUCCESS;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">userId</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (isFailed()) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+        }
+        <span class="hljs-keyword">return</span> userId;
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">enum</span> Status {
+        SUCCESS, PASSWORD_MISMATCH
+    }
+}
+</code></pre>
+<p>&#x7D9A;&#x3044;&#x3066;&#x3001;<code>AuthenticationService</code>&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.example.authentication.application;
+
+<span class="hljs-keyword">import</span> com.example.authentication.application.entity.AccountEntity;
+<span class="hljs-keyword">import</span> nablarch.common.dao.NoDataException;
+<span class="hljs-keyword">import</span> nablarch.common.dao.UniversalDao;
+<span class="hljs-keyword">import</span> nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
+
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-meta">@SystemRepositoryComponent</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthenticationService</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> AuthenticationResult <span class="hljs-title">authenticate</span><span class="hljs-params">(String userName, String password)</span> </span>{
+        AccountEntity accountEntity = findAccount(userName);
+        <span class="hljs-keyword">if</span> (!password.equals(accountEntity.getPassword())) {
+            <span class="hljs-keyword">return</span> AuthenticationResult.passwordMismatch();
+        }
+        <span class="hljs-keyword">return</span> AuthenticationResult.success(accountEntity.getUserId());
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> AccountEntity <span class="hljs-title">findAccount</span><span class="hljs-params">(String userName)</span> </span>{
+        Map&lt;String, String&gt; condition = Map.of(<span class="hljs-string">&quot;userName&quot;</span>, userName);
+        <span class="hljs-keyword">return</span> UniversalDao.findBySqlFile(AccountEntity.class, <span class="hljs-string">&quot;FIND_BY_USERNAME&quot;</span>, condition);
+    }
+}
+</code></pre>
+<p>&#x30E6;&#x30CB;&#x30D0;&#x30FC;&#x30B5;&#x30EB;DAO&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;DB&#x304B;&#x3089;&#x30E6;&#x30FC;&#x30B6;&#x30FC;ID&#x3068;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x3001;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x304C;&#x4E00;&#x81F4;&#x3059;&#x308C;&#x3070;&#x30E6;&#x30FC;&#x30B6;&#x30FC;ID&#x3082;&#x5408;&#x308F;&#x305B;&#x3066;&#x8FD4;&#x3059;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="rest-api&#x306E;&#x5B9F;&#x88C5;"><a name="rest-api&#x306E;&#x5B9F;&#x88C5;" class="plugin-anchor" href="#rest-api&#x306E;&#x5B9F;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>REST API&#x306E;&#x5B9F;&#x88C5;</h2>
+<p>&#x5148;&#x307B;&#x3069;&#x4F5C;&#x6210;&#x3057;&#x305F;<code>AuthenticationAction</code>&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x3001;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x7528;&#x306E;REST API&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java">...
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> AccountRegistrationService registrationService;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> AuthenticationService authenticationService;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AuthenticationAction</span><span class="hljs-params">(AccountRegistrationService registrationService,
+                                AuthenticationService authenticationService)</span> </span>{
+        <span class="hljs-keyword">this</span>.registrationService = registrationService;
+        <span class="hljs-keyword">this</span>.authenticationService = authenticationService;
+    }
+...
+    <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/login&quot;</span>)
+    <span class="hljs-meta">@POST</span>
+    <span class="hljs-meta">@Consumes</span>(MediaType.APPLICATION_JSON)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">login</span><span class="hljs-params">(ExecutionContext executionContext, LoginRequest requestBody)</span> </span>{
+        ValidatorUtil.validate(requestBody);
+
+        AuthenticationResult result = authenticationService.authenticate(requestBody.userName, requestBody.password);
+        <span class="hljs-keyword">if</span> (result.isFailed()) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> HttpErrorResponse(HttpResponse.Status.UNAUTHORIZED.getStatusCode());
+        }
+        SessionUtil.invalidate(executionContext);
+        SessionUtil.put(executionContext, <span class="hljs-string">&quot;user.id&quot;</span>, result.userId());
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoginRequest</span> </span>{
+        <span class="hljs-meta">@NotNull</span>
+        <span class="hljs-keyword">public</span> String userName;
+
+        <span class="hljs-meta">@NotNull</span>
+        <span class="hljs-keyword">public</span> String password;
+    }
+</code></pre>
+<p>&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x540D;&#x3068;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x304C;&#x9001;&#x4FE1;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x304B;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3057;&#x3001;&#x5148;&#x307B;&#x3069;&#x5B9F;&#x88C5;&#x3057;&#x305F;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x6A5F;&#x80FD;&#x3092;&#x547C;&#x3073;&#x51FA;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x8A8D;&#x8A3C;&#x306B;&#x6210;&#x529F;&#x3057;&#x305F;&#x3089;&#x3001;&#x307E;&#x305A;<code>SessionUtil#invalidate</code>&#x3092;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3001;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4E00;&#x5EA6;&#x7834;&#x68C4;&#x3057;&#x3066;&#x65B0;&#x3057;&#x3044;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x3046;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x7BA1;&#x7406;&#x306E;&#x4E0D;&#x5099;&#x3092;&#x72D9;&#x3063;&#x305F;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30FB;&#x30CF;&#x30A4;&#x30B8;&#x30E3;&#x30C3;&#x30AF;&#x306E;&#x5BFE;&#x7B56;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://www.ipa.go.jp/security/vuln/websecurity-HTML-1_4.html" target="_blank">&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x7BA1;&#x7406;&#x306E;&#x4E0D;&#x5099; | &#x5B89;&#x5168;&#x306A;&#x30A6;&#x30A7;&#x30D6;&#x30B5;&#x30A4;&#x30C8;&#x306E;&#x4F5C;&#x308A;&#x65B9;</a>&#xFF09;</p>
+<p><code>SessionUtil#invalidate</code>&#x306E;&#x5F15;&#x6570;&#x306B;&#x5FC5;&#x8981;&#x306A;<code>ExecutionContext</code>&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;&#x30A2;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x306E;&#x5F15;&#x6570;&#x306B;&#x5BA3;&#x8A00;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;Nablarch&#x304B;&#x3089;&#x53D7;&#x3051;&#x53D6;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/web_service/rest/feature_details/resource_signature.html" target="_blank">&#x30EA;&#x30BD;&#x30FC;&#x30B9;(&#x30A2;&#x30AF;&#x30B7;&#x30E7;&#x30F3;)&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x5B9F;&#x88C5;&#x306B;&#x95A2;&#x3057;&#x3066; | Nablarch</a>&#xFF09;</p>
+<p>&#x8A8D;&#x8A3C;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x3068;&#x30E6;&#x30FC;&#x30B6;&#x30FC;ID&#x304C;&#x8FD4;&#x3055;&#x308C;&#x308B;&#x306E;&#x3067;&#x3001;&#x30B9;&#x30EC;&#x30C3;&#x30C9;&#x30B3;&#x30F3;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x306E;&#x30E6;&#x30FC;&#x30B6;&#x30FC;ID&#x5C5E;&#x6027;&#x306B;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306B;<code>user.id</code>&#x540D;&#x3067;&#x4FDD;&#x5B58;&#x3057;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/common/thread_context_handler.html#id14" target="_blank">&#x30E6;&#x30FC;&#x30B6;&#x30FC;ID&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B; | Nablarch</a>&#xFF09;</p>
+<p>&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x304C;&#x9593;&#x9055;&#x3063;&#x3066;&#x3044;&#x305F;&#x5834;&#x5408;&#x306F;<code>null</code>&#x304C;&#x8FD4;&#x3055;&#x308C;&#x308B;&#x306E;&#x3067;&#x3001;<code>null</code>&#x3067;&#x3042;&#x308C;&#x3070;&#x8A8D;&#x8A3C;&#x5931;&#x6557;&#x3068;&#x3057;&#x3066;&#x30B9;&#x30C6;&#x30FC;&#x30BF;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x304C;<code>401 Unauthorized</code>&#x306E;&#x30A8;&#x30E9;&#x30FC;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x3092;&#x8FD4;&#x3059;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="rest-api&#x306E;&#x30C6;&#x30B9;&#x30C8;"><a name="rest-api&#x306E;&#x30C6;&#x30B9;&#x30C8;" class="plugin-anchor" href="#rest-api&#x306E;&#x30C6;&#x30B9;&#x30C8;"><i class="fa fa-link" aria-hidden="true"></i></a>REST API&#x306E;&#x30C6;&#x30B9;&#x30C8;</h2>
+<h3 id="&#x30C6;&#x30B9;&#x30C8;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x8FFD;&#x52A0;"><a name="&#x30C6;&#x30B9;&#x30C8;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x8FFD;&#x52A0;" class="plugin-anchor" href="#&#x30C6;&#x30B9;&#x30C8;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x8FFD;&#x52A0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30C6;&#x30B9;&#x30C8;&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x8FFD;&#x52A0;</h3>
+<p>&#x30C6;&#x30B9;&#x30C8;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x3001;<code>V9999__testdata.sql</code>&#x306B;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/test/resources/db/testdata/V9999__testdata.sql</code></p>
+<pre><code class="lang-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> <span class="hljs-keyword">account</span> (user_id, <span class="hljs-keyword">password</span>) <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&apos;1010&apos;</span>, <span class="hljs-string">&apos;pass&apos;</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> user_profile (user_id, <span class="hljs-keyword">name</span>) <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">&apos;1010&apos;</span>, <span class="hljs-string">&apos;login-test&apos;</span>);
+</code></pre>
+<h3 id="&#x8A8D;&#x8A3C;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><a name="&#x8A8D;&#x8A3C;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;" class="plugin-anchor" href="#&#x8A8D;&#x8A3C;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8A8D;&#x8A3C;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;</h3>
+<p><code>AuthenticationRestApiTest</code>&#x306B;&#x3001;&#x8A8D;&#x8A3C;&#x304C;&#x6210;&#x529F;&#x3059;&#x308B;&#x5834;&#x5408;&#x306E;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java">    <span class="hljs-meta">@Test</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> RESTAPI&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3067;&#x304D;&#x308B;() <span class="hljs-keyword">throws</span> Exception {
+        RestMockHttpRequest request = post(<span class="hljs-string">&quot;/api/login&quot;</span>)
+                .setHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, MediaType.APPLICATION_JSON)
+                .setBody(Map.of(
+                        <span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;login-test&quot;</span>,
+                        <span class="hljs-string">&quot;password&quot;</span>, <span class="hljs-string">&quot;pass&quot;</span>));
+        HttpResponse response = sendRequest(request);
+
+        assertStatusCode(<span class="hljs-string">&quot;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&quot;</span>, HttpResponse.Status.NO_CONTENT, response);
+
+        openApiValidator.validate(<span class="hljs-string">&quot;login&quot;</span>, request, response);
+    }
+</code></pre>
+<p>&#x7D9A;&#x3044;&#x3066;&#x3001;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x524D;&#x6E96;&#x5099;&#x3068;&#x3057;&#x3066;&#x3001;PostgreSQL&#x3092;&#x8D77;&#x52D5;&#x3057;&#x3066;&#x304A;&#x304D;&#x307E;&#x3059;&#x3002;PostgreSQL&#x306E;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x8D77;&#x52D5;&#x3057;&#x3066;&#x3044;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;&#x3001;<code>backend</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3067;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>$ docker-compose -f docker/docker-compose.dev.yml up -d
+</code></pre><p>&#x7D9A;&#x3044;&#x3066;&#x3001;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3067;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x8D77;&#x52D5;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>$ docker-compose -f docker/docker-compose.dev.yml ps
+      Name                     Command              State           Ports
+----------------------------------------------------------------------------------
+docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;5432/tcp
+</code></pre><p>PostgreSQL&#x304C;&#x8D77;&#x52D5;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;Maven&#x3067;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>mvn test
+</code></pre><p>&#x7279;&#x306B;&#x30A8;&#x30E9;&#x30FC;&#x304C;&#x767A;&#x751F;&#x305B;&#x305A;&#x3001;&#x30C6;&#x30B9;&#x30C8;&#x304C;&#x6210;&#x529F;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><a name="&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;" class="plugin-anchor" href="#&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;</h3>
+<p>&#x7D9A;&#x3051;&#x3066;&#x3001;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x5834;&#x5408;&#x306E;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java">    <span class="hljs-meta">@Test</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> &#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x304C;&#x4E0D;&#x4E00;&#x81F4;&#x306E;&#x5834;&#x5408;_&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x306B;&#x5931;&#x6557;&#x3057;&#x3066;<span class="hljs-number">401</span>&#x306B;&#x306A;&#x308B;() <span class="hljs-keyword">throws</span> Exception {
+        RestMockHttpRequest request = post(<span class="hljs-string">&quot;/api/login&quot;</span>)
+                .setHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, MediaType.APPLICATION_JSON)
+                .setBody(Map.of(
+                        <span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;login-test&quot;</span>,
+                        <span class="hljs-string">&quot;password&quot;</span>, <span class="hljs-string">&quot;fail&quot;</span>));
+        HttpResponse response = sendRequest(request);
+
+        assertStatusCode(<span class="hljs-string">&quot;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&quot;</span>, HttpResponse.Status.UNAUTHORIZED, response);
+
+        openApiValidator.validate(<span class="hljs-string">&quot;login&quot;</span>, request, response);
+    }
+</code></pre>
+<p>&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x3001;&#x6210;&#x529F;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x540D;&#x524D;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><a name="&#x540D;&#x524D;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;" class="plugin-anchor" href="#&#x540D;&#x524D;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x540D;&#x524D;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x306E;&#x4F5C;&#x6210;</h3>
+<p>&#x7D9A;&#x3051;&#x3066;&#x3001;&#x30D1;&#x30B9;&#x30EF;&#x30FC;&#x30C9;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x8A8D;&#x8A3C;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x5834;&#x5408;&#x306E;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java">    <span class="hljs-meta">@Test</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> &#x540D;&#x524D;&#x304C;&#x4E0D;&#x4E00;&#x81F4;&#x306E;&#x5834;&#x5408;_&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x306B;&#x5931;&#x6557;&#x3057;&#x3066;<span class="hljs-number">401</span>&#x306B;&#x306A;&#x308B;() <span class="hljs-keyword">throws</span> Exception {
+        RestMockHttpRequest request = post(<span class="hljs-string">&quot;/api/login&quot;</span>)
+                .setHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, MediaType.APPLICATION_JSON)
+                .setBody(Map.of(
+                        <span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;fail-test&quot;</span>,
+                        <span class="hljs-string">&quot;password&quot;</span>, <span class="hljs-string">&quot;pass&quot;</span>));
+        HttpResponse response = sendRequest(request);
+
+        assertStatusCode(<span class="hljs-string">&quot;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&quot;</span>, HttpResponse.Status.UNAUTHORIZED, response);
+
+        openApiValidator.validate(<span class="hljs-string">&quot;login&quot;</span>, request, response);
+    }
+</code></pre>
+<p>&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3068;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x30B9;&#x30C6;&#x30FC;&#x30BF;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x304C;<code>401 Unauthorized</code>&#x3067;&#x306F;&#x306A;&#x304F;<code>500 Internal Server Error</code>&#x306B;&#x306A;&#x308A;&#x5931;&#x6557;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>[ERROR] Failures:
+[ERROR]   AuthenticationRestApiTest.&#x540D;&#x524D;&#x306E;&#x4E0D;&#x4E00;&#x81F4;&#x3067;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x306B;&#x5931;&#x6557;&#x3059;&#x308B;&#x3068;401&#x306B;&#x306A;&#x308B;:70-&gt;SimpleRestTestSupport.assertStatusCode:283-&gt;SimpleRestTestSupport.assertStatusCode:294 &#x30ED;&#x30B0;&#x30A4;&#x30F3; [HTTP STATUS] expected:&lt;401&gt; but was:&lt;500&gt;
+</code></pre><p>&#x4ED6;&#x306E;&#x51FA;&#x529B;&#x7D50;&#x679C;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3068;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30B9;&#x30BF;&#x30C3;&#x30AF;&#x30C8;&#x30EC;&#x30FC;&#x30B9;&#x304C;&#x51FA;&#x529B;&#x3055;&#x308C;&#x3066;&#x304A;&#x308A;&#x3001;&#x5148;&#x307B;&#x3069;&#x5B9F;&#x88C5;&#x3057;&#x305F;<code>AuthenticationService#findAccount</code>&#x306E;&#x4E2D;&#x3067;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3066;&#x3044;&#x308B;<code>UniversalDao#findBySqlFile</code>&#x3067;&#x3001;<code>NoDataException</code>&#x306E;&#x4F8B;&#x5916;&#x304C;&#x9001;&#x51FA;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x5206;&#x304B;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>nablarch.common.dao.NoDataException
+    at nablarch.common.dao.BasicDaoContext.findBySqlFile(BasicDaoContext.java:267)
+    at nablarch.common.dao.UniversalDao.findBySqlFile(UniversalDao.java:165)
+    at com.example.authentication.application.AuthenticationService.findAccount(AuthenticationService.java:48)
+</code></pre><p><code>UniversalDao#findBySqlFile</code>&#x306E;<a href="https://nablarch.github.io/docs/5u18/javadoc/nablarch/common/dao/UniversalDao.html#findBySqlFile-java.lang.Class-java.lang.String-java.lang.Object-" target="_blank">Javadoc</a>&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3068;&#x3001;&#x691C;&#x7D22;&#x6761;&#x4EF6;&#x306B;&#x8A72;&#x5F53;&#x3059;&#x308B;&#x30EC;&#x30B3;&#x30FC;&#x30C9;&#x304C;&#x5B58;&#x5728;&#x3057;&#x306A;&#x3044;&#x5834;&#x5408;&#x306F;<code>NoDataException</code>&#x306E;&#x4F8B;&#x5916;&#x3092;&#x9001;&#x51FA;&#x3059;&#x308B;&#x3068;&#x5B9A;&#x7FA9;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x540D;&#x524D;&#x3067;&#x691C;&#x7D22;&#x3057;&#x3066;&#x898B;&#x3064;&#x304B;&#x3089;&#x306A;&#x304B;&#x3063;&#x305F;&#x5834;&#x5408;&#x306F;&#x3053;&#x308C;&#x306B;&#x8A72;&#x5F53;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x4F8B;&#x5916;&#x3092;&#x30CF;&#x30F3;&#x30C9;&#x30EA;&#x30F3;&#x30B0;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305A;&#x306F;&#x3001;<code>AuthenticationResult</code>&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x3001;&#x898B;&#x3064;&#x304B;&#x3089;&#x306A;&#x304B;&#x3063;&#x305F;&#x5834;&#x5408;&#x306E;&#x7D50;&#x679C;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> AuthenticationResult <span class="hljs-title">nameNotFound</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AuthenticationResult(Status.NAME_NOT_FOUND, <span class="hljs-keyword">null</span>);
+    }
+...
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">enum</span> Status {
+        SUCCESS, NAME_NOT_FOUND, PASSWORD_MISMATCH
+    }
+</code></pre>
+<p>&#x7D9A;&#x3044;&#x3066;&#x3001;&#x4F8B;&#x5916;&#x3092;&#x30CF;&#x30F3;&#x30C9;&#x30EA;&#x30F3;&#x30B0;&#x3057;&#x3066;<code>null</code>&#x3092;&#x8FD4;&#x3059;&#x3088;&#x3046;&#x306B;<code>AuthenticationService</code>&#x30AF;&#x30E9;&#x30B9;&#x306E;<code>findAccount</code>&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x4FEE;&#x6B63;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> AccountEntity <span class="hljs-title">findAccount</span><span class="hljs-params">(String userName)</span> </span>{
+...
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">return</span> UniversalDao.findBySqlFile(AccountEntity.class, <span class="hljs-string">&quot;FIND_BY_USERNAME&quot;</span>, condition);
+    } <span class="hljs-keyword">catch</span> (NoDataException e) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+...
+</code></pre>
+<p>&#x540C;&#x3058;&#x30AF;&#x30E9;&#x30B9;&#x306E;<code>authenticate</code>&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x306B;&#x3001;<code>findAccount</code>&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3067;<code>null</code>&#x304C;&#x8FD4;&#x3055;&#x308C;&#x305F;&#x5834;&#x5408;&#x306E;&#x305F;&#x3081;&#x306B;&#x5224;&#x5B9A;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> AuthenticationResult <span class="hljs-title">authenticate</span><span class="hljs-params">(String userName, String password)</span> </span>{
+    AccountEntity accountEntity = findAccount(userName);
+   <span class="hljs-keyword">if</span> (accountEntity == <span class="hljs-keyword">null</span>) {
+        <span class="hljs-keyword">return</span> AuthenticationResult.nameNotFound();
+    }
+...
+</code></pre>
+<p>&#x3082;&#x3046;&#x4E00;&#x5EA6;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x3001;&#x6210;&#x529F;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x3067;&#x3001;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x306E;REST API&#x306E;&#x5B9F;&#x88C5;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../signup/" class="navigation navigation-prev " aria-label="Previous page: サインアップのREST API">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../logout/" class="navigation navigation-next " aria-label="Next page: ログアウトのREST API">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"ログインのREST API","level":"1.9.2.2","depth":3,"next":{"title":"ログアウトのREST API","level":"1.9.2.3","depth":3,"path":"auth/backend/logout/README.md","ref":"auth/backend/logout/README.md","articles":[]},"previous":{"title":"サインアップのREST API","level":"1.9.2.1","depth":3,"path":"auth/backend/signup/README.md","ref":"auth/backend/signup/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/backend/login/README.md","mtime":"2020-09-29T00:29:01.166Z","type":"markdown"},"gitbook":{"version":"3.6.5","time":"2020-09-29T01:29:59.133Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

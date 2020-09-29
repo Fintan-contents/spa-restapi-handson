@@ -1,0 +1,1102 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>CSRF対策 · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.5">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="../auth/e2e/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    この資料について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../intro/">
+            
+                <a href="../intro/">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../setup/">
+            
+                <a href="../setup/">
+            
+                    
+                    ハンズオンの準備
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../setup/install/">
+            
+                <a href="../setup/install/">
+            
+                    
+                    開発環境の準備
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../setup/download/">
+            
+                <a href="../setup/download/">
+            
+                    
+                    資料のダウンロード
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../todo-spec/">
+            
+                <a href="../todo-spec/">
+            
+                    
+                    ToDoアプリの仕様説明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../todo-project/">
+            
+                <a href="../todo-project/">
+            
+                    
+                    ToDoアプリプロジェクトの作成
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../todo-project/project/">
+            
+                <a href="../todo-project/project/">
+            
+                    
+                    プロジェクトの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../todo-project/frontend/">
+            
+                <a href="../todo-project/frontend/">
+            
+                    
+                    フロントエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../todo-project/backend/">
+            
+                <a href="../todo-project/backend/">
+            
+                    
+                    バックエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../openapi/">
+            
+                <a href="../openapi/">
+            
+                    
+                    OpenAPIドキュメントの利用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../openapi/document/">
+            
+                <a href="../openapi/document/">
+            
+                    
+                    ドキュメントの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../openapi/client/">
+            
+                <a href="../openapi/client/">
+            
+                    
+                    クライアントコードの生成
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../todo/">
+            
+                <a href="../todo/">
+            
+                    
+                    ToDo管理の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../todo/frontend/">
+            
+                <a href="../todo/frontend/">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="../todo/frontend/todo-page/">
+            
+                <a href="../todo/frontend/todo-page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="../todo/frontend/component/">
+            
+                <a href="../todo/frontend/component/">
+            
+                    
+                    コンポーネントの分割
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.3" data-path="../todo/frontend/api/">
+            
+                <a href="../todo/frontend/api/">
+            
+                    
+                    REST APIクライアントの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.4" data-path="../todo/frontend/cors/">
+            
+                <a href="../todo/frontend/cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.5" data-path="../todo/frontend/mock/">
+            
+                <a href="../todo/frontend/mock/">
+            
+                    
+                    モックサーバの起動
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.6" data-path="../todo/frontend/todo-list/">
+            
+                <a href="../todo/frontend/todo-list/">
+            
+                    
+                    ToDoの一覧表示
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.7" data-path="../todo/frontend/todo-add/">
+            
+                <a href="../todo/frontend/todo-add/">
+            
+                    
+                    ToDoの登録
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.8" data-path="../todo/frontend/todo-update/">
+            
+                <a href="../todo/frontend/todo-update/">
+            
+                    
+                    ToDo状態の更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.9" data-path="../todo/frontend/todo-filter/">
+            
+                <a href="../todo/frontend/todo-filter/">
+            
+                    
+                    ToDo一覧の絞り込み
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../todo/backend/">
+            
+                <a href="../todo/backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../todo/backend/todo-list/">
+            
+                <a href="../todo/backend/todo-list/">
+            
+                    
+                    ToDo一覧取得のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../todo/backend/todo-add/">
+            
+                <a href="../todo/backend/todo-add/">
+            
+                    
+                    ToDo登録のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="../todo/backend/todo-update/">
+            
+                <a href="../todo/backend/todo-update/">
+            
+                    
+                    ToDo状態更新のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4" data-path="../todo/backend/cors/">
+            
+                <a href="../todo/backend/cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../todo/e2e/">
+            
+                <a href="../todo/e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../todo-delete/">
+            
+                <a href="../todo-delete/">
+            
+                    
+                    ToDoを削除する（演習）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../auth/">
+            
+                <a href="../auth/">
+            
+                    
+                    ユーザー認証の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../auth/frontend/">
+            
+                <a href="../auth/frontend/">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1.1" data-path="../auth/frontend/page/">
+            
+                <a href="../auth/frontend/page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.2" data-path="../auth/frontend/routing/">
+            
+                <a href="../auth/frontend/routing/">
+            
+                    
+                    ルーティングの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.3" data-path="../auth/frontend/context/">
+            
+                <a href="../auth/frontend/context/">
+            
+                    
+                    ユーザーコンテクストの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.4" data-path="../auth/frontend/header/">
+            
+                <a href="../auth/frontend/header/">
+            
+                    
+                    ナビゲーションメニューの切替
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.5" data-path="../auth/frontend/signup/">
+            
+                <a href="../auth/frontend/signup/">
+            
+                    
+                    サインアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.6" data-path="../auth/frontend/login/">
+            
+                <a href="../auth/frontend/login/">
+            
+                    
+                    ログイン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.7" data-path="../auth/frontend/logout/">
+            
+                <a href="../auth/frontend/logout/">
+            
+                    
+                    ログアウト
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../auth/backend/">
+            
+                <a href="../auth/backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.2.1" data-path="../auth/backend/signup/">
+            
+                <a href="../auth/backend/signup/">
+            
+                    
+                    サインアップのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.2" data-path="../auth/backend/login/">
+            
+                <a href="../auth/backend/login/">
+            
+                    
+                    ログインのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.3" data-path="../auth/backend/logout/">
+            
+                <a href="../auth/backend/logout/">
+            
+                    
+                    ログアウトのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.4" data-path="../auth/backend/check/">
+            
+                <a href="../auth/backend/check/">
+            
+                    
+                    REST APIへのアクセス制限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.5" data-path="../auth/backend/todo/">
+            
+                <a href="../auth/backend/todo/">
+            
+                    
+                    ToDo管理でのユーザー取得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../auth/e2e/">
+            
+                <a href="../auth/e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.10" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    CSRF対策
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >CSRF対策</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="csrf&#x5BFE;&#x7B56;"><a name="csrf&#x5BFE;&#x7B56;" class="plugin-anchor" href="#csrf&#x5BFE;&#x7B56;"><i class="fa fa-link" aria-hidden="true"></i></a>CSRF&#x5BFE;&#x7B56;</h1>
+<p>REST API&#x4E00;&#x89A7;&#x306E;&#x8AAC;&#x660E;&#x6642;&#x306B;&#x3082;&#x7D39;&#x4ECB;&#x3057;&#x307E;&#x3057;&#x305F;&#x304C;&#x3001;Nablarch&#x3067;&#x306F;&#x3001;&#x30AF;&#x30ED;&#x30B9;&#x30B5;&#x30A4;&#x30C8;&#x30FB;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x30FB;&#x30D5;&#x30A9;&#x30FC;&#x30B8;&#x30A7;&#x30EA;&#xFF08;&#x4EE5;&#x4E0B;CSRF&#xFF09;&#x306B;&#x5BFE;&#x7B56;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x6A5F;&#x80FD;&#x304C;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://www.ipa.go.jp/security/vuln/websecurity-HTML-1_6.html" target="_blank">CSRF | &#x5B89;&#x5168;&#x306A;&#x30A6;&#x30A7;&#x30D6;&#x30B5;&#x30A4;&#x30C8;&#x306E;&#x4F5C;&#x308A;&#x65B9;</a>&#xFF09;</p>
+<p>CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x767A;&#x884C;&#x3057;&#x3066;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x6BCE;&#x306B;&#x30B5;&#x30FC;&#x30D0;&#x30FC;&#x30B5;&#x30A4;&#x30C9;&#x5074;&#x3067;&#x4FDD;&#x6301;&#x3057;&#x3066;&#x308B;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3068;&#x7A81;&#x304D;&#x5408;&#x308F;&#x305B;&#x308B;&#x65B9;&#x5F0F;&#x3067;&#x3042;&#x308A;&#x3001;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x767A;&#x884C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30E6;&#x30FC;&#x30C6;&#x30A3;&#x30EA;&#x30C6;&#x30A3;&#x3068;&#x3001;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x691C;&#x8A3C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x304C;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/web/csrf_token_verification_handler.html" target="_blank">CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x691C;&#x8A3C;&#x30CF;&#x30F3;&#x30C9;&#x30E9; | Nablarch</a>&#xFF09;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;CSRF&#x5BFE;&#x7B56;&#x3092;&#x5B9F;&#x73FE;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x3001;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x3067;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;REST API&#x3092;&#x63D0;&#x4F9B;&#x3057;&#x3001;&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;&#x304B;&#x3089;&#x306F;REST API&#x3067;&#x53D6;&#x5F97;&#x3057;&#x305F;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;"><a name="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;" class="plugin-anchor" href="#&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;</h2>
+<p>example-chat&#x306E;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x3067;&#x3082;&#x540C;&#x69D8;&#x306E;&#x5B9F;&#x88C5;&#x3092;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x305D;&#x306E;&#x5B9F;&#x88C5;&#x3092;&#x6D41;&#x7528;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x8A2D;&#x5B9A;"><a name="csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x8A2D;&#x5B9A;" class="plugin-anchor" href="#csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x8A2D;&#x5B9A;"><i class="fa fa-link" aria-hidden="true"></i></a>CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x8A2D;&#x5B9A;</h3>
+<p>&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x3067;&#x306F;&#x3001;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;REST API&#x3068;&#x3001;&#x305D;&#x308C;&#x3092;&#x691C;&#x8A3C;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;REST API&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;example-chat&#x306E;<code>com.example.system.nablarch.handler.csrf.CsrfTokenEndpointHandler</code>&#x30AF;&#x30E9;&#x30B9;&#x3067;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x3053;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x30B3;&#x30D4;&#x30FC;&#x3057;&#x3066;&#x6301;&#x3063;&#x3066;&#x304D;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;&#x30AF;&#x30E9;&#x30B9;&#x306F;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x3067;&#x3042;&#x308B;&#x305F;&#x3081;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5B9A;&#x7FA9;&#x306B;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x691C;&#x8A3C;&#x3059;&#x308B;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;Nablarch&#x304B;&#x3089;&#x63D0;&#x4F9B;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x3053;&#x308C;&#x3082;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5B9A;&#x7FA9;&#x306B;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- CSRF&#x30CF;&#x30F3;&#x30C9;&#x30E9; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;csrfTokenVerificationHandler&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nablarch.fw.web.handler.CsrfTokenVerificationHandler&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;csrfTokenEndpointHandler&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.example.system.nablarch.handler.csrf.CsrfTokenEndpointHandler&quot;</span> /&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;webFrontController&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nablarch.fw.web.servlet.WebFrontController&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;handlerQueue&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">list</span>&gt;</span>
+...
+        <span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nablarch.fw.jaxrs.CorsPreflightRequestHandler&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;cors&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;cors&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">component</span>&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x691C;&#x8A3C;&#x30CF;&#x30F3;&#x30C9;&#x30E9; --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">component-ref</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;csrfTokenVerificationHandler&quot;</span>/&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x53D6;&#x5F97;API&#x306E;&#x30A8;&#x30F3;&#x30C9;&#x30DD;&#x30A4;&#x30F3;&#x30C8; --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nablarch.fw.RequestHandlerEntry&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;requestPattern&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/api/csrf_token&quot;</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;handler&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;csrfTokenEndpointHandler&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">component</span>&gt;</span>    
+...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">list</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">component</span>&gt;</span>
+</code></pre>
+<h3 id="&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x4FEE;&#x6B63;"><a name="&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x4FEE;&#x6B63;" class="plugin-anchor" href="#&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x4FEE;&#x6B63;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306E;&#x4FEE;&#x6B63;</h3>
+<p>CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;REST API&#x306F;&#x3001;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3057;&#x3066;&#x3044;&#x306A;&#x304F;&#x3066;&#x3082;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x3067;&#x304D;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3057;&#x3066;&#x3044;&#x306A;&#x304F;&#x3066;&#x3082;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x3067;&#x304D;&#x308B;&#x30D1;&#x30B9;&#x306F;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x306E;&#x5B9F;&#x88C5;&#x6642;&#x306B;&#x4F5C;&#x6210;&#x3057;&#x305F;<code>com.example.system.nablarch.handler.LoginCheckHandler</code>&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x30B3;&#x30F3;&#x30B9;&#x30C8;&#x30E9;&#x30AF;&#x30BF;&#x3067;&#x8A2D;&#x5B9A;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;<code>/api/csrf_token</code>&#x306E;&#x30D1;&#x30B9;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LoginCheckHandler</span><span class="hljs-params">()</span> </span>{
+    whitePatterns
+            .add(<span class="hljs-string">&quot;/api/signup&quot;</span>, HttpMethod.POST)
+            .add(<span class="hljs-string">&quot;/api/login&quot;</span>, HttpMethod.POST)
+            .add(<span class="hljs-string">&quot;/api/csrf_token&quot;</span>, HttpMethod.GET);
+}
+</code></pre>
+<h3 id="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30C6;&#x30B9;&#x30C8;"><a name="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30C6;&#x30B9;&#x30C8;" class="plugin-anchor" href="#&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30C6;&#x30B9;&#x30C8;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30C6;&#x30B9;&#x30C8;</h3>
+<p>&#x6B21;&#x306B;&#x3001;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x3066;&#x307F;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>mvn test
+</code></pre><p>&#x3059;&#x308B;&#x3068;&#x3001;&#x66F4;&#x65B0;&#x7CFB;&#x306E;&#x64CD;&#x4F5C;&#x3092;&#x3059;&#x308B;REST API&#x306E;&#x30C6;&#x30B9;&#x30C8;&#x304C;&#x5931;&#x6557;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x306F;&#x3001;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x691C;&#x8A3C;&#x30CF;&#x30F3;&#x30C9;&#x30E9;&#x306B;&#x3088;&#x308A;&#x3001;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x6642;&#x306B;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x304C;&#x7121;&#x3051;&#x308C;&#x3070;&#x3001;&#x30B9;&#x30C6;&#x30FC;&#x30BF;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x304C;<code>400 Bad Request</code>&#x306E;&#x30A8;&#x30E9;&#x30FC;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x3068;&#x3057;&#x3066;&#x8FD4;&#x5374;&#x3055;&#x308C;&#x308B;&#x305F;&#x3081;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x30C6;&#x30B9;&#x30C8;&#x6642;&#x306B;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3001;&#x30C6;&#x30B9;&#x30C8;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x4FEE;&#x6B63;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x306B;&#x306F;&#x3001;&#x5148;&#x307B;&#x3069;&#x5B9F;&#x88C5;&#x3057;&#x305F;REST API&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3068;HTTP&#x30D8;&#x30C3;&#x30C0;&#x5C5E;&#x6027;&#x540D;&#x3092;&#x53D6;&#x5F97;&#x3057;&#x3001;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x6642;&#x306E;HTTP&#x30D8;&#x30C3;&#x30C0;&#x306B;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305A;&#x3001;&#x30C6;&#x30B9;&#x30C8;&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;private&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">attachCsrfToken</span><span class="hljs-params">(RestMockHttpRequest request, ExecutionContext context)</span> </span>{
+    HttpResponse response = sendRequest(get(<span class="hljs-string">&quot;/api/csrf_token&quot;</span>));
+    assertStatusCode(<span class="hljs-string">&quot;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x306E;&#x53D6;&#x5F97;&quot;</span>, HttpResponse.Status.OK, response);
+
+    String json = response.getBodyString();
+    String name = JsonPath.read(json, <span class="hljs-string">&quot;$.csrfTokenHeaderName&quot;</span>);
+    String value = JsonPath.read(json, <span class="hljs-string">&quot;$.csrfTokenValue&quot;</span>);
+
+    request.setHeader(name, value);
+
+    WebConfig webConfig = WebConfigFinder.getWebConfig();
+    String storedVarName = webConfig.getCsrfTokenSessionStoredVarName();
+    String storeName = webConfig.getCsrfTokenSavedStoreName();
+    <span class="hljs-keyword">if</span> (storeName != <span class="hljs-keyword">null</span>) {
+        SessionUtil.put(context, storedVarName, value, storeName);
+    } <span class="hljs-keyword">else</span> {
+        SessionUtil.put(context, storedVarName, value);
+    }
+}
+</code></pre>
+<p>&#x3053;&#x306E;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3067;&#x306F;&#x3001;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x53D6;&#x5F97;&#x3059;&#x308B;REST API&#x3092;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3001;&#x5F15;&#x6570;&#x306E;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3078;&#x306E;&#x8A2D;&#x5B9A;&#x3068;&#x3001;&#x30B5;&#x30FC;&#x30D0;&#x30FC;&#x30B5;&#x30A4;&#x30C9;&#x3067;&#x6BD4;&#x8F03;&#x5143;&#x304C;&#x4FDD;&#x5B58;&#x3055;&#x308C;&#x308B;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x3078;&#x306E;&#x8A2D;&#x5B9A;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;<code>ExecutionContext</code>&#x3092;&#x4F7F;&#x7528;&#x3057;&#x305F;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x3078;&#x306E;&#x8A2D;&#x5B9A;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x8A8D;&#x8A3C;&#x3067;&#x306E;&#x30C6;&#x30B9;&#x30C8;&#x30AF;&#x30E9;&#x30B9;&#x3078;&#x306E;&#x5B9F;&#x88C5;&#x3068;&#x540C;&#x69D8;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x3092;&#x3001;&#x5404;&#x30C6;&#x30B9;&#x30C8;&#x3067;&#x3053;&#x306E;&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x3092;&#x547C;&#x3073;&#x51FA;&#x3059;&#x3088;&#x3046;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x4FEE;&#x6B63;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-meta">@Test</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> RESTAPI&#x3067;&#x30B5;&#x30A4;&#x30F3;&#x30A2;&#x30C3;&#x30D7;&#x3067;&#x304D;&#x308B;() {
+    ExecutionContext executionContext = <span class="hljs-keyword">new</span> ExecutionContext();
+    RestMockHttpRequest request = post(<span class="hljs-string">&quot;/api/signup&quot;</span>)
+            .setHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, MediaType.APPLICATION_JSON)
+            .setBody(Map.of(
+                    <span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;signup-test&quot;</span>,
+                    <span class="hljs-string">&quot;password&quot;</span>, <span class="hljs-string">&quot;pass&quot;</span>));
+    attachCsrfToken(request, executionContext);
+
+    HttpResponse response = sendRequestWithContext(request, executionContext);
+...
+</code></pre>
+<p>&#x5404;REST API&#x306E;&#x30C6;&#x30B9;&#x30C8;&#x3067;&#x540C;&#x69D8;&#x306E;&#x5B9F;&#x88C5;&#x3092;&#x3059;&#x308B;&#x3068;&#x3001;&#x30C6;&#x30B9;&#x30C8;&#x304C;&#x6210;&#x529F;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x3067;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x5B9F;&#x88C5;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+<h2 id="&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;"><a name="&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;" class="plugin-anchor" href="#&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;</h2>
+<p>&#x7D9A;&#x3044;&#x3066;&#x3001;&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="rest-api&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x3078;&#x306E;csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x7D44;&#x8FBC;"><a name="rest-api&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x3078;&#x306E;csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x7D44;&#x8FBC;" class="plugin-anchor" href="#rest-api&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x3078;&#x306E;csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x7D44;&#x8FBC;"><i class="fa fa-link" aria-hidden="true"></i></a>REST API&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x3078;&#x306E;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x7D44;&#x8FBC;</h3>
+<p>&#x751F;&#x6210;&#x3057;&#x305F;REST API&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x306E;&#x30E9;&#x30C3;&#x30D1;&#x30FC;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x305F;<code>BackendService.ts</code>&#x306B;&#x3001;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x5B9F;&#x88C5;&#x3092;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/backend/BackendService.ts</code></p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> {
+  ...
+  FetchParams,
+  HTTPMethod
+  RequestContext
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./generated-rest-client&apos;</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CsrfTokenAttachment</span> <span class="hljs-title">implements</span> <span class="hljs-title">Middleware</span> </span>{
+
+  private readonly targetMethod: ReadonlyArray&lt;HTTPMethod&gt; = [<span class="hljs-string">&apos;POST&apos;</span>, <span class="hljs-string">&apos;PUT&apos;</span>, <span class="hljs-string">&apos;DELETE&apos;</span>, <span class="hljs-string">&apos;PATCH&apos;</span>];
+  private headerName = <span class="hljs-string">&apos;&apos;</span>;
+  private tokenValue = <span class="hljs-string">&apos;&apos;</span>;
+
+  setCsrfToken(headerName: string, <span class="hljs-attr">tokenValue</span>: string) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;setCsrfToken:&apos;</span>, headerName, tokenValue);
+    <span class="hljs-keyword">this</span>.headerName = headerName;
+    <span class="hljs-keyword">this</span>.tokenValue = tokenValue;
+  }
+
+  pre = <span class="hljs-keyword">async</span> (context: RequestContext): <span class="hljs-built_in">Promise</span>&lt;FetchParams | <span class="hljs-keyword">void</span>&gt; =&gt; {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.headerName || !<span class="hljs-keyword">this</span>.targetMethod.includes(context.init.method <span class="hljs-keyword">as</span> HTTPMethod)) {
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;attach csrf token:&apos;</span>, <span class="hljs-keyword">this</span>.headerName, <span class="hljs-keyword">this</span>.tokenValue);
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">url</span>: context.url,
+      <span class="hljs-attr">init</span>: {
+        ...context.init,
+        <span class="hljs-attr">headers</span> : {
+          ...context.init.headers,
+          [<span class="hljs-keyword">this</span>.headerName]: <span class="hljs-keyword">this</span>.tokenValue
+        }
+      }
+    };
+  }
+}
+
+<span class="hljs-keyword">const</span> csrfTokenAttachment = <span class="hljs-keyword">new</span> CsrfTokenAttachment();
+
+<span class="hljs-keyword">const</span> configuration = <span class="hljs-keyword">new</span> Configuration({
+  <span class="hljs-attr">middleware</span>: [csrfTokenAttachment, corsHandler, requestLogger]
+});
+
+...
+
+const refreshCsrfToken = <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> usersApi.getCsrfToken();
+  csrfTokenAttachment.setCsrfToken(response.csrfTokenHeaderName, response.csrfTokenValue);
+};
+
+...
+
+export <span class="hljs-keyword">const</span> BackendService = {
+...
+  refreshCsrfToken
+};
+</code></pre>
+<p>&#x3059;&#x3067;&#x306B;&#x8AAC;&#x660E;&#x3057;&#x305F;&#x3068;&#x304A;&#x308A;&#x3001;&#x751F;&#x6210;&#x3057;&#x305F;REST API&#x306E;&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30B3;&#x30FC;&#x30C9;&#x3067;&#x306F;&#x3001;Middleware&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x90E8;&#x54C1;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3084;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x5171;&#x901A;&#x7684;&#x306A;&#x51E6;&#x7406;&#x3092;&#x5B9F;&#x88C5;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305A;&#x3001;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x30D8;&#x30C3;&#x30C0;&#x306B;&#x8A2D;&#x5B9A;&#x3059;&#x308B;<code>CsrfTokenAttachment</code>&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x3001;Middleware&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;&#xFF08;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x72B6;&#x614B;&#x3068;&#x3057;&#x3066;&#x4FDD;&#x6301;&#x3057;&#x3084;&#x3059;&#x304F;&#x3059;&#x308B;&#x3088;&#x3046;&#x3001;&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x3057;&#x3066;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#xFF09;</p>
+<p>Middleware&#x306B;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>CsrfTokenAttachment</code>&#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x751F;&#x6210;&#x3057;&#x3001;<code>middleware</code>&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x306B;&#x8FFD;&#x52A0;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x6B21;&#x306B;&#x3001;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x53D6;&#x5F97;&#x306E;REST API&#x3092;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3066;<code>CsrfTokenAttachment</code>&#x306B;&#x8A2D;&#x5B9A;&#x3059;&#x308B;<code>refreshCsrfToken</code>&#x95A2;&#x6570;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x306F;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x30B9;&#x30C8;&#x30A2;&#x306B;&#x7D10;&#x4ED8;&#x3044;&#x3066;&#x304A;&#x308A;&#x3001;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x304C;&#x5207;&#x308A;&#x66FF;&#x308F;&#x308B;&#x30BF;&#x30A4;&#x30DF;&#x30F3;&#x30B0;&#x3067;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3082;&#x5909;&#x66F4;&#x306B;&#x306A;&#x308B;&#x305F;&#x3081;&#x3001;&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3084;&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;&#x7B49;&#x306E;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x5207;&#x66FF;&#x30BF;&#x30A4;&#x30DF;&#x30F3;&#x30B0;&#x3067;&#x3001;&#x3053;&#x306E;&#x95A2;&#x6570;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x3066;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x6700;&#x65B0;&#x5316;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x30A2;&#x30D7;&#x30EA;&#x8D77;&#x52D5;&#x6642;&#x306E;csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x8A2D;&#x5B9A;"><a name="&#x30A2;&#x30D7;&#x30EA;&#x8D77;&#x52D5;&#x6642;&#x306E;csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x8A2D;&#x5B9A;" class="plugin-anchor" href="#&#x30A2;&#x30D7;&#x30EA;&#x8D77;&#x52D5;&#x6642;&#x306E;csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x8A2D;&#x5B9A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30A2;&#x30D7;&#x30EA;&#x8D77;&#x52D5;&#x6642;&#x306E;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x8A2D;&#x5B9A;</h3>
+<p>&#x30A2;&#x30D7;&#x30EA;&#x8D77;&#x52D5;&#x6642;&#x306B;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x3092;&#x8A2D;&#x5B9A;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>App</code>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3067;&#x5148;&#x307B;&#x3069;&#x4F5C;&#x6210;&#x3057;&#x305F;<code>refreshCsrfToken</code>&#x95A2;&#x6570;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> [initialized, setInitialized] = useState(<span class="hljs-literal">false</span>);
+
+  useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    BackendService.refreshCsrfToken()
+      .finally(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> setInitialized(<span class="hljs-literal">true</span>));
+  }, []);
+
+  <span class="hljs-keyword">if</span> (!initialized) {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span> /&gt;</span>
+    );
+  }
+...
+</span></code></pre>
+<p><code>refreshCsrfToken</code>&#x95A2;&#x6570;&#x306B;&#x3088;&#x308B;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x53D6;&#x5F97;&#x304C;&#x5B8C;&#x4E86;&#x3059;&#x308B;&#x307E;&#x3067;&#x306F;&#x3001;&#x4ED6;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x51E6;&#x7406;&#x3057;&#x305F;&#x304F;&#x306A;&#x3044;&#x305F;&#x3081;&#x3001;&#x305D;&#x308C;&#x3092;&#x5236;&#x5FA1;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30D5;&#x30E9;&#x30B0;&#x3068;&#x3057;&#x3066;<code>initialized</code>state&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;<code>refreshCsrfToken</code>&#x306E;&#x51E6;&#x7406;&#x304C;&#x7D42;&#x308F;&#x308B;&#x307E;&#x3067;&#x306F;&#x3001;JSX&#x3067;&#x7A7A;&#x8981;&#x7D20;&#x3092;&#x8FD4;&#x3059;&#x3088;&#x3046;&#x306B;&#x3057;&#x3001;<code>refreshCsrfToken</code>&#x306E;&#x51E6;&#x7406;&#x304C;&#x5B8C;&#x4E86;&#x3057;&#x3066;<code>initialized</code>&#x304C;<code>true</code>&#x306B;&#x306A;&#x3063;&#x305F;&#x30BF;&#x30A4;&#x30DF;&#x30F3;&#x30B0;&#x3067;&#x3001;&#x4ECA;&#x307E;&#x3067;&#x3068;&#x540C;&#x69D8;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x51E6;&#x7406;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h3 id="&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x30FB;&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;&#x6642;&#x306E;csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x8A2D;&#x5B9A;"><a name="&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x30FB;&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;&#x6642;&#x306E;csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x8A2D;&#x5B9A;" class="plugin-anchor" href="#&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x30FB;&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;&#x6642;&#x306E;csrf&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x8A2D;&#x5B9A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x30FB;&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;&#x6642;&#x306E;CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x8A2D;&#x5B9A;</h3>
+<p>&#x30ED;&#x30B0;&#x30A4;&#x30F3;&#x3001;&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;&#x6642;&#x306B;&#x3001;&#x30BB;&#x30C3;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x7834;&#x68C4;&#x3057;&#x3066;&#x65B0;&#x3057;&#x304F;&#x958B;&#x59CB;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x30E6;&#x30FC;&#x30B6;&#x30FC;&#x30B3;&#x30F3;&#x30C6;&#x30AF;&#x30B9;&#x30C8;&#x306B;&#x3042;&#x308B;<code>login</code>&#x3001;<code>logout</code>&#x95A2;&#x6570;&#x5185;&#x3067;&#x3001;&#x5148;&#x307B;&#x3069;&#x4F5C;&#x6210;&#x3057;&#x305F;<code>refreshCsrfToken</code>&#x95A2;&#x6570;&#x3092;&#x5B9F;&#x884C;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserContextProvider: React.FC = <span class="hljs-function">(<span class="hljs-params">{ children }</span>) =&gt;</span> {
+  ...
+  const contextValue: ContextValueType = {
+    ...
+    login: <span class="hljs-keyword">async</span> (userName, password) =&gt; {
+      <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">await</span> BackendService.login(userName, password);
+        <span class="hljs-keyword">await</span> BackendService.refreshCsrfToken();
+        setUserName(userName)
+        ...
+    },
+    <span class="hljs-attr">logout</span>: <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">await</span> BackendService.logout();
+      <span class="hljs-keyword">await</span> BackendService.refreshCsrfToken();
+      setUserName(<span class="hljs-string">&apos;&apos;</span>);
+      ...
+</code></pre>
+<p>&#x3053;&#x308C;&#x3067;&#x3001;&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x5B9F;&#x88C5;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+<h2 id="&#x52D5;&#x4F5C;&#x78BA;&#x8A8D;"><a name="&#x52D5;&#x4F5C;&#x78BA;&#x8A8D;" class="plugin-anchor" href="#&#x52D5;&#x4F5C;&#x78BA;&#x8A8D;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x52D5;&#x4F5C;&#x78BA;&#x8A8D;</h2>
+<p>&#x3044;&#x307E;&#x307E;&#x3067;&#x3068;&#x540C;&#x3058;&#x3088;&#x3046;&#x306B;&#x3001;&#x30D5;&#x30ED;&#x30F3;&#x30C8;&#x30A8;&#x30F3;&#x30C9;&#x30A2;&#x30D7;&#x30EA;&#x3068;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x8D77;&#x52D5;&#x3057;&#x3001;&#x52D5;&#x4F5C;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x5185;&#x90E8;&#x7684;&#x306A;&#x51E6;&#x7406;&#x3067;&#x3042;&#x308B;&#x305F;&#x3081;&#x3001;&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x52D5;&#x4F5C;&#x3084;&#x898B;&#x305F;&#x76EE;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;&#x4F55;&#x3082;&#x5F71;&#x97FF;&#x304C;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+<p>CSRF&#x30C8;&#x30FC;&#x30AF;&#x30F3;&#x306E;&#x53D6;&#x5F97;&#x3084;&#x8A2D;&#x5B9A;&#x6642;&#x306B;&#x306F;<code>console.log</code>&#x3067;&#x30ED;&#x30B0;&#x3092;&#x51FA;&#x529B;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x306E;&#x3067;&#x3001;&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x306E;&#x958B;&#x767A;&#x8005;&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x30B3;&#x30F3;&#x30BD;&#x30FC;&#x30EB;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x3066;&#x307F;&#x307E;&#x3057;&#x3087;&#x3046;&#x3002;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30ED;&#x30B0;&#x304C;&#x51FA;&#x529B;&#x3055;&#x308C;&#x3001;&#x6B63;&#x5E38;&#x306B;&#x52D5;&#x4F5C;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x304C;&#x78BA;&#x8A8D;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>&gt;&gt; GET /api/csrf_token 
+Object { method: &quot;GET&quot;, headers: {}, body: undefined, credentials: undefined }
+</code></pre><pre><code>&lt;&lt; 200 /api/csrf_token 
+Response { type: &quot;basic&quot;, url: &quot;http://localhost:3000/api/csrf_token&quot;, redirected: false, status: 200, ok: true, statusText: &quot;OK&quot;, headers: Headers, body: ReadableStream, bodyUsed: false }
+</code></pre><pre><code>setCsrfToken: X-CSRF-TOKEN cb5a3ec0-c32f-47f7-b4a0-149f8ba41341
+</code></pre><p>&#x3053;&#x308C;&#x3067;&#x3001;CSRF&#x5BFE;&#x7B56;&#x306E;&#x5B9F;&#x88C5;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../auth/e2e/" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 動作確認">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"CSRF対策","level":"1.10","depth":1,"previous":{"title":"動作確認","level":"1.9.3","depth":2,"path":"auth/e2e/README.md","ref":"auth/e2e/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"csrf/README.md","mtime":"2020-09-29T00:29:01.170Z","type":"markdown"},"gitbook":{"version":"3.6.5","time":"2020-09-29T01:29:59.133Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

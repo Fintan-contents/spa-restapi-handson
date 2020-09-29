@@ -1,0 +1,1547 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>コンポーネントの分割 · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.5">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../api/" />
+    
+    
+    <link rel="prev" href="../todo-page/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    この資料について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../intro/">
+            
+                <a href="../../../intro/">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../setup/">
+            
+                <a href="../../../setup/">
+            
+                    
+                    ハンズオンの準備
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../setup/install/">
+            
+                <a href="../../../setup/install/">
+            
+                    
+                    開発環境の準備
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../setup/download/">
+            
+                <a href="../../../setup/download/">
+            
+                    
+                    資料のダウンロード
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../todo-spec/">
+            
+                <a href="../../../todo-spec/">
+            
+                    
+                    ToDoアプリの仕様説明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../todo-project/">
+            
+                <a href="../../../todo-project/">
+            
+                    
+                    ToDoアプリプロジェクトの作成
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../todo-project/project/">
+            
+                <a href="../../../todo-project/project/">
+            
+                    
+                    プロジェクトの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../todo-project/frontend/">
+            
+                <a href="../../../todo-project/frontend/">
+            
+                    
+                    フロントエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../todo-project/backend/">
+            
+                <a href="../../../todo-project/backend/">
+            
+                    
+                    バックエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../openapi/">
+            
+                <a href="../../../openapi/">
+            
+                    
+                    OpenAPIドキュメントの利用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../openapi/document/">
+            
+                <a href="../../../openapi/document/">
+            
+                    
+                    ドキュメントの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../../openapi/client/">
+            
+                <a href="../../../openapi/client/">
+            
+                    
+                    クライアントコードの生成
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    ToDo管理の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="../todo-page/">
+            
+                <a href="../todo-page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    コンポーネントの分割
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.3" data-path="../api/">
+            
+                <a href="../api/">
+            
+                    
+                    REST APIクライアントの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.4" data-path="../cors/">
+            
+                <a href="../cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.5" data-path="../mock/">
+            
+                <a href="../mock/">
+            
+                    
+                    モックサーバの起動
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.6" data-path="../todo-list/">
+            
+                <a href="../todo-list/">
+            
+                    
+                    ToDoの一覧表示
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.7" data-path="../todo-add/">
+            
+                <a href="../todo-add/">
+            
+                    
+                    ToDoの登録
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.8" data-path="../todo-update/">
+            
+                <a href="../todo-update/">
+            
+                    
+                    ToDo状態の更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.9" data-path="../todo-filter/">
+            
+                <a href="../todo-filter/">
+            
+                    
+                    ToDo一覧の絞り込み
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../backend/">
+            
+                <a href="../../backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../../backend/todo-list/">
+            
+                <a href="../../backend/todo-list/">
+            
+                    
+                    ToDo一覧取得のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../../backend/todo-add/">
+            
+                <a href="../../backend/todo-add/">
+            
+                    
+                    ToDo登録のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="../../backend/todo-update/">
+            
+                <a href="../../backend/todo-update/">
+            
+                    
+                    ToDo状態更新のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4" data-path="../../backend/cors/">
+            
+                <a href="../../backend/cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../../e2e/">
+            
+                <a href="../../e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../todo-delete/">
+            
+                <a href="../../../todo-delete/">
+            
+                    
+                    ToDoを削除する（演習）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../../auth/">
+            
+                <a href="../../../auth/">
+            
+                    
+                    ユーザー認証の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../../auth/frontend/">
+            
+                <a href="../../../auth/frontend/">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1.1" data-path="../../../auth/frontend/page/">
+            
+                <a href="../../../auth/frontend/page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.2" data-path="../../../auth/frontend/routing/">
+            
+                <a href="../../../auth/frontend/routing/">
+            
+                    
+                    ルーティングの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.3" data-path="../../../auth/frontend/context/">
+            
+                <a href="../../../auth/frontend/context/">
+            
+                    
+                    ユーザーコンテクストの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.4" data-path="../../../auth/frontend/header/">
+            
+                <a href="../../../auth/frontend/header/">
+            
+                    
+                    ナビゲーションメニューの切替
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.5" data-path="../../../auth/frontend/signup/">
+            
+                <a href="../../../auth/frontend/signup/">
+            
+                    
+                    サインアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.6" data-path="../../../auth/frontend/login/">
+            
+                <a href="../../../auth/frontend/login/">
+            
+                    
+                    ログイン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.7" data-path="../../../auth/frontend/logout/">
+            
+                <a href="../../../auth/frontend/logout/">
+            
+                    
+                    ログアウト
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../../auth/backend/">
+            
+                <a href="../../../auth/backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.2.1" data-path="../../../auth/backend/signup/">
+            
+                <a href="../../../auth/backend/signup/">
+            
+                    
+                    サインアップのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.2" data-path="../../../auth/backend/login/">
+            
+                <a href="../../../auth/backend/login/">
+            
+                    
+                    ログインのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.3" data-path="../../../auth/backend/logout/">
+            
+                <a href="../../../auth/backend/logout/">
+            
+                    
+                    ログアウトのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.4" data-path="../../../auth/backend/check/">
+            
+                <a href="../../../auth/backend/check/">
+            
+                    
+                    REST APIへのアクセス制限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.5" data-path="../../../auth/backend/todo/">
+            
+                <a href="../../../auth/backend/todo/">
+            
+                    
+                    ToDo管理でのユーザー取得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../../auth/e2e/">
+            
+                <a href="../../../auth/e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../../csrf/">
+            
+                <a href="../../../csrf/">
+            
+                    
+                    CSRF対策
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >コンポーネントの分割</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x5206;&#x5272;"><a name="&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x5206;&#x5272;" class="plugin-anchor" href="#&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x5206;&#x5272;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x5206;&#x5272;</h1>
+<p>ToDo&#x30DA;&#x30FC;&#x30B8;&#x3092;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x5206;&#x5272;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3078;&#x306E;&#x843D;&#x3068;&#x3057;&#x8FBC;&#x307F;"><a name="&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3078;&#x306E;&#x843D;&#x3068;&#x3057;&#x8FBC;&#x307F;" class="plugin-anchor" href="#&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3078;&#x306E;&#x843D;&#x3068;&#x3057;&#x8FBC;&#x307F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3078;&#x306E;&#x843D;&#x3068;&#x3057;&#x8FBC;&#x307F;</h2>
+<p>&#x6B21;&#x306B;&#x3001;ToDo&#x30DA;&#x30FC;&#x30B8;&#x3092;&#x3069;&#x306E;&#x3088;&#x3046;&#x306A;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x69CB;&#x9020;&#x306B;&#x3059;&#x308B;&#x304B;&#x3092;&#x8003;&#x3048;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x843D;&#x3068;&#x3057;&#x8FBC;&#x3093;&#x3067;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>ToDo&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x304B;&#x3089;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x968E;&#x5C64;&#x69CB;&#x9020;&#x306B;&#x843D;&#x3068;&#x3057;&#x8FBC;&#x3093;&#x3067;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://ja.reactjs.org/docs/thinking-in-react.html#step-1-break-the-ui-into-a-component-hierarchy" target="_blank">React - React&#x306E;&#x6D41;&#x5100; Step 1</a>&#xFF09;</p>
+<p>&#x6271;&#x3046;&#x60C5;&#x5831;&#x306E;&#x7A2E;&#x985E;&#x3084;&#x7528;&#x9014;&#x304B;&#x3089;&#x3001;&#x3053;&#x3053;&#x3067;&#x306F;&#x4EE5;&#x4E0B;&#x306E;&#x3088;&#x3046;&#x306B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x5206;&#x5272;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><img src="img/design.png" alt="design"></p>
+<ul>
+<li><strong>NavigationHeader</strong>&#xFF08;&#x9EC4;&#x8272;&#xFF09;&#xFF1A;&#x30CA;&#x30D3;&#x30B2;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30E1;&#x30CB;&#x30E5;&#x30FC;&#x306E;&#x30D8;&#x30C3;&#x30C0;</li>
+<li><strong>TodoBoard</strong>&#xFF08;&#x30AA;&#x30EC;&#x30F3;&#x30B8;&#x8272;&#xFF09;&#xFF1A;ToDo&#x3092;&#x6271;&#x3046;&#x30A8;&#x30EA;&#x30A2;</li>
+<li><strong>TodoForm</strong>&#xFF08;&#x9752;&#x8272;&#xFF09;&#xFF1A;&#x65B0;&#x3057;&#x3044;ToDo&#x3092;&#x5165;&#x529B;&#x3059;&#x308B;</li>
+<li><strong>TodoFilter</strong>&#xFF08;&#x7D2B;&#x8272;&#xFF09;&#xFF1A;ToDo&#x306E;&#x8868;&#x793A;&#x5BFE;&#x8C61;&#x3092;&#x9078;&#x629E;&#x3059;&#x308B;</li>
+<li><strong>TodoList</strong>&#xFF08;&#x7DD1;&#x8272;&#xFF09;&#xFF1A;ToDo&#x3092;&#x4E00;&#x89A7;&#x5F62;&#x5F0F;&#x3067;&#x8868;&#x793A;&#x3059;&#x308B;</li>
+<li><strong>TodoItem</strong>&#xFF08;&#x8D64;&#x8272;&#xFF09;&#xFF1A;ToDo&#x3092;1&#x884C;&#x3067;&#x8868;&#x793A;&#x3059;&#x308B;</li>
+</ul>
+<p>&#x3053;&#x308C;&#x3089;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x3001;&#x4EE5;&#x4E0B;&#x306E;&#x3088;&#x3046;&#x306A;&#x968E;&#x5C64;&#x69CB;&#x9020;&#x3067;&#x4F5C;&#x6210;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li>NavigationHeader</li>
+<li>TodoBoard<ul>
+<li>TodoForm</li>
+<li>TodoFilter</li>
+<li>TodoList<ul>
+<li>TodoItem</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><a name="&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x4F5C;&#x6210;" class="plugin-anchor" href="#&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x4F5C;&#x6210;</h2>
+<p>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3068;&#x3057;&#x3066;&#x3001;<code>src</code>&#x306E;&#x4E0B;&#x306B;<code>components</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3001;&#x305D;&#x3053;&#x306B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;&#x73FE;&#x5728;&#x8868;&#x793A;&#x3057;&#x3066;&#x3044;&#x308B;&#x9759;&#x7684;&#x306A;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x305D;&#x306E;&#x307E;&#x307E;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://ja.reactjs.org/docs/thinking-in-react.html#step-2-build-a-static-version-in-react" target="_blank">React - React&#x306E;&#x6D41;&#x5100; Step 2</a>&#xFF09;</p>
+<p>&#x307E;&#x305F;&#x3001;CSS&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3082;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5358;&#x4F4D;&#x306B;&#x5206;&#x5272;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p><code>import</code>&#x3067;&#x8AAD;&#x307F;&#x8FBC;&#x3093;&#x3060;CSS&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306E;&#x9069;&#x7528;&#x7BC4;&#x56F2;&#x306F;&#x3001;&#x305D;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5185;&#x3060;&#x3051;&#x3067;&#x306A;&#x304F;&#x3001;&#x5168;&#x3066;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#xFF08;&#x30B0;&#x30ED;&#x30FC;&#x30D0;&#x30EB;&#xFF09;&#x306B;&#x9069;&#x7528;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x3053;&#x306E;&#x65B9;&#x6CD5;&#x3067;&#x306F;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5358;&#x4F4D;&#x306B;CSS&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x5206;&#x3051;&#x3066;&#x304A;&#x304F;&#x5FC5;&#x8981;&#x81EA;&#x4F53;&#x306F;&#x3042;&#x308A;&#x307E;&#x305B;&#x3093;&#x304C;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5358;&#x4F4D;&#x306B;&#x5206;&#x3051;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5358;&#x4F4D;&#x3067;&#x53D6;&#x308A;&#x56DE;&#x3057;&#x304C;&#x3057;&#x3084;&#x3059;&#x304B;&#x3063;&#x305F;&#x308A;&#x3001;&#x9069;&#x7528;&#x7BC4;&#x56F2;&#x304C;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5358;&#x4F4D;&#x306B;&#x306A;&#x308B;&#x3088;&#x3046;&#x306A;&#x4ED6;&#x306E;&#x65B9;&#x6CD5;&#x3078;&#x79FB;&#x884C;&#x3057;&#x3084;&#x3059;&#x304F;&#x306A;&#x308B;&#x3001;&#x3068;&#x3044;&#x3063;&#x305F;&#x30E1;&#x30EA;&#x30C3;&#x30C8;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x305F;&#x3060;&#x3057;&#x3001;&#x5168;&#x4F53;&#x3092;&#x628A;&#x63E1;&#x3057;&#x3065;&#x3089;&#x304F;&#x306A;&#x308B;&#x305F;&#x3081;&#x3001;&#x4E88;&#x671F;&#x305B;&#x305A;&#x30B9;&#x30BF;&#x30A4;&#x30EB;&#x304C;&#x885D;&#x7A81;&#x3057;&#x3066;&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x304C;&#x5D29;&#x308C;&#x3066;&#x3057;&#x307E;&#x3046;&#x3001;&#x3068;&#x3044;&#x3063;&#x305F;&#x3088;&#x3046;&#x306A;&#x4E8B;&#x6545;&#x304C;&#x767A;&#x751F;&#x3057;&#x3084;&#x3059;&#x3044;&#x3068;&#x3044;&#x3063;&#x305F;&#x30C7;&#x30E1;&#x30EA;&#x30C3;&#x30C8;&#x3082;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;&#x3053;&#x3046;&#x3044;&#x3063;&#x305F;&#x4E8B;&#x6545;&#x3092;&#x9632;&#x3050;&#x305F;&#x3081;&#x306E;&#x914D;&#x616E;&#x3068;&#x3057;&#x3066;&#x3001;&#x57FA;&#x672C;&#x7684;&#x306B;&#x306F;&#x30AF;&#x30E9;&#x30B9;&#x540D;&#x3092;&#x8D77;&#x70B9;&#x3068;&#x3057;&#x305F;&#x30B9;&#x30BF;&#x30A4;&#x30EB;&#x5B9A;&#x7FA9;&#x306B;&#x3057;&#x3066;&#x3001;&#x30AF;&#x30E9;&#x30B9;&#x540D;&#x306E;&#x547D;&#x540D;&#x30EB;&#x30FC;&#x30EB;&#x3092;<strong><code>[&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x540D;]_[&#x4EFB;&#x610F;&#x6587;&#x5B57;&#x5217;]</code></strong>&#x3068;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x306B;&#x3088;&#x308A;&#x3001;&#x4ED6;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3068;&#x30AF;&#x30E9;&#x30B9;&#x540D;&#x304C;&#x885D;&#x7A81;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x9632;&#x304E;&#x3001;&#x4E8B;&#x6545;&#x304C;&#x8D77;&#x304D;&#x3065;&#x3089;&#x3044;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;&#x304A;&#x304D;&#x307E;&#x3059;&#x3002;&#x306A;&#x304A;&#x3001;&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30E2;&#x30C3;&#x30AF;&#x3067;&#x306F;&#x3059;&#x3067;&#x306B;&#x3053;&#x306E;&#x30EB;&#x30FC;&#x30EB;&#x306B;&#x5247;&#x3063;&#x305F;&#x30AF;&#x30E9;&#x30B9;&#x540D;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x30C7;&#x30B6;&#x30A4;&#x30F3;&#x30E2;&#x30C3;&#x30AF;&#x306E;CSS&#x3092;&#x305D;&#x306E;&#x307E;&#x307E;&#x4F7F;&#x3063;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+</div></div></p>
+<h3 id="navigationheader"><a name="navigationheader" class="plugin-anchor" href="#navigationheader"><i class="fa fa-link" aria-hidden="true"></i></a>NavigationHeader</h3>
+<p><code>NavigationHeader</code>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>NavigationHeader.tsx</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;<code>NavigationHeader</code>&#x304C;&#x4F7F;&#x7528;&#x3059;&#x308B;CSS&#x3082;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>NavigationHeader.css</code>&#x3082;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>NavigationHeader</code>&#x304C;&#x8FD4;&#x3059;React&#x8981;&#x7D20;&#x306B;&#x306F;&#x3001;<code>App</code>&#x304B;&#x3089;&#x8A72;&#x5F53;&#x90E8;&#x5206;&#x3092;&#x62BD;&#x51FA;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/components/NavigationHeader.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./NavigationHeader.css&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NavigationHeader: React.FC = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_header&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_title&quot;</span>&gt;</span>Todo&#x30A2;&#x30D7;&#x30EA;<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_nav&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>&#x30C6;&#x30B9;&#x30C8;&#x30E6;&#x30FC;&#x30B6;&#x3055;&#x3093;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span></span>
+  );
+};
+</code></pre>
+<p><code>src/components/NavigationHeader.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.PageHeader_header</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: space-between;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">5%</span>;
+  <span class="hljs-attribute">border-bottom</span>: solid <span class="hljs-number">1px</span> black;
+  <span class="hljs-attribute">background</span>: black;
+}
+<span class="hljs-selector-class">.PageHeader_title</span> {
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.5rem</span>;
+}
+<span class="hljs-selector-class">.PageHeader_header</span> <span class="hljs-selector-tag">a</span> {
+  <span class="hljs-attribute">text-decoration</span>: none;
+}
+<span class="hljs-selector-class">.PageHeader_nav</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">list-style</span>: none;
+}
+<span class="hljs-selector-class">.PageHeader_nav</span> <span class="hljs-selector-tag">li</span> {
+  <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">color</span>: white;
+}
+<span class="hljs-selector-class">.PageHeader_nav</span> <span class="hljs-selector-tag">a</span> {
+  <span class="hljs-attribute">color</span>: white;
+}
+<span class="hljs-selector-class">.PageHeader_nav</span> <span class="hljs-selector-tag">button</span>,
+<span class="hljs-selector-class">.PageHeader_nav</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:active</span>,
+<span class="hljs-selector-class">.PageHeader_nav</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:hover</span>
+{
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">background-color</span>: transparent;
+  <span class="hljs-attribute">color</span>: white;
+}
+</code></pre>
+<p><code>NavigationHeader</code>&#x3067;&#x306F;&#x3001;TypeScript&#x306E;&#x69CB;&#x6587;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3001;<code>NavigationHeader</code>&#x306B;&#x578B;&#xFF08;<code>React.FC</code>&#xFF09;&#x3092;&#x4ED8;&#x3051;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;<code>React.FC</code>&#x306F;React&#x304C;&#x63D0;&#x4F9B;&#x3057;&#x3066;&#x3044;&#x308B;&#x95A2;&#x6570;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x578B;&#x3067;&#x3059;&#x3002;TypeScript&#x3067;&#x306F;<code>&#x5909;&#x6570;:&#x578B;</code>&#x3068;&#x3044;&#x3046;&#x3088;&#x3046;&#x306A;&#x69CB;&#x6587;&#x3067;&#x3001;&#x578B;&#x3092;&#x4ED8;&#x3051;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NavigationHeader: React.FC = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+}
+</code></pre>
+<p><code>NavigationHeader</code>&#x304C;&#x4F5C;&#x6210;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;<code>App</code>&#x3067;<code>NavigationHeader</code>&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x4FEE;&#x6B63;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/App.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./App.css&apos;</span>;
+<span class="hljs-keyword">import</span> { NavigationHeader } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./components/NavigationHeader&apos;</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">NavigationHeader</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoBoard_content&quot;</span>&gt;</span>
+      ...
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">React.Fragment</span>&gt;</span>
+  );
+}
+
+export default App;
+</span></code></pre>
+<p>&#x307E;&#x305F;&#x3001;<code>App.css</code>&#x304B;&#x3089;<code>NavigationHeader.css</code>&#x306B;&#x62BD;&#x51FA;&#x3057;&#x305F;&#x5B9A;&#x7FA9;&#x3092;&#x524A;&#x9664;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x6642;&#x70B9;&#x3067;&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x8868;&#x793A;&#x5185;&#x5BB9;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3068;&#x3001;&#x4F55;&#x3082;&#x5909;&#x308F;&#x3089;&#x305A;&#x8868;&#x793A;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3067;<code>App</code>&#x304B;&#x3089;<code>NavigationHeader</code>&#x90E8;&#x5206;&#x306E;&#x62BD;&#x51FA;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+<h3 id="todoboard"><a name="todoboard" class="plugin-anchor" href="#todoboard"><i class="fa fa-link" aria-hidden="true"></i></a>TodoBoard</h3>
+<p><code>TodoBoard</code>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoBoard.tsx</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;<code>TodoBoard</code>&#x304C;&#x4F7F;&#x7528;&#x3059;&#x308B;CSS&#x3092;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoBoard.css</code>&#x3082;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>TodoBoard</code>&#x304C;&#x8FD4;&#x3059;React&#x8981;&#x7D20;&#x306B;&#x306F;&#x3001;<code>App</code>&#x304B;&#x3089;&#x8A72;&#x5F53;&#x90E8;&#x5206;&#x3092;&#x62BD;&#x51FA;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x306F;&#x3044;&#x304F;&#x3064;&#x304B;&#x306E;&#x5B50;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x304C;&#x3001;&#x5C11;&#x3057;&#x305A;&#x3064;&#x78BA;&#x8A8D;&#x3057;&#x3066;&#x3044;&#x304F;&#x305F;&#x3081;&#x3001;&#x4E00;&#x5EA6;&#x306B;&#x4F5C;&#x308A;&#x8FBC;&#x307E;&#x305A;&#x306B;&#x4E00;&#x65E6;&#x3053;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3067;&#x5168;&#x3066;&#x5B9A;&#x7FA9;&#x3057;&#x3001;&#x305D;&#x306E;&#x5F8C;&#x306B;&#x5206;&#x5272;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/components/TodoBoard.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoBoard.css&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoBoard: React.FC = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    &lt;div className=&quot;TodoBoard_content&quot;&gt;
+      &lt;div className=&quot;TodoForm_content&quot;&gt;
+        &lt;form className=&quot;TodoForm_form&quot;&gt;
+          &lt;div className=&quot;TodoForm_input&quot;&gt;
+            &lt;input type=&quot;text&quot; placeholder=&quot;&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x5165;&#x529B;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;TodoForm_button&quot;&gt;
+            &lt;button type=&quot;button&quot;&gt;&#x8FFD;&#x52A0;&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;TodoFilter_content&quot;&gt;
+        &lt;button className=&quot;TodoFilter_buttonSelected&quot;&gt;&#x5168;&#x3066;&lt;/button&gt;
+        &lt;button className=&quot;TodoFilter_buttonUnselected&quot;&gt;&#x672A;&#x5B8C;&#x4E86;&#x306E;&#x307F;&lt;/button&gt;
+        &lt;button className=&quot;TodoFilter_buttonUnselected&quot;&gt;&#x5B8C;&#x4E86;&#x306E;&#x307F;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;ul className=&quot;TodoList_list&quot;&gt;
+        &lt;li className=&quot;TodoItem_item&quot;&gt;
+          &lt;div className=&quot;TodoItem_todo&quot;&gt;
+            &lt;label&gt;
+              &lt;input type=&quot;checkbox&quot; className=&quot;TodoItem_checkbox&quot; checked={true} /&gt;
+              &lt;span&gt;&#x6D17;&#x3044;&#x7269;&#x3092;&#x3059;&#x308B;&lt;/span&gt;
+            &lt;/label&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;TodoItem_delete&quot;&gt;
+            &lt;button className=&quot;TodoItem_button&quot;&gt;x&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li className=&quot;TodoItem_item&quot;&gt;
+          &lt;div className=&quot;TodoItem_todo&quot;&gt;
+            &lt;label&gt;
+              &lt;input type=&quot;checkbox&quot; className=&quot;TodoItem_checkbox&quot; /&gt;
+              &lt;span&gt;&#x6D17;&#x6FEF;&#x7269;&#x3092;&#x5E72;&#x3059;&lt;/span&gt;
+            &lt;/label&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;TodoItem_delete&quot;&gt;
+            &lt;button className=&quot;TodoItem_button&quot;&gt;x&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li className=&quot;TodoItem_item&quot;&gt;
+          &lt;div className=&quot;TodoItem_todo&quot;&gt;
+            &lt;label&gt;
+              &lt;input type=&quot;checkbox&quot; className=&quot;TodoItem_checkbox&quot; /&gt;
+              &lt;span&gt;&#x8CB7;&#x3044;&#x7269;&#x3078;&#x884C;&#x304F;&lt;/span&gt;
+            &lt;/label&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;TodoItem_delete&quot;&gt;
+            &lt;button className=&quot;TodoItem_button&quot;&gt;x&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+};
+</code></pre>
+<p><code>src/components/TodoBoard.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.TodoBoard_content</span> {
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">40%</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">30%</span>;
+}
+
+<span class="hljs-selector-class">.TodoForm_content</span> {
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">20px</span>;
+}
+<span class="hljs-selector-class">.TodoForm_form</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: space-between;
+}
+<span class="hljs-selector-class">.TodoForm_input</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">86%</span>;
+}
+<span class="hljs-selector-class">.TodoForm_input</span> <span class="hljs-selector-tag">input</span>{
+  <span class="hljs-attribute">float</span>: left;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">95%</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">border</span>: solid <span class="hljs-number">1px</span> lightgray;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fafbfc</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">outline</span>: none;
+}
+<span class="hljs-selector-class">.TodoForm_input</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-pseudo">:focus</span> {
+  <span class="hljs-attribute">background-color</span>: white;
+}
+<span class="hljs-selector-class">.TodoForm_button</span> {
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">14%</span>;
+}
+<span class="hljs-selector-class">.TodoForm_button</span> <span class="hljs-selector-tag">button</span> {
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">35px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">background-color</span>: darkgreen;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">15px</span>;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">vertical-align</span>: middle;
+}
+<span class="hljs-selector-class">.TodoForm_button</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: green;
+}
+
+<span class="hljs-selector-class">.TodoFilter_content</span> {
+  <span class="hljs-attribute">text-align</span>: right;
+}
+<span class="hljs-selector-class">.TodoFilter_content</span> <span class="hljs-selector-tag">button</span>{
+  <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">5px</span>;
+}
+<span class="hljs-selector-class">.TodoFilter_buttonSelected</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#31b3c7</span>;
+  <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">7px</span> <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">white-space</span>: nowrap;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">290486px</span>;
+  <span class="hljs-attribute">outline</span>: none;
+}
+<span class="hljs-selector-class">.TodoFilter_buttonUnselected</span> {
+  <span class="hljs-attribute">background-color</span>: lightgray;
+  <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">color</span>: gray;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">7px</span> <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">white-space</span>: nowrap;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">290486px</span>;
+  <span class="hljs-attribute">outline</span>: none;
+}
+
+<span class="hljs-selector-class">.TodoList_list</span> {
+  <span class="hljs-attribute">list-style</span>: none;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.TodoItem_item</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">15px</span> <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">background</span>: whitesmoke;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">10px</span>;
+}
+<span class="hljs-selector-class">.TodoItem_todo</span> {
+  <span class="hljs-attribute">float</span>: left;
+  <span class="hljs-attribute">text-align</span>: left;
+}
+<span class="hljs-selector-class">.TodoItem_checkbox</span> {
+  <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">7px</span>;
+  <span class="hljs-attribute">outline</span>: none;
+}
+<span class="hljs-selector-class">.TodoItem_delete</span> {
+  <span class="hljs-attribute">text-align</span>: right;
+}
+<span class="hljs-selector-class">.TodoItem_button</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">17px</span>;
+  <span class="hljs-attribute">font-weight</span>: bold;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">color</span>: grey;
+  <span class="hljs-attribute">background</span>: lightgrey;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">25px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">25px</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">outline</span>: none;
+}
+</code></pre>
+<p><code>TodoBoard</code>&#x304C;&#x4F5C;&#x6210;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;<code>App</code>&#x3067;<code>TodoBoard</code>&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x4FEE;&#x6B63;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/App.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./App.css&apos;</span>;
+<span class="hljs-keyword">import</span> { NavigationHeader } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./components/NavigationHeader&apos;</span>;
+<span class="hljs-keyword">import</span> { TodoBoard } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./components/TodoBoard&apos;</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">NavigationHeader</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoBoard</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">React.Fragment</span>&gt;</span>
+  );
+}
+
+export default App;
+</span></code></pre>
+<p>&#x307E;&#x305F;&#x3001;<code>App.css</code>&#x304B;&#x3089;<code>TodoBoard.css</code>&#x306B;&#x62BD;&#x51FA;&#x3057;&#x305F;&#x5B9A;&#x7FA9;&#x3092;&#x524A;&#x9664;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x8868;&#x793A;&#x5185;&#x5BB9;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3068;&#x3001;&#x4F55;&#x3082;&#x5909;&#x308F;&#x3089;&#x305A;&#x8868;&#x793A;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3067;<code>App</code>&#x304B;&#x3089;<code>TodoBoard</code>&#x90E8;&#x5206;&#x306E;&#x62BD;&#x51FA;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+<h3 id="todoform"><a name="todoform" class="plugin-anchor" href="#todoform"><i class="fa fa-link" aria-hidden="true"></i></a>TodoForm</h3>
+<p><code>TodoBoard</code>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x3055;&#x3089;&#x306B;&#x5B50;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoForm.tsx</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;<code>TodoForm</code>&#x304C;&#x4F7F;&#x7528;&#x3059;&#x308B;CSS&#x3092;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoForm.css</code>&#x3082;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>TodoForm</code>&#x304C;&#x8FD4;&#x3059;React&#x8981;&#x7D20;&#x306B;&#x306F;&#x3001;<code>TodoBoard</code>&#x304B;&#x3089;&#x8A72;&#x5F53;&#x90E8;&#x5206;&#x3092;&#x62BD;&#x51FA;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/components/TodoForm.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoForm.css&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoForm: React.FC = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_content&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_form&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_input&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;&#x30BF;&#x30B9;&#x30AF;&#x3092;&#x5165;&#x529B;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_button&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span>&gt;</span>&#x8FFD;&#x52A0;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  );
+};
+</span></code></pre>
+<p><code>src/components/TodoForm.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.TodoForm_content</span> {
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">20px</span>;
+}
+<span class="hljs-selector-class">.TodoForm_form</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: space-between;
+}
+<span class="hljs-selector-class">.TodoForm_input</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">86%</span>;
+}
+<span class="hljs-selector-class">.TodoForm_input</span> <span class="hljs-selector-tag">input</span>{
+  <span class="hljs-attribute">float</span>: left;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">95%</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">border</span>: solid <span class="hljs-number">1px</span> lightgray;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fafbfc</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">outline</span>: none;
+}
+<span class="hljs-selector-class">.TodoForm_input</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-pseudo">:focus</span> {
+  <span class="hljs-attribute">background-color</span>: white;
+}
+<span class="hljs-selector-class">.TodoForm_button</span> {
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">14%</span>;
+}
+<span class="hljs-selector-class">.TodoForm_button</span> <span class="hljs-selector-tag">button</span> {
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">35px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">background-color</span>: darkgreen;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">15px</span>;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">vertical-align</span>: middle;
+}
+<span class="hljs-selector-class">.TodoForm_button</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: green;
+}
+</code></pre>
+<p><code>TodoForm</code>&#x304C;&#x4F5C;&#x6210;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;<code>TodoBoard</code>&#x3067;<code>TodoForm</code>&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x4FEE;&#x6B63;&#x3057;&#x3001;<code>TodoBoard.css</code>&#x304B;&#x3089;<code>TodoForm.css</code>&#x306B;&#x62BD;&#x51FA;&#x3057;&#x305F;&#x5B9A;&#x7FA9;&#x3092;&#x524A;&#x9664;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x8868;&#x793A;&#x5185;&#x5BB9;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3068;&#x3001;&#x4F55;&#x3082;&#x5909;&#x308F;&#x3089;&#x305A;&#x8868;&#x793A;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3067;<code>TodoBoard</code>&#x304B;&#x3089;<code>TodoForm</code>&#x90E8;&#x5206;&#x306E;&#x62BD;&#x51FA;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+<h3 id="todofilter"><a name="todofilter" class="plugin-anchor" href="#todofilter"><i class="fa fa-link" aria-hidden="true"></i></a>TodoFilter</h3>
+<p><code>TodoBoard</code>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x3055;&#x3089;&#x306B;&#x5B50;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoFilter.tsx</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;<code>TodoFilter</code>&#x304C;&#x4F7F;&#x7528;&#x3059;&#x308B;CSS&#x3092;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoFilter.css</code>&#x3082;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>TodoFilter</code>&#x304C;&#x8FD4;&#x3059;React&#x8981;&#x7D20;&#x306B;&#x306F;&#x3001;<code>TodoBoard</code>&#x304B;&#x3089;&#x8A72;&#x5F53;&#x90E8;&#x5206;&#x3092;&#x62BD;&#x51FA;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/components/TodoFilter.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoFilter.css&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoFilter: React.FC = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoFilter_content&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoFilter_buttonSelected&quot;</span>&gt;</span>&#x5168;&#x3066;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoFilter_buttonUnselected&quot;</span>&gt;</span>&#x672A;&#x5B8C;&#x4E86;&#x306E;&#x307F;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoFilter_buttonUnselected&quot;</span>&gt;</span>&#x5B8C;&#x4E86;&#x306E;&#x307F;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+};
+</code></pre>
+<p><code>src/components/TodoFilter.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.TodoFilter_content</span> {
+  <span class="hljs-attribute">text-align</span>: right;
+}
+<span class="hljs-selector-class">.TodoFilter_content</span> <span class="hljs-selector-tag">button</span>{
+  <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">5px</span>;
+}
+<span class="hljs-selector-class">.TodoFilter_buttonSelected</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#31b3c7</span>;
+  <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">7px</span> <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">white-space</span>: nowrap;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">290486px</span>;
+  <span class="hljs-attribute">outline</span>: none;
+}
+<span class="hljs-selector-class">.TodoFilter_buttonUnselected</span> {
+  <span class="hljs-attribute">background-color</span>: lightgray;
+  <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">color</span>: gray;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">7px</span> <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">white-space</span>: nowrap;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">290486px</span>;
+  <span class="hljs-attribute">outline</span>: none;
+}
+</code></pre>
+<p><code>TodoFilter</code>&#x304C;&#x4F5C;&#x6210;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;<code>TodoBoard</code>&#x3067;<code>TodoFilter</code>&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x4FEE;&#x6B63;&#x3057;&#x3001;<code>TodoBoard.css</code>&#x304B;&#x3089;<code>TodoFilter.css</code>&#x306B;&#x62BD;&#x51FA;&#x3057;&#x305F;&#x5B9A;&#x7FA9;&#x3092;&#x524A;&#x9664;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x8868;&#x793A;&#x5185;&#x5BB9;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3068;&#x3001;&#x4F55;&#x3082;&#x5909;&#x308F;&#x3089;&#x305A;&#x8868;&#x793A;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3067;<code>TodoBoard</code>&#x304B;&#x3089;<code>TodoFilter</code>&#x90E8;&#x5206;&#x306E;&#x62BD;&#x51FA;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+<h3 id="todolist"><a name="todolist" class="plugin-anchor" href="#todolist"><i class="fa fa-link" aria-hidden="true"></i></a>TodoList</h3>
+<p><code>TodoBoard</code>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x3055;&#x3089;&#x306B;&#x5B50;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoList.tsx</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;<code>TodoList</code>&#x304C;&#x4F7F;&#x7528;&#x3059;&#x308B;CSS&#x3092;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoList.css</code>&#x3082;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>TodoList</code>&#x304C;&#x8FD4;&#x3059;React&#x8981;&#x7D20;&#x306B;&#x306F;&#x3001;<code>TodoBoard</code>&#x304B;&#x3089;&#x8A72;&#x5F53;&#x90E8;&#x5206;&#x3092;&#x62BD;&#x51FA;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x306F;&#x3044;&#x304F;&#x3064;&#x304B;&#x306E;&#x5B50;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x304C;&#x3001;<code>TodoBoard</code>&#x4F5C;&#x6210;&#x6642;&#x3068;&#x540C;&#x69D8;&#x3001;&#x4E00;&#x65E6;&#x3053;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3067;&#x5168;&#x3066;&#x5B9A;&#x7FA9;&#x3057;&#x3001;&#x305D;&#x306E;&#x5F8C;&#x306B;&#x5206;&#x5272;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/components/TodoList.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoList.css&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoList: React.FC = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    &lt;ul className=&quot;TodoList_list&quot;&gt;
+      &lt;li className=&quot;TodoItem_item&quot;&gt;
+        &lt;div className=&quot;TodoItem_todo&quot;&gt;
+          &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; className=&quot;TodoItem_checkbox&quot; checked={true} /&gt;
+            &lt;span&gt;&#x6D17;&#x3044;&#x7269;&#x3092;&#x3059;&#x308B;&lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;TodoItem_delete&quot;&gt;
+          &lt;button className=&quot;TodoItem_button&quot;&gt;x&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li className=&quot;TodoItem_item&quot;&gt;
+        &lt;div className=&quot;TodoItem_todo&quot;&gt;
+          &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; className=&quot;TodoItem_checkbox&quot; /&gt;
+            &lt;span&gt;&#x6D17;&#x6FEF;&#x7269;&#x3092;&#x5E72;&#x3059;&lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;TodoItem_delete&quot;&gt;
+          &lt;button className=&quot;TodoItem_button&quot;&gt;x&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li className=&quot;TodoItem_item&quot;&gt;
+        &lt;div className=&quot;TodoItem_todo&quot;&gt;
+          &lt;label&gt;
+            &lt;input type=&quot;checkbox&quot; className=&quot;TodoItem_checkbox&quot; /&gt;
+            &lt;span&gt;&#x8CB7;&#x3044;&#x7269;&#x3078;&#x884C;&#x304F;&lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;TodoItem_delete&quot;&gt;
+          &lt;button className=&quot;TodoItem_button&quot;&gt;x&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  );
+};
+</code></pre>
+<p><code>src/components/TodoList.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.TodoList_list</span> {
+  <span class="hljs-attribute">list-style</span>: none;
+}
+
+<span class="hljs-selector-class">.TodoItem_item</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">15px</span> <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">background</span>: whitesmoke;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">10px</span>;
+}
+<span class="hljs-selector-class">.TodoItem_todo</span> {
+  <span class="hljs-attribute">float</span>: left;
+  <span class="hljs-attribute">text-align</span>: left;
+}
+<span class="hljs-selector-class">.TodoItem_checkbox</span> {
+  <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">7px</span>;
+}
+<span class="hljs-selector-class">.TodoItem_delete</span> {
+  <span class="hljs-attribute">text-align</span>: right;
+}
+<span class="hljs-selector-class">.TodoItem_button</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">17px</span>;
+  <span class="hljs-attribute">font-weight</span>: bold;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">color</span>: grey;
+  <span class="hljs-attribute">background</span>: lightgrey;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">25px</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+}
+</code></pre>
+<p><code>TodoList</code>&#x304C;&#x4F5C;&#x6210;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;<code>TodoBoard</code>&#x3067;<code>TodoList</code>&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x4FEE;&#x6B63;&#x3057;&#x3001;<code>TodoBoard.css</code>&#x304B;&#x3089;<code>TodoList.css</code>&#x306B;&#x62BD;&#x51FA;&#x3057;&#x305F;&#x5B9A;&#x7FA9;&#x3092;&#x524A;&#x9664;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x8868;&#x793A;&#x5185;&#x5BB9;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3068;&#x3001;&#x4F55;&#x3082;&#x5909;&#x308F;&#x3089;&#x305A;&#x8868;&#x793A;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3067;<code>TodoBoard</code>&#x304B;&#x3089;<code>TodoList</code>&#x90E8;&#x5206;&#x306E;&#x62BD;&#x51FA;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x6642;&#x70B9;&#x3067;&#x3001;<code>TodoBoard</code>&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x5206;&#x5272;&#x306F;&#x5B8C;&#x4E86;&#x3057;&#x305F;&#x305F;&#x3081;&#x3001;<code>TodoBoard.tsx</code>&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/components/TodoBoard.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoBoard.css&apos;</span>;
+<span class="hljs-keyword">import</span> { TodoForm } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoForm&apos;</span>;
+<span class="hljs-keyword">import</span> { TodoFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoFilter&apos;</span>;
+<span class="hljs-keyword">import</span> { TodoList } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoList&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoBoard: React.FC = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoBoard_content&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoForm</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoFilter</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+};
+</code></pre>
+<p><code>src/components/TodoBoard.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.TodoBoard_content</span> {
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">40%</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">30%</span>;
+}
+</code></pre>
+<h3 id="todoitem"><a name="todoitem" class="plugin-anchor" href="#todoitem"><i class="fa fa-link" aria-hidden="true"></i></a>TodoItem</h3>
+<p><code>TodoList</code>&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3092;&#x3055;&#x3089;&#x306B;&#x5B50;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoItem.tsx</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;<code>TodoItem</code>&#x304C;&#x4F7F;&#x7528;&#x3059;&#x308B;CSS&#x3092;&#x5206;&#x5272;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>TodoItem.css</code>&#x3082;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>TodoItem</code>&#x304C;&#x8FD4;&#x3059;React&#x8981;&#x7D20;&#x306B;&#x306F;&#x3001;<code>TodoList</code>&#x304B;&#x3089;&#x8A72;&#x5F53;&#x90E8;&#x5206;&#x3092;&#x62BD;&#x51FA;&#x3057;&#x307E;&#x3059;&#x304C;&#x3001;<code>TodoItem</code>&#x306F;&#x8907;&#x6570;&#x914D;&#x7F6E;&#x3057;&#x3001;&#x305D;&#x308C;&#x305E;&#x308C;&#x306E;&#x8868;&#x793A;&#x5185;&#x5BB9;&#x304C;&#x7570;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;&#x3053;&#x306E;&#x3088;&#x3046;&#x306A;&#x5834;&#x5408;&#x306B;&#x306F;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306B;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x3001;&#x89AA;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x304B;&#x3089;&#x5F15;&#x6570;&#x3067;&#x5024;&#x3092;&#x53D7;&#x3051;&#x53D6;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://ja.reactjs.org/docs/components-and-props.html" target="_blank">React - &#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3068;props</a>&#xFF09;</p>
+<p>&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;TypeScript&#x306E;&#x69CB;&#x6587;&#x3067;&#x3042;&#x308B;<code>type</code>&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3001;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x306E;&#x578B;&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x305F;&#x578B;&#x30A8;&#x30A4;&#x30EA;&#x30A2;&#x30B9;&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x307E;&#x3059;&#x3002;&#x305D;&#x308C;&#x3092;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x578B;&#x3067;&#x3042;&#x308B;<code>React.FC</code>&#x306E;&#x578B;&#x5F15;&#x6570;&#x3068;&#x3057;&#x3066;&#x6E21;&#x3059;&#x3053;&#x3068;&#x3067;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x5F15;&#x6570;&#x3092;&#x305D;&#x308C;&#x3089;&#x306E;&#x578B;&#x3067;&#x30C1;&#x30A7;&#x30C3;&#x30AF;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-js">type Props = {
+  <span class="hljs-attr">text</span>: string
+  completed: boolean
+}
+</code></pre>
+<p>&#x53D7;&#x3051;&#x53D6;&#x3063;&#x305F;&#x5F15;&#x6570;&#x306F;&#x3001;&#x30DA;&#x30FC;&#x30B8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x5B9F;&#x88C5;&#x3057;&#x305F;<code>checked</code>&#x3068;&#x540C;&#x69D8;&#x3001;&#x4E2D;&#x62EC;&#x5F27;&#x3067;&#x56F2;&#x3046;&#x3053;&#x3068;&#x306B;&#x3088;&#x308A;JSX&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x306E;&#x3067;&#x3001;<code>TodoItem.tsx</code>&#x306E;&#x5B9F;&#x88C5;&#x306F;&#x6B21;&#x306E;&#x3068;&#x304A;&#x308A;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/components/TodoItem.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoItem.css&apos;</span>;
+
+type Props = {
+  <span class="hljs-attr">text</span>: string
+  completed: boolean
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoItem: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{text, completed}</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_item&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_todo&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_checkbox&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">{completed}</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{text}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_delete&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_button&quot;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  );
+};
+</span></code></pre>
+<p><code>TodoList</code>&#x3067;&#x306F;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x3057;&#x3066;<code>TodoItem</code>&#x306E;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x306B;&#x5024;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/components/TodoList.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoList.css&apos;</span>;
+<span class="hljs-keyword">import</span> { TodoItem } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoItem&apos;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoList: React.FC = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    &lt;ul className=&quot;TodoList_list&quot;&gt;
+      &lt;TodoItem text=&quot;&#x6D17;&#x3044;&#x7269;&#x3092;&#x3059;&#x308B;&quot; completed={true} /&gt;
+      &lt;TodoItem text=&quot;&#x6D17;&#x6FEF;&#x7269;&#x3092;&#x5E72;&#x3059;&quot; completed={false} /&gt;
+      &lt;TodoItem text=&quot;&#x8CB7;&#x3044;&#x7269;&#x3078;&#x884C;&#x304F;&quot; completed={false} /&gt;
+    &lt;/ul&gt;
+  );
+};
+</code></pre>
+<p>CSS&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x306F;&#x4ED6;&#x3068;&#x306E;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x3068;&#x540C;&#x69D8;&#x306B;&#x62BD;&#x51FA;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/components/TodoItem.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.TodoItem_item</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">15px</span> <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">background</span>: whitesmoke;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">10px</span>;
+}
+<span class="hljs-selector-class">.TodoItem_todo</span> {
+  <span class="hljs-attribute">float</span>: left;
+  <span class="hljs-attribute">text-align</span>: left;
+}
+<span class="hljs-selector-class">.TodoItem_checkbox</span> {
+  <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">7px</span>;
+  <span class="hljs-attribute">outline</span>: none;
+}
+<span class="hljs-selector-class">.TodoItem_delete</span> {
+  <span class="hljs-attribute">text-align</span>: right;
+}
+<span class="hljs-selector-class">.TodoItem_button</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">17px</span>;
+  <span class="hljs-attribute">font-weight</span>: bold;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">color</span>: grey;
+  <span class="hljs-attribute">background</span>: lightgrey;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">25px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">25px</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">outline</span>: none;
+}
+</code></pre>
+<p><code>src/components/TodoList.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.TodoList_list</span> {
+  <span class="hljs-attribute">list-style</span>: none;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p><code>TodoItem</code>&#x304C;&#x4F5C;&#x6210;&#x3067;&#x304D;&#x305F;&#x3089;&#x3001;<code>TodoList</code>&#x3067;<code>TodoItem</code>&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x4FEE;&#x6B63;&#x3057;&#x3001;<code>TodoList.css</code>&#x304B;&#x3089;<code>TodoItem.css</code>&#x306B;&#x62BD;&#x51FA;&#x3057;&#x305F;&#x5B9A;&#x7FA9;&#x3092;&#x524A;&#x9664;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30DA;&#x30FC;&#x30B8;&#x306E;&#x8868;&#x793A;&#x5185;&#x5BB9;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x3068;&#x3001;&#x4F55;&#x3082;&#x5909;&#x308F;&#x3089;&#x305A;&#x8868;&#x793A;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3067;<code>TodoList</code>&#x304B;&#x3089;<code>TodoItem</code>&#x90E8;&#x5206;&#x306E;&#x62BD;&#x51FA;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x308C;&#x3067;&#x3001;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306E;&#x5206;&#x5272;&#x306F;&#x5B8C;&#x4E86;&#x3067;&#x3059;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../todo-page/" class="navigation navigation-prev " aria-label="Previous page: ページ外観の作成">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../api/" class="navigation navigation-next " aria-label="Next page: REST APIクライアントの作成">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"コンポーネントの分割","level":"1.7.1.2","depth":3,"next":{"title":"REST APIクライアントの作成","level":"1.7.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},"previous":{"title":"ページ外観の作成","level":"1.7.1.1","depth":3,"path":"todo/frontend/todo-page/README.md","ref":"todo/frontend/todo-page/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/component/README.md","mtime":"2020-09-29T00:29:01.179Z","type":"markdown"},"gitbook":{"version":"3.6.5","time":"2020-09-29T01:29:59.133Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,971 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>REST APIクライアントの作成 · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.5">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../cors/" />
+    
+    
+    <link rel="prev" href="../component/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../../">
+            
+                <a href="../../../">
+            
+                    
+                    この資料について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../../intro/">
+            
+                <a href="../../../intro/">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../../setup/">
+            
+                <a href="../../../setup/">
+            
+                    
+                    ハンズオンの準備
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../../setup/install/">
+            
+                <a href="../../../setup/install/">
+            
+                    
+                    開発環境の準備
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../../setup/download/">
+            
+                <a href="../../../setup/download/">
+            
+                    
+                    資料のダウンロード
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../../todo-spec/">
+            
+                <a href="../../../todo-spec/">
+            
+                    
+                    ToDoアプリの仕様説明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../../todo-project/">
+            
+                <a href="../../../todo-project/">
+            
+                    
+                    ToDoアプリプロジェクトの作成
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../../todo-project/project/">
+            
+                <a href="../../../todo-project/project/">
+            
+                    
+                    プロジェクトの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../../todo-project/frontend/">
+            
+                <a href="../../../todo-project/frontend/">
+            
+                    
+                    フロントエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../../todo-project/backend/">
+            
+                <a href="../../../todo-project/backend/">
+            
+                    
+                    バックエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../../openapi/">
+            
+                <a href="../../../openapi/">
+            
+                    
+                    OpenAPIドキュメントの利用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../openapi/document/">
+            
+                <a href="../../../openapi/document/">
+            
+                    
+                    ドキュメントの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../../openapi/client/">
+            
+                <a href="../../../openapi/client/">
+            
+                    
+                    クライアントコードの生成
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    ToDo管理の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="../todo-page/">
+            
+                <a href="../todo-page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="../component/">
+            
+                <a href="../component/">
+            
+                    
+                    コンポーネントの分割
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    REST APIクライアントの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.4" data-path="../cors/">
+            
+                <a href="../cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.5" data-path="../mock/">
+            
+                <a href="../mock/">
+            
+                    
+                    モックサーバの起動
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.6" data-path="../todo-list/">
+            
+                <a href="../todo-list/">
+            
+                    
+                    ToDoの一覧表示
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.7" data-path="../todo-add/">
+            
+                <a href="../todo-add/">
+            
+                    
+                    ToDoの登録
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.8" data-path="../todo-update/">
+            
+                <a href="../todo-update/">
+            
+                    
+                    ToDo状態の更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.9" data-path="../todo-filter/">
+            
+                <a href="../todo-filter/">
+            
+                    
+                    ToDo一覧の絞り込み
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../backend/">
+            
+                <a href="../../backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../../backend/todo-list/">
+            
+                <a href="../../backend/todo-list/">
+            
+                    
+                    ToDo一覧取得のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../../backend/todo-add/">
+            
+                <a href="../../backend/todo-add/">
+            
+                    
+                    ToDo登録のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="../../backend/todo-update/">
+            
+                <a href="../../backend/todo-update/">
+            
+                    
+                    ToDo状態更新のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4" data-path="../../backend/cors/">
+            
+                <a href="../../backend/cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../../e2e/">
+            
+                <a href="../../e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../../todo-delete/">
+            
+                <a href="../../../todo-delete/">
+            
+                    
+                    ToDoを削除する（演習）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../../auth/">
+            
+                <a href="../../../auth/">
+            
+                    
+                    ユーザー認証の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../../auth/frontend/">
+            
+                <a href="../../../auth/frontend/">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1.1" data-path="../../../auth/frontend/page/">
+            
+                <a href="../../../auth/frontend/page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.2" data-path="../../../auth/frontend/routing/">
+            
+                <a href="../../../auth/frontend/routing/">
+            
+                    
+                    ルーティングの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.3" data-path="../../../auth/frontend/context/">
+            
+                <a href="../../../auth/frontend/context/">
+            
+                    
+                    ユーザーコンテクストの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.4" data-path="../../../auth/frontend/header/">
+            
+                <a href="../../../auth/frontend/header/">
+            
+                    
+                    ナビゲーションメニューの切替
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.5" data-path="../../../auth/frontend/signup/">
+            
+                <a href="../../../auth/frontend/signup/">
+            
+                    
+                    サインアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.6" data-path="../../../auth/frontend/login/">
+            
+                <a href="../../../auth/frontend/login/">
+            
+                    
+                    ログイン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.7" data-path="../../../auth/frontend/logout/">
+            
+                <a href="../../../auth/frontend/logout/">
+            
+                    
+                    ログアウト
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../../auth/backend/">
+            
+                <a href="../../../auth/backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.2.1" data-path="../../../auth/backend/signup/">
+            
+                <a href="../../../auth/backend/signup/">
+            
+                    
+                    サインアップのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.2" data-path="../../../auth/backend/login/">
+            
+                <a href="../../../auth/backend/login/">
+            
+                    
+                    ログインのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.3" data-path="../../../auth/backend/logout/">
+            
+                <a href="../../../auth/backend/logout/">
+            
+                    
+                    ログアウトのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.4" data-path="../../../auth/backend/check/">
+            
+                <a href="../../../auth/backend/check/">
+            
+                    
+                    REST APIへのアクセス制限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.5" data-path="../../../auth/backend/todo/">
+            
+                <a href="../../../auth/backend/todo/">
+            
+                    
+                    ToDo管理でのユーザー取得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../../auth/e2e/">
+            
+                <a href="../../../auth/e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../../csrf/">
+            
+                <a href="../../../csrf/">
+            
+                    
+                    CSRF対策
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../../.." >REST APIクライアントの作成</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="rest-api&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><a name="rest-api&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x306E;&#x4F5C;&#x6210;" class="plugin-anchor" href="#rest-api&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x306E;&#x4F5C;&#x6210;"><i class="fa fa-link" aria-hidden="true"></i></a>REST API&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x306E;&#x4F5C;&#x6210;</h1>
+<p>ToDo&#x4E00;&#x89A7;&#x3092;&#x8868;&#x793A;&#x3059;&#x308B;&#x5B9F;&#x88C5;&#x3092;&#x3059;&#x308B;&#x969B;&#x306B;&#x306F;&#x3001;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;REST API&#x306B;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x4E8B;&#x524D;&#x306B;OpenAPI&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x304B;&#x3089;REST API&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x751F;&#x6210;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;REST API&#x306E;&#x547C;&#x3073;&#x51FA;&#x3057;&#x6642;&#x306B;&#x5171;&#x901A;&#x7684;&#x306A;&#x8A2D;&#x5B9A;&#x3092;&#x884C;&#x3046;&#x3053;&#x3068;&#x304C;&#x591A;&#x3044;&#x305F;&#x3081;&#x3001;&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;&#x5404;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x304B;&#x3089;&#x751F;&#x6210;&#x3057;&#x305F;&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x305B;&#x305A;&#x3001;&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x30E9;&#x30C3;&#x30D4;&#x30F3;&#x30B0;&#x3057;&#x305F;<code>BackendSerivce</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x304B;&#x3089;REST API&#x306B;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x3059;&#x308B;&#x969B;&#x306B;&#x306F;&#x3001;&#x3053;&#x306E;`BackendSerivce&#xFF40;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/backend</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x306B;<code>BackendService.ts</code>&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p><code>src/backend/BackendService.ts</code></p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> {
+  Configuration,
+  TodosApi,
+  Middleware,
+  UsersApi
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./generated-rest-client&apos;</span>;
+
+<span class="hljs-keyword">const</span> requestLogger: Middleware = {
+  <span class="hljs-attr">pre</span>: <span class="hljs-keyword">async</span> (context) =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`&gt;&gt; <span class="hljs-subst">${context.init.method}</span> <span class="hljs-subst">${context.url}</span>`</span>, context.init);
+  },
+  <span class="hljs-attr">post</span>: <span class="hljs-keyword">async</span> (context) =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`&lt;&lt; <span class="hljs-subst">${context.response.status}</span> <span class="hljs-subst">${context.url}</span>`</span>, context.response);
+  }
+}
+
+<span class="hljs-keyword">const</span> configuration = <span class="hljs-keyword">new</span> Configuration({
+  <span class="hljs-attr">middleware</span>: [requestLogger]
+});
+
+<span class="hljs-keyword">const</span> todosApi = <span class="hljs-keyword">new</span> TodosApi(configuration);
+
+<span class="hljs-keyword">const</span> usersApi = <span class="hljs-keyword">new</span> UsersApi(configuration);
+
+<span class="hljs-keyword">const</span> signup = <span class="hljs-keyword">async</span> (userName: string, <span class="hljs-attr">password</span>: string) =&gt; {
+  <span class="hljs-keyword">return</span> usersApi.signup({ <span class="hljs-attr">inlineObject2</span> : { userName, password }});
+};
+
+<span class="hljs-keyword">const</span> login = <span class="hljs-keyword">async</span> (userName: string, <span class="hljs-attr">password</span>: string) =&gt; {
+  <span class="hljs-keyword">return</span> usersApi.login({ <span class="hljs-attr">inlineObject3</span>: { userName, password }});
+};
+
+<span class="hljs-keyword">const</span> logout = <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">return</span> usersApi.logout();
+};
+
+<span class="hljs-keyword">const</span> getTodos = <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">return</span> todosApi.getTodos();
+};
+
+<span class="hljs-keyword">const</span> postTodo = <span class="hljs-keyword">async</span> (text: string) =&gt; {
+  <span class="hljs-keyword">return</span> todosApi.postTodo({ <span class="hljs-attr">inlineObject</span>: { text }});
+}
+
+<span class="hljs-keyword">const</span> putTodo = <span class="hljs-keyword">async</span> (todoId: number, <span class="hljs-attr">completed</span>: boolean) =&gt; {
+  <span class="hljs-keyword">return</span> todosApi.putTodo({ todoId, <span class="hljs-attr">inlineObject1</span>: { completed }});
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> BackendService = {
+  signup,
+  login,
+  logout,
+  getTodos,
+  postTodo,
+  putTodo
+};
+</code></pre>
+<p>&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30B3;&#x30FC;&#x30C9;&#x3067;&#x306F;&#x3001;REST API&#x3092;&#x547C;&#x3073;&#x51FA;&#x3059;&#x305F;&#x3081;&#x306B;&#x306F;<code>TodosApi</code>&#x7B49;&#x306E;API&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x751F;&#x6210;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;&#x751F;&#x6210;&#x6642;&#x306B;&#x306F;&#x8A2D;&#x5B9A;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x6E21;&#x3059;&#x3053;&#x3068;&#x3067;&#x3001;&#x69D8;&#x3005;&#x306A;&#x8A2D;&#x5B9A;&#x3092;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x751F;&#x6210;&#x3057;&#x305F;&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x30B3;&#x30FC;&#x30C9;&#x3067;&#x306F;&#x3001;Middleware&#x3068;&#x547C;&#x3070;&#x308C;&#x308B;&#x90E8;&#x54C1;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3084;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x306B;&#x5BFE;&#x3059;&#x308B;&#x5171;&#x901A;&#x7684;&#x306A;&#x51E6;&#x7406;&#x3092;&#x5B9F;&#x88C5;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#x3053;&#x3053;&#x3067;&#x306F;&#x3001;&#x958B;&#x767A;&#x6642;&#x306B;REST API&#x306E;&#x547C;&#x3073;&#x51FA;&#x3057;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x3084;&#x3059;&#x3044;&#x3088;&#x3046;&#x306B;&#x3001;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3068;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x3092;&#x30B3;&#x30F3;&#x30BD;&#x30FC;&#x30EB;&#x306B;&#x30ED;&#x30B0;&#x51FA;&#x529B;&#x3059;&#x308B;Middleware&#x3092;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x306A;&#x304A;&#x3001;OpenAPI&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x306B;&#x306F;ToDo&#x3092;&#x524A;&#x9664;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;REST API&#x3082;&#x5B9A;&#x7FA9;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;&#x524A;&#x9664;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x5F8C;&#x306E;&#x6F14;&#x7FD2;&#x306B;&#x3066;&#x81EA;&#x8EAB;&#x3067;&#x5B9F;&#x88C5;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x3001;&#x3053;&#x3053;&#x3067;&#x306F;&#x4F5C;&#x6210;&#x3057;&#x307E;&#x305B;&#x3093;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../component/" class="navigation navigation-prev " aria-label="Previous page: コンポーネントの分割">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../cors/" class="navigation navigation-next " aria-label="Next page: CORSの設定">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"REST APIクライアントの作成","level":"1.7.1.3","depth":3,"next":{"title":"CORSの設定","level":"1.7.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},"previous":{"title":"コンポーネントの分割","level":"1.7.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/api/README.md","mtime":"2020-09-29T00:29:01.179Z","type":"markdown"},"gitbook":{"version":"3.6.5","time":"2020-09-29T01:29:59.133Z"},"basePath":"../../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

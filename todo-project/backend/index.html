@@ -1,0 +1,1114 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>バックエンドの確認 · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.5">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../openapi/" />
+    
+    
+    <link rel="prev" href="../frontend/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    この資料について
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../intro/">
+            
+                <a href="../../intro/">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../setup/">
+            
+                <a href="../../setup/">
+            
+                    
+                    ハンズオンの準備
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../setup/install/">
+            
+                <a href="../../setup/install/">
+            
+                    
+                    開発環境の準備
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../setup/download/">
+            
+                <a href="../../setup/download/">
+            
+                    
+                    資料のダウンロード
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../todo-spec/">
+            
+                <a href="../../todo-spec/">
+            
+                    
+                    ToDoアプリの仕様説明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    ToDoアプリプロジェクトの作成
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../project/">
+            
+                <a href="../project/">
+            
+                    
+                    プロジェクトの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../frontend/">
+            
+                <a href="../frontend/">
+            
+                    
+                    フロントエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    バックエンドの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../openapi/">
+            
+                <a href="../../openapi/">
+            
+                    
+                    OpenAPIドキュメントの利用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../openapi/document/">
+            
+                <a href="../../openapi/document/">
+            
+                    
+                    ドキュメントの確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../openapi/client/">
+            
+                <a href="../../openapi/client/">
+            
+                    
+                    クライアントコードの生成
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../todo/">
+            
+                <a href="../../todo/">
+            
+                    
+                    ToDo管理の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../todo/frontend/">
+            
+                <a href="../../todo/frontend/">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="../../todo/frontend/todo-page/">
+            
+                <a href="../../todo/frontend/todo-page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="../../todo/frontend/component/">
+            
+                <a href="../../todo/frontend/component/">
+            
+                    
+                    コンポーネントの分割
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.3" data-path="../../todo/frontend/api/">
+            
+                <a href="../../todo/frontend/api/">
+            
+                    
+                    REST APIクライアントの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.4" data-path="../../todo/frontend/cors/">
+            
+                <a href="../../todo/frontend/cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.5" data-path="../../todo/frontend/mock/">
+            
+                <a href="../../todo/frontend/mock/">
+            
+                    
+                    モックサーバの起動
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.6" data-path="../../todo/frontend/todo-list/">
+            
+                <a href="../../todo/frontend/todo-list/">
+            
+                    
+                    ToDoの一覧表示
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.7" data-path="../../todo/frontend/todo-add/">
+            
+                <a href="../../todo/frontend/todo-add/">
+            
+                    
+                    ToDoの登録
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.8" data-path="../../todo/frontend/todo-update/">
+            
+                <a href="../../todo/frontend/todo-update/">
+            
+                    
+                    ToDo状態の更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.9" data-path="../../todo/frontend/todo-filter/">
+            
+                <a href="../../todo/frontend/todo-filter/">
+            
+                    
+                    ToDo一覧の絞り込み
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../todo/backend/">
+            
+                <a href="../../todo/backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../../todo/backend/todo-list/">
+            
+                <a href="../../todo/backend/todo-list/">
+            
+                    
+                    ToDo一覧取得のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../../todo/backend/todo-add/">
+            
+                <a href="../../todo/backend/todo-add/">
+            
+                    
+                    ToDo登録のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="../../todo/backend/todo-update/">
+            
+                <a href="../../todo/backend/todo-update/">
+            
+                    
+                    ToDo状態更新のREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4" data-path="../../todo/backend/cors/">
+            
+                <a href="../../todo/backend/cors/">
+            
+                    
+                    CORSの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../../todo/e2e/">
+            
+                <a href="../../todo/e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../todo-delete/">
+            
+                <a href="../../todo-delete/">
+            
+                    
+                    ToDoを削除する（演習）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../auth/">
+            
+                <a href="../../auth/">
+            
+                    
+                    ユーザー認証の実装
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../auth/frontend/">
+            
+                <a href="../../auth/frontend/">
+            
+                    
+                    フロントエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1.1" data-path="../../auth/frontend/page/">
+            
+                <a href="../../auth/frontend/page/">
+            
+                    
+                    ページ外観の作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.2" data-path="../../auth/frontend/routing/">
+            
+                <a href="../../auth/frontend/routing/">
+            
+                    
+                    ルーティングの設定
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.3" data-path="../../auth/frontend/context/">
+            
+                <a href="../../auth/frontend/context/">
+            
+                    
+                    ユーザーコンテクストの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.4" data-path="../../auth/frontend/header/">
+            
+                <a href="../../auth/frontend/header/">
+            
+                    
+                    ナビゲーションメニューの切替
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.5" data-path="../../auth/frontend/signup/">
+            
+                <a href="../../auth/frontend/signup/">
+            
+                    
+                    サインアップ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.6" data-path="../../auth/frontend/login/">
+            
+                <a href="../../auth/frontend/login/">
+            
+                    
+                    ログイン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.1.7" data-path="../../auth/frontend/logout/">
+            
+                <a href="../../auth/frontend/logout/">
+            
+                    
+                    ログアウト
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../auth/backend/">
+            
+                <a href="../../auth/backend/">
+            
+                    
+                    バックエンド
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.2.1" data-path="../../auth/backend/signup/">
+            
+                <a href="../../auth/backend/signup/">
+            
+                    
+                    サインアップのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.2" data-path="../../auth/backend/login/">
+            
+                <a href="../../auth/backend/login/">
+            
+                    
+                    ログインのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.3" data-path="../../auth/backend/logout/">
+            
+                <a href="../../auth/backend/logout/">
+            
+                    
+                    ログアウトのREST API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.4" data-path="../../auth/backend/check/">
+            
+                <a href="../../auth/backend/check/">
+            
+                    
+                    REST APIへのアクセス制限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2.5" data-path="../../auth/backend/todo/">
+            
+                <a href="../../auth/backend/todo/">
+            
+                    
+                    ToDo管理でのユーザー取得
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../auth/e2e/">
+            
+                <a href="../../auth/e2e/">
+            
+                    
+                    動作確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../csrf/">
+            
+                <a href="../../csrf/">
+            
+                    
+                    CSRF対策
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >バックエンドの確認</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x78BA;&#x8A8D;"><a name="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x78BA;&#x8A8D;" class="plugin-anchor" href="#&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x78BA;&#x8A8D;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x78BA;&#x8A8D;</h1>
+<p>&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x3092;&#x958B;&#x767A;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x958B;&#x767A;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;"><a name="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x958B;&#x767A;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;" class="plugin-anchor" href="#&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x958B;&#x767A;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x958B;&#x767A;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;</h2>
+<p><code>backend</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x304C;&#x3001;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x958B;&#x767A;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306B;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x3053;&#x306E;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306F;&#x3001;Nablarch&#x306E;RESTful&#x30A6;&#x30A7;&#x30D6;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x69CB;&#x6210;&#x3067;&#x4F5C;&#x6210;&#x3055;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/web_service/rest/index.html" target="_blank">Nablarch - RESTful&#x30A6;&#x30A7;&#x30D6;&#x30B5;&#x30FC;&#x30D3;&#x30B9;</a>&#xFF09;</p>
+<p>Nablarch&#x304C;&#x63D0;&#x4F9B;&#x3057;&#x3066;&#x3044;&#x308B;&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x304B;&#x3089;&#x4F5C;&#x6210;&#x3057;&#x3001;&#x6B21;&#x306E;&#x5909;&#x66F4;&#x3092;&#x52A0;&#x3048;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/blank_project/index.html#blank-project" target="_blank">Nablarch - &#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;</a>&#xFF09;</p>
+<ul>
+<li>&#x4F7F;&#x7528;&#x3059;&#x308B;Java&#x306E;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x3092;11&#x306B;&#x5909;&#x66F4;</li>
+<li>&#x4F7F;&#x7528;&#x3059;&#x308B;Junit&#x306E;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x3092;5&#x306B;&#x5909;&#x66F4;</li>
+<li>&#x958B;&#x767A;&#x74B0;&#x5883;&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B5;&#x30FC;&#x30D0;&#x3092;Jetty&#x306B;&#x5909;&#x66F4;</li>
+<li>&#x8D77;&#x52D5;&#x30C6;&#x30B9;&#x30C8;&#x7528;&#x306E;&#x30A2;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x30AF;&#x30E9;&#x30B9;&#x3068;&#x30C6;&#x30B9;&#x30C8;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x8FFD;&#x52A0;</li>
+<li>Bean Validation&#x306E;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x3068;&#x3057;&#x3066;Hibernate Validation&#x306E;&#x30E1;&#x30C3;&#x30BB;&#x30FC;&#x30B8;&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x8A2D;&#x5B9A;</li>
+<li><code>nablarch.webApi.applicationPath</code>&#x306E;&#x74B0;&#x5883;&#x4F9D;&#x5B58;&#x5024;&#x3092;<code>/api</code>&#x306B;&#x8A2D;&#x5B9A;</li>
+<li>&#x4F7F;&#x7528;&#x3057;&#x306A;&#x3044;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3084;&#x5B9A;&#x7FA9;&#x3092;&#x524A;&#x9664;</li>
+</ul>
+<p>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x69CB;&#x9020;&#x306F;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>backend
+&#x251C;&#x2500;&#x2500; .gitignore
+&#x251C;&#x2500;&#x2500; pom.xml
+&#x251C;&#x2500;&#x2500; docker
+&#x2502;   &#x2514;&#x2500;&#x2500; docker-compose.dev.yml
+&#x251C;&#x2500;&#x2500; rest-api-specification
+&#x2502;   &#x2514;&#x2500;&#x2500; openapi.yaml
+&#x2514;&#x2500;&#x2500; src
+    &#x251C;&#x2500;&#x2500; main
+    &#x2502;   &#x251C;&#x2500;&#x2500; java
+    &#x2502;   &#x2502;   &#x2514;&#x2500;&#x2500; com
+    &#x2502;   &#x2502;       &#x2514;&#x2500;&#x2500; example
+    &#x2502;   &#x2502;           &#x251C;&#x2500;&#x2500; SampleAction.java
+    &#x2502;   &#x2502;           &#x2514;&#x2500;&#x2500; system
+    &#x2502;   &#x2502;               &#x2514;&#x2500;&#x2500; nablarch
+    &#x2502;   &#x2502;                   &#x251C;&#x2500;&#x2500; FlywayExecutor.java
+    &#x2502;   &#x2502;                   &#x2514;&#x2500;&#x2500; di
+    &#x2502;   &#x2502;                       &#x2514;&#x2500;&#x2500; ExampleComponentDefinitionLoader.java
+    &#x2502;   &#x251C;&#x2500;&#x2500; resources
+    &#x2502;   &#x2502;   &#x251C;&#x2500;&#x2500; app-log.properties
+    &#x2502;   &#x2502;   &#x251C;&#x2500;&#x2500; common.config
+    &#x2502;   &#x2502;   &#x251C;&#x2500;&#x2500; data-source.config
+    &#x2502;   &#x2502;   &#x251C;&#x2500;&#x2500; env.config
+    &#x2502;   &#x2502;   &#x251C;&#x2500;&#x2500; log.properties
+    &#x2502;   &#x2502;   &#x251C;&#x2500;&#x2500; rest-boot.xml
+    &#x2502;   &#x2502;   &#x251C;&#x2500;&#x2500; rest-component-configuration.xml
+    &#x2502;   &#x2502;   &#x251C;&#x2500;&#x2500; db
+    &#x2502;   &#x2502;   &#x2502;   &#x2514;&#x2500;&#x2500; migration
+    &#x2502;   &#x2502;   &#x2502;       &#x2514;&#x2500;&#x2500; V1__create_table.sql
+    &#x2502;   &#x2502;   &#x2514;&#x2500;&#x2500; META-INF
+    &#x2502;   &#x2502;       &#x2514;&#x2500;&#x2500; services
+    &#x2502;   &#x2502;           &#x2514;&#x2500;&#x2500; nablarch.core.repository.di.config.externalize.ExternalizedComponentDefinitionLoader
+    &#x2502;   &#x2514;&#x2500;&#x2500; webapp
+    &#x2502;       &#x2514;&#x2500;&#x2500; WEB-INF
+    &#x2502;           &#x2514;&#x2500;&#x2500; web.xml
+    &#x2514;&#x2500;&#x2500; test
+        &#x251C;&#x2500;&#x2500; java
+        &#x2502;   &#x2514;&#x2500;&#x2500; com
+        &#x2502;       &#x2514;&#x2500;&#x2500; example
+        &#x2502;           &#x2514;&#x2500;&#x2500; SampleTest.java
+        &#x2514;&#x2500;&#x2500; resources
+            &#x251C;&#x2500;&#x2500; log.properties
+            &#x2514;&#x2500;&#x2500; unit-test.xml
+</code></pre><h4 id="gitignore"><a name="gitignore" class="plugin-anchor" href="#gitignore"><i class="fa fa-link" aria-hidden="true"></i></a><code>.gitignore</code></h4>
+<p>Git&#x3067;&#x7BA1;&#x7406;&#x5BFE;&#x8C61;&#x5916;&#x3068;&#x3059;&#x308B;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="pomxml"><a name="pomxml" class="plugin-anchor" href="#pomxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>pom.xml</code></h4>
+<p>Maven&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306E;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="dockerdocker-composeapi-genyml"><a name="dockerdocker-composeapi-genyml" class="plugin-anchor" href="#dockerdocker-composeapi-genyml"><i class="fa fa-link" aria-hidden="true"></i></a><code>docker/docker-compose.api-gen.yml</code></h4>
+<p>OpenAPI&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x304B;&#x3089;&#x30AF;&#x30E9;&#x30A4;&#x30A2;&#x30F3;&#x30C8;&#x5B9F;&#x88C5;&#x3092;&#x751F;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x3001;Docker Compose&#x306E;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<h4 id="rest-api-specificationopenapiyaml"><a name="rest-api-specificationopenapiyaml" class="plugin-anchor" href="#rest-api-specificationopenapiyaml"><i class="fa fa-link" aria-hidden="true"></i></a><code>rest-api-specification/openapi.yaml</code></h4>
+<p>OpenAPI&#x4ED5;&#x69D8;&#x3067;REST API&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x305F;OpenAPI&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x672C;&#x30CF;&#x30F3;&#x30BA;&#x30AA;&#x30F3;&#x3067;&#x4F5C;&#x6210;&#x3059;&#x308B;REST API&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;&#x4E88;&#x3081;&#x5B9A;&#x7FA9;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srcmainjavacomexamplesampleactionjava"><a name="srcmainjavacomexamplesampleactionjava" class="plugin-anchor" href="#srcmainjavacomexamplesampleactionjava"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/java/com/example/SampleAction.java</code></h4>
+<p>&#x8D77;&#x52D5;&#x30C6;&#x30B9;&#x30C8;&#x7528;&#x306E;REST API&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x30A2;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x30AF;&#x30E9;&#x30B9;&#x3067;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/web/application_design.html" target="_blank">Nablarch - &#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306E;&#x8CAC;&#x52D9;&#x914D;&#x7F6E;</a>&#xFF09;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.example;
+
+<span class="hljs-keyword">import</span> javax.ws.rs.GET;
+<span class="hljs-keyword">import</span> javax.ws.rs.Path;
+<span class="hljs-keyword">import</span> javax.ws.rs.Produces;
+<span class="hljs-keyword">import</span> javax.ws.rs.core.MediaType;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-meta">@SystemRepositoryComponent</span>
+<span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;test&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SampleAction</span> </span>{
+
+    <span class="hljs-meta">@GET</span>
+    <span class="hljs-meta">@Produces</span>(MediaType.APPLICATION_JSON)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> Map.of(<span class="hljs-string">&quot;status&quot;</span>, <span class="hljs-string">&quot;ok&quot;</span>);
+    }
+}
+</code></pre>
+<p>Nablarch&#x3067;&#x306F;&#x3001;&#x30EB;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x30A2;&#x30C0;&#x30D7;&#x30BF;&#x3068;&#x3044;&#x3046;&#x6A5F;&#x80FD;&#x3067;&#x3001;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3092;&#x3069;&#x306E;&#x30A2;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x30AF;&#x30E9;&#x30B9;&#x3067;&#x51E6;&#x7406;&#x3059;&#x308B;&#x304B;&#x3092;&#x5B9A;&#x7FA9;&#x3059;&#x308B;&#x3053;&#x3068;&#x304C;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/adaptors/router_adaptor.html" target="_blank">Nablarch - &#x30EB;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x30A2;&#x30C0;&#x30D7;&#x30BF;</a>&#xFF09;</p>
+<p>JAX-RS&#x306E;&#x30A2;&#x30CE;&#x30C6;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#xFF08;<code>@PATH</code>&#x3084;<code>@GET</code>&#x7B49;&#xFF09;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x30EB;&#x30FC;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x3092;&#x5B9A;&#x7FA9;&#x3067;&#x304D;&#x307E;&#x3059;&#x306E;&#x3067;&#x3001;&#x30D1;&#x30B9;&#x304C;<code>api/test</code>&#x3001;HTTP&#x30E1;&#x30BD;&#x30C3;&#x30C9;&#x304C;<code>GET</code>&#x306B;&#x5BFE;&#x5FDC;&#x3057;&#x305F;&#x8D77;&#x52D5;&#x30C6;&#x30B9;&#x30C8;&#x7528;&#x306E;REST API&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://ja.wikipedia.org/wiki/JAX-RS" target="_blank">&#x30A6;&#x30A3;&#x30AD;&#x30DA;&#x30C7;&#x30A3;&#x30A2; - JAX-RS</a>&#xFF09;</p>
+<p>&#x30AF;&#x30E9;&#x30B9;&#x306B;&#x4ED8;&#x4E0E;&#x3057;&#x3066;&#x3044;&#x308B;<code>SystemRepositoryComponent</code>&#x30A2;&#x30CE;&#x30C6;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x306F;&#x3001;Nablarch&#x304C;&#x63D0;&#x4F9B;&#x3057;&#x3066;&#x3044;&#x308B;DI&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x6301;&#x3064;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x306B;&#x767B;&#x9332;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x8A2D;&#x5B9A;&#x3067;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/repository.html" target="_blank">Nablarch - &#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;</a>&#xFF09;</p>
+<p>ToDo&#x30A2;&#x30D7;&#x30EA;&#x3067;DI&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x306E;&#x6A5F;&#x80FD;&#x3092;&#x4F7F;&#x3046;&#x305F;&#x3081;&#x3001;&#x30A2;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x304B;&#x3089;&#x53D6;&#x5F97;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x4E88;&#x3081;&#x8A2D;&#x5B9A;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x305D;&#x306E;&#x305F;&#x3081;&#x3001;&#x30A2;&#x30AF;&#x30B7;&#x30E7;&#x30F3;&#x30AF;&#x30E9;&#x30B9;&#x3092;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x306B;&#x767B;&#x9332;&#x3059;&#x308B;&#x5FC5;&#x8981;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002;</p>
+<p>DI&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3067;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x30B3;&#x30F3;&#x30DD;&#x30FC;&#x30CD;&#x30F3;&#x30C8;&#x306F;&#x3001;&#x901A;&#x5E38;&#x306F;XML&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x5B9A;&#x7FA9;&#x3057;&#x307E;&#x3059;&#x304C;&#x3001;&#x305D;&#x306E;&#x4ED6;&#x306B;&#x3082;<code>SystemRepositoryComponent</code>&#x30A2;&#x30CE;&#x30C6;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4ED8;&#x4E0E;&#x3059;&#x308B;&#x65B9;&#x6CD5;&#x3082;&#x3042;&#x308A;&#x3001;&#x3053;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x3067;&#x306F;&#x3053;&#x3061;&#x3089;&#x306E;&#x65B9;&#x6CD5;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#x3002;&#xFF08;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/repository.html#repository-inject-annotation-component" target="_blank">&#x30A2;&#x30CE;&#x30C6;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4ED8;&#x4E0E;&#x3057;&#x305F;&#x30AF;&#x30E9;&#x30B9;&#x306E;&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B; | Nablarch</a>&#xFF09;</p>
+<p><code>&quot;status&quot;</code>&#x30AD;&#x30FC;&#x3067;<code>&quot;ok&quot;</code>&#x6587;&#x5B57;&#x5217;&#x3092;&#x683C;&#x7D0D;&#x3059;&#x308B;<code>Map</code>&#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3092;&#x8FD4;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;&#x3053;&#x308C;&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;JSON&#x306B;&#x5909;&#x63DB;&#x3055;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-json">{ <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;ok&quot;</span> }
+</code></pre>
+<h4 id="srcmainjavacomexamplesystemnablarchflywayexecutorjava"><a name="srcmainjavacomexamplesystemnablarchflywayexecutorjava" class="plugin-anchor" href="#srcmainjavacomexamplesystemnablarchflywayexecutorjava"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/java/com/example/system/nablarch/FlywayExecutor.java</code></h4>
+<p>&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x3067;&#x306F;&#x3001;&#x30DE;&#x30A4;&#x30B0;&#x30EC;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30C4;&#x30FC;&#x30EB;&#x3067;&#x3042;&#x308B;<a href="https://flywaydb.org/" target="_blank">Flyway</a>&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3001;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x4E0A;&#x306E;&#x30C6;&#x30FC;&#x30D6;&#x30EB;&#x3084;&#x30C6;&#x30B9;&#x30C8;&#x30C7;&#x30FC;&#x30BF;&#x3092;&#x767B;&#x9332;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>Flyway&#x3092;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x6E96;&#x5099;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;&#x4E88;&#x3081;&#x8A2D;&#x5B9A;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#xFF08;<a href="https://flywaydb.org/documentation/maven/#installation" target="_blank">Maven Plugin | Flyway</a>&#xFF09;</p>
+<p>Flyway&#x306E;&#x5B9F;&#x884C;&#x306B;&#x3064;&#x3044;&#x3066;&#x306F;&#x3001;Nablarch&#x306E;&#x521D;&#x671F;&#x5316;&#x51E6;&#x7406;&#x3092;&#x5229;&#x7528;&#x3057;&#x3066;&#x3001;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x8D77;&#x52D5;&#x3057;&#x305F;&#x30BF;&#x30A4;&#x30DF;&#x30F3;&#x30B0;&#x3067;&#x884C;&#x3046;&#x3088;&#x3046;&#x306B;&#x4E88;&#x3081;&#x8A2D;&#x5B9A;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#xFF08;&#x53C2;&#x8003;&#xFF1A;<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/repository.html#repository-initialize-object" target="_blank">Nablarch - &#x30AA;&#x30D6;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x306E;&#x521D;&#x671F;&#x5316;&#x51E6;&#x7406;&#x3092;&#x884C;&#x3046;</a>&#xFF09;</p>
+<p>example-chat&#x306E;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x3067;&#x3082;&#x540C;&#x69D8;&#x306E;&#x5B9F;&#x88C5;&#x3092;&#x3057;&#x3066;&#x3044;&#x308B;&#x305F;&#x3081;&#x3001;&#x305D;&#x306E;&#x5B9F;&#x88C5;&#x3092;&#x6D41;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p><div class="alert alert-danger hints-alert"><div class="hints-icon"><i class="fa fa-exclamation-circle"></i></div><div class="hints-container"><p>ToDo&#x30A2;&#x30D7;&#x30EA;&#x3067;&#x306F;&#x3001;&#x30A2;&#x30D7;&#x30EA;&#x8D77;&#x52D5;&#x6642;&#x306B;&#x6BCE;&#x56DE;&#x30C6;&#x30FC;&#x30D6;&#x30EB;&#x3092;&#x521D;&#x671F;&#x5316;&#x3059;&#x308B;&#x3088;&#x3046;&#x306B;&#x8A2D;&#x5B9A;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x7C21;&#x5358;&#x306B;&#x7E70;&#x308A;&#x8FD4;&#x3057;&#x5B9F;&#x884C;&#x3067;&#x304D;&#x308B;&#x3088;&#x3046;&#x306B;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B;&#x3053;&#x306E;&#x3088;&#x3046;&#x306A;&#x8A2D;&#x5B9A;&#x3068;&#x3057;&#x307E;&#x3059;&#x304C;&#x3001;&#x30C6;&#x30B9;&#x30C8;&#x7528;&#x9014;&#x4EE5;&#x5916;&#x3067;&#x306F;&#x6307;&#x5B9A;&#x3057;&#x306A;&#x3044;&#x3088;&#x3046;&#x306B;&#x6CE8;&#x610F;&#x3057;&#x3066;&#x304F;&#x3060;&#x3055;&#x3044;&#x3002;</p>
+</div></div></p>
+<h4 id="srcmainjavacomexamplesystemnablarchdiexamplecomponentdefinitionloaderjava"><a name="srcmainjavacomexamplesystemnablarchdiexamplecomponentdefinitionloaderjava" class="plugin-anchor" href="#srcmainjavacomexamplesystemnablarchdiexamplecomponentdefinitionloaderjava"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/java/com/example/system/nablarch/di/ExampleComponentDefinitionLoader.java</code></h4>
+<p>&#x524D;&#x8FF0;&#x306E;<code>SystemRepositoryComponent</code>&#x30A2;&#x30CE;&#x30C6;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4ED8;&#x4E0E;&#x3057;&#x3066;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x3078;&#x767B;&#x9332;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x5B9F;&#x88C5;&#x3067;&#x3059;&#x3002;</p>
+<h4 id="srcmainresourceapp-logproperties"><a name="srcmainresourceapp-logproperties" class="plugin-anchor" href="#srcmainresourceapp-logproperties"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/app-log.properties</code></h4>
+<p>Nablarch&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30ED;&#x30B0;&#x51FA;&#x529B;&#x7528;&#x306E;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srcmainresourcecommonconfig"><a name="srcmainresourcecommonconfig" class="plugin-anchor" href="#srcmainresourcecommonconfig"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/common.config</code></h4>
+<p>Nablarch&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srcmainresourcedata-sourceconfig"><a name="srcmainresourcedata-sourceconfig" class="plugin-anchor" href="#srcmainresourcedata-sourceconfig"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/data-source.config</code></h4>
+<p>Nablarch&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srcmainresourceenvconfig"><a name="srcmainresourceenvconfig" class="plugin-anchor" href="#srcmainresourceenvconfig"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/env.config</code></h4>
+<p>Nablarch&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30D7;&#x30ED;&#x30D1;&#x30C6;&#x30A3;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srcmainresourcelogproperties"><a name="srcmainresourcelogproperties" class="plugin-anchor" href="#srcmainresourcelogproperties"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/log.properties</code></h4>
+<p>Nablarch&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30ED;&#x30B0;&#x51FA;&#x529B;&#x7528;&#x306E;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srcmainresourcerest-bootxml"><a name="srcmainresourcerest-bootxml" class="plugin-anchor" href="#srcmainresourcerest-bootxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/rest-boot.xml</code></h4>
+<p>Nablarch&#x306E;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x306E;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srcmainresourcerest-component-configurationxml"><a name="srcmainresourcerest-component-configurationxml" class="plugin-anchor" href="#srcmainresourcerest-component-configurationxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/rest-component-configuration.xml</code></h4>
+<p>Nablarch&#x306E;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x306E;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srcmainresourcesdbmigrationv1createtablesql"><a name="srcmainresourcesdbmigrationv1createtablesql" class="plugin-anchor" href="#srcmainresourcesdbmigrationv1createtablesql"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/db/migration/V1__create_table.sql</code></h4>
+<p>Flyway&#x3067;&#x5B9F;&#x884C;&#x3059;&#x308B;SQL&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x305F;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<h4 id="srcmainresourcesmeta-infservicesnablarchcorerepositorydiconfigexternalizeexternalizedcomponentdefinitionloader"><a name="srcmainresourcesmeta-infservicesnablarchcorerepositorydiconfigexternalizeexternalizedcomponentdefinitionloader" class="plugin-anchor" href="#srcmainresourcesmeta-infservicesnablarchcorerepositorydiconfigexternalizeexternalizedcomponentdefinitionloader"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/META-INF/services/nablarch.core.repository.di.config.externalize.ExternalizedComponentDefinitionLoader</code></h4>
+<p>&#x524D;&#x8FF0;&#x306E;<code>SystemRepositoryComponent</code>&#x30A2;&#x30CE;&#x30C6;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4ED8;&#x4E0E;&#x3057;&#x3066;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x3078;&#x767B;&#x9332;&#x3059;&#x308B;&#x305F;&#x3081;&#x306E;&#x5B9F;&#x88C5;&#x3067;&#x3059;&#x3002;</p>
+<h4 id="srcmainwebappweb-infwebxml"><a name="srcmainwebappweb-infwebxml" class="plugin-anchor" href="#srcmainwebappweb-infwebxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/webapp/WEB-INF/web.xml</code></h4>
+<p>Java EE&#x3067;Web&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x3092;&#x4F5C;&#x6210;&#x3059;&#x308B;&#x969B;&#x306E;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srctestjavacomexamplesampletestjava"><a name="srctestjavacomexamplesampletestjava" class="plugin-anchor" href="#srctestjavacomexamplesampletestjava"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/test/java/com/example/SampleTest.java</code></h4>
+<p>&#x52D5;&#x4F5C;&#x78BA;&#x8A8D;&#x3092;&#x884C;&#x3046;&#x305F;&#x3081;&#x306E;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x5B9A;&#x7FA9;&#x3057;&#x305F;&#x30C6;&#x30B9;&#x30C8;&#x30AF;&#x30E9;&#x30B9;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x5B9F;&#x884C;&#x3067;&#x304D;&#x308C;&#x3070;&#x7121;&#x6761;&#x4EF6;&#x306B;&#x6210;&#x529F;&#x3059;&#x308B;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x5B9F;&#x88C5;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.example;
+
+<span class="hljs-keyword">import</span> org.junit.jupiter.api.Assertions;
+<span class="hljs-keyword">import</span> org.junit.jupiter.api.Test;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SampleTest</span> </span>{
+
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>{
+        Assertions.assertTrue(<span class="hljs-keyword">true</span>);
+    }
+}
+</code></pre>
+<h4 id="srctestresourcelogproperties"><a name="srctestresourcelogproperties" class="plugin-anchor" href="#srctestresourcelogproperties"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/test/resource/log.properties</code></h4>
+<p>Nablarch&#x3067;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30ED;&#x30B0;&#x51FA;&#x529B;&#x7528;&#x306E;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h4 id="srctestresourceunit-testxml"><a name="srctestresourceunit-testxml" class="plugin-anchor" href="#srctestresourceunit-testxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/test/resource/unit-test.xml</code></h4>
+<p>&#x30C6;&#x30B9;&#x30C8;&#x5B9F;&#x884C;&#x6642;&#x306B;Nablarch&#x304C;&#x4F7F;&#x7528;&#x3059;&#x308B;&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x306E;&#x5B9A;&#x7FA9;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x3067;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30F3;&#x30AF;&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x4F5C;&#x6210;&#x6642;&#x306B;&#x751F;&#x6210;&#x3055;&#x308C;&#x305F;&#x3082;&#x306E;&#x3092;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<h2 id="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x8D77;&#x52D5;&#x3059;&#x308B;"><a name="&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x8D77;&#x52D5;&#x3059;&#x308B;" class="plugin-anchor" href="#&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x8D77;&#x52D5;&#x3059;&#x308B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x8D77;&#x52D5;&#x3059;&#x308B;</h2>
+<p>&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x306F;Maven&#x30D7;&#x30ED;&#x30B8;&#x30A7;&#x30AF;&#x30C8;&#x3067;&#x3042;&#x308B;&#x305F;&#x3081;&#x3001;Maven&#x3092;&#x4F7F;&#x7528;&#x3057;&#x3066;&#x52D5;&#x4F5C;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x3066;&#x3044;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305A;&#x306F;&#x3001;&#x30B3;&#x30F3;&#x30D1;&#x30A4;&#x30EB;&#x3084;&#x30C6;&#x30B9;&#x30C8;&#x304C;&#x52D5;&#x4F5C;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;<code>backend</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3067;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>$ mvn test
+</code></pre><p>&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;<code>BUILD SUCCESS</code>&#x3068;&#x51FA;&#x529B;&#x3055;&#x308C;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.SampleTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s - in com.example.SampleTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.506 s
+[INFO] Finished at: 2020-08-07T09:55:45+09:00
+[INFO] ------------------------------------------------------------------------
+</code></pre><p>&#x6B21;&#x306B;&#x3001;&#x30A2;&#x30D7;&#x30EA;&#x30B1;&#x30FC;&#x30B7;&#x30E7;&#x30F3;&#x30B5;&#x30FC;&#x30D0;&#x306E;Jetty&#x3067;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x8D77;&#x52D5;&#x3067;&#x304D;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>Nablarch&#x3067;&#x306F;&#x8D77;&#x52D5;&#x6642;&#x306B;&#x30C7;&#x30FC;&#x30BF;&#x30D9;&#x30FC;&#x30B9;&#x306B;&#x63A5;&#x7D9A;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x30A2;&#x30D7;&#x30EA;&#x3092;&#x8D77;&#x52D5;&#x3059;&#x308B;&#x524D;&#x306B;&#x3001;PostgreSQL&#x3092;&#x8D77;&#x52D5;&#x3057;&#x3066;&#x304A;&#x304D;&#x307E;&#x3059;&#x3002;PostgreSQL&#x3092;Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3067;&#x8D77;&#x52D5;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;Docker Compose&#x3092;&#x4F7F;&#x7528;&#x3057;&#x307E;&#x3059;&#x3002;<code>backend</code>&#x30C7;&#x30A3;&#x30EC;&#x30AF;&#x30C8;&#x30EA;&#x3067;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>$ docker-compose -f docker/docker-compose.dev.yml up -d
+</code></pre><p>&#x7D9A;&#x3044;&#x3066;&#x3001;&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x304C;&#x8D77;&#x52D5;&#x3057;&#x3066;&#x3044;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>$ docker-compose -f docker/docker-compose.dev.yml ps
+</code></pre><p><code>docker_postgres_1</code>&#x306E;<code>State</code>&#x304C;<code>Up</code>&#xFF08;&#x8D77;&#x52D5;&#x4E2D;&#xFF09;&#x3068;&#x51FA;&#x529B;&#x3055;&#x308C;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>      Name                     Command              State           Ports
+----------------------------------------------------------------------------------
+docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;5432/tcp
+</code></pre><p>PostgreSQL&#x3092;&#x8D77;&#x52D5;&#x3057;&#x305F;&#x3089;&#x3001;&#x7D9A;&#x3044;&#x3066;Jetty&#x3092;&#x8D77;&#x52D5;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&#x3002;&#x30D0;&#x30C3;&#x30AF;&#x30A8;&#x30F3;&#x30C9;&#x306E;&#x30A2;&#x30D7;&#x30EA;&#x306E;&#x521D;&#x671F;&#x8A2D;&#x5B9A;&#x3067;&#x306F;&#x3001;Jetty&#x306F;<a href="http://localhost:9080" target="_blank">localhost:9080</a>&#x3067;&#x8D77;&#x52D5;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>$ mvn jetty:run
+</code></pre><p>&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;<code>Started</code>&#x3068;&#x51FA;&#x529B;&#x3055;&#x308C;&#x3001;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x304C;&#x5B9F;&#x884C;&#x4E2D;&#x306E;&#x307E;&#x307E;&#x3068;&#x306A;&#x308A;&#x307E;&#x3059;&#x3002;&#x3053;&#x308C;&#x3067;Jetty&#x304C;&#x8D77;&#x52D5;&#x4E2D;&#x306E;&#x72B6;&#x614B;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>[INFO] Started ServerConnector@2299f6d7{HTTP/1.1,[http/1.1]}{0.0.0.0:9080}
+[INFO] Started Server@3751acd7{STARTING}[10.0.0.alpha1] @7133ms
+</code></pre><p>Jetty&#x304C;&#x8D77;&#x52D5;&#x3057;&#x305F;&#x3089;&#x3001;&#x8D77;&#x52D5;&#x30C6;&#x30B9;&#x30C8;&#x3092;&#x884C;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x30D6;&#x30E9;&#x30A6;&#x30B6;&#x3092;&#x8D77;&#x52D5;&#x3057;&#x3001;<a href="http://localhost:9080/api/test" target="_blank">lostlhost:9080/api/test</a>&#x306B;&#x30A2;&#x30AF;&#x30BB;&#x30B9;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x753B;&#x9762;&#x4E0A;&#x306B;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30EC;&#x30B9;&#x30DD;&#x30F3;&#x30B9;&#x304C;&#x51FA;&#x529B;&#x3055;&#x308C;&#x308B;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>{
+    status: &quot;ok&quot;
+}
+</code></pre><p>&#x8D77;&#x52D5;&#x30C6;&#x30B9;&#x30C8;&#x304C;&#x5B8C;&#x4E86;&#x3057;&#x305F;&#x3089;&#x3001;PostgreSQL&#x3068;Jetty&#x3092;&#x505C;&#x6B62;&#x3057;&#x3066;&#x304A;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x307E;&#x305A;&#x3001;Jetty&#x3092;&#x7D42;&#x4E86;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;Jetty&#x3092;&#x8D77;&#x52D5;&#x3057;&#x3066;&#x5B9F;&#x884C;&#x4E2D;&#x3068;&#x306A;&#x3063;&#x3066;&#x3044;&#x308B;&#x30B3;&#x30F3;&#x30BD;&#x30FC;&#x30EB;&#x3067;&#x3001;<code>Ctrl</code>+<code>C</code>&#x3092;&#x62BC;&#x3057;&#x3066;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x7D42;&#x4E86;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<p>Jetty&#x3092;&#x505C;&#x6B62;&#x3057;&#x305F;&#x3089;&#x3001;&#x7D9A;&#x3044;&#x3066;PostgreSQL&#x3092;&#x8D77;&#x52D5;&#x3057;&#x3066;&#x3044;&#x308B;Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3092;&#x7D42;&#x4E86;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>$ docker-compose -f docker/docker-compose.dev.yml down
+</code></pre><p>&#x7D42;&#x4E86;&#x3057;&#x305F;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3059;&#x308B;&#x305F;&#x3081;&#x3001;&#x6B21;&#x306E;&#x30B3;&#x30DE;&#x30F3;&#x30C9;&#x3092;&#x5B9F;&#x884C;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>$ docker-compose -f docker/docker-compose.dev.yml ps
+</code></pre><p>&#x8D77;&#x52D5;&#x4E2D;&#x306E;Docker&#x30B3;&#x30F3;&#x30C6;&#x30CA;&#x3068;&#x3057;&#x3066;&#x51FA;&#x529B;&#x3055;&#x308C;&#x306A;&#x3044;&#x3053;&#x3068;&#x3092;&#x78BA;&#x8A8D;&#x3057;&#x307E;&#x3059;&#x3002;</p>
+<pre><code>Name   Command   State   Ports
+------------------------------
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../frontend/" class="navigation navigation-prev " aria-label="Previous page: フロントエンドの確認">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../openapi/" class="navigation navigation-next " aria-label="Next page: OpenAPIドキュメントの利用">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"バックエンドの確認","level":"1.5.3","depth":2,"next":{"title":"OpenAPIドキュメントの利用","level":"1.6","depth":1,"path":"openapi/README.md","ref":"openapi/README.md","articles":[{"title":"ドキュメントの確認","level":"1.6.1","depth":2,"path":"openapi/document/README.md","ref":"openapi/document/README.md","articles":[]},{"title":"クライアントコードの生成","level":"1.6.2","depth":2,"path":"openapi/client/README.md","ref":"openapi/client/README.md","articles":[]}]},"previous":{"title":"フロントエンドの確認","level":"1.5.2","depth":2,"path":"todo-project/frontend/README.md","ref":"todo-project/frontend/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo-project/backend/README.md","mtime":"2020-09-29T00:29:01.172Z","type":"markdown"},"gitbook":{"version":"3.6.5","time":"2020-09-29T01:29:59.133Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
