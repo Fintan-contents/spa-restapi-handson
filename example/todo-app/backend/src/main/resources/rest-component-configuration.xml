@@ -116,6 +116,7 @@
 
         <component class="com.example.system.nablarch.handler.LoginCheckHandler"/>
 
+        <!-- パッケージマッピングでActionを呼び出すため最後に定義する -->
         <component-ref name="packageMapping"/>
       </list>
     </property>

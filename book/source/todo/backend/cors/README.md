@@ -38,6 +38,10 @@ Nablarchには、リクエストやレスポンスに対して横断的な処理
         <property name="cors" ref="cors" />
       </component>
 ...
+      <component-ref name="packageMapping"/>
+    </list>
+  </property>
+</component>
 ```
 
 続いて、コンポーネント定義で使用する環境依存値を設定します。`env.config`に、以下の値を追加します。

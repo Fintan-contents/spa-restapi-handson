@@ -195,7 +195,6 @@ import com.example.openapi.OpenApiValidator;
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
 import nablarch.test.core.http.SimpleRestTestSupport;
-import org.junit.ClassRule;
 import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
@@ -204,7 +203,6 @@ import java.util.Map;
 
 public class AuthenticationRestApiTest extends SimpleRestTestSupport {
 
-    @ClassRule
     public static OpenApiValidator openApiValidator = new OpenApiValidator(Paths.get("rest-api-specification/openapi.yaml"));
 
     @Test
@@ -249,7 +247,7 @@ mvn test
 
 ### 名前の不一致で認証に失敗するテストの作成
 
-続けて、パスワード不一致で認証に失敗する場合のテストを追加します。
+続けて、名前の不一致で認証に失敗する場合のテストを追加します。
 
 ```java
     @Test

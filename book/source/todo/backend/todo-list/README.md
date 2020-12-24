@@ -454,7 +454,6 @@ import com.example.openapi.OpenApiValidator;
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
 import nablarch.test.core.http.SimpleRestTestSupport;
-import org.junit.ClassRule;
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -466,7 +465,6 @@ import static org.hamcrest.Matchers.hasSize;
 
 public class RestApiTest extends SimpleRestTestSupport {
 
-    @ClassRule
     public static OpenApiValidator openApiValidator = new OpenApiValidator(Paths.get("rest-api-specification/openapi.yaml"));
 
     @Test
@@ -650,7 +648,6 @@ INSERT INTO user_profile (user_id, name) VALUES ('1002', 'todo-test2');
 
 INSERT INTO todo (todo_id, text, completed, user_id) VALUES (2001, 'やること１', true, '1001');
 INSERT INTO todo (todo_id, text, completed, user_id) VALUES (2002, 'やること２', false, '1001');
-INSERT INTO todo (todo_id, text, completed, user_id) VALUES (2003, 'やること３', false, '1002');
 ```
 
 ## REST APIのテスト

@@ -63,6 +63,7 @@
 
         <component-ref name="transactionManagementHandler"/>
 
+        <!-- パッケージマッピングでActionを呼び出すため最後に定義する -->
         <component-ref name="packageMapping"/>
       </list>
     </property>
