@@ -87,6 +87,8 @@ public class UserProfileEntity {
 
 ### ユーザー登録クラスの作成
 
+まず、ユーザー登録クラスを格納する`com.example.authentication.application`パッケージを作成します。
+
 アカウント登録処理を実装するため、`AccountRegistrationService`クラスを作成します。
 
 ```java
@@ -137,7 +139,7 @@ public class AccountRegistrationService {
 ```java
 package com.example.authentication.api;
 
-import com.example.authentication.application.AuthenticationService;
+import com.example.authentication.application.AccountRegistrationService;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
 import nablarch.core.validation.ee.ValidatorUtil;
 
@@ -189,7 +191,7 @@ REST APIをテストするため、`AuthenticationRestApiTest`クラスを作成
 ToDo管理で作成したテストと同様に、NablarchのREST APIテスティングフレームワークと、OpenAPIドキュメントを使用します。
 
 ```java
-package com.example.authentication;
+package com.example.authentication.api;
 
 import com.example.openapi.OpenApiValidator;
 import nablarch.fw.web.HttpResponse;
@@ -305,7 +307,7 @@ public enum AccountRegistrationResult {
 }
 ```
 
-続いて、`AuthenticationService`クラスを修正します。先ほどのSQLを使用してレコードがあるかを判定するための`existsAccount`メソッドを実装します。また、`register`メソッドでそれを呼び出し、結果を`AccountRegistrationResult`で返すように修正します。
+続いて、`AccountRegistrationService`クラスを修正します。先ほどのSQLを使用してレコードがあるかを判定するための`existsAccount`メソッドを実装します。また、`register`メソッドでそれを呼び出し、結果を`AccountRegistrationResult`で返すように修正します。
 
 ```java
     public AccountRegistrationResult register(String userName, String password) {
@@ -326,11 +328,11 @@ public enum AccountRegistrationResult {
 
 続いて、`AuthenticationAction`クラスを修正します。
 
-Nablarchでは、`HttpErrorResponse`（[Javadoc](https://nablarch.github.io/docs/5u18/javadoc/nablarch/fw/web/HttpErrorResponse.html)）の例外を送出することで、エラーレスポンスを返すことができます。`AuthenticationService#register`から`false`が返ってきたら、ステータスコードが`409 Conflict`のエラーレスポンスになるように実装します。
+Nablarchでは、`HttpErrorResponse`（[Javadoc](https://nablarch.github.io/docs/5u18/javadoc/nablarch/fw/web/HttpErrorResponse.html)）の例外を送出することで、エラーレスポンスを返すことができます。`AccountRegistrationService#register`から`false`が返ってきたら、ステータスコードが`409 Conflict`のエラーレスポンスになるように実装します。
 
 ```java
 ...
-        AccountRegistrationResult result = authenticationService.register(requestBody.userName, requestBody.password);
+        AccountRegistrationResult result = registrationService.register(requestBody.userName, requestBody.password);
         if (result == AccountRegistrationResult.NAME_CONFLICT) {
             throw new HttpErrorResponse(HttpResponse.Status.CONFLICT.getStatusCode());
         }

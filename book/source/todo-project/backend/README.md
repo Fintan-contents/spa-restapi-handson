@@ -11,7 +11,6 @@
 Nablarchが提供しているブランクプロジェクトから作成し、次の変更を加えています。（参考：[Nablarch - ブランクプロジェクト](https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/blank_project/index.html#blank-project)）
 
 - 使用するJavaのバージョンを11に変更
-- 使用するJunitのバージョンを5に変更
 - 開発環境で使用するアプリケーションサーバをJettyに変更
 - 起動テスト用のアクションクラスとテストクラスを追加
 - Bean ValidationのメッセージとしてHibernate Validationのメッセージを使用する設定
@@ -213,14 +212,15 @@ Java EEでWebアプリケーションを作成する際の定義ファイルで�
 ```java
 package com.example;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class SampleTest {
 
     @Test
-    void test() {
-        Assertions.assertTrue(true);
+    public void test() {
+        assertTrue(true);
     }
 }
 ```

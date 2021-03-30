@@ -87,7 +87,7 @@ example-chatではエラーレスポンスを独自の例外で表現してい�
 
 次に、テストが成功するように修正していきます。REST APIテスティングフレームワークではCookieが使えないため、テスト開始時にセッションストアにユーザーIDを設定し、それに使用した`ExecutionContext`をリクエスト送信時に使用するようにします。特定の`ExecutionContext`をリクエスト送信時に使用するには、`sendRequest`メソッドではなく`sendRequestWithContext`メソッドを使用します。
 
-失敗したテストの内、ログアウトのテストを例として、次のように修正します。
+ユーザー認証のテストではユーザーIDに`1010`を使用していますので、例えばログアウトのテストであれば、次のように修正します。
 
 ```java
 @Test
@@ -100,10 +100,19 @@ public void RESTAPIでログアウトできる() {
 ...
 ```
 
-もう一度テストを実行し、ログアウトのテストが成功することを確認します。
+Todo操作のテストではユーザーIDに`1001`を使用していますので、例えばTodo一覧取得のテストであれば、次のように修正します。
 
-ToDo管理のREST APIのテストも、同様に修正していきます。
+```java
+@Test
+public void RESTAPIでToDo一覧が取得できる() throws Exception {
+    ExecutionContext executionContext = new ExecutionContext();
+    SessionUtil.put(executionContext, "user.id", "1001");
 
-全て修正したら、もう一度テストを実行し、全てのテストが成功することを確認します。
+    RestMockHttpRequest request = get("/api/todos");
+    HttpResponse response = sendRequestWithContext(request, executionContext);
+...
+```
+
+他のテストケースもこれらと同様に修正します。全て修正したら、もう一度テストを実行し、全てのテストが成功することを確認します。
 
 これで、REST APIへのアクセス制御の実装は完了です。

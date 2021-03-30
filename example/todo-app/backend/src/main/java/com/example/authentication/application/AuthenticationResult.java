@@ -15,10 +15,6 @@ public class AuthenticationResult {
         return new AuthenticationResult(Status.SUCCESS, userId);
     }
 
-    public static AuthenticationResult nameNotFound() {
-        return new AuthenticationResult(Status.NAME_NOT_FOUND, null);
-    }
-
     public static AuthenticationResult passwordMismatch() {
         return new AuthenticationResult(Status.PASSWORD_MISMATCH, null);
     }
@@ -32,6 +28,10 @@ public class AuthenticationResult {
             throw new UnsupportedOperationException();
         }
         return userId;
+    }
+
+    public static AuthenticationResult nameNotFound() {
+        return new AuthenticationResult(Status.NAME_NOT_FOUND, null);
     }
 
     private enum Status {

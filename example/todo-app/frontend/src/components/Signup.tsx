@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Signup.css';
-import { AccountConflictError, useUserContext } from '../contexts/UserContext';
 import { useInput } from '../hooks/useInput';
+import { AccountConflictError, useUserContext } from '../contexts/UserContext';
 import { stringField, useValidation } from '../validation';
 
 type ValidationFields = {
@@ -14,8 +14,8 @@ export const Signup: React.FC = () => {
   const history = useHistory();
   const [userName, userNameAttributes] = useInput('');
   const [password, passwordAttributes] = useInput('');
-  const userContext = useUserContext();
   const [formError, setFormError] = useState('');
+  const userContext = useUserContext();
 
   const { error, handleSubmit } = useValidation<ValidationFields>({
     userName: stringField()
@@ -29,7 +29,7 @@ export const Signup: React.FC = () => {
     event.preventDefault();
     const result = await userContext.signup(userName, password);
     if (result instanceof AccountConflictError) {
-      setFormError('サインアップに失敗しました。同じ名前が登録されています。')
+      setFormError('サインアップに失敗しました。同じ名前が登録されています。');
       return;
     }
     history.push('/');

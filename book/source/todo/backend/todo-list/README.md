@@ -2,6 +2,10 @@
 
 ToDoの一覧を取得するために使用するREST APIを実装します。
 
+## OpenAPIドキュメントの確認
+
+バックエンドのREST APIは、OpenAPIドキュメントの定義と合うように実装しますので、OpenAPIドキュメントを確認します。フロントエンドのREST APIクライアント作成で説明している内容と同じであるため、該当ページの「[OpenAPIドキュメントの確認](../../frontend/api/README.md#OpenAPIドキュメントの確認)」を参照してください。
+
 ## ダミーデータのToDoを取得する処理の実装
 
 REST APIを実装する前に、REST APIから呼ぶToDoを取得する処理を実装します。
@@ -112,10 +116,13 @@ public class Todo {
 
     private final TodoStatus status;
 
-    public Todo(TodoId id, TodoText text, TodoStatus status) {
+    private final UserId userId;
+
+    public Todo(TodoId id, TodoText text, TodoStatus status, UserId userId) {
         this.id = id;
         this.text = text;
         this.status = status;
+        this.userId = userId;
     }
 
     public TodoId id() {
@@ -128,6 +135,10 @@ public class Todo {
 
     public TodoStatus status() {
         return status;
+    }
+
+    public UserId userId() {
+        return userId;
     }
 }
 ```
@@ -215,8 +226,8 @@ public class JdbcTodoRepository implements TodoRepository {
     @Override
     public List<Todo> list(UserId userId) {
         return List.of(
-            new Todo(new TodoId(2001L), new TodoText("やること１"), TodoStatus.COMPLETED),
-            new Todo(new TodoId(2002L), new TodoText("やること２"), TodoStatus.INCOMPLETE)
+            new Todo(new TodoId(2001L), new TodoText("やること１"), TodoStatus.COMPLETED, new UserId("1001")),
+            new Todo(new TodoId(2002L), new TodoText("やること２"), TodoStatus.INCOMPLETE, new UserId("1001"))
         );
     }
 }
@@ -324,21 +335,21 @@ REST APIのテスティングフレームワークを使用するための設定
 
 ### テストクラスの作成
 
-テスト用Javaディレクトリの`src/test/java`に、`com.example.todo`パッケージを作成し、そこに`RestApiTest`クラスを作成します。
+テスト用Javaディレクトリの`src/test/java`に、`com.example.todo.api`パッケージを作成し、そこに`TodoListRestApiTest`クラスを作成します。
 
 REST APIのテスティングフレームワークを使用するため、親クラスに`nablarch.test.core.http.SimpleRestTestSupport`クラスを指定します。
 
 合わせて、最初のテストとしてREST APIが想定しているパスとHTTPメソッドで呼び出せるかをテストします。
 
 ```java
-package com.example.todo;
+package com.example.todo.api;
 
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
 import nablarch.test.core.http.SimpleRestTestSupport;
 import org.junit.Test;
 
-public class RestApiTest extends SimpleRestTestSupport {
+public class TodoListRestApiTest extends SimpleRestTestSupport {
 
     @Test
     public void RESTAPIでToDo一覧が取得できる() {
@@ -378,14 +389,14 @@ Mavenでテストを実行するため、次のコマンドを実行します。
 mvn test
 ```
 
-出力された内容から、`RestApiTest`テストが実行され、テストが成功していることを確認します。
+出力された内容から、`TodoListRestApiTest`テストが実行され、テストが成功していることを確認します。
 
 ### レスポンスボディのJSONの検証
 
 次は、ダミーデータのToDoが想定通りJSONに変換されていることを確認します。先ほどのテストメソッドを、次のように変更します。
 
 ```java
-package com.example.todo;
+package com.example.todo.api;
 
 import nablarch.fw.web.HttpResponse;
 import nablarch.fw.web.RestMockHttpRequest;
@@ -397,7 +408,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 
-public class RestApiTest extends SimpleRestTestSupport {
+public class TodoListRestApiTest extends SimpleRestTestSupport {
 
     @Test
     public void RESTAPIでToDo一覧が取得できる() {
@@ -421,7 +432,7 @@ public class RestApiTest extends SimpleRestTestSupport {
 }
 ```
 
-ここでは、先ほど依存関係に追加したライブラリでるJsonPathを利用して、レスポンスとして返されたJSONに対して次の検証をします。（JsonPathでは、ルート要素を`$`で表します）
+ここでは、先ほど依存関係に追加したライブラリであるJsonPathを利用して、レスポンスとして返されたJSONに対して次の検証をします。（JsonPathでは、ルート要素を`$`で表します）
 
 - 配列の要素数が2である
 - 配列の1番目が、ダミーデータの1番目の値と同じである
@@ -448,7 +459,7 @@ example-chatのテストソースに`com.example.openapi.OpenApiValidator`クラ
 次に、先ほどのテストに、OpenAPIドキュメントの定義と一致するかを検証するためのテストコードを追加します。
 
 ```java
-package com.example.todo;
+package com.example.todo.api;
 
 import com.example.openapi.OpenApiValidator;
 import nablarch.fw.web.HttpResponse;
@@ -463,7 +474,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 
-public class RestApiTest extends SimpleRestTestSupport {
+public class TodoListRestApiTest extends SimpleRestTestSupport {
 
     public static OpenApiValidator openApiValidator = new OpenApiValidator(Paths.get("rest-api-specification/openapi.yaml"));
 
@@ -602,7 +613,8 @@ public class JdbcTodoRepository implements TodoRepository {
         return new Todo(
                 new TodoId(entity.getTodoId()),
                 new TodoText(entity.getText()),
-                entity.getCompleted() ? TodoStatus.COMPLETED : TodoStatus.INCOMPLETE);
+                entity.getCompleted() ? TodoStatus.COMPLETED : TodoStatus.INCOMPLETE,
+                new UserId(entity.getUserId()));
     }
 }
 ```
@@ -641,18 +653,72 @@ SQLファイル内のそれぞれのSQLにはIDが必要であるため、先ほ
 `src/test/resouces/db/testdata/V9999__testdata.sql`
 ```SQL
 INSERT INTO account (user_id, password) VALUES ('1001', '');
-INSERT INTO account (user_id, password) VALUES ('1002', '');
-
-INSERT INTO user_profile (user_id, name) VALUES ('1001', 'todo-test1');
-INSERT INTO user_profile (user_id, name) VALUES ('1002', 'todo-test2');
-
+INSERT INTO user_profile (user_id, name) VALUES ('1001', 'todo-test');
 INSERT INTO todo (todo_id, text, completed, user_id) VALUES (2001, 'やること１', true, '1001');
 INSERT INTO todo (todo_id, text, completed, user_id) VALUES (2002, 'やること２', false, '1001');
 ```
 
 ## REST APIのテスト
 
-Flywayで投入したテストデータは、最初に作成したダミーデータと同じ値にしています。また、`user_id`には`TodosAction`で生成する際のダミー値と同じ値を設定しているため、先ほど作成したREST APIのテストはそのまま利用できます。
+DBのテストデータは最初に作成したダミーデータと同じ値であるため、REST APIのテストケースはそのまま利用できます。後ほど実装する登録等のテストでも同じテストデータを利用するため、テスト実行順序でテスト結果が変わらないように、テスト前処理としてDB初期化処理を実装します。DB初期化処理にはFlywayのマイグレーションを利用します。
+
+{% hint style='tip' %}
+DB初期化処理を簡易に実装するためFlywayのマイグレーションを利用していますが、処理時間が増えるためテスト実行時間は遅くなってしまいます。ハンズオンコンテンツではテストケース数がわずかであるため問題ありませんが、使用する際にはご注意ください。
+{% endhint %}
+
+```java
+package com.example.todo.api;
+
+import com.example.openapi.OpenApiValidator;
+import com.example.system.nablarch.FlywayExecutor;
+import nablarch.core.repository.SystemRepository;
+import nablarch.fw.web.HttpResponse;
+import nablarch.fw.web.RestMockHttpRequest;
+import nablarch.test.core.http.SimpleRestTestSupport;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.nio.file.Paths;
+
+import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
+
+public class TodoListRestApiTest extends SimpleRestTestSupport {
+
+    public static OpenApiValidator openApiValidator = new OpenApiValidator(Paths.get("rest-api-specification/openapi.yaml"));
+
+    @BeforeClass
+    public static void setUpClass() {
+        FlywayExecutor flywayExecutor = SystemRepository.get("dbMigration");
+        flywayExecutor.migrate(true);
+    }
+
+    @Test
+    public void RESTAPIでToDo一覧が取得できる() throws Exception {
+        RestMockHttpRequest request = get("/api/todos");
+        HttpResponse response = sendRequest(request);
+
+        assertStatusCode("ToDo一覧の取得", HttpResponse.Status.OK, response);
+
+        String responseBody = response.getBodyString();
+
+        assertThat(responseBody, hasJsonPath("$", hasSize(2)));
+
+        assertThat(responseBody, hasJsonPath("$[0].id", equalTo(2001)));
+        assertThat(responseBody, hasJsonPath("$[0].text", equalTo("やること１")));
+        assertThat(responseBody, hasJsonPath("$[0].completed", equalTo(true)));
+
+        assertThat(responseBody, hasJsonPath("$[1].id", equalTo(2002)));
+        assertThat(responseBody, hasJsonPath("$[1].text", equalTo("やること２")));
+        assertThat(responseBody, hasJsonPath("$[1].completed", equalTo(false)));
+
+        openApiValidator.validate("getTodos", request, response);
+    }
+
+}
+```
 
 テストが成功することを確認するため、再度Mavenでテストを実行してみます。
 

@@ -1,12 +1,34 @@
 import {
   Configuration,
   TodosApi,
+  Middleware,
+  UsersApi,
   FetchParams,
   HTTPMethod,
-  Middleware,
-  RequestContext,
-  UsersApi
+  RequestContext
 } from './generated-rest-client';
+  
+const requestLogger: Middleware = {
+  pre: async (context) => {
+    console.log(`>> ${context.init.method} ${context.url}`, context.init);
+  },
+  post: async (context) => {
+    console.log(`<< ${context.response.status} ${context.url}`, context.response);
+  }
+};
+
+const corsHandler: Middleware = {
+  pre: async (context) => {
+    return {
+      url: context.url,
+      init: {
+        ...context.init,
+        mode: 'cors',
+        credentials: 'include'
+      }
+    };
+  }
+};
 
 class CsrfTokenAttachment implements Middleware {
 
@@ -40,28 +62,6 @@ class CsrfTokenAttachment implements Middleware {
 
 const csrfTokenAttachment = new CsrfTokenAttachment();
 
-const requestLogger: Middleware = {
-  pre: async (context) => {
-    console.log(`>> ${context.init.method} ${context.url}`, context.init);
-  },
-  post: async (context) => {
-    console.log(`<< ${context.response.status} ${context.url}`, context.response);
-  }
-}
-
-const corsHandler: Middleware = {
-  pre: async (context) => {
-    return {
-      url: context.url,
-      init: {
-        ...context.init,
-        mode: 'cors',
-        credentials: 'include'
-      }
-    };
-  }
-}
-
 const configuration = new Configuration({
   middleware: [csrfTokenAttachment, corsHandler, requestLogger]
 });
@@ -69,11 +69,6 @@ const configuration = new Configuration({
 const todosApi = new TodosApi(configuration);
 
 const usersApi = new UsersApi(configuration);
-
-const refreshCsrfToken = async () => {
-  const response = await usersApi.getCsrfToken();
-  csrfTokenAttachment.setCsrfToken(response.csrfTokenHeaderName, response.csrfTokenValue);
-};
 
 const signup = async (userName: string, password: string) => {
   return usersApi.signup({ inlineObject2 : { userName, password }});
@@ -93,10 +88,19 @@ const getTodos = async () => {
 
 const postTodo = async (text: string) => {
   return todosApi.postTodo({ inlineObject: { text }});
-}
+};
 
 const putTodo = async (todoId: number, completed: boolean) => {
   return todosApi.putTodo({ todoId, inlineObject1: { completed }});
+};
+
+const deleteTodo = async (todoId: number) => {
+  return todosApi.deleteTodo({ todoId });
+};
+
+const refreshCsrfToken = async () => {
+  const response = await usersApi.getCsrfToken();
+  csrfTokenAttachment.setCsrfToken(response.csrfTokenHeaderName, response.csrfTokenValue);
 };
 
 export const BackendService = {
@@ -106,5 +110,6 @@ export const BackendService = {
   getTodos,
   postTodo,
   putTodo,
+  deleteTodo,
   refreshCsrfToken
 };

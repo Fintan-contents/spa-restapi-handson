@@ -12,7 +12,7 @@ ToDoの状態を変更したインスタンスを生成する`changeStatus`メ�
 
 ```java
 public Todo changeStatus(TodoStatus status) {
-    return new Todo(id, text, status);
+    return new Todo(id, text, status, userId);
 }
 ```
 
@@ -23,7 +23,7 @@ public Todo changeStatus(TodoStatus status) {
 ```java
     Todo get(TodoId todoId);
 
-    void update(UserId userId, Todo todo);
+    void update(Todo todo);
 ```
 
 ### `TodoService`クラスに追加
@@ -31,10 +31,10 @@ public Todo changeStatus(TodoStatus status) {
 ToDoの状態を更新するための`updateStatus`メソッドを実装します。
 
 ```java
-public Todo updateStatus(UserId userId, TodoId todoId, TodoStatus status) {
+public Todo updateStatus(TodoId todoId, TodoStatus status) {
     Todo todo = todoRepository.get(todoId);
     Todo changedTodo = todo.changeStatus(status);
-    todoRepository.update(userId, changedTodo);
+    todoRepository.update(changedTodo);
     return changedTodo;
 }
 ```
@@ -51,12 +51,12 @@ public Todo updateStatus(UserId userId, TodoId todoId, TodoStatus status) {
     }
 
     @Override
-    public void update(UserId userId, Todo todo) {
+    public void update(Todo todo) {
         TodoEntity todoEntity = new TodoEntity();
         todoEntity.setTodoId(todo.id().value());
         todoEntity.setText(todo.text().value());
         todoEntity.setCompleted(todo.status() == TodoStatus.COMPLETED);
-        todoEntity.setUserId(userId.value());
+        todoEntity.setUserId(todo.userId().value());
         UniversalDao.update(todoEntity);
     }
 ```
@@ -101,11 +101,10 @@ public class TodoAction {
     public TodoResponse put(HttpRequest request, ExecutionContext context, PutRequest requestBody) {
         ValidatorUtil.validate(requestBody);
 
-        UserId userId = new UserId("1002");
         TodoId todoId = new TodoId(Long.valueOf(request.getParam("todoId")[0]));
         TodoStatus status = requestBody.completed ? TodoStatus.COMPLETED : TodoStatus.INCOMPLETE;
         
-        Todo todo = todoService.updateStatus(userId, todoId, status);
+        Todo todo = todoService.updateStatus(todoId, status);
 
         return new TodoResponse(todo.id(), todo.text(), todo.status());
     }
@@ -135,7 +134,6 @@ public class TodoAction {
 `put`メソッドは以下の処理を実装します。
  
 - 登録と同じように、`ValidatorUtil`を使用してBean Validationを実行
-- ユーザーIDをダミー値で生成
 - ToDoのIDをパスパラメータから取得
 - ToDo状態のオブジェクトを生成
 - `TodoService`の状態更新メソッドを呼び出し
@@ -143,30 +141,55 @@ public class TodoAction {
 
 ## REST APIのテスト
 
-他のテストに影響を与えないように、`src/test/resources/db/testdata/V9999__testdata.sql`にテストデータを追加します。
+テスト用Javaディレクトリの`com.example.todo.api`パッケージに、`TodoUpdateRestApiTest`クラスを作成します。
 
-```
-INSERT INTO todo (todo_id, text, completed, user_id) VALUES (2003, 'やること３', false, '1003');
-```
-
-前回作成した`RestApiTest`に、新しく作成したRSET APIのテストを追加します。
 
 ```java
+package com.example.todo.api;
+
+import com.example.openapi.OpenApiValidator;
+import com.example.system.nablarch.FlywayExecutor;
+import nablarch.core.repository.SystemRepository;
+import nablarch.fw.web.HttpResponse;
+import nablarch.fw.web.RestMockHttpRequest;
+import nablarch.test.core.http.SimpleRestTestSupport;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import javax.ws.rs.core.MediaType;
+import java.nio.file.Paths;
+import java.util.Map;
+
+import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
+public class TodoUpdateRestApiTest extends SimpleRestTestSupport {
+
+    public static OpenApiValidator openApiValidator = new OpenApiValidator(Paths.get("rest-api-specification/openapi.yaml"));
+
+    @BeforeClass
+    public static void setUpClass() {
+        FlywayExecutor flywayExecutor = SystemRepository.get("dbMigration");
+        flywayExecutor.migrate(true);
+    }
+
     @Test
     public void RESTAPIでToDoの状態を更新できる() throws Exception {
-        RestMockHttpRequest request = put("/api/todos/2003")
+        RestMockHttpRequest request = put("/api/todos/2002")
                 .setHeader("Content-Type", MediaType.APPLICATION_JSON)
                 .setBody(Map.of("completed", true));
         HttpResponse response = sendRequest(request);
 
         assertStatusCode("ToDoのステータス更新", HttpResponse.Status.OK, response);
 
-        assertThat(response.getBodyString(), hasJsonPath("$.id", equalTo(2003)));
-        assertThat(response.getBodyString(), hasJsonPath("$.text", equalTo("やること３")));
+        assertThat(response.getBodyString(), hasJsonPath("$.id", equalTo(2002)));
+        assertThat(response.getBodyString(), hasJsonPath("$.text", equalTo("やること２")));
         assertThat(response.getBodyString(), hasJsonPath("$.completed", equalTo(true)));
 
         openApiValidator.validate("putTodo", request, response);
     }
+}
 ```
 
 実装要領は登録と同じです。

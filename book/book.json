@@ -7,7 +7,9 @@
   "plugins": [
     "page-toc-button",
     "anchors",
-    "hints"
+    "hints",
+    "search-pro-fixed", "-lunr", "-search",
+    "hide-published-with"
   ],
   "pluginsConfig": {
     "page-toc-button": {

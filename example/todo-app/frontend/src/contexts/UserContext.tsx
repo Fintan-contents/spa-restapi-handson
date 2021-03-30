@@ -5,12 +5,12 @@ export class AccountConflictError {}
 
 export class AuthenticationFailedError {}
 
-interface ContextValueType {
-  signup: (userName: string, password: string) => Promise<void | AccountConflictError>
-  login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>
-  logout: () => Promise<void>
+type ContextValueType = {
+  signup: (userName: string, password: string) => Promise<void | AccountConflictError>,
+  login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>,
+  logout: () => Promise<void>,
   userName: string
-  isLoggedIn: boolean
+  isLoggedIn: boolean,
 }
 
 export const UserContext = React.createContext<ContextValueType>({} as ContextValueType);
@@ -35,7 +35,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
       try {
         await BackendService.login(userName, password);
         await BackendService.refreshCsrfToken();
-        setUserName(userName)
+        setUserName(userName);
       } catch(error) {
         if (error.status === 401) {
           return new AuthenticationFailedError();

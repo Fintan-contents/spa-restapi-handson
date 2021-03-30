@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { NavigationHeader } from './components/NavigationHeader';
 import { TodoBoard } from './components/TodoBoard';
@@ -23,22 +23,22 @@ function App() {
       <React.Fragment />
     );
   }
-
+  
   return (
     <UserContextProvider>
       <BrowserRouter>
         <NavigationHeader />
         <Switch>
-          <Route exact path="/board">
+          <Route path="/board">
             <TodoBoard />
           </Route>
-          <Route exact path="/signup">
+          <Route path="/signup">
             <Signup />
           </Route>
-          <Route exact path="/login">
+          <Route path="/login">
             <Login />
           </Route>
-          <Route exact path="/">
+          <Route path="/">
             <Welcome />
           </Route>
         </Switch>

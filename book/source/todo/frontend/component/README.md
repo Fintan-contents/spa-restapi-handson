@@ -34,6 +34,12 @@ ToDoページのデザインから、コンポーネントの階層構造に落�
 
 ここでは、現在表示している静的なデータをそのまま使用して、それぞれのコンポーネントを作成していきます。（参考：[React - Reactの流儀 Step 2](https://ja.reactjs.org/docs/thinking-in-react.html#step-2-build-a-static-version-in-react)）
 
+Reactのコンポーネントには「関数コンポーネント」と「クラスコンポーネント」の2種類が存在します。（参考：[React - コンポーネントとprops](https://ja.reactjs.org/docs/components-and-props.html)）
+
+関数コンポーネントはクラスコンポーネントの後に登場し、コンポーネントを実装する際の第一候補になることを目指して開発されています。（参考：[React - フックに関するよくある質問](https://ja.reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both)）
+
+ハンズオンで作成するコンポーネントは関数コンポーネントの機能で実装することが可能であるため、すべて関数コンポーネントとして作成していきます。
+
 また、CSSファイルもそれぞれのコンポーネント単位に分割していきます。
 
 {% hint style='tip' %}
@@ -109,7 +115,7 @@ export const NavigationHeader: React.FC = () => {
 }
 ```
 
-`NavigationHeader`では、TypeScriptの構文を使用して、`NavigationHeader`に型（`React.FC`）を付けています。`React.FC`はReactが提供している関数コンポーネントの型です。TypeScriptでは`変数:型`というような構文で、型を付けることができます。
+`NavigationHeader`では、TypeScriptの構文を使用して`NavigationHeader`の型に`React.FC`を指定しています。`React.FC`は、Reactが提供している関数コンポーネントを表す型になります。TypeScriptでは`変数:型`というような構文で、型を付けることができます。
 
 ```js
 export const NavigationHeader: React.FC = () => {
@@ -120,6 +126,7 @@ export const NavigationHeader: React.FC = () => {
 
 `src/App.tsx`
 ```jsx
+import React from 'react';
 import './App.css';
 import { NavigationHeader } from './components/NavigationHeader';
 
@@ -149,7 +156,7 @@ export default App;
 
 `src/components/TodoBoard.tsx`
 ```jsx
-import React from "react";
+import React from 'react';
 import './TodoBoard.css';
 
 export const TodoBoard: React.FC = () => {
@@ -335,7 +342,7 @@ export const TodoBoard: React.FC = () => {
 
 `src/App.tsx`
 ```jsx
-import React from 'react'
+import React from 'react';
 import './App.css';
 import { NavigationHeader } from './components/NavigationHeader';
 import { TodoBoard } from './components/TodoBoard';
@@ -443,7 +450,7 @@ export const TodoForm: React.FC = () => {
 
 `src/components/TodoFilter.tsx`
 ```jsx
-import React from "react";
+import React from 'react';
 import './TodoFilter.css';
 
 export const TodoFilter: React.FC = () => {
@@ -553,6 +560,8 @@ export const TodoList: React.FC = () => {
 ```css
 .TodoList_list {
   list-style: none;
+  padding: 0;
+  margin: 20px 0;
 }
 
 .TodoItem_item {
@@ -591,7 +600,7 @@ export const TodoList: React.FC = () => {
 
 `src/components/TodoBoard.tsx`
 ```jsx
-import React from "react";
+import React from 'react';
 import './TodoBoard.css';
 import { TodoForm } from './TodoForm';
 import { TodoFilter } from './TodoFilter';

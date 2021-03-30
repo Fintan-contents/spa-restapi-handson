@@ -95,8 +95,8 @@ export const TodoBoard: React.FC = () => {
       return;
     }
     BackendService.putTodo(id, !target.completed)
-      .then(returnedTodo => setTodos(
-        todos.map(todo => todo.id === id ? returnedTodo : todo)
+      .then(response => setTodos(
+        todos.map(todo => todo.id === response.id ? response : todo)
       ));
   };
 

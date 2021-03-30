@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 import './TodoFilter.css';
 
 export type FilterType = 'ALL' | 'INCOMPLETE' | 'COMPLETED';
 
-interface Props {
+type Props = {
   filterType: FilterType
   setFilterType: (filter: FilterType) => void
 }

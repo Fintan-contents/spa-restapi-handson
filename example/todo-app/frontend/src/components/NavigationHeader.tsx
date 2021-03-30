@@ -25,11 +25,9 @@ export const NavigationHeader: React.FC = () => {
               </li>
             </React.Fragment>
           ) : (
-            <React.Fragment>
-              <li>
-                <Link to="/login">ログイン</Link>
-              </li>
-            </React.Fragment>
+            <li>
+              <Link to="/login">ログイン</Link>
+            </li>
           )}
         </ul>
       </nav>

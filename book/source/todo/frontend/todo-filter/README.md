@@ -23,12 +23,12 @@ ToDoの表示対象を絞り込むために、どのようなstateが必要に�
 また、`TodoBoard`で管理した場合、`TodoBoard`でもどういったボタンがあるかを知っている必要があります。ただし、どういうボタンがあるかは`TodoFilter`が決めるため、`TodoFilter`で選択可能な種類を`TodoBoard`に知らせるため、型として宣言することにします。
 
 ```jsx
-import React from "react";
+import React from 'react';
 import './TodoFilter.css';
 
 export type FilterType = 'ALL' | 'INCOMPLETE' | 'COMPLETED';
 
-interface Props {
+type Props = {
   filterType: FilterType
   setFilterType: (filter: FilterType) => void
 }

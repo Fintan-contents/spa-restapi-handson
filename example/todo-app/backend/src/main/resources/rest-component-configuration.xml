@@ -19,14 +19,14 @@
   <component name="packageMapping" class="nablarch.integration.router.PathOptionsProviderRoutesMapping">
     <property name="pathOptionsProvider">
       <component class="nablarch.integration.router.jaxrs.JaxRsPathOptionsProvider">
-        <property name="applicationPath" value="${nablarch.webApi.applicationPath}" />
-        <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+        <property name="applicationPath" value="${nablarch.webApi.applicationPath}"/>
+        <property name="basePackage" value="${nablarch.commonProperty.basePackage}"/>
       </component>
     </property>
     <property name="methodBinderFactory">
       <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
         <property name="handlerList">
-          <component class="nablarch.integration.jaxrs.jersey.JerseyJaxRsHandlerListFactory" />
+          <component class="nablarch.integration.jaxrs.jersey.JerseyJaxRsHandlerListFactory"/>
         </property>
       </component>
     </property>
@@ -45,31 +45,28 @@
     <property name="cleanBeforeMigrate" value="${flyway.cleanBeforeMigrate}"/>
   </component>
 
-  <!-- セッションストア機能 -->
-  <import file="nablarch/webui/session-store.xml" />
-
-  <component name="sessionManager" class="nablarch.common.web.session.SessionManager">
-    <property name="defaultStoreName" value="${nablarch.sessionManager.defaultStoreName}" />
-    <property name="availableStores">
-      <list>
-        <!-- HTTPセッション上に保存するセッションストア -->
-        <component-ref name="httpSessionStore" />
-      </list>
-    </property>
-  </component>
-
-  <!-- CSRFハンドラ -->
-  <component name="csrfTokenVerificationHandler" class="nablarch.fw.web.handler.CsrfTokenVerificationHandler" />
-  <component name="csrfTokenEndpointHandler" class="com.example.system.nablarch.handler.csrf.CsrfTokenEndpointHandler" />
-
   <!-- CORS設定 -->
-  <component name="cors" class="nablarch.fw.jaxrs.cors.BasicCors">
+  <component name="cors" class="com.example.system.nablarch.CustomCors">
     <property name="allowOrigins">
       <component class="nablarch.core.repository.di.config.StringListComponentFactory">
         <property name="values" value="${cors.origins}"/>
       </component>
     </property>
   </component>
+
+  <import file="nablarch/webui/session-store.xml" />
+
+  <component name="sessionManager" class="nablarch.common.web.session.SessionManager">
+    <property name="defaultStoreName" value="${nablarch.sessionManager.defaultStoreName}" />
+    <property name="availableStores">
+      <list>
+        <component-ref name="httpSessionStore" />
+      </list>
+    </property>
+  </component>
+
+  <!-- CSRFトークン検証ハンドラ -->
+  <component name="csrfTokenVerificationHandler" class="nablarch.fw.web.handler.CsrfTokenVerificationHandler" />
 
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
@@ -92,23 +89,17 @@
           </property>
         </component>
 
-        <component-ref name="sessionStoreHandler" />
-
-        <component-ref name="threadContextHandler"/>
-
         <!-- CORSハンドラ -->
         <component class="nablarch.fw.jaxrs.CorsPreflightRequestHandler">
           <property name="cors" ref="cors" />
         </component>
 
+        <component-ref name="sessionStoreHandler" />
+
+        <component-ref name="threadContextHandler"/>
+
         <!-- CSRFトークン検証ハンドラ -->
         <component-ref name="csrfTokenVerificationHandler"/>
-
-        <!-- CSRFトークン取得APIのエンドポイント -->
-        <component class="nablarch.fw.RequestHandlerEntry">
-          <property name="requestPattern" value="/api/csrf_token" />
-          <property name="handler" ref="csrfTokenEndpointHandler" />
-        </component>
 
         <component-ref name="dbConnectionManagementHandler"/>
 

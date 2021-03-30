@@ -25,7 +25,7 @@ public interface TodoRepository {
 
     TodoId nextId();
 
-    void add(UserId userId, Todo todo);
+    void add(Todo todo);
 }
 ```
 
@@ -57,8 +57,8 @@ public class TodoService {
 
     public Todo addTodo(UserId userId, TodoText text) {
         TodoId todoId = todoRepository.nextId();
-        Todo newTodo = new Todo(todoId, text, TodoStatus.INCOMPLETE);
-        todoRepository.add(userId, newTodo);
+        Todo newTodo = new Todo(todoId, text, TodoStatus.INCOMPLETE, userId);
+        todoRepository.add(newTodo);
         return newTodo;
     }
 }
@@ -136,12 +136,12 @@ public class JdbcTodoRepository implements TodoRepository {
     }
 
     @Override
-    public void add(UserId userId, Todo todo) {
+    public void add(Todo todo) {
         TodoEntity todoEntity = new TodoEntity();
         todoEntity.setTodoId(todo.id().value());
         todoEntity.setText(todo.text().value());
         todoEntity.setCompleted(todo.status() == TodoStatus.COMPLETED);
-        todoEntity.setUserId(userId.value());
+        todoEntity.setUserId(todo.userId().value());
         UniversalDao.insert(todoEntity);
     }
 
@@ -149,7 +149,8 @@ public class JdbcTodoRepository implements TodoRepository {
         return new Todo(
                 new TodoId(entity.getTodoId()),
                 new TodoText(entity.getText()),
-                entity.getCompleted() ? TodoStatus.COMPLETED : TodoStatus.INCOMPLETE);
+                entity.getCompleted() ? TodoStatus.COMPLETED : TodoStatus.INCOMPLETE,
+                new UserId(entity.getUserId()));
     }
 }
 ```
@@ -175,7 +176,7 @@ NablarchのBean Validation機能は、JavaEEのBean Validation(JSR349)に準拠�
     public TodoResponse post(PostRequest requestBody) {
         ValidatorUtil.validate(requestBody);
 
-        UserId userId = new UserId("1002");
+        UserId userId = new UserId("1001");
         TodoText text = new TodoText(requestBody.text);
 
         Todo todo = todoService.addTodo(userId, text);
@@ -199,7 +200,6 @@ NablarchのBean Validation機能は、JavaEEのBean Validation(JSR349)に準拠�
 入力値に異常がなかった場合、以下の処理フローで実装します。
 
 - 前回と同じく、ユーザーIDはダミー値で生成する
-    - テスト時に影響が出ないよう、前回とは異なるダミー値にしておく
 - リクエストボディのToDo内容をオブジェクトとして生成する
 - `TodoService`のToDo登録メソッドを呼び出し、ToDoを登録する
 - 登録結果のToDoを、レスポンス用のオブジェクトに変換する
@@ -208,9 +208,39 @@ NablarchのBean Validation機能は、JavaEEのBean Validation(JSR349)に準拠�
 
 ### 登録に成功するテストを作成
 
-前回作成した`RestApiTest`に、新しく作成したRSET APIのテストを追加します。
+テスト用Javaディレクトリの`com.example.todo.api`パッケージに、`TodoRegisterRestApiTest`クラスを作成します。
 
 ```java
+package com.example.todo.api;
+
+import com.example.openapi.OpenApiValidator;
+import com.example.system.nablarch.FlywayExecutor;
+import nablarch.core.repository.SystemRepository;
+import nablarch.fw.web.HttpResponse;
+import nablarch.fw.web.RestMockHttpRequest;
+import nablarch.test.core.http.SimpleRestTestSupport;
+import org.hamcrest.Matchers;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import javax.ws.rs.core.MediaType;
+import java.nio.file.Paths;
+import java.util.Map;
+
+import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
+public class TodoRegisterRestApiTest extends SimpleRestTestSupport {
+
+    public static OpenApiValidator openApiValidator = new OpenApiValidator(Paths.get("rest-api-specification/openapi.yaml"));
+
+    @BeforeClass
+    public static void setUpClass() {
+        FlywayExecutor flywayExecutor = SystemRepository.get("dbMigration");
+        flywayExecutor.migrate(true);
+    }
+
     @Test
     public void RESTAPIでToDoを登録できる() throws Exception {
         RestMockHttpRequest request = post("/api/todos")
@@ -226,6 +256,7 @@ NablarchのBean Validation機能は、JavaEEのBean Validation(JSR349)に準拠�
 
         openApiValidator.validate("postTodo", request, response);
     }
+}
 ```
 
 実装要領は前回と同じですが、今回はHTTPメソッドが`GET`ではなく`POST`であるため、`post`メソッドを使用してリクエストオブジェクトを生成します。
@@ -257,7 +288,7 @@ mvn test
 
 ### Bean Validationでエラーになるテストを作成
 
-続いて、`ValidatorUtil`を使用したBean Validationが実行されていることを確認するため、リクエストに`text`項目を含めずに送信するテストを追加します。
+続いて、`ValidatorUtil`を使用したBean Validationが実行されていることを確認するため、リクエストに`text`項目を含めずに送信するテストを `TodoRegisterRestApiTest` クラスに追加します。
 
 ```java
     @Test

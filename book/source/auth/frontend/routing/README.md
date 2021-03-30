@@ -30,7 +30,7 @@ npm install --save react-router-dom @types/react-router-dom
 URLごとに使用するコンポーネントが切り替わるように実装するため、`App`コンポーネントを次のように実装します。
 
 ```jsx
-import React from 'react'
+import React from 'react';
 import './App.css';
 import { NavigationHeader } from './components/NavigationHeader';
 import { TodoBoard } from './components/TodoBoard';
@@ -80,7 +80,7 @@ URLとのマッチングは、デフォルトでは部分一致で判定され�
 
 `src/components/Welcome.tsx`
 ```js
-import React from "react";
+import React from 'react';
 import {Link} from 'react-router-dom';
 import './Welcome.css';
 
@@ -108,7 +108,7 @@ export const Welcome: React.FC = () => {
 
 `src/components/Signup.tsx`
 ```jsx
-import React from "react";
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './Signup.css';
 
@@ -191,7 +191,7 @@ export const NavigationHeader: React.FC = () => {
 
 `src/components/Login.tsx`
 ```jsx
-import React  from "react";
+import React  from 'react';
 import { useHistory } from 'react-router-dom';
 import './Login.css';
 

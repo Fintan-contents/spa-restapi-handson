@@ -30,12 +30,12 @@ public class JdbcTodoRepository implements TodoRepository {
     }
 
     @Override
-    public void add(UserId userId, Todo todo) {
+    public void add(Todo todo) {
         TodoEntity todoEntity = new TodoEntity();
         todoEntity.setTodoId(todo.id().value());
         todoEntity.setText(todo.text().value());
         todoEntity.setCompleted(todo.status() == TodoStatus.COMPLETED);
-        todoEntity.setUserId(userId.value());
+        todoEntity.setUserId(todo.userId().value());
         UniversalDao.insert(todoEntity);
     }
 
@@ -46,19 +46,27 @@ public class JdbcTodoRepository implements TodoRepository {
     }
 
     @Override
-    public void update(UserId userId, Todo todo) {
+    public void update(Todo todo) {
         TodoEntity todoEntity = new TodoEntity();
         todoEntity.setTodoId(todo.id().value());
         todoEntity.setText(todo.text().value());
         todoEntity.setCompleted(todo.status() == TodoStatus.COMPLETED);
-        todoEntity.setUserId(userId.value());
+        todoEntity.setUserId(todo.userId().value());
         UniversalDao.update(todoEntity);
+    }
+
+    @Override
+    public void delete(TodoId todoId) {
+        TodoEntity todoEntity = new TodoEntity();
+        todoEntity.setTodoId(todoId.value());
+        UniversalDao.delete(todoEntity);
     }
 
     private Todo createTodo(TodoEntity entity) {
         return new Todo(
                 new TodoId(entity.getTodoId()),
                 new TodoText(entity.getText()),
-                entity.getCompleted() ? TodoStatus.COMPLETED : TodoStatus.INCOMPLETE);
+                entity.getCompleted() ? TodoStatus.COMPLETED : TodoStatus.INCOMPLETE,
+                new UserId(entity.getUserId()));
     }
 }

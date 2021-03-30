@@ -21,15 +21,19 @@ public class TodoService {
 
     public Todo addTodo(UserId userId, TodoText text) {
         TodoId todoId = todoRepository.nextId();
-        Todo newTodo = new Todo(todoId, text, TodoStatus.INCOMPLETE);
-        todoRepository.add(userId, newTodo);
+        Todo newTodo = new Todo(todoId, text, TodoStatus.INCOMPLETE, userId);
+        todoRepository.add(newTodo);
         return newTodo;
     }
 
-    public Todo updateStatus(UserId userId, TodoId todoId, TodoStatus status) {
+    public Todo updateStatus(TodoId todoId, TodoStatus status) {
         Todo todo = todoRepository.get(todoId);
         Todo changedTodo = todo.changeStatus(status);
-        todoRepository.update(userId, changedTodo);
+        todoRepository.update(changedTodo);
         return changedTodo;
+    }
+
+    public void deleteTodo(TodoId todoId) {
+        todoRepository.delete(todoId);
     }
 }

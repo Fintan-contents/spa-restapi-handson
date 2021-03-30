@@ -8,10 +8,13 @@ public class Todo {
 
     private final TodoStatus status;
 
-    public Todo(TodoId id, TodoText text, TodoStatus status) {
+    private final UserId userId;
+
+    public Todo(TodoId id, TodoText text, TodoStatus status, UserId userId) {
         this.id = id;
         this.text = text;
         this.status = status;
+        this.userId = userId;
     }
 
     public TodoId id() {
@@ -26,7 +29,11 @@ public class Todo {
         return status;
     }
 
+    public UserId userId() {
+        return userId;
+    }
+
     public Todo changeStatus(TodoStatus status) {
-        return new Todo(id, text, status);
+        return new Todo(id, text, status, userId);
     }
 }

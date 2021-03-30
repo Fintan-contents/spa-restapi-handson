@@ -62,7 +62,8 @@ export const TodoForm: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // 登録した際の処理を書く予定
+    // 登録した際の処理を書く予定だが、この時点で動作確認しやすいように一旦 alert で入力値を表示する
+    alert(text);
   };
   
   return (
@@ -105,6 +106,8 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 ...
 ```
 
+サブミットイベントをキャンセルすると何も起きなくなるため、この時点で動作確認をしたい場合には少し分かりづらくなります。そのため、ここでは一旦 `alert` で入力値を表示するようにしています。これはあくまで一時的な確認用のため、この後でREST APIを呼び出す処理を実装する際には削除します。
+
 ## REST APIの呼び出しとstateの更新
 
 先ほど作成したサブミット用のコールバック関数では、イベントをキャンセルするだけでしたが、生成したクライアントコードでREST APIを呼び出すように実装していきます。
@@ -117,11 +120,16 @@ REST APIを呼び出すと登録した結果のToDoがレスポンスとして�
 import React from 'react';
 import './TodoForm.css';
 import { useInput } from '../hooks/useInput';
-import { Todo } from '../backend/generated-rest-client';
 import { BackendService } from '../backend/BackendService';
 
-interface Props {
-  addTodo: (returnedTodo: Todo) => void
+type Todo = {
+  id: number
+  text: string
+  completed: boolean
+}
+
+type Props = {
+  addTodo: (todo: Todo) => void
 }
 
 export const TodoForm: React.FC<Props> = ({addTodo}) => {
@@ -157,9 +165,9 @@ export const TodoForm: React.FC<Props> = ({addTodo}) => {
 ```jsx
 export const TodoBoard: React.FC = () => {
 ...
-  const addTodo = (returnedTodo: Todo) => {
-    setTodos(todos.concat(returnedTodo));
-  }
+  const addTodo = (todo: Todo) => {
+    setTodos(todos.concat(todo));
+  };
 ...
   return (
     <div className="TodoBoard_content">

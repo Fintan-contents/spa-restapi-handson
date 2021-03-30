@@ -45,6 +45,12 @@ public class OpenApiValidator {
 
     public void validate(String operationId, RestMockHttpRequest request, HttpResponse response)
             throws ValidationException {
+        validateRequest(operationId, request);
+        validateResponse(operationId, response);
+
+    }
+
+    public void validateRequest(String operationId, RestMockHttpRequest request) throws ValidationException {
         String requestUri = request.getRequestUri();
         Request.Method method = Request.Method.getMethod(request.getMethod());
         DefaultRequest.Builder requestBuilder = new DefaultRequest.Builder(requestUri, method)
@@ -62,15 +68,22 @@ public class OpenApiValidator {
             }
         }
         validateRequest(operationId, requestBuilder.build());
+    }
 
+    public void validateResponse(String operationId, HttpResponse response) throws ValidationException {
         validateResponse(operationId,
                 new DefaultResponse.Builder(response.getStatusCode())
-                        .headers(formatResponseHeaderMap(response.getHeaderMap()))
+                        .headers(formatHeaderMap(getResponseHeaders(response)))
                         .body(Body.from(response.getBodyString())).build());
     }
 
     public void validate(String operationId, HttpRequest request, java.net.http.HttpResponse<?> response)
             throws ValidationException, JsonProcessingException {
+        validateRequest(operationId, request);
+        validateResponse(operationId, response);
+    }
+
+    public void validateRequest(String operationId, HttpRequest request) throws ValidationException {
         String requestUri = request.uri().toString();
         Request.Method method = Request.Method.getMethod(request.method());
         DefaultRequest.Builder requestBuilder = new DefaultRequest.Builder(requestUri, method)
@@ -82,7 +95,10 @@ public class OpenApiValidator {
         request.bodyPublisher()
                 .ifPresent(p -> p.subscribe(new StringSubscriber(v -> requestBuilder.body(Body.from(v)))));
         validateRequest(operationId, requestBuilder.build());
+    }
 
+    public void validateResponse(String operationId, java.net.http.HttpResponse<?> response)
+            throws ValidationException, JsonProcessingException {
         DefaultResponse.Builder responseBuilder = new DefaultResponse.Builder(response.statusCode())
                 .headers(convertType(response.headers()));
         if (response.body() != null) {
@@ -119,8 +135,7 @@ public class OpenApiValidator {
             }
 
         }
-
-        validator.validate(request, getPathItem(operationId), operation);
+        validator.validate(request);
     }
 
     public void validateResponse(String operationId, Response response) throws ValidationException {
@@ -153,16 +168,16 @@ public class OpenApiValidator {
         return headers;
     }
 
-    private Map<String, Collection<String>> formatResponseHeaderMap(Map<String, String> originHeaders) {
-        Map<String, Collection<String>> headers = formatHeaderMap(originHeaders);
-        // Nablarchの仕様として、Content-typeが設定されていなければ"text/plain"が設定されてしまう。
-        // 空の場合でもOpenAPI定義ファイルにContent−Typeを設定しなければ検証失敗になるため、除去しておく。
-        if (originHeaders.getOrDefault("Content-Length", "0").equals("0")) {
-            if (originHeaders.containsKey("Content-Type")) {
-                headers.remove("Content-Type");
-            }
+    private Map<String, String> getResponseHeaders(HttpResponse response) {
+        // Nablarchの仕様として、getHeaderMapでヘッダー一覧を取得すると、Content-Typeが設定されていなければ更新されてしまう
+        // 元々のContent-Typeが設定されていなければ、ヘッダー一覧を取得後に自動設定されたContent-Typeを削除しておく
+        String contentType = response.getHeader("Content-Type");
+        Map<String, String> headerMap = response.getHeaderMap();
+        HashMap<String, String> result = new HashMap<>(headerMap);
+        if (contentType == null) {
+            result.remove("Content-Type");
         }
-        return headers;
+        return result;
     }
 
     private Map<String, Collection<String>> convertType(HttpHeaders headers) {

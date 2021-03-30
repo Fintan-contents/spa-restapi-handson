@@ -63,7 +63,7 @@ type Props = {
 
 `src/components/TodoBoard.tsx`
 ```jsx
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import './TodoBoard.css';
 import { TodoForm } from './TodoForm';
 import { TodoFilter } from './TodoFilter';
@@ -163,7 +163,7 @@ stateフックの初期値で静的データを渡していましたが、REST A
 
 `src/components/TodoBoard.tsx`
 ```jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import './TodoBoard.css';
 import { TodoForm } from './TodoForm';
 import { TodoFilter } from './TodoFilter';
@@ -201,7 +201,7 @@ export const TodoBoard: React.FC = () => {
 effectフックで更新する準備ができたため、次に、生成したクライアントコードを使用してREST APIを呼び出すように実装します。事前に作成した`BackendService`の関数を使用して、REST APIを呼び出します。結果は`Promise`で返ってくるため、`then`を呼び出してレスポンスが返ってきたタイミングでstateの更新関数を呼び出すように実装します。
 
 ```jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import './TodoBoard.css';
 import { TodoForm } from './TodoForm';
 import { TodoFilter } from './TodoFilter';

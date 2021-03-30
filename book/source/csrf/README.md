@@ -10,35 +10,32 @@ CSRFトークンを発行してリクエスト毎にサーバーサイド側で�
 
 example-chatのバックエンドでも同様の実装をしているため、その実装を流用します。
 
-### CSRFトークンハンドラの設定
-
 バックエンドでは、CSRFトークンを取得するREST APIと、それを検証するためのハンドラを実装します。
 
-CSRFトークンを取得するREST APIについては、example-chatの`com.example.system.nablarch.handler.csrf.CsrfTokenEndpointHandler`クラスで実装しているため、このクラスをコピーして持ってきます。このクラスはハンドラであるため、コンポーネント定義に追加します。
+### CSRFトークンを取得するREST APIの作成
 
-CSRFトークンを検証するハンドラについては、Nablarchから提供されているため、これもコンポーネント定義に追加します。
+CSRFトークンを取得するREST APIについては、example-chatの`com.example.presentation.restapi.system.CsrfTokenAction`クラスで同様の実装をしているため、このクラスをコピーして持ってきます。
+
+### CSRFトークン検証ハンドラの設定
+
+CSRFトークンを検証するハンドラについては、Nablarchから提供されているため、これもコンポーネント定義に追加します。CSRFトークンを検証するハンドラではセッションを使用するため、セッション変数保存ハンドラ（ここでは`sessionStoreHandler`）より後で実行されるように定義します。
 
 ```xml
-<!-- CSRFハンドラ -->
+<!-- CSRFトークン検証ハンドラ -->
 <component name="csrfTokenVerificationHandler" class="nablarch.fw.web.handler.CsrfTokenVerificationHandler" />
-<component name="csrfTokenEndpointHandler" class="com.example.system.nablarch.handler.csrf.CsrfTokenEndpointHandler" />
 
 <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
   <property name="handlerQueue">
     <list>
 ...
-        <component class="nablarch.fw.jaxrs.CorsPreflightRequestHandler">
-          <property name="cors" ref="cors" />
-        </component>
+        <component-ref name="sessionStoreHandler" />
+
+        <component-ref name="threadContextHandler"/>
 
         <!-- CSRFトークン検証ハンドラ -->
         <component-ref name="csrfTokenVerificationHandler"/>
 
-        <!-- CSRFトークン取得APIのエンドポイント -->
-        <component class="nablarch.fw.RequestHandlerEntry">
-          <property name="requestPattern" value="/api/csrf_token" />
-          <property name="handler" ref="csrfTokenEndpointHandler" />
-        </component>    
+        <component-ref name="dbConnectionManagementHandler"/>
 ...
     </list>
   </property>
@@ -98,7 +95,9 @@ private void attachCsrfToken(RestMockHttpRequest request, ExecutionContext conte
 
 このメソッドでは、CSRFトークンを取得するREST APIを呼び出し、引数のリクエストオブジェクトへの設定と、サーバーサイドで比較元が保存されるセッションストアへの設定を実装しています。`ExecutionContext`を使用したセッションストアへの設定については、ユーザー認証でのテストクラスへの実装と同様に実装します。
 
-これを、各テストでこのメソッドを呼び出すよう、次のように修正します。
+各REST APIのテストで、REST APIにアクセスする前にこの`attachCsrfToken`メソッドを呼び出すように修正します。
+
+例えばサインアップのテストであれば、次のように修正します。
 
 ```java
 @Test
@@ -109,6 +108,21 @@ public void RESTAPIでサインアップできる() {
             .setBody(Map.of(
                     "userName", "signup-test",
                     "password", "pass"));
+    attachCsrfToken(request, executionContext);
+
+    HttpResponse response = sendRequestWithContext(request, executionContext);
+...
+```
+
+例えばログアウトのようにユーザーIDを設定しているテストであれば、次のように修正します。
+
+```java
+@Test
+public void RESTAPIでログアウトできる() throws Exception {
+    ExecutionContext executionContext = new ExecutionContext();
+    SessionUtil.put(executionContext, "user.id", "1010");
+
+    RestMockHttpRequest request = post("/api/logout");
     attachCsrfToken(request, executionContext);
 
     HttpResponse response = sendRequestWithContext(request, executionContext);
@@ -132,7 +146,7 @@ public void RESTAPIでサインアップできる() {
 import {
   ...
   FetchParams,
-  HTTPMethod
+  HTTPMethod,
   RequestContext
 } from './generated-rest-client';
 
@@ -231,7 +245,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
       try {
         await BackendService.login(userName, password);
         await BackendService.refreshCsrfToken();
-        setUserName(userName)
+        setUserName(userName);
         ...
     },
     logout: async () => {

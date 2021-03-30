@@ -7,7 +7,7 @@
 `Signup`コンポーネントにサインアップ処理を実装します。
 
 ```jsx
-import React from "react";
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './Signup.css';
 import { useInput } from '../hooks/useInput';
@@ -148,7 +148,7 @@ export const Signup: React.FC = () => {
 
 
 ```jsx
-import React, { useState } from "react";
+import React, { useState } from 'react';
 ...
 import { AccountConflictError, useUserContext } from '../contexts/UserContext';
 ...
@@ -161,7 +161,7 @@ export const Signup: React.FC = () => {
     event.preventDefault();
     const result = await userContext.signup(userName, password);
     if (result instanceof AccountConflictError) {
-      setFormError('サインアップに失敗しました。同じ名前が登録されています。')
+      setFormError('サインアップに失敗しました。同じ名前が登録されています。');
       return;
     }
     history.push('/');

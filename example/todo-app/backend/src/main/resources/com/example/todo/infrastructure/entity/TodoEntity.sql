@@ -1,9 +1,9 @@
 FIND_BY_USERID =
 select
-  *
+    *
 FROM
-  todo
+    todo
 WHERE
-  user_id = :userId
+        user_id = :userId
 ORDER BY
-  todo_id
+    todo_id

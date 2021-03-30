@@ -27,13 +27,15 @@
 
 ## コンポーネントの作成
 
+Todoページを作成した時と同じように、`spa-restapi-handson/design-mock`に配置されているデザインモックを元に、それぞれのコンポーネントを作成していきます。
+
 ### `Welcome`コンポーネント
 
 まず、`Welcome`コンポーネントを作成します。
 
 `src/components/Welcome.tsx`
 ```js
-import React from "react";
+import React from 'react';
 import './Welcome.css';
 
 export const Welcome: React.FC = () => {
@@ -88,7 +90,7 @@ export const Welcome: React.FC = () => {
 
 `src/components/Signup.tsx`
 ```jsx
-import React from "react";
+import React from 'react';
 import './Signup.css';
 
 export const Signup: React.FC = () => {
@@ -186,7 +188,7 @@ export const Signup: React.FC = () => {
 
 `src/components/Login.tsx`
 ```jsx
-import React  from "react";
+import React  from 'react';
 import './Login.css';
 
 export const Login: React.FC = () => {

@@ -31,7 +31,7 @@ const corsHandler: Middleware = {
       }
     };
   }
-}
+};
 
 const configuration = new Configuration({
   middleware: [corsHandler, requestLogger]

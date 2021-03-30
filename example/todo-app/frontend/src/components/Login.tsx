@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Login.css';
 import { useInput } from '../hooks/useInput';
@@ -28,7 +28,7 @@ export const Login: React.FC = () => {
     event.preventDefault();
     const result = await userContext.login(userName, password);
     if (result instanceof AuthenticationFailedError) {
-      setFormError('ログインに失敗しました。名前またはパスワードが正しくありません。')
+      setFormError('ログインに失敗しました。名前またはパスワードが正しくありません。');
       return;
     }
     history.push('/board');

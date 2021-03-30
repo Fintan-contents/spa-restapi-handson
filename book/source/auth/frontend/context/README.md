@@ -27,7 +27,7 @@ export class AccountConflictError {}
 
 export class AuthenticationFailedError {}
 
-interface ContextValueType {
+type ContextValueType = {
   signup: (userName: string, password: string) => Promise<void | AccountConflictError>,
   login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>,
   logout: () => Promise<void>,
@@ -38,7 +38,7 @@ interface ContextValueType {
 export const UserContext = React.createContext<ContextValueType>({} as ContextValueType);
 ```
 
-`React.createContext`を使用して、コンテクストを作成します。ユーザーコンテクストを扱う際に型を使用したいため、`ContextValueType`型も定義ます。
+`React.createContext`を使用して、コンテクストを作成します。ユーザーコンテクストを扱う際に型を使用したいため、`ContextValueType`型も定義します。
 
 また、サインアップやログインのREST APIの仕様として、入力ミス等で失敗した場合にはエラーレスポンスが返却されます。生成したクライアントコードでは、エラーレスポンスであった場合は例外として送出されます。ここでは、ユーザーコンテクストの利用者がエラーを扱いやすくするため、エラーを表現するオブジェクトに変換して返すようにします。
 
@@ -83,7 +83,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
     login: async (userName, password) => {
       try {
         await BackendService.login(userName, password);
-        setUserName(userName)
+        setUserName(userName);
       } catch(error) {
         if (error.status === 401) {
           return new AuthenticationFailedError();

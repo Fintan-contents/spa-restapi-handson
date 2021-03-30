@@ -125,7 +125,7 @@ ReactDOM.render(
 `App`コンポーネントを実装しています。このコンポーネントは、`<h1>Hello, world</h1>`というHTML要素を表すReact要素を返します。
 
 ```jsx
-import React from 'react'
+import React from 'react';
 
 function App() {
   return (

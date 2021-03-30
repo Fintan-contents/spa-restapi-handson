@@ -34,26 +34,6 @@ public class TodosAction {
                 .collect(Collectors.toList());
     }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public TodoResponse post(PostRequest requestBody) {
-        ValidatorUtil.validate(requestBody);
-
-        String userIdValue = ThreadContext.getUserId();
-        UserId userId = new UserId(userIdValue);
-        TodoText text = new TodoText(requestBody.text);
-
-        Todo todo = todoService.addTodo(userId, text);
-
-        return new TodoResponse(todo.id(), todo.text(), todo.status());
-    }
-
-    public static class PostRequest {
-        @NotNull
-        public String text;
-    }
-
     public static class TodoResponse {
 
         public final Long id;
@@ -67,5 +47,26 @@ public class TodosAction {
             this.text = text.value();
             this.completed = status == TodoStatus.COMPLETED;
         }
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public TodoResponse post(PostRequest requestBody) {
+        ValidatorUtil.validate(requestBody);
+
+        String userIdValue = ThreadContext.getUserId();
+        UserId userId = new UserId(userIdValue);
+
+        TodoText text = new TodoText(requestBody.text);
+
+        Todo todo = todoService.addTodo(userId, text);
+
+        return new TodoResponse(todo.id(), todo.text(), todo.status());
+    }
+
+    public static class PostRequest {
+        @NotNull
+        public String text;
     }
 }

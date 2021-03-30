@@ -1,9 +1,9 @@
 package com.example.authentication.api;
 
+import com.example.authentication.application.AccountRegistrationResult;
 import com.example.authentication.application.AccountRegistrationService;
 import com.example.authentication.application.AuthenticationResult;
 import com.example.authentication.application.AuthenticationService;
-import com.example.authentication.application.AccountRegistrationResult;
 import nablarch.common.web.session.SessionUtil;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
 import nablarch.core.validation.ee.ValidatorUtil;
@@ -43,6 +43,14 @@ public class AuthenticationAction {
         }
     }
 
+    public static class SignupRequest {
+        @NotNull
+        public String userName;
+
+        @NotNull
+        public String password;
+    }
+
     @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -61,14 +69,6 @@ public class AuthenticationAction {
     @POST
     public void logout(ExecutionContext executionContext) {
         SessionUtil.invalidate(executionContext);
-    }
-
-    public static class SignupRequest {
-        @NotNull
-        public String userName;
-
-        @NotNull
-        public String password;
     }
 
     public static class LoginRequest {

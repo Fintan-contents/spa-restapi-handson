@@ -39,15 +39,13 @@
 
 次に、セッション変数保存ハンドラを設定します。
 
-`webFrontController`名で定義しているコンポーネントの`handlerQueue`プロパティに、REST APIの呼び出しで実行するハンドラを設定するため、ここにセッション変数保存ハンドラを追加します。セッション管理保存ハンドラは、先ほど読み込んだNablarchのデフォルト設定の中で`sessionStoreHandler`名のコンポーネントとして定義されているため、`corsHandler`の後ろに追加します。
+`webFrontController`名で定義しているコンポーネントの`handlerQueue`プロパティに、REST APIの呼び出しで実行するハンドラを設定するため、ここにセッション変数保存ハンドラを追加します。セッション変数保存ハンドラは、先ほど読み込んだNablarchのデフォルト設定の中で`sessionStoreHandler`名のコンポーネントとして定義されているため、`threadContextHandler`の手前に追加します。
 
 ```xml
 <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
   <property name="handlerQueue">
     <list>
 ...
-      <component-ref name="corsHandler"/>
-
       <component-ref name="sessionStoreHandler" />
 
       <component-ref name="threadContextHandler"/>
@@ -351,7 +349,7 @@ private AccountEntity findAccount(String userName) {
 ```java
 public AuthenticationResult authenticate(String userName, String password) {
     AccountEntity accountEntity = findAccount(userName);
-   if (accountEntity == null) {
+    if (accountEntity == null) {
         return AuthenticationResult.nameNotFound();
     }
 ...

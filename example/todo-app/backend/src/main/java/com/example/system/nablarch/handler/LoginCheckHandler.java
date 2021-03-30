@@ -53,8 +53,7 @@ public class LoginCheckHandler implements Handler<HttpRequest, Object> {
         }
 
         boolean matches(HttpRequest request) {
-            return list.stream()
-                    .anyMatch(whitePattern -> whitePattern.matches(request));
+            return list.stream().anyMatch(whitePattern -> whitePattern.matches(request));
         }
     }
 

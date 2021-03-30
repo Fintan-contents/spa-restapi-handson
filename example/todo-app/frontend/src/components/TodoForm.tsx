@@ -1,10 +1,15 @@
 import React from 'react';
 import './TodoForm.css';
 import { useInput } from '../hooks/useInput';
-import { Todo } from '../backend/generated-rest-client';
 import { BackendService } from '../backend/BackendService';
 
-interface Props {
+type Todo = {
+  id: number
+  text: string
+  completed: boolean
+}
+
+type Props = {
   addTodo: (todo: Todo) => void
 }
 
@@ -23,7 +28,7 @@ export const TodoForm: React.FC<Props> = ({addTodo}) => {
 
   return (
     <div className="TodoForm_content">
-      <form onSubmit={handleSubmit}　className="TodoForm_form">
+      <form onSubmit={handleSubmit} className="TodoForm_form">
         <div className="TodoForm_input">
           <input type="text" {...textAttributes} placeholder="タスクを入力してください"/>
         </div>

@@ -21,6 +21,10 @@ public class AccountRegistrationService {
         return AccountRegistrationResult.SUCCESS;
     }
 
+    private boolean existsAccount(String userName) {
+        Map<String, String> condition = Map.of("userName", userName);
+        return UniversalDao.exists(UserProfileEntity.class, "FIND_BY_USERNAME", condition);
+    }
     private String generateUserId() {
         return UUID.randomUUID().toString();
     }
@@ -37,10 +41,5 @@ public class AccountRegistrationService {
         userProfileEntity.setUserId(userId);
         userProfileEntity.setName(userName);
         UniversalDao.insert(userProfileEntity);
-    }
-
-    private boolean existsAccount(String userName) {
-        Map<String, String> condition = Map.of("userName", userName);
-        return UniversalDao.exists(UserProfileEntity.class, "FIND_BY_USERNAME", condition);
     }
 }

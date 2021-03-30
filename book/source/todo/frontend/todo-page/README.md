@@ -6,7 +6,7 @@ ToDoページの外観を作成します。
 
 まず、フロントエンドのアプリでデザインモックと同様のページを表示できることを確認します。
 
-ToDoアプリのデザインモックを確認すると、以下のような画面デザインになっています。
+前述のとおり、Todoアプリのデザインモックは`spa-restapi-handson/design-mock`に配置しており、その中の`todo.html`と`todo.css`がTodoページのデザインモックになります。デザインモックを確認すると、以下のような画面デザインになっています。
 
 ![mock](img/mock.png)
 
@@ -22,7 +22,7 @@ $ npm start
 
 アプリが起動したら、`App`にJSXを記述していきます。HTMLを確認しながら順にJSXを記述していくこともできますが、ここでは、デザインモックのHTMLのbody部をそのまま持ってきて同じように表示できることをまず確認してみます。また、HTMLをそのまま持ってきた際に、HTMLとJSXの違いによりいくつかのエラーが発生しますので、それについても確認していきます。
 
-それでは、ToDoページのデザインモックのHTMLにあるbody部を、`App`のJSXとしてそのまま持ってきます。
+それでは、ToDoページのデザインモックである`todo.html`のbody部をコピーして、`App`のJSXとしてそのまま持ってきます。
 
 ```jsx
 function App() {
@@ -121,7 +121,7 @@ JSXでは、中括弧で囲うことで式を埋め込むことができます�
 
 `src/App.tsx`
 ```jsx
-import React from 'react'
+import React from 'react';
 
 function App() {
   return (

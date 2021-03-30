@@ -6,7 +6,7 @@ ToDo管理のREST APIで、ログインしたユーザーを使用するよう�
 
 ToDo管理の実装時には、ユーザーIDとしてダミー値を使用していましたが、スレッドコンテキストからユーザーIDを取得するように修正します。
 
-`TodosAction`クラスと`TodoAction`クラスでダミーのユーザーIDを生成している箇所を、次のように修正します。
+`TodosAction`クラスでダミーのユーザーIDを生成している箇所を、次のように修正します。
 
 ```java
 String userIdValue = ThreadContext.getUserId();
