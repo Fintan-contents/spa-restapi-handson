@@ -22,7 +22,7 @@ React Routerを使用することで、URLごとに使用するコンポーネ�
 React RouterとTypeScript用の型定義をインストールするため、`frontend`ディレクトリで次のコマンドを実行します。（参考：[Installation | React Router](https://reactrouter.com/web/guides/quick-start#quick-start-installation)）
 
 ```
-npm install --save react-router-dom @types/react-router-dom
+npm install --save react-router-dom@5 @types/react-router-dom@5
 ```
 
 ## ルーティングの設定

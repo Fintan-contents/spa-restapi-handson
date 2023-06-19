@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   openapi-gen:
-    image: openapitools/openapi-generator-cli
+    image: openapitools/openapi-generator-cli:v5.4.0
     volumes:
       - ../..:/todo-app
     command: generate -g typescript-fetch -i /todo-app/backend/rest-api-specification/openapi.yaml -o /todo-app/frontend/src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
