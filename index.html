@@ -778,10 +778,76 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="この資料について"><a name="この資料について" class="plugin-anchor" href="#この資料について"><i class="fa fa-link" aria-hidden="true"></i></a>この資料について</h2>
+                                <h1 id="この資料について"><a name="この資料について" class="plugin-anchor" href="#この資料について"><i class="fa fa-link" aria-hidden="true"></i></a>この資料について</h1>
 <p>これは、サービス開発リファレンスのひとつとして提供している「ハンズオンコンテンツ」の資料です。</p>
 <p>ハンズオンコンテンツは、常に活用して頂ける状態にするため、利用者からのフィードバックや技術トレンド等に合わせて、継続的にアップデートを行います。</p>
 <p>サービス開発リファレンス全体の紹介については<a href="https://fintan.jp/?p=5952" target="_blank">こちら</a>をご参照ください。</p>
+<h2 id="ご利用にあたって"><a name="ご利用にあたって" class="plugin-anchor" href="#ご利用にあたって"><i class="fa fa-link" aria-hidden="true"></i></a>ご利用にあたって</h2>
+<p>当サイトでは、ブラウザによる閲覧履歴等の情報を収集しております。
+以下に、情報の利用目的や各情報の具体的な用途を示します。</p>
+<h3 id="情報の利用目的"><a name="情報の利用目的" class="plugin-anchor" href="#情報の利用目的"><i class="fa fa-link" aria-hidden="true"></i></a>情報の利用目的</h3>
+<p>取得した情報はアクセス解析に利用されます。
+ページのアクセス数等からサイトの利用状況を把握し、サイトの改善に利用します。
+アクセス情報は匿名で収集され、個人を特定することはできません。</p>
+<h3 id="情報の送信先"><a name="情報の送信先" class="plugin-anchor" href="#情報の送信先"><i class="fa fa-link" aria-hidden="true"></i></a>情報の送信先</h3>
+<p>取得した情報は<a href="https://plausible.io" target="_blank">Plausible Analytics</a>に送信されます。</p>
+<h3 id="情報の種類・用途"><a name="情報の種類・用途" class="plugin-anchor" href="#情報の種類・用途"><i class="fa fa-link" aria-hidden="true"></i></a>情報の種類・用途</h3>
+<p>利用する情報は以下のとおりです。</p>
+<table>
+<thead>
+<tr>
+<th>情報の種類</th>
+<th>例</th>
+<th>説明</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ページのURL</td>
+<td><a href="https://fintan-contents.github.io/spa-restapi-handson/" target="_blank">https://fintan-contents.github.io/spa-restapi-handson/</a></td>
+<td>当ウェブサイトのURL</td>
+<td>どのページが閲覧されたか測定するために使用されます。</td>
+</tr>
+<tr>
+<td>リファラー</td>
+<td><a href="https://twitter.com/" target="_blank">https://twitter.com/</a></td>
+<td>参照元ページ</td>
+<td>どのページから当サイトに到達したかを測定するために使用されます。</td>
+</tr>
+<tr>
+<td>ブラウザ</td>
+<td>Chrome 86.0</td>
+<td>利用者のブラウザの種類</td>
+<td>利用者の閲覧環境を測定するために使用されます<sup><a href="#fn_1" id="reffn_1">1</a></sup>。</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>macOS 10.15</td>
+<td>利用者のOSの種類</td>
+<td>利用者の閲覧環境を測定するために使用されます<sup><a href="#fn_1" id="reffn_1">1</a></sup>。</td>
+</tr>
+<tr>
+<td>デバイス種別</td>
+<td>Desktop</td>
+<td>利用者のデバイスの種類</td>
+<td>利用者の閲覧環境を測定するために使用されます<sup><a href="#fn_1" id="reffn_1">1</a></sup>。</td>
+</tr>
+<tr>
+<td>国、地域、都市</td>
+<td>United Kingdom, England, London</td>
+<td>利用者の位置情報</td>
+<td>利用者の閲覧環境を測定するために使用されます<sup><a href="#fn_2" id="reffn_2">2</a></sup>。</td>
+</tr>
+</tbody>
+</table>
+<blockquote id="fn_1">
+<sup>1</sup>. ユーザーエージェントから取得しますが、必要な情報だけを使用します。完全なユーザーエージェントは破棄されます。<a href="#reffn_1" title="Jump back to footnote [1] in the text."> ↩</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. IPアドレスを使用して位置情報を取得しますが、都市レベルより詳細な追跡は行いません。IPアドレスは破棄されるため、データベース等に保存されることはありません。<a href="#reffn_2" title="Jump back to footnote [2] in the text."> ↩</a>
+</blockquote>
+<p>より詳細な情報については、<a href="https://plausible.io/data-policy" target="_blank">Plausible Analyticsのポリシー</a>をご参照ください。</p>
 
                                 
                                 </section>
@@ -821,7 +887,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"この資料について","level":"1.1","depth":1,"next":{"title":"はじめに","level":"1.2","depth":1,"path":"intro/README.md","ref":"intro/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"index.md","mtime":"2023-06-19T04:11:22.729Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-06-19T07:14:40.493Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"この資料について","level":"1.1","depth":1,"next":{"title":"はじめに","level":"1.2","depth":1,"path":"intro/README.md","ref":"intro/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"index.md","mtime":"2023-07-24T02:52:18.365Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
