@@ -131,9 +131,12 @@ import {
   Configuration,
   TodosApi,
   Middleware,
-  UsersApi
+  UsersApi,
+  FetchParams,
+  HTTPMethod,
+  RequestContext
 } from './generated-rest-client';
-
+  
 const requestLogger: Middleware = {
   pre: async (context) => {
     console.log(`>> ${context.init.method} ${context.url}`, context.init);
@@ -143,8 +146,53 @@ const requestLogger: Middleware = {
   }
 };
 
+const corsHandler: Middleware = {
+  pre: async (context) => {
+    return {
+      url: context.url,
+      init: {
+        ...context.init,
+        mode: 'cors',
+        credentials: 'include'
+      }
+    };
+  }
+};
+
+class CsrfTokenAttachment implements Middleware {
+
+  private readonly targetMethod: ReadonlyArray<HTTPMethod> = ['POST', 'PUT', 'DELETE', 'PATCH'];
+  private headerName = '';
+  private tokenValue = '';
+
+  setCsrfToken(headerName: string, tokenValue: string) {
+    console.log('setCsrfToken:', headerName, tokenValue);
+    this.headerName = headerName;
+    this.tokenValue = tokenValue;
+  }
+
+  pre = async (context: RequestContext): Promise<FetchParams | void> => {
+    if (!this.headerName || !this.targetMethod.includes(context.init.method as HTTPMethod)) {
+      return;
+    }
+    console.log('attach csrf token:', this.headerName, this.tokenValue);
+    return {
+      url: context.url,
+      init: {
+        ...context.init,
+        headers : {
+          ...context.init.headers,
+          [this.headerName]: this.tokenValue
+        }
+      }
+    };
+  }
+}
+
+const csrfTokenAttachment = new CsrfTokenAttachment();
+
 const configuration = new Configuration({
-  middleware: [requestLogger]
+  middleware: [csrfTokenAttachment, corsHandler, requestLogger]
 });
 
 const todosApi = new TodosApi(configuration);
@@ -175,13 +223,24 @@ const putTodo = async (todoId: number, completed: boolean) => {
   return todosApi.putTodo({ todoId, inlineObject1: { completed }});
 };
 
+const deleteTodo = async (todoId: number) => {
+  return todosApi.deleteTodo({ todoId });
+};
+
+const refreshCsrfToken = async () => {
+  const response = await usersApi.getCsrfToken();
+  csrfTokenAttachment.setCsrfToken(response.csrfTokenHeaderName, response.csrfTokenValue);
+};
+
 export const BackendService = {
   signup,
   login,
   logout,
   getTodos,
   postTodo,
-  putTodo
+  putTodo,
+  deleteTodo,
+  refreshCsrfToken
 };
 ```
 
