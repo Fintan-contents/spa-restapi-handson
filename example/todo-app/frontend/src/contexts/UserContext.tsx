@@ -5,6 +5,15 @@ export class AccountConflictError {}
 
 export class AuthenticationFailedError {}
 
+/**
+ * React v18からpropsを定義する際にchildrenプロパティを明示的に列挙する必要がある。
+ * 
+ * @See https://ja.react.dev/blog/2022/03/08/react-18-upgrade-guide#updates-to-typescript-definitions
+ */
+type Props = {
+  children?: React.ReactNode;
+}
+
 type ContextValueType = {
   signup: (userName: string, password: string) => Promise<void | AccountConflictError>,
   login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>,
@@ -17,7 +26,7 @@ export const UserContext = React.createContext<ContextValueType>({} as ContextVa
 
 export const useUserContext = () => useContext(UserContext);
 
-export const UserContextProvider: React.FC = ({ children }) => {
+export const UserContextProvider: React.FC<Props> = ({ children }) => {
   const [userName, setUserName] = useState<string>('');
 
   const contextValue: ContextValueType = {
