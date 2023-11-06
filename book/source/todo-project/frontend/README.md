@@ -94,29 +94,35 @@ CRAで作成したアプリでJavaScript実行のエントリポイントとな�
 
 ```jsx
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render (
+  <BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>
 );
 
 ```
 
-`ReactDOM.render()`を使用し、React要素をDOMにレンダーしています。（参考：[React - 要素のレンダー](https://ja.reactjs.org/docs/rendering-elements.html#rendering-an-element-into-the-dom)）
+`createRoot()`メソッドを使用してアプリのルートレンダリングエントリポイントを作成できます。（参考：[createRoot](https://ja.react.dev/reference/react-dom/client/createRoot)）
 
-`ReactDOM.render()`の第1引数にはReact要素を指定します。ここでは、上で説明したJSXを使用して、`<React.StrictMode>`とその子要素に`<App>`があるReact要素を定義しています。
+`createRoot()`の引数にはDOM要素を指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById)の実行結果を渡しています。
 
-`<React.StrictMode>`は`React.StrictMode`のコンポーネントを指しており、`React.StrictMode`コンポーネントはReactが提供するコンポーネントです。このコンポーネントは、子要素でReactのstrictモードを有効にするためのコンポーネントになります。出力されるページのコンテンツには影響しませんが、開発時に有用となる警告等を表示してくれるようになります。（参考[React - strictモード](https://ja.reactjs.org/docs/strict-mode.html)）
+`root.render()`メソッドを使用してReactコンポーネントを指定されたルートにレンダリングします。（参考：[root.render(reactNode)](https://ja.react.dev/reference/react-dom/client/createRoot#root-render)）
+
+`root.render()`の引数にはReactコンポーネントを指定します。ここでは、上で説明したJSXを使用して、`<BrowserRouter>`、`<React.StrictMode>`とその子要素に`<App>`があるReact要素を定義しています。
+
+`<React.StrictMode>`は`React.StrictMode`のコンポーネントを指しており、`React.StrictMode`コンポーネントはReactが提供するコンポーネントです。このコンポーネントは、子要素でReactのstrictモードを有効にするためのコンポーネントになります。出力されるページのコンテンツには影響しませんが、開発時に有用となる警告等を表示してくれるようになります。（参考：[StrictMode](https://ja.react.dev/reference/react/StrictMode)）
 
 同様に、`<App />`は`App`コンポーネントを指しています。このコンポーネントについては後述します。
 
-`ReactDOM.render()`の第2引数にはレンダー先のDOMを指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementByIde)の実行結果を渡しています。
-
-ここでの`document`は前述の`public/index.html`を指しており、そこで定義されている`<div id="root"></div>`を表すDOMに、第1引数に渡したReact要素がレンダーされることになります。
+ここでの`document`は前述の`public/index.html`を指しており、そこで定義されている`<div id="root"></div>`を表すDOMに、`root.render()`に作成されているReactコンポーネントがレンダーされることになります。
 
 `public/index.html`の`<body>`には`<div id="root"></div>`しか無いため、コンテンツを全て更新していることになります。
 
