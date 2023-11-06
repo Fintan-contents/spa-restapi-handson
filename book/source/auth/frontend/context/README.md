@@ -124,23 +124,21 @@ import { UserContextProvider } from './contexts/UserContext';
 function App() {
   return (
     <UserContextProvider>
-      <BrowserRouter>
-        <NavigationHeader />
-        <Switch>
-          <Route path="/board">
-            <TodoBoard />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/">
-            <Welcome />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <NavigationHeader />
+      <Switch>
+        <Route path="/board">
+          <TodoBoard />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/">
+          <Welcome />
+        </Route>
+      </Switch>
     </UserContextProvider>
   );
 }
