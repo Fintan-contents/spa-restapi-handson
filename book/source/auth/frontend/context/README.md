@@ -27,6 +27,10 @@ export class AccountConflictError {}
 
 export class AuthenticationFailedError {}
 
+type Props = {
+  children?: React.ReactNode;
+}
+
 type ContextValueType = {
   signup: (userName: string, password: string) => Promise<void | AccountConflictError>,
   login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>,
@@ -37,6 +41,8 @@ type ContextValueType = {
 
 export const UserContext = React.createContext<ContextValueType>({} as ContextValueType);
 ```
+
+React v18からpropsを定義する際にchildrenプロパティを明示的に列挙する必要があるので、`Props`型を定義します。
 
 `React.createContext`を使用して、コンテクストを作成します。ユーザーコンテクストを扱う際に型を使用したいため、`ContextValueType`型も定義します。
 
@@ -66,7 +72,7 @@ import React, { useContext, useState } from 'react';
 import { BackendService } from '../backend/BackendService';
 ...
 
-export const UserContextProvider: React.FC = ({ children }) => {
+export const UserContextProvider: React.FC<Props> = ({ children }) => {
   const [userName, setUserName] = useState<string>('');
 
   const contextValue: ContextValueType = {
