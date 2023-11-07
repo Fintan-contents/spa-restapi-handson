@@ -28,7 +28,7 @@ export class AccountConflictError {}
 export class AuthenticationFailedError {}
 
 type Props = {
-  children?: React.ReactNode;
+  children?: React.ReactNode,
 }
 
 type ContextValueType = {
