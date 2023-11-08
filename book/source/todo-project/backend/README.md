@@ -159,7 +159,7 @@ Nablarchで使用するプロパティ定義ファイルです。
 
 ブランクプロジェクト作成時に生成されたものをベースに使用しています。
 
-#### `src/main/resource/data-source.config`
+#### `src/main/resource/data-source.xml`
 
 Nablarchで使用するプロパティ定義ファイルです。
 
