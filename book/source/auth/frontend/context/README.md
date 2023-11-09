@@ -79,7 +79,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     signup: async (userName, password) => {
       try {
         await BackendService.signup(userName, password);
-      } catch(error) {
+      } catch(error: any) {
         if (error.status === 409) {
           return new AccountConflictError();
         }
@@ -90,7 +90,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
       try {
         await BackendService.login(userName, password);
         setUserName(userName);
-      } catch(error) {
+      } catch(error: any) {
         if (error.status === 401) {
           return new AuthenticationFailedError();
         }
