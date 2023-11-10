@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { NavigationHeader } from './components/NavigationHeader';
 import { TodoBoard } from './components/TodoBoard';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Signup } from './components/Signup';
 import { Login } from './components/Login';
 import { Welcome } from './components/Welcome';
@@ -26,21 +26,23 @@ function App() {
   
   return (
     <UserContextProvider>
-      <NavigationHeader />
-      <Switch>
-        <Route path="/board">
-          <TodoBoard />
-        </Route>
-        <Route path="/signup">
-          <Signup />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/">
-          <Welcome />
-        </Route>
-      </Switch>
+      <BrowserRouter>
+        <NavigationHeader />
+        <Switch>
+          <Route path="/board">
+            <TodoBoard />
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">
+            <Welcome />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </UserContextProvider>
   );
 }

@@ -94,18 +94,15 @@ CRAで作成したアプリでJavaScript実行のエントリポイントとな�
 
 ```jsx
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
 import App from './App';
 
 const container = document.getElementById('root');
-const root = createRoot(container!);
-root.render (
-  <BrowserRouter>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </BrowserRouter>
+const root = ReactDOM.createRoot(container!);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
 
 ```
@@ -116,7 +113,7 @@ root.render (
 
 `root.render()`メソッドを使用してReactコンポーネントを指定されたルートにレンダリングします。（参考：[root.render(reactNode)](https://ja.react.dev/reference/react-dom/client/createRoot#root-render)）
 
-`root.render()`の引数にはReactコンポーネントを指定します。ここでは、上で説明したJSXを使用して、`<BrowserRouter>`、`<React.StrictMode>`とその子要素に`<App>`があるReact要素を定義しています。
+`root.render()`の引数にはReactコンポーネントを指定します。ここでは、上で説明したJSXを使用して、`<React.StrictMode>`とその子要素に`<App>`があるReact要素を定義しています。
 
 `<React.StrictMode>`は`React.StrictMode`のコンポーネントを指しており、`React.StrictMode`コンポーネントはReactが提供するコンポーネントです。このコンポーネントは、子要素でReactのstrictモードを有効にするためのコンポーネントになります。出力されるページのコンテンツには影響しませんが、開発時に有用となる警告等を表示してくれるようになります。（参考：[StrictMode](https://ja.react.dev/reference/react/StrictMode)）
 
