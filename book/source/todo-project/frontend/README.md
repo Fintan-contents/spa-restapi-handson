@@ -110,7 +110,7 @@ root.render (
 
 ```
 
-`createRoot()`メソッドを使用してアプリのルートレンダリングエントリポイントを作成できます。（参考：[createRoot](https://ja.react.dev/reference/react-dom/client/createRoot)）
+`createRoot()`を使用してアプリのルートコンポーネントを作成しています。（参考：[createRoot](https://ja.react.dev/reference/react-dom/client/createRoot)）
 
 `createRoot()`の引数にはDOM要素を指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById)の実行結果を渡しています。
 
