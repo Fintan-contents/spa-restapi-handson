@@ -237,7 +237,7 @@ function App() {
 ログイン、ログアウト時に、セッションを破棄して新しく開始するようにしているため、ユーザーコンテクストにある`login`、`logout`関数内で、先ほど作成した`refreshCsrfToken`関数を実行するように実装します。
 
 ```jsx
-export const UserContextProvider: React.FC<Props> = ({ children }) => {
+export const UserContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   ...
   const contextValue: ContextValueType = {
     ...
