@@ -15,7 +15,7 @@ URLと同様に、ページの[題名要素](https://developer.mozilla.org/ja/do
 
 ## React Routerの導入
 
-ルーティングを実現するために、React用のルーティングライブラリである[React Router](https://reactrouter.com/)を導入します。
+ルーティングを実現するために、React用のルーティングライブラリである[React Router](https://v5.reactrouter.com/)を導入します。
 
 React Routerを使用することで、URLごとに使用するコンポーネントを制御したり異なるURLへ移動したりといったことを、簡単に実装することができます。
 
