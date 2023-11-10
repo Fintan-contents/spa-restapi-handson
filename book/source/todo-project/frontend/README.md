@@ -112,7 +112,7 @@ root.render (
 
 `createRoot()`を使用してアプリのルートコンポーネントを作成しています。（参考：[createRoot](https://ja.react.dev/reference/react-dom/client/createRoot)）
 
-`createRoot()`の引数にはDOM要素を指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById)の実行結果を渡しています。
+`createRoot()`の引数にはレンダー先のDOM要素を指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById)の実行結果を渡しています。
 
 `root.render()`メソッドを使用してReactコンポーネントを指定されたルートにレンダリングします。（参考：[root.render(reactNode)](https://ja.react.dev/reference/react-dom/client/createRoot#root-render)）
 
