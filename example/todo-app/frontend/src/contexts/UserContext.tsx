@@ -5,6 +5,10 @@ export class AccountConflictError {}
 
 export class AuthenticationFailedError {}
 
+type Props = {
+  children: React.ReactNode;
+}
+
 type ContextValueType = {
   signup: (userName: string, password: string) => Promise<void | AccountConflictError>,
   login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>,
@@ -17,7 +21,7 @@ export const UserContext = React.createContext<ContextValueType>({} as ContextVa
 
 export const useUserContext = () => useContext(UserContext);
 
-export const UserContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const UserContextProvider: React.FC<Props> = ({ children }) => {
   const [userName, setUserName] = useState<string>('');
 
   const contextValue: ContextValueType = {

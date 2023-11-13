@@ -72,7 +72,7 @@ import React, { useContext, useState } from 'react';
 import { BackendService } from '../backend/BackendService';
 ...
 
-export const UserContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const UserContextProvider: React.FC<Props> = ({ children }) => {
   const [userName, setUserName] = useState<string>('');
 
   const contextValue: ContextValueType = {
