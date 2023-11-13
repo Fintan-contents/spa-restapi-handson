@@ -111,7 +111,7 @@ root.render(
 
 `createRoot()`の引数にはレンダー先のDOM要素を指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById)の実行結果を渡しています。
 
-`root.render()`メソッドを使用してReactコンポーネントを指定されたルートにレンダリングします。（参考：[root.render(reactNode)](https://ja.react.dev/reference/react-dom/client/createRoot#root-render)）
+`root.render()`を使用してReactコンポーネントを指定されたDOMにレンダリングします。（参考：[root.render(reactNode)](https://ja.react.dev/reference/react-dom/client/createRoot#root-render)）
 
 `root.render()`の引数にはReactコンポーネントを指定します。ここでは、上で説明したJSXを使用して、`<React.StrictMode>`とその子要素に`<App>`があるReact要素を定義しています。
 
