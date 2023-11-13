@@ -127,16 +127,16 @@ function App() {
       <BrowserRouter>
         <NavigationHeader />
         <Switch>
-          <Route path="/board">
+          <Route exact path="/board">
             <TodoBoard />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <Signup />
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Welcome />
           </Route>
         </Switch>
