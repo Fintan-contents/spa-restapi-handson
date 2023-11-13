@@ -79,7 +79,7 @@ Mavenプロジェクトの定義ファイルです。
 
 #### `docker/docker-compose.dev.yml`
 
-DBコンテナの構成と起動に使用されるファイルです。
+データベース（PostgreSQL）を起動するDocker Composeの定義ファイルです。
 
 #### `rest-api-specification/openapi.yaml`
 
