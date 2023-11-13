@@ -111,6 +111,8 @@ root.render(
 
 `createRoot()`の引数にはレンダー先のDOM要素を指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById)の実行結果を渡しています。
 
+ここでの`document`は前述の`public/index.html`を指しており、そこで定義されている`<div id="root"></div>`を表すDOMに、引数に渡したReact要素がレンダーされることになります。
+
 `root.render()`を使用してReactコンポーネントを指定されたDOMにレンダリングします。（参考：[root.render(reactNode)](https://ja.react.dev/reference/react-dom/client/createRoot#root-render)）
 
 `root.render()`の引数にはReactコンポーネントを指定します。ここでは、上で説明したJSXを使用して、`<React.StrictMode>`とその子要素に`<App>`があるReact要素を定義しています。
@@ -118,8 +120,6 @@ root.render(
 `<React.StrictMode>`は`React.StrictMode`のコンポーネントを指しており、`React.StrictMode`コンポーネントはReactが提供するコンポーネントです。このコンポーネントは、子要素でReactのstrictモードを有効にするためのコンポーネントになります。出力されるページのコンテンツには影響しませんが、開発時に有用となる警告等を表示してくれるようになります。（参考：[StrictMode](https://ja.react.dev/reference/react/StrictMode)）
 
 同様に、`<App />`は`App`コンポーネントを指しています。このコンポーネントについては後述します。
-
-ここでの`document`は前述の`public/index.html`を指しており、そこで定義されている`<div id="root"></div>`を表すDOMに、`root.render()`に作成されているReactコンポーネントがレンダーされることになります。
 
 `public/index.html`の`<body>`には`<div id="root"></div>`しか無いため、コンテンツを全て更新していることになります。
 
