@@ -13,7 +13,7 @@
 - 開発に使用するDockerCompose定義ファイルを追加
 - HelloWorldを表示するだけの簡易なページに変更
 - ページ変更に伴う不要ファイルの削除
-- `@testing-library/jest-dom`、 `@testing-library/react`、`@testing-library/user-event`、`@types/jest`、`@types/node`、`@types/react`、`@types/react-dom`をpackage.jsonのdependenciesからdevDependeciesに移動
+- `@testing-library/jest-dom`、 `@testing-library/react`、`@testing-library/user-event`、`@types/jest`、`@types/node`、`@types/react`、`@types/react-dom`をpackage.jsonのdependenciesからdevDependenciesに移動
 
 
 ディレクトリ構造は、次のようになっています。
