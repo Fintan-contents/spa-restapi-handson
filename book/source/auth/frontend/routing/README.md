@@ -98,7 +98,7 @@ export const Welcome: React.FC = () => {
 };
 ```
 
-「登録する」ボタンがクリックされたら`/signup`URLへ遷移するように、`Link`コンポーネントを使用します。`to`プロパティには、遷移先のURLを指定します。（参考：[Link](https://v5.reactrouter.com/web/api/Link)）
+「登録する」ボタンがクリックされたら`/signup`URLへ遷移するように、`Link`コンポーネントを使用します。`to`プロパティには、遷移先のURLを指定します。（参考：[Basic Routing | React Router](https://v5.reactrouter.com/web/guides/quick-start/1st-example-basic-routing)）
 
 ### サインアップ後のトップページへの遷移
 
