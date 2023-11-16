@@ -27,6 +27,10 @@ export class AccountConflictError {}
 
 export class AuthenticationFailedError {}
 
+type Props = {
+  children?: React.ReactNode,
+}
+
 type ContextValueType = {
   signup: (userName: string, password: string) => Promise<void | AccountConflictError>,
   login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>,
@@ -37,6 +41,8 @@ type ContextValueType = {
 
 export const UserContext = React.createContext<ContextValueType>({} as ContextValueType);
 ```
+
+React v18からpropsを定義する際にchildrenプロパティを明示的に列挙する必要があるので、`Props`型を定義します。
 
 `React.createContext`を使用して、コンテクストを作成します。ユーザーコンテクストを扱う際に型を使用したいため、`ContextValueType`型も定義します。
 
@@ -66,14 +72,14 @@ import React, { useContext, useState } from 'react';
 import { BackendService } from '../backend/BackendService';
 ...
 
-export const UserContextProvider: React.FC = ({ children }) => {
+export const UserContextProvider: React.FC<Props> = ({ children }) => {
   const [userName, setUserName] = useState<string>('');
 
   const contextValue: ContextValueType = {
     signup: async (userName, password) => {
       try {
         await BackendService.signup(userName, password);
-      } catch(error) {
+      } catch(error: any) {
         if (error.status === 409) {
           return new AccountConflictError();
         }
@@ -84,7 +90,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
       try {
         await BackendService.login(userName, password);
         setUserName(userName);
-      } catch(error) {
+      } catch(error: any) {
         if (error.status === 401) {
           return new AuthenticationFailedError();
         }
@@ -121,16 +127,16 @@ function App() {
       <BrowserRouter>
         <NavigationHeader />
         <Switch>
-          <Route path="/board">
+          <Route exact path="/board">
             <TodoBoard />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <Signup />
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Welcome />
           </Route>
         </Switch>

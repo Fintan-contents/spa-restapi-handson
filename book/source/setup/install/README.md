@@ -4,7 +4,7 @@ ToDoアプリの開発で使用するツールをインストールします。
 
 ## Node.jsのインストール
 
-フロントエンドの開発ではCreate React AppやTypeScriptを使用するため、Node.jsをインストールします。Node.jsのバージョンには `12` を使用します。
+フロントエンドの開発ではCreate React AppやTypeScriptを使用するため、Node.jsをインストールします。Node.jsのバージョンには `20` を使用します。
 
 [公式サイト](https://nodejs.org/ja/)の案内に沿って、インストールしてください。
 

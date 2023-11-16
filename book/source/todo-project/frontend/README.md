@@ -13,6 +13,7 @@
 - 開発に使用するDockerCompose定義ファイルを追加
 - HelloWorldを表示するだけの簡易なページに変更
 - ページ変更に伴う不要ファイルの削除
+- アプリの実行時には使用しないライブラリをpackage.jsonのdependenciesからdevDependenciesに移動
 
 
 ディレクトリ構造は、次のようになっています。
@@ -94,31 +95,34 @@ CRAで作成したアプリでJavaScript実行のエントリポイントとな�
 
 ```jsx
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import App from './App';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container!);
+root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 ```
 
-`ReactDOM.render()`を使用し、React要素をDOMにレンダーしています。（参考：[React - 要素のレンダー](https://ja.reactjs.org/docs/rendering-elements.html#rendering-an-element-into-the-dom)）
+`ReactDOM.createRoot()`を使用してアプリのルートコンポーネントを作成しています。（参考：[createRoot](https://ja.react.dev/reference/react-dom/client/createRoot)）
 
-`ReactDOM.render()`の第1引数にはReact要素を指定します。ここでは、上で説明したJSXを使用して、`<React.StrictMode>`とその子要素に`<App>`があるReact要素を定義しています。
+`ReactDOM.createRoot()`の引数にはレンダー先のDOM要素を指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById)の実行結果を渡しています。
 
-`<React.StrictMode>`は`React.StrictMode`のコンポーネントを指しており、`React.StrictMode`コンポーネントはReactが提供するコンポーネントです。このコンポーネントは、子要素でReactのstrictモードを有効にするためのコンポーネントになります。出力されるページのコンテンツには影響しませんが、開発時に有用となる警告等を表示してくれるようになります。（参考[React - strictモード](https://ja.reactjs.org/docs/strict-mode.html)）
-
-同様に、`<App />`は`App`コンポーネントを指しています。このコンポーネントについては後述します。
-
-`ReactDOM.render()`の第2引数にはレンダー先のDOMを指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementByIde)の実行結果を渡しています。
-
-ここでの`document`は前述の`public/index.html`を指しており、そこで定義されている`<div id="root"></div>`を表すDOMに、第1引数に渡したReact要素がレンダーされることになります。
+ここでの`document`は前述の`public/index.html`を指しており、そこで定義されている`<div id="root"></div>`を表すDOMに、引数に渡したReact要素がレンダーされることになります。
 
 `public/index.html`の`<body>`には`<div id="root"></div>`しか無いため、コンテンツを全て更新していることになります。
+
+`root.render()`を使用してReactコンポーネントを指定されたDOMにレンダリングします。（参考：[root.render(reactNode)](https://ja.react.dev/reference/react-dom/client/createRoot#root-render)）
+
+`root.render()`の引数にはReactコンポーネントを指定します。ここでは、上で説明したJSXを使用して、`<React.StrictMode>`とその子要素に`<App>`があるReact要素を定義しています。
+
+`<React.StrictMode>`は`React.StrictMode`のコンポーネントを指しており、`React.StrictMode`コンポーネントはReactが提供するコンポーネントです。このコンポーネントは、子要素でReactのstrictモードを有効にするためのコンポーネントになります。出力されるページのコンテンツには影響しませんが、開発時に有用となる警告等を表示してくれるようになります。（参考：[StrictMode](https://ja.react.dev/reference/react/StrictMode)）
+
+同様に、`<App />`は`App`コンポーネントを指しています。このコンポーネントについては後述します。
 
 #### `src/App.tsx`
 
