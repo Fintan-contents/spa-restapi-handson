@@ -109,7 +109,7 @@ Type 'string' is not assignable to type 'boolean | undefined'.  TS2322
 
 これは、JSXでは`checked`属性には`boolean`値を設定する必要があるためです。
 
-JSXでは、中括弧で囲うことで式を埋め込むことができますので、`"checked"`と同等である`true`を設定するよう、次のように修正します。（参考：[React - JSXに式を埋め込む](https://ja.reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx)）
+JSXでは、中括弧で囲うことで式を埋め込むことができますので、`"checked"`と同等である`true`を設定するよう、次のように修正します。（参考：[React - 波括弧は JavaScript 世界への窓口](https://ja.react.dev/learn/javascript-in-jsx-with-curly-braces#using-curly-braces-a-window-into-the-javascript-world)）
 
 ```html
 <input type="checkbox" className="TodoItem_checkbox" checked={true} />
@@ -202,7 +202,7 @@ export default App;
 
 ## CSSファイルの作成
 
-Reactでは、スタイルの記述方法がいくつか提供されていますが、ここではデザインモックのCSSファイルを使うために、`className`属性とCSSファイルを使ってスタイルを定義します。（参考：[React - CSSとスタイルの使用](https://ja.reactjs.org/docs/faq-styling.html)）
+Reactでは、スタイルの記述方法がいくつか提供されていますが、ここではデザインモックのCSSファイルを使うために、`className`属性とCSSファイルを使ってスタイルを定義します。（参考：[React - CSS スタイルの適用](https://ja.react.dev/reference/react-dom/components/common#applying-css-styles)）
 
 CRAに含まれる[webpack](https://webpack.js.org/)では、`import`を使用してCSSファイルを読み込むことが出来るため、その方法でコンポーネントにCSSファイルを読み込みます。（参考：[CRA - Adding a Stylesheet](https://create-react-app.dev/docs/adding-a-stylesheet)）
 
