@@ -147,43 +147,43 @@ ToDoアプリでは、アプリ起動時に毎回テーブルを初期化する�
 
 前述の`SystemRepositoryComponent`アノテーションを付与してシステムリポジトリへ登録するための実装です。
 
-#### `src/main/resource/app-log.properties`
+#### `src/main/resources/app-log.properties`
 
 Nablarchで使用するログ出力用の定義ファイルです。
 
 ブランクプロジェクト作成時に生成されたものを使用しています。
 
-#### `src/main/resource/common.config`
+#### `src/main/resources/common.config`
 
 Nablarchで使用するプロパティ定義ファイルです。
 
 ブランクプロジェクト作成時に生成されたものをベースに使用しています。
 
-#### `src/main/resource/data-source.xml`
+#### `src/main/resources/data-source.xml`
 
 Nablarchで使用するプロパティ定義ファイルです。
 
 ブランクプロジェクト作成時に生成されたものをベースに使用しています。
 
-#### `src/main/resource/env.config`
+#### `src/main/resources/env.config`
 
 Nablarchで使用するプロパティ定義ファイルです。
 
 ブランクプロジェクト作成時に生成されたものをベースに使用しています。
 
-#### `src/main/resource/log.properties`
+#### `src/main/resources/log.properties`
 
 Nablarchで使用するログ出力用の定義ファイルです。
 
 ブランクプロジェクト作成時に生成されたものを使用しています。
 
-#### `src/main/resource/rest-boot.xml`
+#### `src/main/resources/rest-boot.xml`
 
 Nablarchの使用するシステムリポジトリの定義ファイルです。
 
 ブランクプロジェクト作成時に生成されたものをベースに使用しています。
 
-#### `src/main/resource/rest-component-configuration.xml`
+#### `src/main/resources/rest-component-configuration.xml`
 
 Nablarchの使用するシステムリポジトリの定義ファイルです。
 
@@ -225,13 +225,13 @@ public class SampleTest {
 }
 ```
 
-#### `src/test/resource/log.properties`
+#### `src/test/resources/log.properties`
 
 Nablarchで使用するログ出力用の定義ファイルです。
 
 ブランクプロジェクト作成時に生成されたものを使用しています。
 
-#### `src/test/resource/unit-test.xml`
+#### `src/test/resources/unit-test.xml`
 
 テスト実行時にNablarchが使用するシステムリポジトリの定義ファイルです。
 
