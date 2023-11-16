@@ -1,7 +1,7 @@
 # ユーザーコンテクストの作成
 
 ユーザー情報のような特定のコンポーネントに依存しない値は、様々なコンポーネントで使用する可能性がありますが、その場合にはプロパティを使用してコンポーネントの階層に渡していく必要が出てきます。
-このような情報を扱う場合、コンテクストと呼ばれるReactの機能を利用することで、プロパティを使用せずにコンポーネント間で値を共有することが出来ます。（参考：[コンテクスト | React](https://ja.reactjs.org/docs/context.html)）
+このような情報を扱う場合、コンテクストと呼ばれるReactの機能を利用することで、プロパティを使用せずにコンポーネント間で値を共有することが出来ます。（参考：[createContext | React](https://ja.react.dev/reference/react/createContext)）
 
 ここでは、ユーザーの認証に関する値を持つコンテクスト（以下ユーザーコンテクスト）を作成し、認証に関わるコンポーネントではそのコンテクストを使用できるように実装していきます。ここでは、認証に関する情報を集約させるため、ユーザーコンテクストには次の値を持たせます。
 
@@ -50,7 +50,7 @@ React v18からpropsを定義する際にchildrenプロパティを明示的に�
 
 ## ユーザーコンテクストを取得するフックの作成
 
-関数コンポーネントでコンテクストを使用するためのフックとして`useContext`が提供されています。`useContext`を使用することで、関数コンポーネントでコンテクストとして設定されている値（コンテクストオブジェクト）を取得することができます。（参考：[useContext | React](https://ja.reactjs.org/docs/hooks-reference.html#usecontext)）
+関数コンポーネントでコンテクストを使用するためのフックとして`useContext`が提供されています。`useContext`を使用することで、関数コンポーネントでコンテクストとして設定されている値（コンテクストオブジェクト）を取得することができます。（参考：[useContext | React](https://ja.react.dev/reference/react/useContext)）
 
 各コンポーネントで`useContext`を使用してもよいですが、ここではユーザーコンテクストを明示的に取得するためのフックを作成します。ユーザーコンテクストに関わる実装は`UserContext.tsx`に集約するため、`UserContext.tsx`に次のような実装を追加します。
 
@@ -63,7 +63,7 @@ export const useUserContext = () => useContext(UserContext);
 
 ## コンテクストプロバイダの作成
 
-ユーザーコンテクストを各コンポーネントで使用できるようにするためには、プロパイダと呼ばれるコンポーネントを使用します。（参考：[Context.Provider | React](https://ja.reactjs.org/docs/context.html#contextprovider)）
+ユーザーコンテクストを各コンポーネントで使用できるようにするためには、プロパイダと呼ばれるコンポーネントを使用します。（参考：[SomeContext.Provider | React](https://ja.react.dev/reference/react/createContext#provider)）
 
 プロパイダコンポーネントの`value`属性に渡した値が、子要素のコンポーネントで使用できるようになります。ここでは、このプロパイダコンポーネントとそれに渡す値を、独立したコンポーネントとして使用できるようにするため、`UserContextProvider`コンポーネントを作成します。ユーザーコンテクストに関わる実装は`UserContext.tsx`にまとめます。
 
