@@ -6,11 +6,11 @@ ToDoページで登録されているToDoを一覧表示できるように実装
 
 登録されているToDoを表示するために、コンポーネントでどのような状態が必要になるかを考えていきます。
 
-Reactでは、stateを使用することで、状態の変化を表現することができます。（参考：[React - Reactの流儀 Step 3](https://ja.reactjs.org/docs/thinking-in-react.html#step-3-identify-the-minimal-but-complete-representation-of-ui-state)）
+Reactでは、stateを使用することで、状態の変化を表現することができます。（参考：[React - Reactの流儀 Step 3](https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state)）
 
 コンポーネントのstateになりうるのは、ユーザーからの入力や時間の経過の中で変化したり、他のstate等を使って算出可能ではないものになります。画面に表示するToDoの一覧は、ユーザーからの入力で変化していくもので、算出することもできないため、stateとします。
 
-次に、そのstateをどのコンポーネントに配置するのかを考えていきます。（参考：[React - Reactの流儀 Step 4](https://ja.reactjs.org/docs/thinking-in-react.html#step-4-identify-where-your-state-should-live)）
+次に、そのstateをどのコンポーネントに配置するのかを考えていきます。（参考：[React - Reactの流儀 Step 4](https://ja.react.dev/learn/thinking-in-react#step-4-identify-where-your-state-should-live)）
 
 このstateを表示するためのコンポーネントは、`TodoList`になります。`TodoItem`ではそれぞれのToDoの内容を表示しますが、一覧できるように表示するのは`TodoList`です。また、`TodoForm`ではこのToDo一覧に追加することができるため、`TodoForm`でもこのstateを扱うことになります。複数のコンポーネントでstateを必要とする場合、階層構造の中で共通の親コンポーネントがstateを持つことが適しているため、ここでは、`TodoBoard`にこのstateを持たせることにします。
 
@@ -18,7 +18,7 @@ Reactでは、stateを使用することで、状態の変化を表現するこ�
 
 現時点では、ToDoの表示内容は`TodoList`に静的に定義していますが、これを`TodoBoard`でstateを使って実装します。
 
-Reactの関数コンポーネントでは、様々な機能を実装するためにフック（Hooks）と呼ばれる様々な機能が提供されており、stateフックを使います。（[参考](https://ja.reactjs.org/docs/hooks-state.html)）
+Reactの関数コンポーネントでは、様々な機能を実装するためにフック（Hooks）と呼ばれる様々な機能が提供されており、stateフックを使います。（[参考](https://ja.react.dev/learn/state-a-components-memory)）
 
 stateフックは`useState`を呼び出すことで使用できます。引数に初期値を指定し、返り値としてstateとそれを更新するための関数をペアで返します。例えば、0から始まるカウントをstateとし、ボタンをクリックするごとにstateを更新するような場合、次のように使用します。
 
@@ -147,7 +147,7 @@ export const TodoItem: React.FC<Props> = ({id, text, completed}) => {
 };
 ```
 
-なお、`TodoList`のJSXで`TodoItem`を宣言しているところで、`key`プロパティを使用します。これは、コンポーネントのレンダリング要否を判定するためにReactが使うプロパティで、`map`で繰り返してコンポーネントを使用したりする場合、個々のコンポーネントを識別するために一意となる値を設定しておきます。（参考：[React - リストとkey](https://ja.reactjs.org/docs/lists-and-keys.html)）
+なお、`TodoList`のJSXで`TodoItem`を宣言しているところで、`key`プロパティを使用します。これは、コンポーネントのレンダリング要否を判定するためにReactが使うプロパティで、`map`で繰り返してコンポーネントを使用したりする場合、個々のコンポーネントを識別するために一意となる値を設定しておきます。（参考：[React - リストのレンダー](https://ja.react.dev/learn/rendering-lists)）
 
 ## REST APIの呼び出しとstateの更新
 
@@ -155,9 +155,9 @@ export const TodoItem: React.FC<Props> = ({id, text, completed}) => {
 
 ページを表示したタイミングでToDo一覧を表示したいので、`TodoBoard`コンポーネントを最初にレンダーしたタイミングで、REST APIを呼び出し、その結果からstateを更新するようにします。
 
-関数コンポーネントでは、このようにデータの取得や更新によりコンポーネントに影響を与えることを副作用と呼び、副作用を起こす処理を実装するためのフックとして、effectフックが提供されています。（参考：[React - 副作用フックの利用方法](https://ja.reactjs.org/docs/hooks-effect.html)）
+関数コンポーネントでは、このようにデータの取得や更新によりコンポーネントに影響を与えることを副作用と呼び、副作用を起こす処理を実装するためのフックとして、effectフックが提供されています。（参考：[React - useEffect](https://ja.react.dev/reference/react/useEffect)）
 
-effectフックは`useEffect`を呼び出すことで使用します。第1引数に副作用を起こす関数と、第2引数にこの副作用が依存するstateを配列で渡します。第2引数に渡したstateが更新されると、第1引数の関数が実行されます。ここでのREST API呼び出しは他のstateに依存せず、最初のレンダー後に呼び出したいため、そのような場合には空の配列（`[]`）を渡します。（参考：[React - 副作用を使う場合のヒント（最後の補足）](https://ja.reactjs.org/docs/hooks-effect.html#tips-for-using-effects)）
+effectフックは`useEffect`を呼び出すことで使用します。第1引数に副作用を起こす関数と、第2引数にこの副作用が依存するstateを配列で渡します。第2引数に渡したstateが更新されると、第1引数の関数が実行されます。ここでのREST API呼び出しは他のstateに依存せず、最初のレンダー後に呼び出したいため、そのような場合には空の配列（`[]`）を渡します。（参考：[React - エフェクトの依存配列を指定する（落とし穴）](https://ja.react.dev/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies)）
 
 stateフックの初期値で静的データを渡していましたが、REST APIの呼び出しを想定し、まずはeffectフックを使用して静的データでstateを更新するように実装してみます。stateの初期値としては、空の配列を渡しておきます。
 
