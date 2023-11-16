@@ -65,7 +65,7 @@ export default App;
 ```
 まず、React Routerを有効にするため、`BrowserRouter`コンポーネントを使用します。
 
-次に、URLによるルーティングを行うため、`Switch`コンポーネントと`Route`コンポーネントを使用します。（参考：[Switch](https://v5.reactrouter.com/web/api/Switch)、[Route](https://v5.reactrouter.com/web/api/Route)）
+次に、URLによるルーティングを行うため、`Switch`コンポーネントと`Route`コンポーネントを使用します。（参考：[Basic Routing | React Router](https://v5.reactrouter.com/web/guides/quick-start/1st-example-basic-routing)）
 
 `Switch`コンポーネントの中でURLルーティングが有効になり、`Route`コンポーネントの`path`プロパティに指定されたURLにマッチしたら、子要素のコンポーネントが実行されます。
 
