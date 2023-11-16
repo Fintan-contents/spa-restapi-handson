@@ -89,7 +89,7 @@ CRAで作成したアプリでページ表示のエントリポイントとな�
 
 CRAで作成したアプリでJavaScript実行のエントリポイントとなる`src/index.js`のTypeScript実装です。
 
-この実装の中では、JSXと呼ばれるJavaScript構文の拡張を使用しています。JSXを使用することで、React要素をHTMLのマークアップに近しいイメージで記述することができます。（参考：[React - JSXの導入]](https://ja.reactjs.org/docs/introducing-jsx.html)）
+この実装の中では、JSXと呼ばれるJavaScript構文の拡張を使用しています。JSXを使用することで、React要素をHTMLのマークアップに近しいイメージで記述することができます。（参考：[React - JSX でマークアップを記述する]](https://ja.react.dev/learn/writing-markup-with-jsx)）
 
 なお、TypeScriptファイルの拡張子は通常`ts`ですが、後述のJSXを使用する場合は`tsx`とする必要があります。（参考：[TypeScript - JSX](https://www.typescriptlang.org/docs/handbook/jsx.html)）
 
