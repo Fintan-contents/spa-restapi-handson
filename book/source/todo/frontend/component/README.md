@@ -6,7 +6,7 @@ ToDoページをコンポーネントに分割します。
 
 次に、ToDoページをどのようなコンポーネント構造にするかを考え、コンポーネントに落とし込んでいきます。
 
-ToDoページのデザインから、コンポーネントの階層構造に落とし込んでいきます。（参考：[React - Reactの流儀 Step 1](https://ja.reactjs.org/docs/thinking-in-react.html#step-1-break-the-ui-into-a-component-hierarchy)）
+ToDoページのデザインから、コンポーネントの階層構造に落とし込んでいきます。（参考：[React - Reactの流儀 ステップ 1](https://ja.react.dev/learn/thinking-in-react#step-1-break-the-ui-into-a-component-hierarchy)）
 
 扱う情報の種類や用途から、ここでは以下のようにコンポーネントに分割します。
 
@@ -32,13 +32,7 @@ ToDoページのデザインから、コンポーネントの階層構造に落�
 
 コンポーネントを作成するディレクトリとして、`src`の下に`components`ディレクトリを作成し、そこにコンポーネントを作成していきます。
 
-ここでは、現在表示している静的なデータをそのまま使用して、それぞれのコンポーネントを作成していきます。（参考：[React - Reactの流儀 Step 2](https://ja.reactjs.org/docs/thinking-in-react.html#step-2-build-a-static-version-in-react)）
-
-Reactのコンポーネントには「関数コンポーネント」と「クラスコンポーネント」の2種類が存在します。（参考：[React - コンポーネントとprops](https://ja.reactjs.org/docs/components-and-props.html)）
-
-関数コンポーネントはクラスコンポーネントの後に登場し、コンポーネントを実装する際の第一候補になることを目指して開発されています。（参考：[React - フックに関するよくある質問](https://ja.reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both)）
-
-ハンズオンで作成するコンポーネントは関数コンポーネントの機能で実装することが可能であるため、すべて関数コンポーネントとして作成していきます。
+ここでは、現在表示している静的なデータをそのまま使用して、それぞれのコンポーネントを作成していきます。（参考：[React - Reactの流儀 ステップ 2](https://ja.react.dev/learn/thinking-in-react#step-2-build-a-static-version-in-react)）
 
 また、CSSファイルもそれぞれのコンポーネント単位に分割していきます。
 
@@ -630,7 +624,7 @@ export const TodoBoard: React.FC = () => {
 
 `TodoList`コンポーネントをさらに子コンポーネントに分割するため、`TodoItem.tsx`を作成します。`TodoItem`が使用するCSSを分割するため、`TodoItem.css`も作成します。
 
-`TodoItem`が返すReact要素には、`TodoList`から該当部分を抽出しますが、`TodoItem`は複数配置し、それぞれの表示内容が異なります。このような場合には、コンポーネントにプロパティを定義し、親コンポーネントから引数で値を受け取るようにします。（参考：[React - コンポーネントとprops](https://ja.reactjs.org/docs/components-and-props.html)）
+`TodoItem`が返すReact要素には、`TodoList`から該当部分を抽出しますが、`TodoItem`は複数配置し、それぞれの表示内容が異なります。このような場合には、コンポーネントにプロパティを定義し、親コンポーネントから引数で値を受け取るようにします。（参考：[コンポーネントに props を渡す](https://ja.react.dev/learn/passing-props-to-a-component)）
 
 ここでは、TypeScriptの構文である`type`を使用し、プロパティの型を定義した型エイリアスを定義します。それをコンポーネントの型である`React.FC`の型引数として渡すことで、コンポーネントの引数をそれらの型でチェックすることができます。
 
