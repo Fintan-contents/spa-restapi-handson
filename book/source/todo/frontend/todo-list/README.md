@@ -155,11 +155,11 @@ export const TodoItem: React.FC<Props> = ({id, text, completed}) => {
 
 ページを表示したタイミングでToDo一覧を表示したいので、`TodoBoard`コンポーネントを最初にレンダーしたタイミングで、REST APIを呼び出し、その結果からstateを更新するようにします。
 
-関数コンポーネントでは、このようにデータの取得や更新によりコンポーネントに影響を与えることを副作用と呼び、副作用を起こす処理を実装するためのフックとして、effectフックが提供されています。（参考：[React - useEffect](https://ja.react.dev/reference/react/useEffect)）
+関数コンポーネントでは、このようにデータの取得や更新によりコンポーネントに影響を与えることを副作用と呼び、副作用を起こす処理を実装するためのフックとして、useEffectフックが提供されています。（参考：[React - useEffect](https://ja.react.dev/reference/react/useEffect)）
 
-effectフックは`useEffect`を呼び出すことで使用します。第1引数に副作用を起こす関数と、第2引数にこの副作用が依存するstateを配列で渡します。第2引数に渡したstateが更新されると、第1引数の関数が実行されます。ここでのREST API呼び出しは他のstateに依存せず、最初のレンダー後に呼び出したいため、そのような場合には空の配列（`[]`）を渡します。（参考：[React - エフェクトの依存配列を指定する（落とし穴）](https://ja.react.dev/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies)）
+useEffectフックは`useEffect`を呼び出すことで使用します。第1引数に副作用を起こす関数と、第2引数にこの副作用が依存するstateを配列で渡します。第2引数に渡したstateが更新されると、第1引数の関数が実行されます。ここでのREST API呼び出しは他のstateに依存せず、最初のレンダー後に呼び出したいため、そのような場合には空の配列（`[]`）を渡します。（参考：[React - エフェクトの依存配列を指定する（落とし穴）](https://ja.react.dev/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies)）
 
-useStateフックの初期値で静的データを渡していましたが、REST APIの呼び出しを想定し、まずはeffectフックを使用して静的データでstateを更新するように実装してみます。stateの初期値としては、空の配列を渡しておきます。
+useStateフックの初期値で静的データを渡していましたが、REST APIの呼び出しを想定し、まずはuseEffectフックを使用して静的データでstateを更新するように実装してみます。stateの初期値としては、空の配列を渡しておきます。
 
 `src/components/TodoBoard.tsx`
 ```jsx
@@ -198,7 +198,7 @@ export const TodoBoard: React.FC = () => {
 
 ページの表示内容を確認すると、何も変わらず表示されています。いまは静的データで設定しているだけでuseEffectの処理も瞬時に完了するため、目に見えるような影響はありません。
 
-effectフックで更新する準備ができたため、次に、生成したクライアントコードを使用してREST APIを呼び出すように実装します。事前に作成した`BackendService`の関数を使用して、REST APIを呼び出します。結果は`Promise`で返ってくるため、`then`を呼び出してレスポンスが返ってきたタイミングでstateの更新関数を呼び出すように実装します。
+useEffectフックで更新する準備ができたため、次に、生成したクライアントコードを使用してREST APIを呼び出すように実装します。事前に作成した`BackendService`の関数を使用して、REST APIを呼び出します。結果は`Promise`で返ってくるため、`then`を呼び出してレスポンスが返ってきたタイミングでstateの更新関数を呼び出すように実装します。
 
 ```jsx
 import React, { useEffect, useState } from 'react';
