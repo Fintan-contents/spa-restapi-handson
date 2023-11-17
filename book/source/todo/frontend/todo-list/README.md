@@ -6,11 +6,11 @@ ToDoページで登録されているToDoを一覧表示できるように実装
 
 登録されているToDoを表示するために、コンポーネントでどのような状態が必要になるかを考えていきます。
 
-Reactでは、stateを使用することで、状態の変化を表現することができます。（参考：[React - Reactの流儀 Step 3](https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state)）
+Reactでは、stateを使用することで、状態の変化を表現することができます。（参考：[React - Reactの流儀 ステップ 3](https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state)）
 
 コンポーネントのstateになりうるのは、ユーザーからの入力や時間の経過の中で変化したり、他のstate等を使って算出可能ではないものになります。画面に表示するToDoの一覧は、ユーザーからの入力で変化していくもので、算出することもできないため、stateとします。
 
-次に、そのstateをどのコンポーネントに配置するのかを考えていきます。（参考：[React - Reactの流儀 Step 4](https://ja.react.dev/learn/thinking-in-react#step-4-identify-where-your-state-should-live)）
+次に、そのstateをどのコンポーネントに配置するのかを考えていきます。（参考：[React - Reactの流儀 ステップ 4](https://ja.react.dev/learn/thinking-in-react#step-4-identify-where-your-state-should-live)）
 
 このstateを表示するためのコンポーネントは、`TodoList`になります。`TodoItem`ではそれぞれのToDoの内容を表示しますが、一覧できるように表示するのは`TodoList`です。また、`TodoForm`ではこのToDo一覧に追加することができるため、`TodoForm`でもこのstateを扱うことになります。複数のコンポーネントでstateを必要とする場合、階層構造の中で共通の親コンポーネントがstateを持つことが適しているため、ここでは、`TodoBoard`にこのstateを持たせることにします。
 

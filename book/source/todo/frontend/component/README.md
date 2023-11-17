@@ -6,7 +6,7 @@ ToDoページをコンポーネントに分割します。
 
 次に、ToDoページをどのようなコンポーネント構造にするかを考え、コンポーネントに落とし込んでいきます。
 
-ToDoページのデザインから、コンポーネントの階層構造に落とし込んでいきます。（参考：[React - Reactの流儀 Step 1](https://ja.react.dev/learn/thinking-in-react#step-1-break-the-ui-into-a-component-hierarchy)）
+ToDoページのデザインから、コンポーネントの階層構造に落とし込んでいきます。（参考：[React - Reactの流儀 ステップ 1](https://ja.react.dev/learn/thinking-in-react#step-1-break-the-ui-into-a-component-hierarchy)）
 
 扱う情報の種類や用途から、ここでは以下のようにコンポーネントに分割します。
 
@@ -32,7 +32,7 @@ ToDoページのデザインから、コンポーネントの階層構造に落�
 
 コンポーネントを作成するディレクトリとして、`src`の下に`components`ディレクトリを作成し、そこにコンポーネントを作成していきます。
 
-ここでは、現在表示している静的なデータをそのまま使用して、それぞれのコンポーネントを作成していきます。（参考：[React - Reactの流儀 Step 2](https://ja.react.dev/learn/thinking-in-react#step-2-build-a-static-version-in-react)）
+ここでは、現在表示している静的なデータをそのまま使用して、それぞれのコンポーネントを作成していきます。（参考：[React - Reactの流儀 ステップ 2](https://ja.react.dev/learn/thinking-in-react#step-2-build-a-static-version-in-react)）
 
 また、CSSファイルもそれぞれのコンポーネント単位に分割していきます。
 
