@@ -18,9 +18,9 @@ Reactでは、stateを使用することで、状態の変化を表現するこ�
 
 現時点では、ToDoの表示内容は`TodoList`に静的に定義していますが、これを`TodoBoard`でstateを使って実装します。
 
-Reactの関数コンポーネントでは、様々な機能を実装するためにフック（Hooks）と呼ばれる様々な機能が提供されており、stateフックを使います。（[参考](https://ja.react.dev/learn/state-a-components-memory)）
+Reactの関数コンポーネントでは、様々な機能を実装するためにフック（Hooks）と呼ばれる様々な機能が提供されており、useStateフックを使います。（[参考](https://ja.react.dev/learn/state-a-components-memory)）
 
-stateフックは`useState`を呼び出すことで使用できます。引数に初期値を指定し、返り値としてstateとそれを更新するための関数をペアで返します。例えば、0から始まるカウントをstateとし、ボタンをクリックするごとにstateを更新するような場合、次のように使用します。
+useStateフックは`useState`を呼び出すことで使用できます。引数に初期値を指定し、返り値としてstateとそれを更新するための関数をペアで返します。例えば、0から始まるカウントをstateとし、ボタンをクリックするごとにstateを更新するような場合、次のように使用します。
 
 ```js
 const [count, setCount] = useState(0);
@@ -159,7 +159,7 @@ export const TodoItem: React.FC<Props> = ({id, text, completed}) => {
 
 effectフックは`useEffect`を呼び出すことで使用します。第1引数に副作用を起こす関数と、第2引数にこの副作用が依存するstateを配列で渡します。第2引数に渡したstateが更新されると、第1引数の関数が実行されます。ここでのREST API呼び出しは他のstateに依存せず、最初のレンダー後に呼び出したいため、そのような場合には空の配列（`[]`）を渡します。（参考：[React - エフェクトの依存配列を指定する（落とし穴）](https://ja.react.dev/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies)）
 
-stateフックの初期値で静的データを渡していましたが、REST APIの呼び出しを想定し、まずはeffectフックを使用して静的データでstateを更新するように実装してみます。stateの初期値としては、空の配列を渡しておきます。
+useStateフックの初期値で静的データを渡していましたが、REST APIの呼び出しを想定し、まずはeffectフックを使用して静的データでstateを更新するように実装してみます。stateの初期値としては、空の配列を渡しておきます。
 
 `src/components/TodoBoard.tsx`
 ```jsx
