@@ -44,7 +44,7 @@ WindowsでのDocker利用方法はいくつかありますが、ここではDock
 使用する環境が既に整っている場合は、この手順をスキップしてください。
 
 {% hint style='danger' %}
-本ハンズオンでは、Dockerコンテナ起動時にローカルディレクトリをマウントします。Docker Desktop for WindowsやDocker Desktop for Macでローカルディレクトリをマウントするためには事前にファイル共有を許可しておく必要があります。Docker Desktopの`Settings`→`Resources`→`FILE SHARING`から、本ハンズオンのプロジェクトを配置するドライブやディレクトリを共有可能に設定しておいてください。（参考：[Docker Desktop for Windows user manual](https://docs.docker.com/docker-for-windows/)、[Docker Desktop for Mac user manual](https://docs.docker.com/docker-for-mac/)）
+本ハンズオンでは、Dockerコンテナ起動時にローカルディレクトリをマウントします。Docker Desktop for WindowsやDocker Desktop for Macでローカルディレクトリをマウントするためには事前にファイル共有を許可しておく必要があります。Docker Desktopの`Settings`→`Resources`→`FILE SHARING`から、本ハンズオンのプロジェクトを配置するドライブやディレクトリを共有可能に設定しておいてください。（参考：[File Sharing | Windows](https://docs.docker.com/desktop/settings/windows/#file-sharing)、[File Sharing | Mac](https://docs.docker.com/desktop/settings/mac/#file-sharing)）
 {% endhint %}
 
 ## Gitのインストール（オプション）
