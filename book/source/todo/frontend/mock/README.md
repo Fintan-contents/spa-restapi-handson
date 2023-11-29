@@ -29,7 +29,7 @@ prism_1  | [9:54:47 PM] › [CLI] ▶  start     Prism is listening on http://0.
 
 動作を確認するため、ブラウザを起動し、[localhost:9080/api/todos](http://localhost:9080/api/todos)にアクセスします。
 
-Prismでは、レスポンスとしてOpenAPIドキュメントに定義された`example`を使用するため、次のレスポンスが画面上に出力されることを確認します。（`examples`を使用せずに動的に生成する[Dynamic Response Generation](https://meta.stoplight.io/docs/prism/docs/guides/01-mocking.md#dynamic-response-generation)機能もあります）
+Prismでは、レスポンスとしてOpenAPIドキュメントに定義された`example`を使用するため、次のレスポンスが画面上に出力されることを確認します。（`examples`を使用せずに動的に生成する[Dynamic Response Generation](https://meta.stoplight.io/docs/prism/83dbbd75532cf-http-mocking#dynamic-response-generation)機能もあります）
 
 ```
 [

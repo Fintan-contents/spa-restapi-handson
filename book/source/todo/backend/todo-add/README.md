@@ -161,9 +161,9 @@ public class JdbcTodoRepository implements TodoRepository {
 
 ## REST APIの作成
 
-### `TodosActon`クラスへ追加
+### `TodosAction`クラスへ追加
 
-前回作成した`TodosActon`クラスへ、ToDoを登録するためのREST APIを実装します。
+前回作成した`TodosAction`クラスへ、ToDoを登録するためのREST APIを実装します。
 
 ここでは、リクエストボディで送信された入力に異常がないか、NablarchのBean Validation機能を使用した入力値バリデーションを実装します。（参考：[Nablarch - BeanValidation](https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/validation/bean_validation.html)）
 

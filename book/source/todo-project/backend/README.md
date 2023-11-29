@@ -305,7 +305,7 @@ $ mvn jetty:run
 
 Jettyが起動したら、起動テストを行います。
 
-ブラウザを起動し、[lostlhost:9080/api/test](http://localhost:9080/api/test)にアクセスします。
+ブラウザを起動し、[localhost:9080/api/test](http://localhost:9080/api/test)にアクセスします。
 
 画面上に次のようなレスポンスが出力されることを確認します。
 
