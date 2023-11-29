@@ -23,7 +23,7 @@ JDKはいくつかありますが、ここでは、OpenJDKの1つであるAdoptO
 
 バックエンドの開発では構成管理にMavenを利用するため、Mavenをインストールします。Mavenのバージョンには `3.6` を使用します。
 
-[公式サイト](https://maven.apache.org/download.cgi)の案内に沿って、ダウンロードおよび配置してください。
+[こちら](https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/)からダウンロードおよび配置してください。
 
 使用する環境が既に整っている場合は、この手順をスキップしてください。
 
