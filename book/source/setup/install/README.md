@@ -39,7 +39,7 @@ JDKはいくつかありますが、ここでは、OpenJDKの1つであるAdoptO
 
 開発時にコンテナを使用するため、DockerとDocker Composeをインストールします。
 
-WindowsでのDocker利用方法はいくつかありますがは、ここではDocker Desktop for Windowsをインストールします。[公式サイト](https://docs.docker.com/docker-for-windows/install/)の案内に沿って、インストールしてください。
+WindowsでのDocker利用方法はいくつかありますが、ここではDocker Desktop for Windowsをインストールします。[公式サイト](https://docs.docker.com/docker-for-windows/install/)の案内に沿って、インストールしてください。
 
 使用する環境が既に整っている場合は、この手順をスキップしてください。
 
