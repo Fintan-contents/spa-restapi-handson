@@ -36,7 +36,7 @@ JDKはいくつかありますが、ここでは、OpenJDKの1つであるEclips
 エディタが既に整っている場合は、この手順をスキップしてください。
 
 {% hint style='tip' %}
-Javaの開発ツールは[Eclipse](https://www.eclipse.org/)と[IntelliJ IDEA](https://www.jetbrains.com/idea/)があります。それ以外にもいくつかのツールがありますので、お好みに合わせてご利用してください。
+Javaの開発ツールは[Eclipse](https://www.eclipse.org/)や[IntelliJ IDEA](https://www.jetbrains.com/idea/)があります。それ以外にもいくつかのツールがありますので、お好みに合わせてご利用してください。
 {% endhint %}
 
 ## Docker(Docker Compose)のインストール
