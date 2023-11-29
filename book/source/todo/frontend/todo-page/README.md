@@ -40,7 +40,7 @@ function App() {
 Failed to compile.
 
 ./src/App.tsx
-  Line 67:2:  Parsing error: JSX expressions must have one parent element
+  SyntaxError: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?
 ```
 
 エラーメッセージを確認すると、JSXは必ず1の親要素を持つ必要がある、とあります。これは、JSXではトップレベルの要素として複数の要素を返すことはできず、必ず1つの要素として返さなければいけないためです。デザインモックのHTMLをそのまま持ってくると、`header`タグと`div`タグがトップレベルで並んだ状態になるため、このルールに違反してしまいます。ダミーの親要素として`<div>`等で囲って返すといったこともできますが、意味を持たない余分な要素をページに出力することになってしまいます。そのため、ここではフラグメントというReactが提供するコンポーネントを使用します。次のようにReact要素のトップレベルで使用することで、出力結果には影響させずに、複数の要素を1つの要素として返すことができます。
