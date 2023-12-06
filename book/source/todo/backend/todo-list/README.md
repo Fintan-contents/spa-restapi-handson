@@ -4,7 +4,7 @@ ToDoの一覧を取得するために使用するREST APIを実装します。
 
 ## OpenAPIドキュメントの確認
 
-バックエンドのREST APIは、OpenAPIドキュメントの定義と合うように実装しますので、OpenAPIドキュメントを確認します。フロントエンドのREST APIクライアント作成で説明している内容と同じであるため、該当ページの「[OpenAPIドキュメントの確認](../../frontend/api/README.md#OpenAPIドキュメントの確認)」を参照してください。
+バックエンドのREST APIは、OpenAPIドキュメントの定義と合うように実装しますので、OpenAPIドキュメントを確認します。フロントエンドのREST APIクライアント作成で説明している内容と同じであるため、該当ページの「[OpenAPIドキュメントの確認](../../frontend/api/README.md#openapiドキュメントの確認)」を参照してください。
 
 ## ダミーデータのToDoを取得する処理の実装
 
