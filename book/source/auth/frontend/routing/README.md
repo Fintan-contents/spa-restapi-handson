@@ -15,11 +15,11 @@ URLと同様に、ページの[題名要素](https://developer.mozilla.org/ja/do
 
 ## React Routerの導入
 
-ルーティングを実現するために、React用のルーティングライブラリである[React Router](https://reactrouter.com/)を導入します。
+ルーティングを実現するために、React用のルーティングライブラリである[React Router](https://v5.reactrouter.com/)を導入します。
 
 React Routerを使用することで、URLごとに使用するコンポーネントを制御したり異なるURLへ移動したりといったことを、簡単に実装することができます。
 
-React RouterとTypeScript用の型定義をインストールするため、`frontend`ディレクトリで次のコマンドを実行します。（参考：[Installation | React Router](https://reactrouter.com/web/guides/quick-start#quick-start-installation)）
+React RouterとTypeScript用の型定義をインストールするため、`frontend`ディレクトリで次のコマンドを実行します。
 
 ```
 npm install --save react-router-dom@5 @types/react-router-dom@5
@@ -34,7 +34,7 @@ import React from 'react';
 import './App.css';
 import { NavigationHeader } from './components/NavigationHeader';
 import { TodoBoard } from './components/TodoBoard';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Signup } from './components/Signup';
 import { Login } from './components/Login';
 import { Welcome } from './components/Welcome';
@@ -63,10 +63,9 @@ function App() {
 
 export default App;
 ```
-
 まず、React Routerを有効にするため、`BrowserRouter`コンポーネントを使用します。
 
-次に、URLによるルーティングを行うため、`Switch`コンポーネントと`Route`コンポーネントを使用します。（参考：[Basic Routing | React Router](https://reactrouter.com/web/guides/quick-start#quick-start-1st-example-basic-routing)）
+次に、URLによるルーティングを行うため、`Switch`コンポーネントと`Route`コンポーネントを使用します。（参考：[Basic Routing | React Router](https://v5.reactrouter.com/web/guides/quick-start/1st-example-basic-routing)）
 
 `Switch`コンポーネントの中でURLルーティングが有効になり、`Route`コンポーネントの`path`プロパティに指定されたURLにマッチしたら、子要素のコンポーネントが実行されます。
 
@@ -100,7 +99,7 @@ export const Welcome: React.FC = () => {
 };
 ```
 
-「登録する」ボタンがクリックされたら`/signup`URLへ遷移するように、`Link`コンポーネントを使用します。`to`プロパティには、遷移先のURLを指定します。（参考：[Basic Routing | React Router](https://reactrouter.com/web/guides/quick-start#quick-start-1st-example-basic-routing)）
+「登録する」ボタンがクリックされたら`/signup`URLへ遷移するように、`Link`コンポーネントを使用します。`to`プロパティには、遷移先のURLを指定します。（参考：[Basic Routing | React Router](https://v5.reactrouter.com/web/guides/quick-start/1st-example-basic-routing)）
 
 ### サインアップ後のトップページへの遷移
 
@@ -145,7 +144,7 @@ export const Signup: React.FC = () => {
 };
 ```
 
-ReactRouterが提供しているフックの`useHistory`を使うことで、コンポーネントの処理中にURL遷移を行うことができます。（参考：[useHistory | React Router](https://reactrouter.com/web/api/Hooks/usehistory)）
+ReactRouterが提供しているフックの`useHistory`を使うことで、コンポーネントの処理中にURL遷移を行うことができます。（参考：[useHistory](https://v5.reactrouter.com/web/api/Hooks/usehistory)）
 
 ここでは、「登録する」ボタンをクリックしたら、トップページに遷移するようにします。最終的にはアカウントの登録処理が完了したら遷移するように実装しますが、ここではまず遷移のみ実装しておきます。
 

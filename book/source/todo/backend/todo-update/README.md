@@ -67,7 +67,7 @@ public Todo updateStatus(TodoId todoId, TodoStatus status) {
 
 ## REST APIの作成
 
-### `TodoActon`クラスの作成
+### `TodoAction`クラスの作成
 
 今回は、単一のToDoを表現したパスに変わるため、新しく`TodoAction`クラスを作成します。（同じアクションクラスでも実装可能ですが、ここでは分けます）
 

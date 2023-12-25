@@ -1,0 +1,14 @@
+# wjdp/htmltest
+
+# 実行方法
+# docker run -v (pwd)/_book:/test/_book -v (pwd)/.htmltest.yaml:/test/.htmltest.yaml --rm wjdp/htmltest --conf .htmltest.yaml
+
+# https://github.com/wjdp/htmltest#wrench-configuration
+DirectoryPath: _book
+# 末尾にスラッシュのないディレクトリへのリンクがエラーになってしまう
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreURLs:
+  - localhost:3000
+  - localhost:9080
+# 余裕を持って長めに設定しておく。
+ExternalTimeout: 60

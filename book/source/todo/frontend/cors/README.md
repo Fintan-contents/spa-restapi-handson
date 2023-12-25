@@ -8,7 +8,7 @@ ToDoアプリでは、フロントエンドとバックエンドを別々のア�
 
 この制限に対応するため、ToDoアプリでは、オリジン間リソース共有（以下CORS）と呼ばれる仕組みを利用します。（参考：[オリジン間リソース共有 (CORS) | MDN](https://developer.mozilla.org/ja/docs/Web/HTTP/CORS)）
 
-生成したクライアントコードでは、[Fetch API](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch)を使用してHTTP通信を行います。このAPIでは、リクエストを送信するための`fetch()`メソッドの引数である`init`オブジェクトに次の値を設定することで、CORSを使用することができます。（[リクエストにオプションを適用する | MDN](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch#Supplying_request_options)）
+生成したクライアントコードでは、[Fetch API](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch)を使用してHTTP通信を行います。このAPIでは、リクエストを送信するための`fetch()`メソッドの引数である`init`オブジェクトに次の値を設定することで、CORSを使用することができます。（[リクエストにオプションを適用する | MDN](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch#%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E9%81%A9%E7%94%A8)）
 
 ```js
 {

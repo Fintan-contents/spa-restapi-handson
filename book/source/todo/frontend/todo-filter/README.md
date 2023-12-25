@@ -8,7 +8,7 @@ ToDoの表示対象を絞り込むために、どのようなstateが必要に�
 
 ボタンを押すとどれか1つが選択された状態にするため、どのボタンが選択されているかのstateは必要そうです。
 
-他に、絞り込んだ後のToDoの一覧は、stateとして保持する必要があるかを考えます。これは、全てのToDoを保持するstateと、どのボタンが選択されているかのstateで算出可能なため、stateにはなりません。（参考：[React - Reactの流儀 Step 3](https://ja.reactjs.org/docs/thinking-in-react.html#step-3-identify-the-minimal-but-complete-representation-of-ui-state)）
+他に、絞り込んだ後のToDoの一覧は、stateとして保持する必要があるかを考えます。これは、全てのToDoを保持するstateと、どのボタンが選択されているかのstateで算出可能なため、stateにはなりません。（参考：[React - Reactの流儀 ステップ 3](https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state)）
 
 `TodoBoard`のstateを使用して算出するためには、どのボタンが選択されているかのstateも、`TodoFilter`ではなく`TodoBoard`まで引き上げた方が簡単そうです。
 

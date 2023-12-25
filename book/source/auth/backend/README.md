@@ -20,6 +20,6 @@
 
 ログイン状態によるREST APIへのアクセス制御を実装します。
 
-## [ToDo管理でのユーザー取得](auth/backend/todo/README.md)
+## [ToDo管理でのユーザー取得](todo/README.md)
 
 ToDo管理のREST APIで、ログインしたユーザーを使用するように修正します。

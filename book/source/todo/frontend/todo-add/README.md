@@ -6,7 +6,7 @@ ToDoページで新しいToDoを登録できるように実装します。
 
 ToDoの一覧表示の時と同様に、ToDoを登録するコンポーネントで、どのような状態が必要になるかを考えていきます。
 
-ここでは、ToDoを登録するためのフォームを作成します。フォームの作成についてはReactからガイドされており、フォーム自身が保持する独自のstateをReactが管理するstateに統合し、Reactのstateのみで制御する「制御されたコンポーネント」として作成することを推奨しています。（参考：[React - フォーム](https://ja.reactjs.org/docs/forms.html)）
+ここでは、ToDoを登録するためのフォームを作成します。フォームの作成についてはReactからガイドされており、フォーム自身が保持する独自のstateをReactが管理するstateに統合し、Reactのstateのみで制御する「制御されたコンポーネント」として作成することを推奨しています。（参考：[input](https://ja.react.dev/reference/react-dom/components/input)、[select](https://ja.react.dev/reference/react-dom/components/select)、[textarea](https://ja.react.dev/reference/react-dom/components/textarea)）
 
 ここからわかるとおり、フォームでは入力中の状態を保持するstateが必要になります。ここでは、ToDoの内容を入力するフォームであるため、入力中のToDoの内容を保持するstateが必要になります。
 
