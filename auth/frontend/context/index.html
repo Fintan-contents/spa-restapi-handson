@@ -6,7 +6,7 @@
         <title>ユーザーコンテクストの作成 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,9 +780,9 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="ユーザーコンテクストの作成"><a name="ユーザーコンテクストの作成" class="plugin-anchor" href="#ユーザーコンテクストの作成"><i class="fa fa-link" aria-hidden="true"></i></a>ユーザーコンテクストの作成</h1>
+                                <html><head></head><body><h1 id="ユーザーコンテクストの作成"><a name="ユーザーコンテクストの作成" class="plugin-anchor" href="#ユーザーコンテクストの作成"><i class="fa fa-link" aria-hidden="true"></i></a>ユーザーコンテクストの作成</h1>
 <p>ユーザー情報のような特定のコンポーネントに依存しない値は、様々なコンポーネントで使用する可能性がありますが、その場合にはプロパティを使用してコンポーネントの階層に渡していく必要が出てきます。
-このような情報を扱う場合、コンテクストと呼ばれるReactの機能を利用することで、プロパティを使用せずにコンポーネント間で値を共有することが出来ます。（参考：<a href="https://ja.reactjs.org/docs/context.html" target="_blank">コンテクスト | React</a>）</p>
+このような情報を扱う場合、コンテクストと呼ばれるReactの機能を利用することで、プロパティを使用せずにコンポーネント間で値を共有することが出来ます。（参考：<a href="https://ja.react.dev/learn/passing-data-deeply-with-context" target="_blank">コンテクストで深くデータを受け渡す | React</a>）</p>
 <p>ここでは、ユーザーの認証に関する値を持つコンテクスト（以下ユーザーコンテクスト）を作成し、認証に関わるコンポーネントではそのコンテクストを使用できるように実装していきます。ここでは、認証に関する情報を集約させるため、ユーザーコンテクストには次の値を持たせます。</p>
 <ul>
 <li>サインアップするための関数</li>
@@ -802,6 +802,10 @@
 
 <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthenticationFailedError</span> </span>{}
 
+type Props = {
+  children?: React.ReactNode,
+}
+
 type ContextValueType = {
   <span class="hljs-attr">signup</span>: <span class="hljs-function">(<span class="hljs-params">userName: string, password: string</span>) =&gt;</span> <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span> | AccountConflictError&gt;,
   login: <span class="hljs-function">(<span class="hljs-params">userName: string, password: string</span>) =&gt;</span> <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span> | AuthenticationFailedError&gt;,
@@ -812,10 +816,11 @@ type ContextValueType = {
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserContext = React.createContext&lt;ContextValueType&gt;({} <span class="hljs-keyword">as</span> ContextValueType);
 </code></pre>
+<p>React v18からpropsを定義する際にchildrenプロパティを明示的に列挙する必要があるので、<code>Props</code>型を定義します。</p>
 <p><code>React.createContext</code>を使用して、コンテクストを作成します。ユーザーコンテクストを扱う際に型を使用したいため、<code>ContextValueType</code>型も定義します。</p>
 <p>また、サインアップやログインのREST APIの仕様として、入力ミス等で失敗した場合にはエラーレスポンスが返却されます。生成したクライアントコードでは、エラーレスポンスであった場合は例外として送出されます。ここでは、ユーザーコンテクストの利用者がエラーを扱いやすくするため、エラーを表現するオブジェクトに変換して返すようにします。</p>
 <h2 id="ユーザーコンテクストを取得するフックの作成"><a name="ユーザーコンテクストを取得するフックの作成" class="plugin-anchor" href="#ユーザーコンテクストを取得するフックの作成"><i class="fa fa-link" aria-hidden="true"></i></a>ユーザーコンテクストを取得するフックの作成</h2>
-<p>関数コンポーネントでコンテクストを使用するためのフックとして<code>useContext</code>が提供されています。<code>useContext</code>を使用することで、関数コンポーネントでコンテクストとして設定されている値（コンテクストオブジェクト）を取得することができます。（参考：<a href="https://ja.reactjs.org/docs/hooks-reference.html#usecontext" target="_blank">useContext | React</a>）</p>
+<p>関数コンポーネントでコンテクストを使用するためのフックとして<code>useContext</code>が提供されています。<code>useContext</code>を使用することで、関数コンポーネントでコンテクストとして設定されている値（コンテクストオブジェクト）を取得することができます。（参考：<a href="https://ja.react.dev/reference/react/useContext" target="_blank">useContext | React</a>）</p>
 <p>各コンポーネントで<code>useContext</code>を使用してもよいですが、ここではユーザーコンテクストを明示的に取得するためのフックを作成します。ユーザーコンテクストに関わる実装は<code>UserContext.tsx</code>に集約するため、<code>UserContext.tsx</code>に次のような実装を追加します。</p>
 <pre><code class="lang-js"><span class="hljs-keyword">import</span> React, { useContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
 ...
@@ -823,20 +828,20 @@ type ContextValueType = {
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> useUserContext = <span class="hljs-function">() =&gt;</span> useContext(UserContext);
 </code></pre>
 <h2 id="コンテクストプロバイダの作成"><a name="コンテクストプロバイダの作成" class="plugin-anchor" href="#コンテクストプロバイダの作成"><i class="fa fa-link" aria-hidden="true"></i></a>コンテクストプロバイダの作成</h2>
-<p>ユーザーコンテクストを各コンポーネントで使用できるようにするためには、プロパイダと呼ばれるコンポーネントを使用します。（参考：<a href="https://ja.reactjs.org/docs/context.html#contextprovider" target="_blank">Context.Provider | React</a>）</p>
+<p>ユーザーコンテクストを各コンポーネントで使用できるようにするためには、プロパイダと呼ばれるコンポーネントを使用します。（参考：<a href="https://ja.react.dev/reference/react/createContext#provider" target="_blank">SomeContext.Provider | React</a>）</p>
 <p>プロパイダコンポーネントの<code>value</code>属性に渡した値が、子要素のコンポーネントで使用できるようになります。ここでは、このプロパイダコンポーネントとそれに渡す値を、独立したコンポーネントとして使用できるようにするため、<code>UserContextProvider</code>コンポーネントを作成します。ユーザーコンテクストに関わる実装は<code>UserContext.tsx</code>にまとめます。</p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, { useContext, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
 <span class="hljs-keyword">import</span> { BackendService } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../backend/BackendService&apos;</span>;
 ...
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserContextProvider: React.FC = <span class="hljs-function">(<span class="hljs-params">{ children }</span>) =&gt;</span> {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserContextProvider: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{ children }</span>) =&gt;</span> {
   <span class="hljs-keyword">const</span> [userName, setUserName] = useState&lt;string&gt;(<span class="hljs-string">&apos;&apos;</span>);
 
   <span class="hljs-keyword">const</span> contextValue: ContextValueType = {
     <span class="hljs-attr">signup</span>: <span class="hljs-keyword">async</span> (userName, password) =&gt; {
       <span class="hljs-keyword">try</span> {
         <span class="hljs-keyword">await</span> BackendService.signup(userName, password);
-      } <span class="hljs-keyword">catch</span>(error) {
+      } <span class="hljs-keyword">catch</span>(error: any) {
         <span class="hljs-keyword">if</span> (error.status === <span class="hljs-number">409</span>) {
           <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AccountConflictError();
         }
@@ -847,7 +852,7 @@ type ContextValueType = {
       <span class="hljs-keyword">try</span> {
         <span class="hljs-keyword">await</span> BackendService.login(userName, password);
         setUserName(userName);
-      } <span class="hljs-keyword">catch</span>(error) {
+      } <span class="hljs-keyword">catch</span>(error: any) {
         <span class="hljs-keyword">if</span> (error.status === <span class="hljs-number">401</span>) {
           <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AuthenticationFailedError();
         }
@@ -880,16 +885,16 @@ type ContextValueType = {
       <span class="hljs-tag">&lt;<span class="hljs-name">BrowserRouter</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">NavigationHeader</span> /&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">Switch</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/board&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/board&quot;</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">TodoBoard</span> /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/signup&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/signup&quot;</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">Signup</span> /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/login&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/login&quot;</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">Login</span> /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">Welcome</span> /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">Switch</span>&gt;</span>
@@ -900,7 +905,7 @@ type ContextValueType = {
 </code></pre>
 <h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
 <p>コンテクストを使用しているコンポーネントが無ければ確認しづらいため、最後にまとめて確認します。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -943,7 +948,7 @@ type ContextValueType = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ユーザーコンテクストの作成","level":"1.8.1.3","depth":3,"next":{"title":"ナビゲーションメニューの切替","level":"1.8.1.4","depth":3,"path":"auth/frontend/header/README.md","ref":"auth/frontend/header/README.md","articles":[]},"previous":{"title":"ルーティングの設定","level":"1.8.1.2","depth":3,"path":"auth/frontend/routing/README.md","ref":"auth/frontend/routing/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/context/README.md","mtime":"2023-07-24T02:52:18.363Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ユーザーコンテクストの作成","level":"1.8.1.3","depth":3,"next":{"title":"ナビゲーションメニューの切替","level":"1.8.1.4","depth":3,"path":"auth/frontend/header/README.md","ref":"auth/frontend/header/README.md","articles":[]},"previous":{"title":"ルーティングの設定","level":"1.8.1.2","depth":3,"path":"auth/frontend/routing/README.md","ref":"auth/frontend/routing/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/context/README.md","mtime":"2023-12-25T02:59:13.952Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

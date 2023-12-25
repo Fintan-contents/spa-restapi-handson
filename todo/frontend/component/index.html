@@ -6,7 +6,7 @@
         <title>コンポーネントの分割 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,11 +780,11 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="コンポーネントの分割"><a name="コンポーネントの分割" class="plugin-anchor" href="#コンポーネントの分割"><i class="fa fa-link" aria-hidden="true"></i></a>コンポーネントの分割</h1>
+                                <html><head></head><body><h1 id="コンポーネントの分割"><a name="コンポーネントの分割" class="plugin-anchor" href="#コンポーネントの分割"><i class="fa fa-link" aria-hidden="true"></i></a>コンポーネントの分割</h1>
 <p>ToDoページをコンポーネントに分割します。</p>
 <h2 id="コンポーネントへの落とし込み"><a name="コンポーネントへの落とし込み" class="plugin-anchor" href="#コンポーネントへの落とし込み"><i class="fa fa-link" aria-hidden="true"></i></a>コンポーネントへの落とし込み</h2>
 <p>次に、ToDoページをどのようなコンポーネント構造にするかを考え、コンポーネントに落とし込んでいきます。</p>
-<p>ToDoページのデザインから、コンポーネントの階層構造に落とし込んでいきます。（参考：<a href="https://ja.reactjs.org/docs/thinking-in-react.html#step-1-break-the-ui-into-a-component-hierarchy" target="_blank">React - Reactの流儀 Step 1</a>）</p>
+<p>ToDoページのデザインから、コンポーネントの階層構造に落とし込んでいきます。（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-1-break-the-ui-into-a-component-hierarchy" target="_blank">React - Reactの流儀 ステップ 1</a>）</p>
 <p>扱う情報の種類や用途から、ここでは以下のようにコンポーネントに分割します。</p>
 <p><img src="img/design.png" alt="design"></p>
 <ul>
@@ -810,15 +810,12 @@
 </ul>
 <h2 id="コンポーネントの作成"><a name="コンポーネントの作成" class="plugin-anchor" href="#コンポーネントの作成"><i class="fa fa-link" aria-hidden="true"></i></a>コンポーネントの作成</h2>
 <p>コンポーネントを作成するディレクトリとして、<code>src</code>の下に<code>components</code>ディレクトリを作成し、そこにコンポーネントを作成していきます。</p>
-<p>ここでは、現在表示している静的なデータをそのまま使用して、それぞれのコンポーネントを作成していきます。（参考：<a href="https://ja.reactjs.org/docs/thinking-in-react.html#step-2-build-a-static-version-in-react" target="_blank">React - Reactの流儀 Step 2</a>）</p>
-<p>Reactのコンポーネントには「関数コンポーネント」と「クラスコンポーネント」の2種類が存在します。（参考：<a href="https://ja.reactjs.org/docs/components-and-props.html" target="_blank">React - コンポーネントとprops</a>）</p>
-<p>関数コンポーネントはクラスコンポーネントの後に登場し、コンポーネントを実装する際の第一候補になることを目指して開発されています。（参考：<a href="https://ja.reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both" target="_blank">React - フックに関するよくある質問</a>）</p>
-<p>ハンズオンで作成するコンポーネントは関数コンポーネントの機能で実装することが可能であるため、すべて関数コンポーネントとして作成していきます。</p>
+<p>ここでは、現在表示している静的なデータをそのまま使用して、それぞれのコンポーネントを作成していきます。（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-2-build-a-static-version-in-react" target="_blank">React - Reactの流儀 ステップ 2</a>）</p>
 <p>また、CSSファイルもそれぞれのコンポーネント単位に分割していきます。</p>
-<p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p><code>import</code>で読み込んだCSSファイルの適用範囲は、そのコンポーネント内だけでなく、全てのコンポーネント（グローバル）に適用されます。</p>
+<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p><code>import</code>で読み込んだCSSファイルの適用範囲は、そのコンポーネント内だけでなく、全てのコンポーネント（グローバル）に適用されます。</p>
 <p>そのため、この方法ではコンポーネント単位にCSSファイルを分けておく必要自体はありませんが、コンポーネント単位に分けることで、コンポーネント単位で取り回しがしやすかったり、適用範囲がコンポーネント単位になるような他の方法へ移行しやすくなる、といったメリットがあります。ただし、全体を把握しづらくなるため、予期せずスタイルが衝突してデザインが崩れてしまう、といったような事故が発生しやすいといったデメリットもあります。</p>
 <p>ここでは、こういった事故を防ぐための配慮として、基本的にはクラス名を起点としたスタイル定義にして、クラス名の命名ルールを<strong><code>[コンポーネント名]_[任意文字列]</code></strong>とします。これにより、他のコンポーネントとクラス名が衝突することを防ぎ、事故が起きづらいようにしておきます。なお、デザインモックではすでにこのルールに則ったクラス名を使用しているため、デザインモックのCSSをそのまま使っていきます。</p>
-</div></div></p>
+</div></div><p></p>
 <h3 id="navigationheader"><a name="navigationheader" class="plugin-anchor" href="#navigationheader"><i class="fa fa-link" aria-hidden="true"></i></a>NavigationHeader</h3>
 <p><code>NavigationHeader</code>コンポーネントを作成するため、<code>NavigationHeader.tsx</code>を作成します。<code>NavigationHeader</code>が使用するCSSも分割するため、<code>NavigationHeader.css</code>も作成します。</p>
 <p><code>NavigationHeader</code>が返すReact要素には、<code>App</code>から該当部分を抽出します。</p>
@@ -1336,7 +1333,7 @@
 </code></pre>
 <h3 id="todoitem"><a name="todoitem" class="plugin-anchor" href="#todoitem"><i class="fa fa-link" aria-hidden="true"></i></a>TodoItem</h3>
 <p><code>TodoList</code>コンポーネントをさらに子コンポーネントに分割するため、<code>TodoItem.tsx</code>を作成します。<code>TodoItem</code>が使用するCSSを分割するため、<code>TodoItem.css</code>も作成します。</p>
-<p><code>TodoItem</code>が返すReact要素には、<code>TodoList</code>から該当部分を抽出しますが、<code>TodoItem</code>は複数配置し、それぞれの表示内容が異なります。このような場合には、コンポーネントにプロパティを定義し、親コンポーネントから引数で値を受け取るようにします。（参考：<a href="https://ja.reactjs.org/docs/components-and-props.html" target="_blank">React - コンポーネントとprops</a>）</p>
+<p><code>TodoItem</code>が返すReact要素には、<code>TodoList</code>から該当部分を抽出しますが、<code>TodoItem</code>は複数配置し、それぞれの表示内容が異なります。このような場合には、コンポーネントにプロパティを定義し、親コンポーネントから引数で値を受け取るようにします。（参考：<a href="https://ja.react.dev/learn/passing-props-to-a-component" target="_blank">コンポーネントに props を渡す</a>）</p>
 <p>ここでは、TypeScriptの構文である<code>type</code>を使用し、プロパティの型を定義した型エイリアスを定義します。それをコンポーネントの型である<code>React.FC</code>の型引数として渡すことで、コンポーネントの引数をそれらの型でチェックすることができます。</p>
 <pre><code class="lang-js">type Props = {
   <span class="hljs-attr">text</span>: string
@@ -1427,7 +1424,7 @@ type Props = {
 <p><code>TodoItem</code>が作成できたら、<code>TodoList</code>で<code>TodoItem</code>を使用するように修正し、<code>TodoList.css</code>から<code>TodoItem.css</code>に抽出した定義を削除します。</p>
 <p>ページの表示内容を確認すると、何も変わらず表示されていることを確認します。これで<code>TodoList</code>から<code>TodoItem</code>部分の抽出は完了です。</p>
 <p>これで、コンポーネントの分割は完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -1470,7 +1467,7 @@ type Props = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"next":{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},"previous":{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"path":"todo/frontend/todo-page/README.md","ref":"todo/frontend/todo-page/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/component/README.md","mtime":"2023-07-24T02:52:18.370Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"next":{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},"previous":{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"path":"todo/frontend/todo-page/README.md","ref":"todo/frontend/todo-page/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/component/README.md","mtime":"2023-12-25T02:59:13.968Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

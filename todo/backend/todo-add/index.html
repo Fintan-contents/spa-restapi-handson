@@ -6,7 +6,7 @@
         <title>ToDo登録のREST API · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,7 +780,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="todo登録のrest-api"><a name="todo登録のrest-api" class="plugin-anchor" href="#todo登録のrest-api"><i class="fa fa-link" aria-hidden="true"></i></a>ToDo登録のREST API</h1>
+                                <html><head></head><body><h1 id="todo登録のrest-api"><a name="todo登録のrest-api" class="plugin-anchor" href="#todo登録のrest-api"><i class="fa fa-link" aria-hidden="true"></i></a>ToDo登録のREST API</h1>
 <p>ToDoを登録するために使用するREST APIを実装します。</p>
 <h2 id="todoを登録する処理の実装"><a name="todoを登録する処理の実装" class="plugin-anchor" href="#todoを登録する処理の実装"><i class="fa fa-link" aria-hidden="true"></i></a>ToDoを登録する処理の実装</h2>
 <p>まず、ToDoを登録する処理を実装します。ここはREST APIと直接関係が無い部分であるため、詳細な説明は省略します。</p>
@@ -912,8 +912,8 @@
 <p><code>nextId</code>メソッドでは、先ほど作成したシーケンスオブジェクトを使用し、ToDoIDを生成するように実装します。</p>
 <p><code>add</code>メソッドでは、渡されたユーザーIDとToDoオブジェクトを、DB上に追加するように実装します。</p>
 <h2 id="rest-apiの作成"><a name="rest-apiの作成" class="plugin-anchor" href="#rest-apiの作成"><i class="fa fa-link" aria-hidden="true"></i></a>REST APIの作成</h2>
-<h3 id="todosactonクラスへ追加"><a name="todosactonクラスへ追加" class="plugin-anchor" href="#todosactonクラスへ追加"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodosActon</code>クラスへ追加</h3>
-<p>前回作成した<code>TodosActon</code>クラスへ、ToDoを登録するためのREST APIを実装します。</p>
+<h3 id="todosactionクラスへ追加"><a name="todosactionクラスへ追加" class="plugin-anchor" href="#todosactionクラスへ追加"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodosAction</code>クラスへ追加</h3>
+<p>前回作成した<code>TodosAction</code>クラスへ、ToDoを登録するためのREST APIを実装します。</p>
 <p>ここでは、リクエストボディで送信された入力に異常がないか、NablarchのBean Validation機能を使用した入力値バリデーションを実装します。（参考：<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/validation/bean_validation.html" target="_blank">Nablarch - BeanValidation</a>）</p>
 <p>NablarchのBean Validation機能は、JavaEEのBean Validation(JSR349)に準拠しており、ここでは<code>javax.validation.constraints</code>パッケージ（<a href="https://docs.oracle.com/javaee/7/api/javax/validation/constraints/package-summary.html" target="_blank">Javadoc</a>）にあるアノテーションを使用して、入力項目の制約を定義していきます。</p>
 <pre><code class="lang-java">    <span class="hljs-meta">@POST</span>
@@ -1025,7 +1025,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
 <pre><code>mvn test
 </code></pre><p>特にエラーが発生せず、テストが成功することを確認します。</p>
 <p>これで、ToDo登録のREST APIの実装は完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -1068,7 +1068,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"next":{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},"previous":{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/backend/todo-add/README.md","mtime":"2023-07-24T02:52:18.369Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"next":{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},"previous":{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/backend/todo-add/README.md","mtime":"2023-12-25T02:59:13.963Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

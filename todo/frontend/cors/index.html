@@ -6,7 +6,7 @@
         <title>CORSの設定 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,12 +780,12 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="corsの設定"><a name="corsの設定" class="plugin-anchor" href="#corsの設定"><i class="fa fa-link" aria-hidden="true"></i></a>CORSの設定</h1>
+                                <html><head></head><body><h1 id="corsの設定"><a name="corsの設定" class="plugin-anchor" href="#corsの設定"><i class="fa fa-link" aria-hidden="true"></i></a>CORSの設定</h1>
 <p>ToDoアプリでは、フロントエンドとバックエンドを別々のアプリとして作成します。フロントエンドアプリは<code>http://localhost:3000</code>、バックエンドアプリは<code>http://localhost:9080</code>で起動するため、ウェブコンテンツとしては異なるオリジンということになります。（<a href="https://developer.mozilla.org/ja/docs/Glossary/Origin" target="_blank">オリジン | MDN</a>）</p>
 <p>セキュリティ上の理由から、ブラウザでは異なるオリジンへのリクエストを制限しています。（参考：<a href="https://developer.mozilla.org/ja/docs/Web/Security/Same-origin_policy" target="_blank">同一オリジンポリシー | MDN</a>）</p>
 <p>この制限により、そのままではフロントエンドアプリからバックエンドアプリのREST APIにアクセスしようとするとエラーが発生してしまいます。</p>
 <p>この制限に対応するため、ToDoアプリでは、オリジン間リソース共有（以下CORS）と呼ばれる仕組みを利用します。（参考：<a href="https://developer.mozilla.org/ja/docs/Web/HTTP/CORS" target="_blank">オリジン間リソース共有 (CORS) | MDN</a>）</p>
-<p>生成したクライアントコードでは、<a href="https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">Fetch API</a>を使用してHTTP通信を行います。このAPIでは、リクエストを送信するための<code>fetch()</code>メソッドの引数である<code>init</code>オブジェクトに次の値を設定することで、CORSを使用することができます。（<a href="https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch#Supplying_request_options" target="_blank">リクエストにオプションを適用する | MDN</a>）</p>
+<p>生成したクライアントコードでは、<a href="https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">Fetch API</a>を使用してHTTP通信を行います。このAPIでは、リクエストを送信するための<code>fetch()</code>メソッドの引数である<code>init</code>オブジェクトに次の値を設定することで、CORSを使用することができます。（<a href="https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch#%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E9%81%A9%E7%94%A8" target="_blank">リクエストにオプションを適用する | MDN</a>）</p>
 <pre><code class="lang-js">{
   <span class="hljs-attr">mode</span>: <span class="hljs-string">&apos;cors&apos;</span>,
   <span class="hljs-attr">credentials</span>: <span class="hljs-string">&apos;include&apos;</span>
@@ -810,7 +810,7 @@
 });
 </code></pre>
 <p>これで、フロントエンドのCORS設定については完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -853,7 +853,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"CORSの設定","level":"1.6.1.4","depth":3,"next":{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},"previous":{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/cors/README.md","mtime":"2023-07-24T02:52:18.371Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"CORSの設定","level":"1.6.1.4","depth":3,"next":{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},"previous":{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/cors/README.md","mtime":"2023-12-25T02:59:13.971Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

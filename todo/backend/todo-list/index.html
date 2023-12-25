@@ -6,7 +6,7 @@
         <title>ToDo一覧取得のREST API · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,10 +780,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="todo一覧取得のrest-api"><a name="todo一覧取得のrest-api" class="plugin-anchor" href="#todo一覧取得のrest-api"><i class="fa fa-link" aria-hidden="true"></i></a>ToDo一覧取得のREST API</h1>
+                                <html><head></head><body><h1 id="todo一覧取得のrest-api"><a name="todo一覧取得のrest-api" class="plugin-anchor" href="#todo一覧取得のrest-api"><i class="fa fa-link" aria-hidden="true"></i></a>ToDo一覧取得のREST API</h1>
 <p>ToDoの一覧を取得するために使用するREST APIを実装します。</p>
 <h2 id="openapiドキュメントの確認"><a name="openapiドキュメントの確認" class="plugin-anchor" href="#openapiドキュメントの確認"><i class="fa fa-link" aria-hidden="true"></i></a>OpenAPIドキュメントの確認</h2>
-<p>バックエンドのREST APIは、OpenAPIドキュメントの定義と合うように実装しますので、OpenAPIドキュメントを確認します。フロントエンドのREST APIクライアント作成で説明している内容と同じであるため、該当ページの「<a href="../../frontend/api/#OpenAPIドキュメントの確認">OpenAPIドキュメントの確認</a>」を参照してください。</p>
+<p>バックエンドのREST APIは、OpenAPIドキュメントの定義と合うように実装しますので、OpenAPIドキュメントを確認します。フロントエンドのREST APIクライアント作成で説明している内容と同じであるため、該当ページの「<a href="../../frontend/api/#openapiドキュメントの確認">OpenAPIドキュメントの確認</a>」を参照してください。</p>
 <h2 id="ダミーデータのtodoを取得する処理の実装"><a name="ダミーデータのtodoを取得する処理の実装" class="plugin-anchor" href="#ダミーデータのtodoを取得する処理の実装"><i class="fa fa-link" aria-hidden="true"></i></a>ダミーデータのToDoを取得する処理の実装</h2>
 <p>REST APIを実装する前に、REST APIから呼ぶToDoを取得する処理を実装します。</p>
 <p>まず、DBからToDoを取得するところまでは一気に実装せず、想定どおりのJSONを返却するREST APIが作成できることを確認します。
@@ -808,8 +808,8 @@
     }
 }
 </code></pre>
-<p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>このような何のための値であるかを専用の型で表現する方法は、一般的に「値オブジェクト（バリューオブジェクト）」と呼ばれます。何の値であるかを型で区別できるようにすることで、ミスを防ぎやすくしたり、どこでどのように使われるのかを特定しやすくしたりします。</p>
-</div></div></p>
+<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>このような何のための値であるかを専用の型で表現する方法は、一般的に「値オブジェクト（バリューオブジェクト）」と呼ばれます。何の値であるかを型で区別できるようにすることで、ミスを防ぎやすくしたり、どこでどのように使われるのかを特定しやすくしたりします。</p>
+</div></div><p></p>
 <h3 id="todotextクラスの作成"><a name="todotextクラスの作成" class="plugin-anchor" href="#todotextクラスの作成"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoText</code>クラスの作成</h3>
 <p>続いて、ToDoの内容を表す<code>TodoText</code>クラスを作成します。</p>
 <pre><code class="lang-java"><span class="hljs-keyword">package</span> com.example.todo.domain;
@@ -892,8 +892,8 @@
     }
 }
 </code></pre>
-<p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>コンストラクタでのみ状態を設定し、生成後に状態を変更できないオブジェクトは、一般的に「イミュータブル（不変）」なオブジェクトと呼ばれます。オブジェクトをやり取りする中で、意図せずオブジェクトの状態を更新されてしまうといったバグを防ぎやすくしたりします。</p>
-</div></div></p>
+<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>コンストラクタでのみ状態を設定し、生成後に状態を変更できないオブジェクトは、一般的に「イミュータブル（不変）」なオブジェクトと呼ばれます。オブジェクトをやり取りする中で、意図せずオブジェクトの状態を更新されてしまうといったバグを防ぎやすくしたりします。</p>
+</div></div><p></p>
 <h3 id="comexampletodoapplicationパッケージの作成"><a name="comexampletodoapplicationパッケージの作成" class="plugin-anchor" href="#comexampletodoapplicationパッケージの作成"><i class="fa fa-link" aria-hidden="true"></i></a><code>com.example.todo.application</code>パッケージの作成</h3>
 <p>ToDo管理の機能を表すクラスを配置するための、<code>com.example.todo.application</code>パッケージを作成します。</p>
 <h3 id="todorepositoryインターフェースの作成"><a name="todorepositoryインターフェースの作成" class="plugin-anchor" href="#todorepositoryインターフェースの作成"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoRepository</code>インターフェースの作成</h3>
@@ -1299,8 +1299,8 @@ ORDER BY
 </code></pre>
 <h2 id="rest-apiのテスト"><a name="rest-apiのテスト" class="plugin-anchor" href="#rest-apiのテスト"><i class="fa fa-link" aria-hidden="true"></i></a>REST APIのテスト</h2>
 <p>DBのテストデータは最初に作成したダミーデータと同じ値であるため、REST APIのテストケースはそのまま利用できます。後ほど実装する登録等のテストでも同じテストデータを利用するため、テスト実行順序でテスト結果が変わらないように、テスト前処理としてDB初期化処理を実装します。DB初期化処理にはFlywayのマイグレーションを利用します。</p>
-<p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>DB初期化処理を簡易に実装するためFlywayのマイグレーションを利用していますが、処理時間が増えるためテスト実行時間は遅くなってしまいます。ハンズオンコンテンツではテストケース数がわずかであるため問題ありませんが、使用する際にはご注意ください。</p>
-</div></div></p>
+<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>DB初期化処理を簡易に実装するためFlywayのマイグレーションを利用していますが、処理時間が増えるためテスト実行時間は遅くなってしまいます。ハンズオンコンテンツではテストケース数がわずかであるため問題ありませんが、使用する際にはご注意ください。</p>
+</div></div><p></p>
 <pre><code class="lang-java"><span class="hljs-keyword">package</span> com.example.todo.api;
 
 <span class="hljs-keyword">import</span> com.example.openapi.OpenApiValidator;
@@ -1357,7 +1357,7 @@ ORDER BY
 <pre><code>mvn test
 </code></pre><p>特にエラーが発生せず、テストが成功することを確認します。</p>
 <p>これで、ToDo一覧取得のREST APIの実装は完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -1400,7 +1400,7 @@ ORDER BY
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"next":{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},"previous":{"title":"バックエンド","level":"1.6.2","depth":2,"path":"todo/backend/README.md","ref":"todo/backend/README.md","articles":[{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/backend/todo-list/README.md","mtime":"2023-07-24T02:52:18.369Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"next":{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},"previous":{"title":"バックエンド","level":"1.6.2","depth":2,"path":"todo/backend/README.md","ref":"todo/backend/README.md","articles":[{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/backend/todo-list/README.md","mtime":"2023-12-25T02:59:13.965Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

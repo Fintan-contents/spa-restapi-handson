@@ -6,7 +6,7 @@
         <title>モックサーバの起動 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,7 +780,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="モックサーバの起動"><a name="モックサーバの起動" class="plugin-anchor" href="#モックサーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>モックサーバの起動</h1>
+                                <html><head></head><body><h1 id="モックサーバの起動"><a name="モックサーバの起動" class="plugin-anchor" href="#モックサーバの起動"><i class="fa fa-link" aria-hidden="true"></i></a>モックサーバの起動</h1>
 <p>この時点では、まだバックエンドのREST APIの開発は完了していないため、そのままではREST APIを呼び出すことができません。そこで、OpenAPIドキュメントを使用してモックサーバを起動し、REST APIを呼び出せるようにします。</p>
 <p>モックサーバには<a href="https://stoplight.io/open-source/prism/" target="_blank">Prism</a>を使用します。PrismはOSSのモック&amp;プロキシサーバで、OpenAPIドキュメントを使用してモックサーバを起動することができます。</p>
 <p>Prismはコンテナイメージでも提供されています。そのコンテナイメージを使用して実行するためのDocker Composeファイルとして<code>docker-compose.api-mock.yml</code>を予め作成しているため、Docker Composeを使用してDockerコンテナ上でモックサーバを起動します。</p>
@@ -798,7 +798,7 @@ prism_1  | [9:54:47 PM] › [CLI] ℹ  info      POST       http://0.0.0.0:9080/
 prism_1  | [9:54:47 PM] › [CLI] ℹ  info      GET        http://0.0.0.0:9080/api/csrf_token
 prism_1  | [9:54:47 PM] › [CLI] ▶  start     Prism is listening on http://0.0.0.0:9080
 </code></pre><p>動作を確認するため、ブラウザを起動し、<a href="http://localhost:9080/api/todos" target="_blank">localhost:9080/api/todos</a>にアクセスします。</p>
-<p>Prismでは、レスポンスとしてOpenAPIドキュメントに定義された<code>example</code>を使用するため、次のレスポンスが画面上に出力されることを確認します。（<code>examples</code>を使用せずに動的に生成する<a href="https://meta.stoplight.io/docs/prism/docs/guides/01-mocking.md#dynamic-response-generation" target="_blank">Dynamic Response Generation</a>機能もあります）</p>
+<p>Prismでは、レスポンスとしてOpenAPIドキュメントに定義された<code>example</code>を使用するため、次のレスポンスが画面上に出力されることを確認します。（<code>examples</code>を使用せずに動的に生成する<a href="https://meta.stoplight.io/docs/prism/83dbbd75532cf-http-mocking#dynamic-response-generation" target="_blank">Dynamic Response Generation</a>機能もあります）</p>
 <pre><code>[
   - {
         id: 2001,
@@ -819,7 +819,7 @@ prism_1  | [4:29:54 AM] ›     [NEGOTIATOR] ✔  success   Found a compatible c
 prism_1  | [4:29:54 AM] ›     [NEGOTIATOR] ✔  success   Responding with the requested status code 200
 </code></pre><p>なお、モックサーバを停止させる場合には、起動したコンソールで<code>Ctrl</code>+<code>C</code>を押します。</p>
 <p>これでモックサーバの起動は完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -862,7 +862,7 @@ prism_1  | [4:29:54 AM] ›     [NEGOTIATOR] ✔  success   Responding with the 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"next":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},"previous":{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/mock/README.md","mtime":"2023-07-24T02:52:18.371Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"next":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},"previous":{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/mock/README.md","mtime":"2023-12-25T02:59:13.973Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
