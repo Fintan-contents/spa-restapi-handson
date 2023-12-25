@@ -6,7 +6,7 @@
         <title>ページ外観の作成 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,7 +780,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="ページ外観の作成"><a name="ページ外観の作成" class="plugin-anchor" href="#ページ外観の作成"><i class="fa fa-link" aria-hidden="true"></i></a>ページ外観の作成</h1>
+                                <html><head></head><body><h1 id="ページ外観の作成"><a name="ページ外観の作成" class="plugin-anchor" href="#ページ外観の作成"><i class="fa fa-link" aria-hidden="true"></i></a>ページ外観の作成</h1>
 <p>ToDoページの外観を作成します。</p>
 <h2 id="todoページの表示"><a name="todoページの表示" class="plugin-anchor" href="#todoページの表示"><i class="fa fa-link" aria-hidden="true"></i></a>ToDoページの表示</h2>
 <p>まず、フロントエンドのアプリでデザインモックと同様のページを表示できることを確認します。</p>
@@ -804,7 +804,7 @@
 <pre><code>Failed to compile.
 
 ./src/App.tsx
-  Line 67:2:  Parsing error: JSX expressions must have one parent element
+  SyntaxError: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment &lt;&gt;...&lt;/&gt;?
 </code></pre><p>エラーメッセージを確認すると、JSXは必ず1の親要素を持つ必要がある、とあります。これは、JSXではトップレベルの要素として複数の要素を返すことはできず、必ず1つの要素として返さなければいけないためです。デザインモックのHTMLをそのまま持ってくると、<code>header</code>タグと<code>div</code>タグがトップレベルで並んだ状態になるため、このルールに違反してしまいます。ダミーの親要素として<code>&lt;div&gt;</code>等で囲って返すといったこともできますが、意味を持たない余分な要素をページに出力することになってしまいます。そのため、ここではフラグメントというReactが提供するコンポーネントを使用します。次のようにReact要素のトップレベルで使用することで、出力結果には影響させずに、複数の要素を1つの要素として返すことができます。</p>
 <pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> (
@@ -855,7 +855,7 @@ Type &apos;string&apos; is not assignable to type &apos;boolean | undefined&apos
     46 |               &lt;/label&gt;
     47 |             &lt;/div&gt;
 </code></pre><p>これは、JSXでは<code>checked</code>属性には<code>boolean</code>値を設定する必要があるためです。</p>
-<p>JSXでは、中括弧で囲うことで式を埋め込むことができますので、<code>&quot;checked&quot;</code>と同等である<code>true</code>を設定するよう、次のように修正します。（参考：<a href="https://ja.reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx" target="_blank">React - JSXに式を埋め込む</a>）</p>
+<p>JSXでは、中括弧で囲うことで式を埋め込むことができますので、<code>&quot;checked&quot;</code>と同等である<code>true</code>を設定するよう、次のように修正します。（参考：<a href="https://ja.react.dev/learn/javascript-in-jsx-with-curly-braces#using-curly-braces-a-window-into-the-javascript-world" target="_blank">React - 波括弧は JavaScript 世界への窓口</a>）</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_checkbox&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">{true}</span> /&gt;</span>
 </code></pre>
 <p>ちなみに、スクリプトを実行したタイミングでエラーになるのではなく、このようにコンパイルされるタイミングでエラーを検知してくれるのは、型を利用できるTypeScriptのメリットでもあります。</p>
@@ -937,7 +937,7 @@ Type &apos;string&apos; is not assignable to type &apos;boolean | undefined&apos
 <p><img src="img/page-nocss.png" alt="page-nocss"></p>
 <p><code>App</code>ではCSSファイルを取り込む実装をしていないため、スタイルが適用されていない状態になっています。そのため、次はCSSファイルを取り込む実装を追加していきます。</p>
 <h2 id="cssファイルの作成"><a name="cssファイルの作成" class="plugin-anchor" href="#cssファイルの作成"><i class="fa fa-link" aria-hidden="true"></i></a>CSSファイルの作成</h2>
-<p>Reactでは、スタイルの記述方法がいくつか提供されていますが、ここではデザインモックのCSSファイルを使うために、<code>className</code>属性とCSSファイルを使ってスタイルを定義します。（参考：<a href="https://ja.reactjs.org/docs/faq-styling.html" target="_blank">React - CSSとスタイルの使用</a>）</p>
+<p>Reactでは、スタイルの記述方法がいくつか提供されていますが、ここではデザインモックのCSSファイルを使うために、<code>className</code>属性とCSSファイルを使ってスタイルを定義します。（参考：<a href="https://ja.react.dev/reference/react-dom/components/common#applying-css-styles" target="_blank">React - CSS スタイルの適用</a>）</p>
 <p>CRAに含まれる<a href="https://webpack.js.org/" target="_blank">webpack</a>では、<code>import</code>を使用してCSSファイルを読み込むことが出来るため、その方法でコンポーネントにCSSファイルを読み込みます。（参考：<a href="https://create-react-app.dev/docs/adding-a-stylesheet" target="_blank">CRA - Adding a Stylesheet</a>）</p>
 <p><code>App</code>用のCSSのファイルとして、<code>App.css</code>を作成します。CSSファイルの中身は、ToDoページのデザインモックのCSSをそのまま持ってきます。</p>
 <p><code>src/App.css</code></p>
@@ -1106,7 +1106,7 @@ Type &apos;string&apos; is not assignable to type &apos;boolean | undefined&apos
 <p>ページの表示内容を確認し、スタイルが適用されてデザインモックと同等の表示内容になっていることを確認します。</p>
 <p><img src="img/page-css.png" alt="page-css"></p>
 <p>これで、ページの作成は完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -1149,7 +1149,7 @@ Type &apos;string&apos; is not assignable to type &apos;boolean | undefined&apos
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"next":{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},"previous":{"title":"フロントエンド","level":"1.6.1","depth":2,"path":"todo/frontend/README.md","ref":"todo/frontend/README.md","articles":[{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"path":"todo/frontend/todo-page/README.md","ref":"todo/frontend/todo-page/README.md","articles":[]},{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"path":"todo/frontend/todo-filter/README.md","ref":"todo/frontend/todo-filter/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-page/README.md","mtime":"2023-07-24T02:52:18.371Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"next":{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},"previous":{"title":"フロントエンド","level":"1.6.1","depth":2,"path":"todo/frontend/README.md","ref":"todo/frontend/README.md","articles":[{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"path":"todo/frontend/todo-page/README.md","ref":"todo/frontend/todo-page/README.md","articles":[]},{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"path":"todo/frontend/todo-filter/README.md","ref":"todo/frontend/todo-filter/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-page/README.md","mtime":"2023-12-25T02:59:13.979Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

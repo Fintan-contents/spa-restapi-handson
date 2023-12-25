@@ -6,7 +6,7 @@
         <title>ToDoの一覧表示 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,18 +780,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="todoの一覧表示"><a name="todoの一覧表示" class="plugin-anchor" href="#todoの一覧表示"><i class="fa fa-link" aria-hidden="true"></i></a>ToDoの一覧表示</h1>
+                                <html><head></head><body><h1 id="todoの一覧表示"><a name="todoの一覧表示" class="plugin-anchor" href="#todoの一覧表示"><i class="fa fa-link" aria-hidden="true"></i></a>ToDoの一覧表示</h1>
 <p>ToDoページで登録されているToDoを一覧表示できるように実装します。</p>
 <h2 id="stateの設計"><a name="stateの設計" class="plugin-anchor" href="#stateの設計"><i class="fa fa-link" aria-hidden="true"></i></a>stateの設計</h2>
 <p>登録されているToDoを表示するために、コンポーネントでどのような状態が必要になるかを考えていきます。</p>
-<p>Reactでは、stateを使用することで、状態の変化を表現することができます。（参考：<a href="https://ja.reactjs.org/docs/thinking-in-react.html#step-3-identify-the-minimal-but-complete-representation-of-ui-state" target="_blank">React - Reactの流儀 Step 3</a>）</p>
+<p>Reactでは、stateを使用することで、状態の変化を表現することができます。（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state" target="_blank">React - Reactの流儀 ステップ 3</a>）</p>
 <p>コンポーネントのstateになりうるのは、ユーザーからの入力や時間の経過の中で変化したり、他のstate等を使って算出可能ではないものになります。画面に表示するToDoの一覧は、ユーザーからの入力で変化していくもので、算出することもできないため、stateとします。</p>
-<p>次に、そのstateをどのコンポーネントに配置するのかを考えていきます。（参考：<a href="https://ja.reactjs.org/docs/thinking-in-react.html#step-4-identify-where-your-state-should-live" target="_blank">React - Reactの流儀 Step 4</a>）</p>
+<p>次に、そのstateをどのコンポーネントに配置するのかを考えていきます。（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-4-identify-where-your-state-should-live" target="_blank">React - Reactの流儀 ステップ 4</a>）</p>
 <p>このstateを表示するためのコンポーネントは、<code>TodoList</code>になります。<code>TodoItem</code>ではそれぞれのToDoの内容を表示しますが、一覧できるように表示するのは<code>TodoList</code>です。また、<code>TodoForm</code>ではこのToDo一覧に追加することができるため、<code>TodoForm</code>でもこのstateを扱うことになります。複数のコンポーネントでstateを必要とする場合、階層構造の中で共通の親コンポーネントがstateを持つことが適しているため、ここでは、<code>TodoBoard</code>にこのstateを持たせることにします。</p>
 <h2 id="コンポーネントの実装"><a name="コンポーネントの実装" class="plugin-anchor" href="#コンポーネントの実装"><i class="fa fa-link" aria-hidden="true"></i></a>コンポーネントの実装</h2>
 <p>現時点では、ToDoの表示内容は<code>TodoList</code>に静的に定義していますが、これを<code>TodoBoard</code>でstateを使って実装します。</p>
-<p>Reactの関数コンポーネントでは、様々な機能を実装するためにフック（Hooks）と呼ばれる様々な機能が提供されており、stateフックを使います。（<a href="https://ja.reactjs.org/docs/hooks-state.html" target="_blank">参考</a>）</p>
-<p>stateフックは<code>useState</code>を呼び出すことで使用できます。引数に初期値を指定し、返り値としてstateとそれを更新するための関数をペアで返します。例えば、0から始まるカウントをstateとし、ボタンをクリックするごとにstateを更新するような場合、次のように使用します。</p>
+<p>Reactの関数コンポーネントでは、様々な機能を実装するためにフック（Hooks）と呼ばれる様々な機能が提供されており、useStateフックを使います。（<a href="https://ja.react.dev/learn/state-a-components-memory" target="_blank">参考</a>）</p>
+<p>useStateフックは<code>useState</code>を呼び出すことで使用できます。引数に初期値を指定し、返り値としてstateとそれを更新するための関数をペアで返します。例えば、0から始まるカウントをstateとし、ボタンをクリックするごとにstateを更新するような場合、次のように使用します。</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> [count, setCount] = useState(<span class="hljs-number">0</span>);
 
 <span class="hljs-keyword">return</span> (
@@ -899,13 +899,13 @@ type Props = {
   );
 };
 </code></pre>
-<p>なお、<code>TodoList</code>のJSXで<code>TodoItem</code>を宣言しているところで、<code>key</code>プロパティを使用します。これは、コンポーネントのレンダリング要否を判定するためにReactが使うプロパティで、<code>map</code>で繰り返してコンポーネントを使用したりする場合、個々のコンポーネントを識別するために一意となる値を設定しておきます。（参考：<a href="https://ja.reactjs.org/docs/lists-and-keys.html" target="_blank">React - リストとkey</a>）</p>
+<p>なお、<code>TodoList</code>のJSXで<code>TodoItem</code>を宣言しているところで、<code>key</code>プロパティを使用します。これは、コンポーネントのレンダリング要否を判定するためにReactが使うプロパティで、<code>map</code>で繰り返してコンポーネントを使用したりする場合、個々のコンポーネントを識別するために一意となる値を設定しておきます。（参考：<a href="https://ja.react.dev/learn/rendering-lists" target="_blank">React - リストのレンダー</a>）</p>
 <h2 id="rest-apiの呼び出しとstateの更新"><a name="rest-apiの呼び出しとstateの更新" class="plugin-anchor" href="#rest-apiの呼び出しとstateの更新"><i class="fa fa-link" aria-hidden="true"></i></a>REST APIの呼び出しとstateの更新</h2>
 <p>次に、stateを更新するため、REST APIを呼び出すタイミングを考えます。</p>
 <p>ページを表示したタイミングでToDo一覧を表示したいので、<code>TodoBoard</code>コンポーネントを最初にレンダーしたタイミングで、REST APIを呼び出し、その結果からstateを更新するようにします。</p>
-<p>関数コンポーネントでは、このようにデータの取得や更新によりコンポーネントに影響を与えることを副作用と呼び、副作用を起こす処理を実装するためのフックとして、effectフックが提供されています。（参考：<a href="https://ja.reactjs.org/docs/hooks-effect.html" target="_blank">React - 副作用フックの利用方法</a>）</p>
-<p>effectフックは<code>useEffect</code>を呼び出すことで使用します。第1引数に副作用を起こす関数と、第2引数にこの副作用が依存するstateを配列で渡します。第2引数に渡したstateが更新されると、第1引数の関数が実行されます。ここでのREST API呼び出しは他のstateに依存せず、最初のレンダー後に呼び出したいため、そのような場合には空の配列（<code>[]</code>）を渡します。（参考：<a href="https://ja.reactjs.org/docs/hooks-effect.html#tips-for-using-effects" target="_blank">React - 副作用を使う場合のヒント（最後の補足）</a>）</p>
-<p>stateフックの初期値で静的データを渡していましたが、REST APIの呼び出しを想定し、まずはeffectフックを使用して静的データでstateを更新するように実装してみます。stateの初期値としては、空の配列を渡しておきます。</p>
+<p>関数コンポーネントでは、このようにデータの取得や更新によりコンポーネントに影響を与えることを副作用と呼び、副作用を起こす処理を実装するためのフックとして、useEffectフックが提供されています。（参考：<a href="https://ja.react.dev/reference/react/useEffect" target="_blank">React - useEffect</a>）</p>
+<p>useEffectフックは<code>useEffect</code>を呼び出すことで使用します。第1引数に副作用を起こす関数と、第2引数にこの副作用が依存するstateを配列で渡します。第2引数に渡したstateが更新されると、第1引数の関数が実行されます。ここでのREST API呼び出しは他のstateに依存せず、最初のレンダー後に呼び出したいため、そのような場合には空の配列（<code>[]</code>）を渡します。（参考：<a href="https://ja.react.dev/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies" target="_blank">React - エフェクトの依存配列を指定する（落とし穴）</a>）</p>
+<p>useStateフックの初期値で静的データを渡していましたが、REST APIの呼び出しを想定し、まずはuseEffectフックを使用して静的データでstateを更新するように実装してみます。stateの初期値としては、空の配列を渡しておきます。</p>
 <p><code>src/components/TodoBoard.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, { useEffect, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoBoard.css&apos;</span>;
@@ -940,7 +940,7 @@ type Todo = {
 };
 </code></pre>
 <p>ページの表示内容を確認すると、何も変わらず表示されています。いまは静的データで設定しているだけでuseEffectの処理も瞬時に完了するため、目に見えるような影響はありません。</p>
-<p>effectフックで更新する準備ができたため、次に、生成したクライアントコードを使用してREST APIを呼び出すように実装します。事前に作成した<code>BackendService</code>の関数を使用して、REST APIを呼び出します。結果は<code>Promise</code>で返ってくるため、<code>then</code>を呼び出してレスポンスが返ってきたタイミングでstateの更新関数を呼び出すように実装します。</p>
+<p>useEffectフックで更新する準備ができたため、次に、生成したクライアントコードを使用してREST APIを呼び出すように実装します。事前に作成した<code>BackendService</code>の関数を使用して、REST APIを呼び出します。結果は<code>Promise</code>で返ってくるため、<code>then</code>を呼び出してレスポンスが返ってきたタイミングでstateの更新関数を呼び出すように実装します。</p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, { useEffect, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoBoard.css&apos;</span>;
 <span class="hljs-keyword">import</span> { TodoForm } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoForm&apos;</span>;
@@ -974,7 +974,7 @@ type Todo = {
 <h2 id="モックを使用した動作確認"><a name="モックを使用した動作確認" class="plugin-anchor" href="#モックを使用した動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>モックを使用した動作確認</h2>
 <p>ページを表示したら、モックサーバから取得したデータが一覧で表示されることを確認します。</p>
 <p>確認ができたら、フロントエンドの実装は完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -1017,7 +1017,7 @@ type Todo = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"next":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},"previous":{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-list/README.md","mtime":"2023-07-24T02:52:18.371Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"next":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},"previous":{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-list/README.md","mtime":"2023-12-25T02:59:13.976Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

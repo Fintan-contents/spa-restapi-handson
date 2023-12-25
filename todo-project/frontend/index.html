@@ -6,7 +6,7 @@
         <title>フロントエンドの確認 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,7 +780,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="フロントエンドの確認"><a name="フロントエンドの確認" class="plugin-anchor" href="#フロントエンドの確認"><i class="fa fa-link" aria-hidden="true"></i></a>フロントエンドの確認</h1>
+                                <html><head></head><body><h1 id="フロントエンドの確認"><a name="フロントエンドの確認" class="plugin-anchor" href="#フロントエンドの確認"><i class="fa fa-link" aria-hidden="true"></i></a>フロントエンドの確認</h1>
 <p>フロントエンドを開発するためのプロジェクトを確認します。</p>
 <h2 id="フロントエンド開発プロジェクトを確認する"><a name="フロントエンド開発プロジェクトを確認する" class="plugin-anchor" href="#フロントエンド開発プロジェクトを確認する"><i class="fa fa-link" aria-hidden="true"></i></a>フロントエンド開発プロジェクトを確認する</h2>
 <p><code>frontend</code>ディレクトリが、フロントエンド開発プロジェクトになります。</p>
@@ -790,6 +790,7 @@
 <li>開発に使用するDockerCompose定義ファイルを追加</li>
 <li>HelloWorldを表示するだけの簡易なページに変更</li>
 <li>ページ変更に伴う不要ファイルの削除</li>
+<li>アプリの実行時には使用しないライブラリをpackage.jsonのdependenciesからdevDependenciesに移動</li>
 </ul>
 <p>ディレクトリ構造は、次のようになっています。</p>
 <pre><code>frontend
@@ -838,26 +839,28 @@
 </code></pre>
 <h4 id="srcindextsx"><a name="srcindextsx" class="plugin-anchor" href="#srcindextsx"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/index.tsx</code></h4>
 <p>CRAで作成したアプリでJavaScript実行のエントリポイントとなる<code>src/index.js</code>のTypeScript実装です。</p>
-<p>この実装の中では、JSXと呼ばれるJavaScript構文の拡張を使用しています。JSXを使用することで、React要素をHTMLのマークアップに近しいイメージで記述することができます。（参考：<a href="https://ja.reactjs.org/docs/introducing-jsx.html" target="_blank">React - JSXの導入]</a>）</p>
+<p>この実装の中では、JSXと呼ばれるJavaScript構文の拡張を使用しています。JSXを使用することで、React要素をHTMLのマークアップに近しいイメージで記述することができます。（参考：<a href="https://ja.react.dev/learn/writing-markup-with-jsx" target="_blank">React - JSX でマークアップを記述する]</a>）</p>
 <p>なお、TypeScriptファイルの拡張子は通常<code>ts</code>ですが、後述のJSXを使用する場合は<code>tsx</code>とする必要があります。（参考：<a href="https://www.typescriptlang.org/docs/handbook/jsx.html" target="_blank">TypeScript - JSX</a>）</p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-dom&apos;</span>;
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-dom/client&apos;</span>;
 <span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./App&apos;</span>;
 
-ReactDOM.render(
+<span class="hljs-keyword">const</span> container = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&apos;root&apos;</span>);
+<span class="hljs-keyword">const</span> root = ReactDOM.createRoot(container!);
+root.render(
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.StrictMode</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">React.StrictMode</span>&gt;</span></span>,
-  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&apos;root&apos;</span>)
+  <span class="hljs-tag">&lt;/<span class="hljs-name">React.StrictMode</span>&gt;</span></span>
 );
 </code></pre>
-<p><code>ReactDOM.render()</code>を使用し、React要素をDOMにレンダーしています。（参考：<a href="https://ja.reactjs.org/docs/rendering-elements.html#rendering-an-element-into-the-dom" target="_blank">React - 要素のレンダー</a>）</p>
-<p><code>ReactDOM.render()</code>の第1引数にはReact要素を指定します。ここでは、上で説明したJSXを使用して、<code>&lt;React.StrictMode&gt;</code>とその子要素に<code>&lt;App&gt;</code>があるReact要素を定義しています。</p>
-<p><code>&lt;React.StrictMode&gt;</code>は<code>React.StrictMode</code>のコンポーネントを指しており、<code>React.StrictMode</code>コンポーネントはReactが提供するコンポーネントです。このコンポーネントは、子要素でReactのstrictモードを有効にするためのコンポーネントになります。出力されるページのコンテンツには影響しませんが、開発時に有用となる警告等を表示してくれるようになります。（参考<a href="https://ja.reactjs.org/docs/strict-mode.html" target="_blank">React - strictモード</a>）</p>
-<p>同様に、<code>&lt;App /&gt;</code>は<code>App</code>コンポーネントを指しています。このコンポーネントについては後述します。</p>
-<p><code>ReactDOM.render()</code>の第2引数にはレンダー先のDOMを指定します。ここでは<a href="https://developer.mozilla.org/ja/docs/Web/API/Document/getElementByIde" target="_blank"><code>Document.getElementById()</code></a>の実行結果を渡しています。</p>
-<p>ここでの<code>document</code>は前述の<code>public/index.html</code>を指しており、そこで定義されている<code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code>を表すDOMに、第1引数に渡したReact要素がレンダーされることになります。</p>
+<p><code>ReactDOM.createRoot()</code>を使用してアプリのルートコンポーネントを作成しています。（参考：<a href="https://ja.react.dev/reference/react-dom/client/createRoot" target="_blank">createRoot</a>）</p>
+<p><code>ReactDOM.createRoot()</code>の引数にはレンダー先のDOM要素を指定します。ここでは<a href="https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById" target="_blank"><code>Document.getElementById()</code></a>の実行結果を渡しています。</p>
+<p>ここでの<code>document</code>は前述の<code>public/index.html</code>を指しており、そこで定義されている<code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code>を表すDOMに、引数に渡したReact要素がレンダーされることになります。</p>
 <p><code>public/index.html</code>の<code>&lt;body&gt;</code>には<code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code>しか無いため、コンテンツを全て更新していることになります。</p>
+<p><code>root.render()</code>を使用してReactコンポーネントを指定されたDOMにレンダリングします。（参考：<a href="https://ja.react.dev/reference/react-dom/client/createRoot#root-render" target="_blank">root.render(reactNode)</a>）</p>
+<p><code>root.render()</code>の引数にはReactコンポーネントを指定します。ここでは、上で説明したJSXを使用して、<code>&lt;React.StrictMode&gt;</code>とその子要素に<code>&lt;App&gt;</code>があるReact要素を定義しています。</p>
+<p><code>&lt;React.StrictMode&gt;</code>は<code>React.StrictMode</code>のコンポーネントを指しており、<code>React.StrictMode</code>コンポーネントはReactが提供するコンポーネントです。このコンポーネントは、子要素でReactのstrictモードを有効にするためのコンポーネントになります。出力されるページのコンテンツには影響しませんが、開発時に有用となる警告等を表示してくれるようになります。（参考：<a href="https://ja.react.dev/reference/react/StrictMode" target="_blank">StrictMode</a>）</p>
+<p>同様に、<code>&lt;App /&gt;</code>は<code>App</code>コンポーネントを指しています。このコンポーネントについては後述します。</p>
 <h4 id="srcapptsx"><a name="srcapptsx" class="plugin-anchor" href="#srcapptsx"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/App.tsx</code></h4>
 <p><code>App</code>コンポーネントを実装しています。このコンポーネントは、<code>&lt;h1&gt;Hello, world&lt;/h1&gt;</code>というHTML要素を表すReact要素を返します。</p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
@@ -885,7 +888,7 @@ ReactDOM.render(
 </code></pre><p>起動が完了したら、自動的にデフォルトブラウザで<a href="http://localhost:3000/" target="_blank">トップページ</a>が開きますので、次の画面が表示されていることを確認します。</p>
 <p><img src="img/frontend-test.png" alt="frontend-test"></p>
 <p>起動中はコマンドが実行中のままになりますので、確認が完了したら、<code>Ctrl</code>+<code>C</code>で終了します。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -928,7 +931,7 @@ ReactDOM.render(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"フロントエンドの確認","level":"1.5.2","depth":2,"next":{"title":"バックエンドの確認","level":"1.5.3","depth":2,"path":"todo-project/backend/README.md","ref":"todo-project/backend/README.md","articles":[]},"previous":{"title":"プロジェクトの作成","level":"1.5.1","depth":2,"path":"todo-project/project/README.md","ref":"todo-project/project/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo-project/frontend/README.md","mtime":"2023-07-24T02:52:18.366Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"フロントエンドの確認","level":"1.5.2","depth":2,"next":{"title":"バックエンドの確認","level":"1.5.3","depth":2,"path":"todo-project/backend/README.md","ref":"todo-project/backend/README.md","articles":[]},"previous":{"title":"プロジェクトの作成","level":"1.5.1","depth":2,"path":"todo-project/project/README.md","ref":"todo-project/project/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo-project/frontend/README.md","mtime":"2023-12-25T02:59:13.961Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

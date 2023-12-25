@@ -6,7 +6,7 @@
         <title>バックエンドの確認 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,7 +780,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="バックエンドの確認"><a name="バックエンドの確認" class="plugin-anchor" href="#バックエンドの確認"><i class="fa fa-link" aria-hidden="true"></i></a>バックエンドの確認</h1>
+                                <html><head></head><body><h1 id="バックエンドの確認"><a name="バックエンドの確認" class="plugin-anchor" href="#バックエンドの確認"><i class="fa fa-link" aria-hidden="true"></i></a>バックエンドの確認</h1>
 <p>バックエンドを開発するためのプロジェクトを確認します。</p>
 <h2 id="バックエンド開発プロジェクトを確認する"><a name="バックエンド開発プロジェクトを確認する" class="plugin-anchor" href="#バックエンド開発プロジェクトを確認する"><i class="fa fa-link" aria-hidden="true"></i></a>バックエンド開発プロジェクトを確認する</h2>
 <p><code>backend</code>ディレクトリが、バックエンド開発プロジェクトになります。</p>
@@ -844,8 +844,8 @@
 <h4 id="pomxml"><a name="pomxml" class="plugin-anchor" href="#pomxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>pom.xml</code></h4>
 <p>Mavenプロジェクトの定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものをベースに使用しています。</p>
-<h4 id="dockerdocker-composeapi-genyml"><a name="dockerdocker-composeapi-genyml" class="plugin-anchor" href="#dockerdocker-composeapi-genyml"><i class="fa fa-link" aria-hidden="true"></i></a><code>docker/docker-compose.api-gen.yml</code></h4>
-<p>OpenAPI定義ファイルからクライアント実装を生成するための、Docker Composeの定義ファイルです。</p>
+<h4 id="dockerdocker-composedevyml"><a name="dockerdocker-composedevyml" class="plugin-anchor" href="#dockerdocker-composedevyml"><i class="fa fa-link" aria-hidden="true"></i></a><code>docker/docker-compose.dev.yml</code></h4>
+<p>データベース（PostgreSQL）を起動するDocker Composeの定義ファイルです。</p>
 <h4 id="rest-api-specificationopenapiyaml"><a name="rest-api-specificationopenapiyaml" class="plugin-anchor" href="#rest-api-specificationopenapiyaml"><i class="fa fa-link" aria-hidden="true"></i></a><code>rest-api-specification/openapi.yaml</code></h4>
 <p>OpenAPI仕様でREST APIを定義したOpenAPIドキュメントです。</p>
 <p>本ハンズオンで作成するREST APIについては、予め定義しています。</p>
@@ -883,29 +883,29 @@
 <p>Flywayを使用するための準備については、予め設定しています。（<a href="https://flywaydb.org/documentation/maven/#installation" target="_blank">Maven Plugin | Flyway</a>）</p>
 <p>Flywayの実行については、Nablarchの初期化処理を利用して、バックエンドアプリを起動したタイミングで行うように予め設定しています。（参考：<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/repository.html#repository-initialize-object" target="_blank">Nablarch - オブジェクトの初期化処理を行う</a>）</p>
 <p>example-chatのバックエンドでも同様の実装をしているため、その実装を流用しています。</p>
-<p><div class="alert alert-danger hints-alert"><div class="hints-icon"><i class="fa fa-exclamation-circle"></i></div><div class="hints-container"><p>ToDoアプリでは、アプリ起動時に毎回テーブルを初期化するように設定しています。テストを簡単に繰り返し実行できるようにするためにこのような設定としますが、テスト用途以外では指定しないように注意してください。</p>
-</div></div></p>
+<p></p><div class="alert alert-danger hints-alert"><div class="hints-icon"><i class="fa fa-exclamation-circle"></i></div><div class="hints-container"><p>ToDoアプリでは、アプリ起動時に毎回テーブルを初期化するように設定しています。テストを簡単に繰り返し実行できるようにするためにこのような設定としますが、テスト用途以外では指定しないように注意してください。</p>
+</div></div><p></p>
 <h4 id="srcmainjavacomexamplesystemnablarchdiexamplecomponentdefinitionloaderjava"><a name="srcmainjavacomexamplesystemnablarchdiexamplecomponentdefinitionloaderjava" class="plugin-anchor" href="#srcmainjavacomexamplesystemnablarchdiexamplecomponentdefinitionloaderjava"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/java/com/example/system/nablarch/di/ExampleComponentDefinitionLoader.java</code></h4>
 <p>前述の<code>SystemRepositoryComponent</code>アノテーションを付与してシステムリポジトリへ登録するための実装です。</p>
-<h4 id="srcmainresourceapp-logproperties"><a name="srcmainresourceapp-logproperties" class="plugin-anchor" href="#srcmainresourceapp-logproperties"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/app-log.properties</code></h4>
+<h4 id="srcmainresourcesapp-logproperties"><a name="srcmainresourcesapp-logproperties" class="plugin-anchor" href="#srcmainresourcesapp-logproperties"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/app-log.properties</code></h4>
 <p>Nablarchで使用するログ出力用の定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものを使用しています。</p>
-<h4 id="srcmainresourcecommonconfig"><a name="srcmainresourcecommonconfig" class="plugin-anchor" href="#srcmainresourcecommonconfig"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/common.config</code></h4>
+<h4 id="srcmainresourcescommonconfig"><a name="srcmainresourcescommonconfig" class="plugin-anchor" href="#srcmainresourcescommonconfig"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/common.config</code></h4>
 <p>Nablarchで使用するプロパティ定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものをベースに使用しています。</p>
-<h4 id="srcmainresourcedata-sourceconfig"><a name="srcmainresourcedata-sourceconfig" class="plugin-anchor" href="#srcmainresourcedata-sourceconfig"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/data-source.config</code></h4>
+<h4 id="srcmainresourcesdata-sourcexml"><a name="srcmainresourcesdata-sourcexml" class="plugin-anchor" href="#srcmainresourcesdata-sourcexml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/data-source.xml</code></h4>
 <p>Nablarchで使用するプロパティ定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものをベースに使用しています。</p>
-<h4 id="srcmainresourceenvconfig"><a name="srcmainresourceenvconfig" class="plugin-anchor" href="#srcmainresourceenvconfig"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/env.config</code></h4>
+<h4 id="srcmainresourcesenvconfig"><a name="srcmainresourcesenvconfig" class="plugin-anchor" href="#srcmainresourcesenvconfig"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/env.config</code></h4>
 <p>Nablarchで使用するプロパティ定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものをベースに使用しています。</p>
-<h4 id="srcmainresourcelogproperties"><a name="srcmainresourcelogproperties" class="plugin-anchor" href="#srcmainresourcelogproperties"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/log.properties</code></h4>
+<h4 id="srcmainresourceslogproperties"><a name="srcmainresourceslogproperties" class="plugin-anchor" href="#srcmainresourceslogproperties"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/log.properties</code></h4>
 <p>Nablarchで使用するログ出力用の定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものを使用しています。</p>
-<h4 id="srcmainresourcerest-bootxml"><a name="srcmainresourcerest-bootxml" class="plugin-anchor" href="#srcmainresourcerest-bootxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/rest-boot.xml</code></h4>
+<h4 id="srcmainresourcesrest-bootxml"><a name="srcmainresourcesrest-bootxml" class="plugin-anchor" href="#srcmainresourcesrest-bootxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/rest-boot.xml</code></h4>
 <p>Nablarchの使用するシステムリポジトリの定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものをベースに使用しています。</p>
-<h4 id="srcmainresourcerest-component-configurationxml"><a name="srcmainresourcerest-component-configurationxml" class="plugin-anchor" href="#srcmainresourcerest-component-configurationxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resource/rest-component-configuration.xml</code></h4>
+<h4 id="srcmainresourcesrest-component-configurationxml"><a name="srcmainresourcesrest-component-configurationxml" class="plugin-anchor" href="#srcmainresourcesrest-component-configurationxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/rest-component-configuration.xml</code></h4>
 <p>Nablarchの使用するシステムリポジトリの定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものをベースに使用しています。</p>
 <h4 id="srcmainresourcesdbmigrationv1createtablesql"><a name="srcmainresourcesdbmigrationv1createtablesql" class="plugin-anchor" href="#srcmainresourcesdbmigrationv1createtablesql"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/main/resources/db/migration/V1__create_table.sql</code></h4>
@@ -932,10 +932,10 @@
     }
 }
 </code></pre>
-<h4 id="srctestresourcelogproperties"><a name="srctestresourcelogproperties" class="plugin-anchor" href="#srctestresourcelogproperties"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/test/resource/log.properties</code></h4>
+<h4 id="srctestresourceslogproperties"><a name="srctestresourceslogproperties" class="plugin-anchor" href="#srctestresourceslogproperties"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/test/resources/log.properties</code></h4>
 <p>Nablarchで使用するログ出力用の定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものを使用しています。</p>
-<h4 id="srctestresourceunit-testxml"><a name="srctestresourceunit-testxml" class="plugin-anchor" href="#srctestresourceunit-testxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/test/resource/unit-test.xml</code></h4>
+<h4 id="srctestresourcesunit-testxml"><a name="srctestresourcesunit-testxml" class="plugin-anchor" href="#srctestresourcesunit-testxml"><i class="fa fa-link" aria-hidden="true"></i></a><code>src/test/resources/unit-test.xml</code></h4>
 <p>テスト実行時にNablarchが使用するシステムリポジトリの定義ファイルです。</p>
 <p>ブランクプロジェクト作成時に生成されたものをベースに使用しています。</p>
 <h2 id="バックエンドのアプリを起動する"><a name="バックエンドのアプリを起動する" class="plugin-anchor" href="#バックエンドのアプリを起動する"><i class="fa fa-link" aria-hidden="true"></i></a>バックエンドのアプリを起動する</h2>
@@ -974,7 +974,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
 <pre><code>[INFO] Started ServerConnector@2299f6d7{HTTP/1.1,[http/1.1]}{0.0.0.0:9080}
 [INFO] Started Server@3751acd7{STARTING}[10.0.0.alpha1] @7133ms
 </code></pre><p>Jettyが起動したら、起動テストを行います。</p>
-<p>ブラウザを起動し、<a href="http://localhost:9080/api/test" target="_blank">lostlhost:9080/api/test</a>にアクセスします。</p>
+<p>ブラウザを起動し、<a href="http://localhost:9080/api/test" target="_blank">localhost:9080/api/test</a>にアクセスします。</p>
 <p>画面上に次のようなレスポンスが出力されることを確認します。</p>
 <pre><code>{
     status: &quot;ok&quot;
@@ -988,7 +988,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
 </code></pre><p>起動中のDockerコンテナとして出力されないことを確認します。</p>
 <pre><code>Name   Command   State   Ports
 ------------------------------
-</code></pre>
+</code></pre></body></html>
                                 
                                 </section>
                             
@@ -1031,7 +1031,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"バックエンドの確認","level":"1.5.3","depth":2,"next":{"title":"ToDo管理の実装","level":"1.6","depth":1,"path":"todo/README.md","ref":"todo/README.md","articles":[{"title":"フロントエンド","level":"1.6.1","depth":2,"path":"todo/frontend/README.md","ref":"todo/frontend/README.md","articles":[{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"path":"todo/frontend/todo-page/README.md","ref":"todo/frontend/todo-page/README.md","articles":[]},{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"path":"todo/frontend/todo-filter/README.md","ref":"todo/frontend/todo-filter/README.md","articles":[]}]},{"title":"バックエンド","level":"1.6.2","depth":2,"path":"todo/backend/README.md","ref":"todo/backend/README.md","articles":[{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]}]},{"title":"動作確認","level":"1.6.3","depth":2,"path":"todo/e2e/README.md","ref":"todo/e2e/README.md","articles":[]}]},"previous":{"title":"フロントエンドの確認","level":"1.5.2","depth":2,"path":"todo-project/frontend/README.md","ref":"todo-project/frontend/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo-project/backend/README.md","mtime":"2023-07-24T02:52:18.366Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"バックエンドの確認","level":"1.5.3","depth":2,"next":{"title":"ToDo管理の実装","level":"1.6","depth":1,"path":"todo/README.md","ref":"todo/README.md","articles":[{"title":"フロントエンド","level":"1.6.1","depth":2,"path":"todo/frontend/README.md","ref":"todo/frontend/README.md","articles":[{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"path":"todo/frontend/todo-page/README.md","ref":"todo/frontend/todo-page/README.md","articles":[]},{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"path":"todo/frontend/todo-filter/README.md","ref":"todo/frontend/todo-filter/README.md","articles":[]}]},{"title":"バックエンド","level":"1.6.2","depth":2,"path":"todo/backend/README.md","ref":"todo/backend/README.md","articles":[{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]}]},{"title":"動作確認","level":"1.6.3","depth":2,"path":"todo/e2e/README.md","ref":"todo/e2e/README.md","articles":[]}]},"previous":{"title":"フロントエンドの確認","level":"1.5.2","depth":2,"path":"todo-project/frontend/README.md","ref":"todo-project/frontend/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo-project/backend/README.md","mtime":"2023-12-25T02:59:13.961Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

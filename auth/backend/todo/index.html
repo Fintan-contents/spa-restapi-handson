@@ -6,7 +6,7 @@
         <title>ToDo管理でのユーザー取得 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,7 +780,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="todo管理でのユーザー取得"><a name="todo管理でのユーザー取得" class="plugin-anchor" href="#todo管理でのユーザー取得"><i class="fa fa-link" aria-hidden="true"></i></a>ToDo管理でのユーザー取得</h1>
+                                <html><head></head><body><h1 id="todo管理でのユーザー取得"><a name="todo管理でのユーザー取得" class="plugin-anchor" href="#todo管理でのユーザー取得"><i class="fa fa-link" aria-hidden="true"></i></a>ToDo管理でのユーザー取得</h1>
 <p>ToDo管理のREST APIで、ログインしたユーザーを使用するように修正します。</p>
 <h2 id="todo管理のrest-apiを修正"><a name="todo管理のrest-apiを修正" class="plugin-anchor" href="#todo管理のrest-apiを修正"><i class="fa fa-link" aria-hidden="true"></i></a>ToDo管理のREST APIを修正</h2>
 <p>ToDo管理の実装時には、ユーザーIDとしてダミー値を使用していましたが、スレッドコンテキストからユーザーIDを取得するように修正します。</p>
@@ -790,10 +790,10 @@ UserId userId = <span class="hljs-keyword">new</span> UserId(userIdValue);
 </code></pre>
 <h2 id="rest-apiのテスト"><a name="rest-apiのテスト" class="plugin-anchor" href="#rest-apiのテスト"><i class="fa fa-link" aria-hidden="true"></i></a>REST APIのテスト</h2>
 <p>もう一度テストを実行し、成功することを確認します。</p>
-<p><div class="alert alert-danger hints-alert"><div class="hints-icon"><i class="fa fa-exclamation-circle"></i></div><div class="hints-container"><p>もしテストが失敗する場合は、先ほどのログインチェックハンドラのテスト時にテストクラスに加えたユーザーIDが、元々使用していたダミー値と異なっていないか確認しましょう。ログインチェックハンドラでの修正時には、まだREST APIの内部で使用するユーザーIDはダミー値であったため、どのようなユーザーIDをセッションストアに設定してもテストが成功していましたが、ここでの修正により想定しているユーザーIDでなければテストデータとマッチせずにテストが失敗するようになります。</p>
-</div></div></p>
+<p></p><div class="alert alert-danger hints-alert"><div class="hints-icon"><i class="fa fa-exclamation-circle"></i></div><div class="hints-container"><p>もしテストが失敗する場合は、先ほどのログインチェックハンドラのテスト時にテストクラスに加えたユーザーIDが、元々使用していたダミー値と異なっていないか確認しましょう。ログインチェックハンドラでの修正時には、まだREST APIの内部で使用するユーザーIDはダミー値であったため、どのようなユーザーIDをセッションストアに設定してもテストが成功していましたが、ここでの修正により想定しているユーザーIDでなければテストデータとマッチせずにテストが失敗するようになります。</p>
+</div></div><p></p>
 <p>これで、ToDo管理でのユーザー取得の実装は完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -836,7 +836,7 @@ UserId userId = <span class="hljs-keyword">new</span> UserId(userIdValue);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDo管理でのユーザー取得","level":"1.8.2.5","depth":3,"next":{"title":"動作確認","level":"1.8.3","depth":2,"path":"auth/e2e/README.md","ref":"auth/e2e/README.md","articles":[]},"previous":{"title":"REST APIへのアクセス制限","level":"1.8.2.4","depth":3,"path":"auth/backend/check/README.md","ref":"auth/backend/check/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/backend/todo/README.md","mtime":"2023-07-24T02:52:18.362Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDo管理でのユーザー取得","level":"1.8.2.5","depth":3,"next":{"title":"動作確認","level":"1.8.3","depth":2,"path":"auth/e2e/README.md","ref":"auth/e2e/README.md","articles":[]},"previous":{"title":"REST APIへのアクセス制限","level":"1.8.2.4","depth":3,"path":"auth/backend/check/README.md","ref":"auth/backend/check/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/backend/todo/README.md","mtime":"2023-11-06T02:43:38.339Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

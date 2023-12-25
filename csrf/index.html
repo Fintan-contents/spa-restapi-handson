@@ -6,7 +6,7 @@
         <title>CSRF対策 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -778,7 +778,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="csrf対策"><a name="csrf対策" class="plugin-anchor" href="#csrf対策"><i class="fa fa-link" aria-hidden="true"></i></a>CSRF対策</h1>
+                                <html><head></head><body><h1 id="csrf対策"><a name="csrf対策" class="plugin-anchor" href="#csrf対策"><i class="fa fa-link" aria-hidden="true"></i></a>CSRF対策</h1>
 <p>REST API一覧の説明時にも紹介しましたが、Nablarchでは、クロスサイト・リクエスト・フォージェリ（以下CSRF）に対策するための機能が提供されています。（参考：<a href="https://www.ipa.go.jp/security/vuln/websecurity-HTML-1_6.html" target="_blank">CSRF | 安全なウェブサイトの作り方</a>）</p>
 <p>CSRFトークンを発行してリクエスト毎にサーバーサイド側で保持してるCSRFトークンと突き合わせる方式であり、CSRFトークンを発行するためのユーティリティと、CSRFトークンを検証するためのハンドラが提供されています。（参考：<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/web/csrf_token_verification_handler.html" target="_blank">CSRFトークン検証ハンドラ | Nablarch</a>）</p>
 <p>ここでは、CSRF対策を実現するために、バックエンドでCSRFトークンを取得するREST APIを提供し、フロントエンドからはREST APIで取得したCSRFトークンを使用するように実装していきます。</p>
@@ -961,7 +961,7 @@
 <p><code>refreshCsrfToken</code>関数によるCSRFトークン取得が完了するまでは、他のコンポーネントを処理したくないため、それを制御するためのフラグとして<code>initialized</code>stateを作成します。<code>refreshCsrfToken</code>の処理が終わるまでは、JSXで空要素を返すようにし、<code>refreshCsrfToken</code>の処理が完了して<code>initialized</code>が<code>true</code>になったタイミングで、今までと同様のコンポーネント処理を実行するようにします。</p>
 <h3 id="ログイン・ログアウト時のcsrfトークン設定"><a name="ログイン・ログアウト時のcsrfトークン設定" class="plugin-anchor" href="#ログイン・ログアウト時のcsrfトークン設定"><i class="fa fa-link" aria-hidden="true"></i></a>ログイン・ログアウト時のCSRFトークン設定</h3>
 <p>ログイン、ログアウト時に、セッションを破棄して新しく開始するようにしているため、ユーザーコンテクストにある<code>login</code>、<code>logout</code>関数内で、先ほど作成した<code>refreshCsrfToken</code>関数を実行するように実装します。</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserContextProvider: React.FC = <span class="hljs-function">(<span class="hljs-params">{ children }</span>) =&gt;</span> {
+<pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserContextProvider: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{ children }</span>) =&gt;</span> {
   ...
   <span class="hljs-keyword">const</span> contextValue: ContextValueType = {
     ...
@@ -989,7 +989,7 @@ Object { method: &quot;GET&quot;, headers: {}, body: undefined, credentials: und
 Response { type: &quot;basic&quot;, url: &quot;http://localhost:3000/api/csrf_token&quot;, redirected: false, status: 200, ok: true, statusText: &quot;OK&quot;, headers: Headers, body: ReadableStream, bodyUsed: false }
 </code></pre><pre><code>setCsrfToken: X-CSRF-TOKEN cb5a3ec0-c32f-47f7-b4a0-149f8ba41341
 </code></pre><p>これで、CSRF対策の実装は完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -1028,7 +1028,7 @@ Response { type: &quot;basic&quot;, url: &quot;http://localhost:3000/api/csrf_to
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"CSRF対策","level":"1.9","depth":1,"previous":{"title":"動作確認","level":"1.8.3","depth":2,"path":"auth/e2e/README.md","ref":"auth/e2e/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"csrf/README.md","mtime":"2023-07-24T02:52:18.365Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"CSRF対策","level":"1.9","depth":1,"previous":{"title":"動作確認","level":"1.8.3","depth":2,"path":"auth/e2e/README.md","ref":"auth/e2e/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"csrf/README.md","mtime":"2023-12-25T02:59:13.956Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

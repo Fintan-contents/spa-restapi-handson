@@ -6,7 +6,7 @@
         <title>ToDoの登録 · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.19">
+        <meta name="generator" content="HonKit 3.7.5">
         
         
         
@@ -32,7 +32,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -780,11 +780,11 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="todoの登録"><a name="todoの登録" class="plugin-anchor" href="#todoの登録"><i class="fa fa-link" aria-hidden="true"></i></a>ToDoの登録</h1>
+                                <html><head></head><body><h1 id="todoの登録"><a name="todoの登録" class="plugin-anchor" href="#todoの登録"><i class="fa fa-link" aria-hidden="true"></i></a>ToDoの登録</h1>
 <p>ToDoページで新しいToDoを登録できるように実装します。</p>
 <h2 id="stateの設計"><a name="stateの設計" class="plugin-anchor" href="#stateの設計"><i class="fa fa-link" aria-hidden="true"></i></a>stateの設計</h2>
 <p>ToDoの一覧表示の時と同様に、ToDoを登録するコンポーネントで、どのような状態が必要になるかを考えていきます。</p>
-<p>ここでは、ToDoを登録するためのフォームを作成します。フォームの作成についてはReactからガイドされており、フォーム自身が保持する独自のstateをReactが管理するstateに統合し、Reactのstateのみで制御する「制御されたコンポーネント」として作成することを推奨しています。（参考：<a href="https://ja.reactjs.org/docs/forms.html" target="_blank">React - フォーム</a>）</p>
+<p>ここでは、ToDoを登録するためのフォームを作成します。フォームの作成についてはReactからガイドされており、フォーム自身が保持する独自のstateをReactが管理するstateに統合し、Reactのstateのみで制御する「制御されたコンポーネント」として作成することを推奨しています。（参考：<a href="https://ja.react.dev/reference/react-dom/components/input" target="_blank">input</a>、<a href="https://ja.react.dev/reference/react-dom/components/select" target="_blank">select</a>、<a href="https://ja.react.dev/reference/react-dom/components/textarea" target="_blank">textarea</a>）</p>
 <p>ここからわかるとおり、フォームでは入力中の状態を保持するstateが必要になります。ここでは、ToDoの内容を入力するフォームであるため、入力中のToDoの内容を保持するstateが必要になります。</p>
 <p>このstateは、ToDoを登録するコンポーネントである<code>TodoForm</code>でしか必要ないため、stateはこのコンポーネントに配置します。</p>
 <p>登録完了したToDoは一覧に表示しますが、一覧で表示するためのToDoを保持するstateは<code>TodoBoard</code>に配置しています。そのため、<code>TodoForm</code>でToDoを登録した際に<code>TodoBoard</code>のstateを更新するようにします。</p>
@@ -924,7 +924,7 @@ type Props = {
 <p>ToDoページを表示して、ToDoが登録できることを確認します。ToDo登録フォームのテキスト入力に適当な値を入力して「追加」ボタンをクリックし、モックサーバからのレスポンスで取得したToDoが一覧に追加されるのを確認します。</p>
 <p>モックサーバの起動時にも説明しましたが、モックサーバからはOpenAPIドキュメントのexampleに設定した値がレスポンスとして返されます。そのため、ここでは常に同じToDoが追加されることになり、実際に入力したToDoが追加されるわけではありませんので、注意してください。</p>
 <p>確認ができたら、フロントエンドの実装は完了です。</p>
-
+</body></html>
                                 
                                 </section>
                             
@@ -967,7 +967,7 @@ type Props = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"next":{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},"previous":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-add/README.md","mtime":"2023-07-24T02:52:18.371Z","type":"markdown"},"gitbook":{"version":"3.6.19","time":"2023-07-24T02:53:26.524Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"next":{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},"previous":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-add/README.md","mtime":"2023-12-25T02:59:13.973Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
