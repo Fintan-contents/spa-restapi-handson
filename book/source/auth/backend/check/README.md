@@ -49,10 +49,10 @@ public Object handle(HttpRequest request, ExecutionContext context) {
 
 example-chatでは、セッションストアから独自の値を取得していますが、ここでは、スレッドコンテキストからユーザーIDを取得します。スレッドコンテキストからユーザーIDを取得するには、`ThreadContext#getUserId`を使用します。（参考：[スレッドコンテキストの属性値を設定/取得する | Nablarch](https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/common/thread_context_handler.html#thread-context-handler-attribute-access)）
 
-スレッドコンテキストにユーザーIDがされていない場合は、`common.config`に設定されている次の環境依存値がユーザーIDとして使用されます。
+スレッドコンテキストにユーザーIDが設定されていない場合は、`common.config`に設定されている次の環境依存値がユーザーIDとして使用されます。
 
 ```
-# 未ログイン時、ログに出力するユーザID
+# 未ログイン時、ログに出力するユーザーID
 nablarch.userIdAttribute.anonymousId=guest
 ```
 
@@ -100,7 +100,7 @@ public void RESTAPIでログアウトできる() {
 ...
 ```
 
-Todo操作のテストではユーザーIDに`1001`を使用していますので、例えばTodo一覧取得のテストであれば、次のように修正します。
+ToDo操作のテストではユーザーIDに`1001`を使用していますので、例えばToDo一覧取得のテストであれば、次のように修正します。
 
 ```java
 @Test

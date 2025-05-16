@@ -1,0 +1,29 @@
+.item {
+  padding: 15px 10px;
+  background: whitesmoke;
+  margin-bottom: 10px;
+}
+.todo {
+  float: left;
+  text-align: left;
+}
+.checkbox {
+  margin-right: 7px;
+  outline: none;
+}
+.delete {
+  text-align: right;
+}
+.button {
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  color: grey;
+  background: lightgrey;
+  border-radius: 100%;
+  width: 25px;
+  height: 25px;
+  line-height: 20px;
+  cursor: pointer;
+  outline: none;
+}

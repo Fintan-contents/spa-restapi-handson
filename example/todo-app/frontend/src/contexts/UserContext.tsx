@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { BackendService } from '../backend/BackendService';
+'use client';
+import React, {useContext, useState} from 'react';
+import {BackendService} from '../backend/BackendService';
 
 export class AccountConflictError {}
 
@@ -7,29 +8,29 @@ export class AuthenticationFailedError {}
 
 type Props = {
   children: React.ReactNode;
-}
+};
 
 type ContextValueType = {
-  signup: (userName: string, password: string) => Promise<void | AccountConflictError>,
-  login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>,
-  logout: () => Promise<void>,
-  userName: string
-  isLoggedIn: boolean,
-}
+  signup: (userName: string, password: string) => Promise<void | AccountConflictError>;
+  login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>;
+  logout: () => Promise<void>;
+  userName: string;
+  isLoggedIn: boolean;
+};
 
 export const UserContext = React.createContext<ContextValueType>({} as ContextValueType);
 
 export const useUserContext = () => useContext(UserContext);
 
-export const UserContextProvider: React.FC<Props> = ({ children }) => {
+export const UserContextProvider: React.FC<Props> = ({children}) => {
   const [userName, setUserName] = useState<string>('');
 
   const contextValue: ContextValueType = {
     signup: async (userName, password) => {
       try {
         await BackendService.signup(userName, password);
-      } catch(error: any) {
-        if (error.status === 409) {
+      } catch (error: unknown) {
+        if (error instanceof Response && error.status === 409) {
           return new AccountConflictError();
         }
         throw error;
@@ -40,8 +41,8 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         await BackendService.login(userName, password);
         await BackendService.refreshCsrfToken();
         setUserName(userName);
-      } catch(error: any) {
-        if (error.status === 401) {
+      } catch (error: unknown) {
+        if (error instanceof Response && error.status === 401) {
           return new AuthenticationFailedError();
         }
         throw error;
@@ -53,12 +54,8 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
       setUserName('');
     },
     userName: userName,
-    isLoggedIn: userName !== ''
+    isLoggedIn: userName !== '',
   };
 
-  return (
-    <UserContext.Provider value={contextValue}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 };

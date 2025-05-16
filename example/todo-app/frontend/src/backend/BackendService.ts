@@ -5,33 +5,32 @@ import {
   UsersApi,
   FetchParams,
   HTTPMethod,
-  RequestContext
+  RequestContext,
 } from './generated-rest-client';
-  
+
 const requestLogger: Middleware = {
-  pre: async (context) => {
+  pre: async context => {
     console.log(`>> ${context.init.method} ${context.url}`, context.init);
   },
-  post: async (context) => {
+  post: async context => {
     console.log(`<< ${context.response.status} ${context.url}`, context.response);
-  }
+  },
 };
 
 const corsHandler: Middleware = {
-  pre: async (context) => {
+  pre: async context => {
     return {
       url: context.url,
       init: {
         ...context.init,
         mode: 'cors',
-        credentials: 'include'
-      }
+        credentials: 'include',
+      },
     };
-  }
+  },
 };
 
 class CsrfTokenAttachment implements Middleware {
-
   private readonly targetMethod: ReadonlyArray<HTTPMethod> = ['POST', 'PUT', 'DELETE', 'PATCH'];
   private headerName = '';
   private tokenValue = '';
@@ -51,19 +50,19 @@ class CsrfTokenAttachment implements Middleware {
       url: context.url,
       init: {
         ...context.init,
-        headers : {
+        headers: {
           ...context.init.headers,
-          [this.headerName]: this.tokenValue
-        }
-      }
+          [this.headerName]: this.tokenValue,
+        },
+      },
     };
-  }
+  };
 }
 
 const csrfTokenAttachment = new CsrfTokenAttachment();
 
 const configuration = new Configuration({
-  middleware: [csrfTokenAttachment, corsHandler, requestLogger]
+  middleware: [csrfTokenAttachment, corsHandler, requestLogger],
 });
 
 const todosApi = new TodosApi(configuration);
@@ -71,11 +70,11 @@ const todosApi = new TodosApi(configuration);
 const usersApi = new UsersApi(configuration);
 
 const signup = async (userName: string, password: string) => {
-  return usersApi.signup({ inlineObject2 : { userName, password }});
+  return usersApi.signup({inlineObject2: {userName, password}});
 };
 
 const login = async (userName: string, password: string) => {
-  return usersApi.login({ inlineObject3: { userName, password }});
+  return usersApi.login({inlineObject3: {userName, password}});
 };
 
 const logout = async () => {
@@ -87,15 +86,15 @@ const getTodos = async () => {
 };
 
 const postTodo = async (text: string) => {
-  return todosApi.postTodo({ inlineObject: { text }});
+  return todosApi.postTodo({inlineObject: {text}});
 };
 
 const putTodo = async (todoId: number, completed: boolean) => {
-  return todosApi.putTodo({ todoId, inlineObject1: { completed }});
+  return todosApi.putTodo({todoId, inlineObject1: {completed}});
 };
 
 const deleteTodo = async (todoId: number) => {
-  return todosApi.deleteTodo({ todoId });
+  return todosApi.deleteTodo({todoId});
 };
 
 const refreshCsrfToken = async () => {
@@ -111,5 +110,5 @@ export const BackendService = {
   postTodo,
   putTodo,
   deleteTodo,
-  refreshCsrfToken
+  refreshCsrfToken,
 };

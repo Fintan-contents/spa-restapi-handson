@@ -144,7 +144,7 @@ public class Todo {
 ```
 
 {% hint style='tip' %}
-コンストラクタでのみ状態を設定し、生成後に状態を変更できないオブジェクトは、一般的に「イミュータブル（不変）」なオブジェクトと呼ばれます。オブジェクトをやり取りする中で、意図せずオブジェクトの状態を更新されてしまうといったバグを防ぎやすくしたりします。
+コンストラクタでのみ状態を設定し、生成後に状態を変更できないオブジェクトは、一般的に「イミュータブル（不変）」なオブジェクトと呼ばれます。オブジェクトをやり取りする中で、意図せずオブジェクトの状態を更新されてしまう等のバグを防ぎやすくします。
 {% endhint %}
 
 ### `com.example.todo.application`パッケージの作成
@@ -306,7 +306,7 @@ public class TodosAction {
 
 メソッドの実装としては、さきほど作成した`TodoService`クラスの`list(UserId)`メソッドを呼び出します。DBから取得するためのユーザーIDを渡す必要がありますが、今はまだユーザー認証を実装していないため、とりあえずダミーのユーザーIDを生成して渡しておきます。
 
-レスポンスのオブジェクトがJSONに変換されるため、OpenAPIドキュメントに沿った値に変換されるように`TodoResponse`クラスを内部で定義し、`TodoSerivce`から取得したオブジェクトを変換します。また、`java.util.List`で返すことで配列形式に変換されるため、`TodoResponse`型のオブジェクトをListで返すことで、OpenAPIの定義時に想定していた次のようなJSONに変換されます。
+レスポンスのオブジェクトがJSONに変換されるため、OpenAPIドキュメントに沿った値に変換されるように`TodoResponse`クラスを内部で定義し、`TodoService`から取得したオブジェクトを変換します。また、`java.util.List`で返すことで配列形式に変換されるため、`TodoResponse`型のオブジェクトをListで返すことで、OpenAPIの定義時に想定していた次のようなJSONに変換されます。
 
 ```json
 {
@@ -386,7 +386,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432->5432/t
 Mavenでテストを実行するため、次のコマンドを実行します。
 
 ```
-mvn test
+$ mvn test
 ```
 
 出力された内容から、`TodoListRestApiTest`テストが実行され、テストが成功していることを確認します。
@@ -446,9 +446,9 @@ public class TodoListRestApiTest extends SimpleRestTestSupport {
 
 次に、OpenAPIドキュメントに記述したレスポンスの定義と、実際のレスポンスの内容が一致しているか検証します。
 
-OpenAPIによりフロントエンドとREST APIに対する認識を合わせているため、OpenAPIドキュメントの定義と実際の実装が一致することを検証するのは重要になります。
+OpenAPIによりフロントエンドとREST APIに対する認識を合わせているため、OpenAPIドキュメントの定義と実装が一致していることの検証は重要です。
 
-ここでは、OpenAPIドキュメントを解析したり検証することができるOSSの[OpenAPI4J](https://www.openapi4j.org/)を使用します。
+ここでは、OpenAPIドキュメントの解析や検証ができるOSSの[OpenAPI4J](https://www.openapi4j.org/)を使用します。
 
 OpenAPI4Jを使用するための設定は済んだ状態になっているため、事前準備は必要ありません。（[Operation validator | OpenAPI4J](https://www.openapi4j.org/operation-validator.html#installation)）
 
@@ -625,7 +625,7 @@ SQLファイルは後ほど作成しますので、使用するSQLのIDを`FIND_
 
 ### `com/example/todo/infrastructure/entity`ディレクトリの作成
 
-ユニバーサルDAOで使用するSQLファイルを使用するためには、Entityクラスと同じクラスパス上にSQLファイルを配置する必要がある。
+ユニバーサルDAOで使用するSQLファイルを使用するためには、Entityクラスと同じクラスパス上にSQLファイルを配置する必要があります。
 そのため、まずは`src/main/resources`の下に`com/example/todo/infrastructure/entity`ディレクトリを作成します。
 
 ### `TodoEntity.sql`ファイルの作成
@@ -723,7 +723,7 @@ public class TodoListRestApiTest extends SimpleRestTestSupport {
 テストが成功することを確認するため、再度Mavenでテストを実行してみます。
 
 ```
-mvn test
+$ mvn test
 ```
 
 特にエラーが発生せず、テストが成功することを確認します。

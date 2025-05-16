@@ -2,18 +2,19 @@
 
 ユーザーコンテクストを使用して、ナビゲーションメニューが切り替わるように実装します。
 
-## ナビゲーションメニュー切替処理を実装
+## ナビゲーションメニュー切替処理の実装
 
 `NavigationHeader`コンポーネントにナビゲーションメニューの切替処理を実装します。
 
+`src/components/navigation-header/NavigationHeader.tsx`
 ```jsx
+'use client';
 import React from 'react';
-import './NavigationHeader.css';
-import { Link } from 'react-router-dom';
-import { useUserContext } from '../contexts/UserContext';
+import styles from './NavigationHeader.module.css';
+import Link from 'next/link';
+import {useUserContext} from '../../contexts/UserContext';
 
 export const NavigationHeader: React.FC = () => {
-
   const userContext = useUserContext();
 
   const logout = async () => {
@@ -21,20 +22,22 @@ export const NavigationHeader: React.FC = () => {
   };
 
   return (
-    <header className="PageHeader_header">
-      <h1 className="PageHeader_title">Todoアプリ</h1>
+    <header className={styles.header}>
+      <h1 className={styles.title}>ToDoアプリ</h1>
       <nav>
-        <ul className="PageHeader_nav">
-          { userContext.isLoggedIn ? (
+        <ul className={styles.nav}>
+          {userContext.isLoggedIn ? (
             <React.Fragment>
               <li>{userContext.userName}さん</li>
               <li>
-                <button type="button" onClick={logout}>ログアウト</button>
+                <button type='button' onClick={logout}>
+                  ログアウト
+                </button>
               </li>
             </React.Fragment>
           ) : (
             <li>
-              <Link to="/login">ログイン</Link>
+              <Link href='/login'>ログイン</Link>
             </li>
           )}
         </ul>
@@ -44,8 +47,8 @@ export const NavigationHeader: React.FC = () => {
 };
 ```
 
-ユーザーコンテクストは先ほど作成した`useUserContext`で取得します。ユーザーコンテクストからログイン済みであるかを取得し、それによりメニューを切り替えます。
+ユーザーコンテクストは前章で作成した`useUserContext`で取得します。ユーザーコンテクストからログイン済みであるかを取得し、その状態によりメニューを切り替えます。
 
 ## 動作確認
 
-単体での動作確認がしづらいため、最後にまてめて動作を確認します。
+単体での動作確認がしづらいため、最後にまとめて動作を確認します。

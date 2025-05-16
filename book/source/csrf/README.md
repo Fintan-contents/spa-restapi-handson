@@ -1,29 +1,34 @@
 # CSRF対策
 
-REST API一覧の説明時にも紹介しましたが、Nablarchでは、クロスサイト・リクエスト・フォージェリ（以下CSRF）に対策するための機能が提供されています。（参考：[CSRF | 安全なウェブサイトの作り方](https://www.ipa.go.jp/security/vuln/websecurity-HTML-1_6.html)）
+REST API一覧の説明時にも紹介しましたが、Nablarchではクロスサイト・リクエスト・フォージェリ（以下CSRF）に対策するための機能が提供されています。  
+（参考：[CSRF | 安全なウェブサイトの作り方](https://www.ipa.go.jp/security/vuln/websecurity-HTML-1_6.html)）
 
-CSRFトークンを発行してリクエスト毎にサーバーサイド側で保持してるCSRFトークンと突き合わせる方式であり、CSRFトークンを発行するためのユーティリティと、CSRFトークンを検証するためのハンドラが提供されています。（参考：[CSRFトークン検証ハンドラ | Nablarch](https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/web/csrf_token_verification_handler.html)）
+CSRFトークンを発行してリクエスト毎にサーバサイドで保持しているCSRFトークンと突き合わせる方式であり、
+CSRFトークンを発行するためのユーティリティとCSRFトークンを検証するためのハンドラが提供されています。
+（参考：[CSRFトークン検証ハンドラ — Nablarch](https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/web/csrf_token_verification_handler.html)）
 
 ここでは、CSRF対策を実現するために、バックエンドでCSRFトークンを取得するREST APIを提供し、フロントエンドからはREST APIで取得したCSRFトークンを使用するように実装していきます。
 
 ## バックエンド
 
-example-chatのバックエンドでも同様の実装をしているため、その実装を流用します。
+example-chatのバックエンドでも同様の実装をしているため、その実装を流用します。  
 
-バックエンドでは、CSRFトークンを取得するREST APIと、それを検証するためのハンドラを実装します。
+バックエンドではCSRFトークンを取得するREST APIと、それを検証するためのハンドラを実装します。
 
 ### CSRFトークンを取得するREST APIの作成
 
-CSRFトークンを取得するREST APIについては、example-chatの`com.example.presentation.restapi.system.CsrfTokenAction`クラスで同様の実装をしているため、このクラスをコピーして持ってきます。
+CSRFトークンを取得するREST APIについては、example-chatの`com.example.presentation.restapi.system.CsrfTokenAction`クラスで同様の実装をしているため、このクラスを流用します。`backend/src/main/java/com/example`配下に`presentation/restapi/system`ディレクトリを作成し`CsrfTokenAction.java`をコピーします。
 
 ### CSRFトークン検証ハンドラの設定
 
 CSRFトークンを検証するハンドラについては、Nablarchから提供されているため、これもコンポーネント定義に追加します。CSRFトークンを検証するハンドラではセッションを使用するため、セッション変数保存ハンドラ（ここでは`sessionStoreHandler`）より後で実行されるように定義します。
 
+`backend/src/main/resources/rest-component-configuration.xml`
 ```xml
 <!-- CSRFトークン検証ハンドラ -->
 <component name="csrfTokenVerificationHandler" class="nablarch.fw.web.handler.CsrfTokenVerificationHandler" />
 
+<!-- ハンドラキュー構成 -->
 <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
   <property name="handlerQueue">
     <list>
@@ -46,6 +51,7 @@ CSRFトークンを検証するハンドラについては、Nablarchから提�
 
 CSRFトークンを取得するREST APIは、ログインしていなくてもアクセスできる必要があります。ログインしていなくてもアクセスできるパスは、ユーザー認証の実装時に作成した`com.example.system.nablarch.handler.LoginCheckHandler`クラスのコンストラクタで設定しているため、`/api/csrf_token`のパスを追加します。
 
+`backend/src/main/java/com/example/system/nablarch/handler/LoginCheckHandler.java`
 ```java
 public LoginCheckHandler() {
     whitePatterns
@@ -60,7 +66,7 @@ public LoginCheckHandler() {
 次に、バックエンドのテストを実行してみます。
 
 ```
-mvn test
+$ mvn test
 ```
 
 すると、更新系の操作をするREST APIのテストが失敗します。これは、CSRFトークン検証ハンドラにより、リクエスト時にCSRFトークンが無ければ、ステータスコードが`400 Bad Request`のエラーレスポンスとして返却されるためです。
@@ -71,6 +77,7 @@ CSRFトークンを使用するには、先ほど実装したREST APIを使用�
 
 まず、テストクラスに次のようなprivateメソッドを実装します。
 
+`backend/src/test/java/com/example/authentication/api/AuthenticationRestApiTest.java`
 ```java
 private void attachCsrfToken(RestMockHttpRequest request, ExecutionContext context) {
     HttpResponse response = sendRequest(get("/api/csrf_token"));
@@ -93,7 +100,13 @@ private void attachCsrfToken(RestMockHttpRequest request, ExecutionContext conte
 }
 ```
 
-このメソッドでは、CSRFトークンを取得するREST APIを呼び出し、引数のリクエストオブジェクトへの設定と、サーバーサイドで比較元が保存されるセッションストアへの設定を実装しています。`ExecutionContext`を使用したセッションストアへの設定については、ユーザー認証でのテストクラスへの実装と同様に実装します。
+このメソッドでは以下の実装をしています。
+- CSRFトークンを取得するREST APIを呼び出す
+- リクエストヘッダーにCSRFトークンをセットする
+- セッションストアにトークンをセットする
+
+セッションストアにも保存するのは、サーバサイドで比較元として使用するためです。
+`ExecutionContext`を使用したセッションストアへの設定については、ユーザー認証でのテストクラスへの実装と同様に実装します。
 
 各REST APIのテストで、REST APIにアクセスする前にこの`attachCsrfToken`メソッドを呼び出すように修正します。
 
@@ -101,7 +114,7 @@ private void attachCsrfToken(RestMockHttpRequest request, ExecutionContext conte
 
 ```java
 @Test
-public void RESTAPIでサインアップできる() {
+public void RESTAPIでサインアップできる() throws Exception {
     ExecutionContext executionContext = new ExecutionContext();
     RestMockHttpRequest request = post("/api/signup")
             .setHeader("Content-Type", MediaType.APPLICATION_JSON)
@@ -109,7 +122,6 @@ public void RESTAPIでサインアップできる() {
                     "userName", "signup-test",
                     "password", "pass"));
     attachCsrfToken(request, executionContext);
-
     HttpResponse response = sendRequestWithContext(request, executionContext);
 ...
 ```
@@ -124,7 +136,6 @@ public void RESTAPIでログアウトできる() throws Exception {
 
     RestMockHttpRequest request = post("/api/logout");
     attachCsrfToken(request, executionContext);
-
     HttpResponse response = sendRequestWithContext(request, executionContext);
 ...
 ```
@@ -147,11 +158,12 @@ import {
   ...
   FetchParams,
   HTTPMethod,
-  RequestContext
+  RequestContext,
 } from './generated-rest-client';
 
-class CsrfTokenAttachment implements Middleware {
+...
 
+class CsrfTokenAttachment implements Middleware {
   private readonly targetMethod: ReadonlyArray<HTTPMethod> = ['POST', 'PUT', 'DELETE', 'PATCH'];
   private headerName = '';
   private tokenValue = '';
@@ -171,19 +183,19 @@ class CsrfTokenAttachment implements Middleware {
       url: context.url,
       init: {
         ...context.init,
-        headers : {
+        headers: {
           ...context.init.headers,
-          [this.headerName]: this.tokenValue
-        }
-      }
+          [this.headerName]: this.tokenValue,
+        },
+      },
     };
-  }
+  };
 }
 
 const csrfTokenAttachment = new CsrfTokenAttachment();
 
 const configuration = new Configuration({
-  middleware: [csrfTokenAttachment, corsHandler, requestLogger]
+  middleware: [csrfTokenAttachment, corsHandler, requestLogger],
 });
 
 ...
@@ -193,11 +205,9 @@ const refreshCsrfToken = async () => {
   csrfTokenAttachment.setCsrfToken(response.csrfTokenHeaderName, response.csrfTokenValue);
 };
 
-...
-
 export const BackendService = {
 ...
-  refreshCsrfToken
+  refreshCsrfToken,
 };
 ```
 
@@ -205,40 +215,83 @@ export const BackendService = {
 
 まず、CSRFトークンをヘッダに設定する`CsrfTokenAttachment`クラスを、Middlewareとして実装します。（CSRFトークンを状態として保持しやすくするよう、クラスとして実装します）
 
-Middlewareに追加するため、`CsrfTokenAttachment`のオブジェクトを生成し、`middleware`プロパティに追加します。
+Middlewareに追加するため、`CsrfTokenAttachment`クラスのインスタンスを生成し、`middleware`プロパティに追加します。
 
-次に、CSRFトークン取得のREST APIを呼び出して`CsrfTokenAttachment`に設定する`refreshCsrfToken`関数を実装します。CSRFトークンはセッションストアに紐付いており、セッションが切り替わるタイミングでCSRFトークンも変更になるため、ログインやログアウト等のセッション切替タイミングで、この関数を実行してCSRFトークンを最新化します。
+次に、CSRFトークン取得のREST APIを呼び出して`CsrfTokenAttachment`に設定する`refreshCsrfToken`関数を実装します。
+CSRFトークンはセッションストアに紐付いており、セッションが切り替わるタイミングでCSRFトークンも変更されます。
+そのため、ログインやログアウト等のセッション切替タイミングで、この関数を実行してCSRFトークンを最新化します。
 
 ### アプリ起動時のCSRFトークン設定
 
-アプリ起動時にCSRFトークンを設定するため、`App`コンポーネントで先ほど作成した`refreshCsrfToken`関数を実行するように実装します。
+この関数を実行してCSRFトークンを最新化するため、共通の部品として実装します。  
+具体的には、CSRFトークンを最新化する部品を作成し、それを`layout.tsx`で呼び出します。
 
+`src`ディレクトリ配下に`initializer`ディレクトリを作成し、その中に`AppInitializer.tsx`を作成して、下記のコードを実装します。
+
+`src/initializer/AppInitializer.tsx`
 ```jsx
-function App() {
+'use client';
+import React, {useEffect, useState} from 'react';
+import {BackendService} from '../backend/BackendService';
+
+const AppInitializer: React.FC<{children: React.ReactNode}> = ({children}) => {
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    BackendService.refreshCsrfToken()
-      .finally(() => setInitialized(true));
+    BackendService.refreshCsrfToken().finally(() => setInitialized(true));
   }, []);
 
   if (!initialized) {
-    return (
-      <React.Fragment />
-    );
+    return <React.Fragment />;
   }
-...
+
+  return children;
+};
+
+export default AppInitializer;
 ```
 
-`refreshCsrfToken`関数によるCSRFトークン取得が完了するまでは、他のコンポーネントを処理したくないため、それを制御するためのフラグとして`initialized`stateを作成します。`refreshCsrfToken`の処理が終わるまでは、JSXで空要素を返すようにし、`refreshCsrfToken`の処理が完了して`initialized`が`true`になったタイミングで、今までと同様のコンポーネント処理を実行するようにします。
+`refreshCsrfToken`関数によるCSRFトークン取得が完了するまでは、他のコンポーネントを処理したくないため、それを制御するためのフラグとして`initialized`stateを作成します。  
+`refreshCsrfToken`の処理が終わるまではJSXで空要素を返すようにし、`refreshCsrfToken`の処理が完了して`initialized`が`true`になったタイミングで、今までと同様のコンポーネント処理を実行するようにします。
+
+return文で`children`を返すことにより、`AppInitializer`でラップするコンポーネントをレンダリングする実装になっています。
+作成した`AppInitializer`を共通の部品として使用するために、`layout.tsx`で呼び出します。
+
+`src/app/layout.tsx`
+```jsx
+...
+import AppInitializer from '../initializer/AppInitializer';
+
+...
+  return (
+    <html lang='en'>
+      <body>
+        <AppInitializer>
+          <UserContextProvider>
+            <NavigationHeader />
+            {children}
+          </UserContextProvider>
+        </AppInitializer>
+      </body>
+    </html>
+  );
+}
+```
+
+この実装により、セッション切替のタイミングでCSRFトークンを最新化できるようになりました。
 
 ### ログイン・ログアウト時のCSRFトークン設定
 
-ログイン、ログアウト時に、セッションを破棄して新しく開始するようにしているため、ユーザーコンテクストにある`login`、`logout`関数内で、先ほど作成した`refreshCsrfToken`関数を実行するように実装します。
+ログイン、ログアウト時に、セッションを破棄して新しく開始するようにします。
+`UserContext`にある`login`、`logout`関数内で、先ほど作成した`refreshCsrfToken`関数を実行するように実装します。
 
+`src/contexts/UserContext.tsx`
 ```jsx
-export const UserContextProvider: React.FC<Props> = ({ children }) => {
+...
+
+export const UserContextProvider: React.FC<Props> = ({children}) => {
   ...
+
   const contextValue: ContextValueType = {
     ...
     login: async (userName, password) => {
@@ -252,7 +305,8 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
       await BackendService.logout();
       await BackendService.refreshCsrfToken();
       setUserName('');
-      ...
+    },
+    ...
 ```
 
 これで、フロントエンドの実装は完了です。
@@ -267,15 +321,31 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
 CSRFトークンの取得や設定時には`console.log`でログを出力していますので、ブラウザの開発者ツールでコンソールを確認してみましょう。次のようなログが出力され、正常に動作していることが確認できます。
 
 ```
->> GET /api/csrf_token 
-Object { method: "GET", headers: {}, body: undefined, credentials: undefined }
+>> GET http://localhost:9080/api/csrf_token 
+Object
+body: undefined
+credentials: "include"
+headers: {}
+method: "GET"
+mode: "cors"
+[[Prototype]]: Object
 ```
 ```
-<< 200 /api/csrf_token 
-Response { type: "basic", url: "http://localhost:3000/api/csrf_token", redirected: false, status: 200, ok: true, statusText: "OK", headers: Headers, body: ReadableStream, bodyUsed: false }
+<< 200 http://localhost:9080/api/csrf_token 
+Response
+body: ReadableStream
+bodyUsed: false
+headers: Headers {}
+ok: true
+redirected: false
+status: 200
+statusText: "OK"
+type: "cors"
+url: "http://localhost:9080/api/csrf_token"
+[[Prototype]]: Response
 ```
 ```
-setCsrfToken: X-CSRF-TOKEN cb5a3ec0-c32f-47f7-b4a0-149f8ba41341
+setCsrfToken: X-CSRF-TOKEN fe709dd4-ed6a-4436-ab6d-63dce1291b05
 ```
 
 これで、CSRF対策の実装は完了です。

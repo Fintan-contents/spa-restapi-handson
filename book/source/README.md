@@ -1,6 +1,6 @@
 # Summary
 
-- [この資料について](index.md)
+- [SPA + REST API構成のハンズオン](index.md)
 - [はじめに](intro/README.md)
 - [ハンズオンの準備](setup/README.md)
   - [開発環境の準備](setup/install/README.md)

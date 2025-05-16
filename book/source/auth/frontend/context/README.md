@@ -1,9 +1,9 @@
 # ユーザーコンテクストの作成
 
-ユーザー情報のような特定のコンポーネントに依存しない値は、様々なコンポーネントで使用する可能性がありますが、その場合にはプロパティを使用してコンポーネントの階層に渡していく必要が出てきます。
-このような情報を扱う場合、コンテクストと呼ばれるReactの機能を利用することで、プロパティを使用せずにコンポーネント間で値を共有することが出来ます。（参考：[コンテクストで深くデータを受け渡す | React](https://ja.react.dev/learn/passing-data-deeply-with-context)）
+ユーザー情報のような特定のコンポーネントに依存しない値は、様々なコンポーネントで使用する可能性があります。このような情報を扱う場合、プロパティを使用してコンポーネントの階層に値を渡していく必要が出てきます。こういった場合に活用できるのがReactのコンテクスト機能で、プロパティを使用せずにコンポーネント間で値を共有することが出来ます。  
+（参考：[コンテクストで深くデータを受け渡す – React](https://ja.react.dev/learn/passing-data-deeply-with-context)）
 
-ここでは、ユーザーの認証に関する値を持つコンテクスト（以下ユーザーコンテクスト）を作成し、認証に関わるコンポーネントではそのコンテクストを使用できるように実装していきます。ここでは、認証に関する情報を集約させるため、ユーザーコンテクストには次の値を持たせます。
+ここでは、ユーザーの認証に関する値を持つコンテクスト（以下ユーザーコンテクスト）を作成し、認証に関わるコンポーネントではそのコンテクストを使用できるように実装していきます。認証に関する情報を集約させるため、ユーザーコンテクストには次の値を持たせます。
 
 - サインアップするための関数
 - ログインするための関数
@@ -11,16 +11,19 @@
 - ユーザー名
 - ログインしているかどうか
 
-なお、example-chatのバックエンド実装でも同様の実装をしています。
+なお、example-chatのフロントエンド実装でも同様の実装をしています。
 
 ## ユーザーコンテクストの定義
 
 まず、ユーザーコンテクストを作成します。
 
-コンテクストに関する実装を配置するため、`src/contexts`ディレクトリを作成し、その中に`UserContext.tsx`を作成します。（後ほどJSXを使用する実装を入れるため、拡張子には`tsx`を使用しておきます）
+コンテクストに関する実装を配置するため、`src/contexts`ディレクトリを作成し、  
+その中に`UserContext.tsx`を作成します。  
+（後ほどJSXを使用する実装を入れるため、拡張子には`tsx`を使用しておきます。）
 
 `src/contexts/UserContext.tsx`
-```js
+```jsx
+'use client';
 import React from 'react';
 
 export class AccountConflictError {}
@@ -28,34 +31,37 @@ export class AccountConflictError {}
 export class AuthenticationFailedError {}
 
 type Props = {
-  children?: React.ReactNode,
-}
+  children: React.ReactNode;
+};
 
 type ContextValueType = {
-  signup: (userName: string, password: string) => Promise<void | AccountConflictError>,
-  login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>,
-  logout: () => Promise<void>,
-  userName: string
-  isLoggedIn: boolean,
-}
+  signup: (userName: string, password: string) => Promise<void | AccountConflictError>;
+  login: (userName: string, password: string) => Promise<void | AuthenticationFailedError>;
+  logout: () => Promise<void>;
+  userName: string;
+  isLoggedIn: boolean;
+};
 
 export const UserContext = React.createContext<ContextValueType>({} as ContextValueType);
 ```
 
-React v18からpropsを定義する際にchildrenプロパティを明示的に列挙する必要があるので、`Props`型を定義します。
+サインアップやログインにおけるREST APIの仕様として、入力ミス等で失敗した場合にはエラーレスポンスが返却されます。生成したクライアントコードでは、エラーレスポンスである場合は例外として送出されます。ここでは、ユーザーコンテクストの利用者がエラーを扱いやすくするため、エラーを表現するクラスのインスタンスに変換して返すようにします。
+
+React v18からpropsを定義する際にchildrenプロパティを明示的に列挙する必要があるため、`Props`型を定義します。
 
 `React.createContext`を使用して、コンテクストを作成します。ユーザーコンテクストを扱う際に型を使用したいため、`ContextValueType`型も定義します。
 
-また、サインアップやログインのREST APIの仕様として、入力ミス等で失敗した場合にはエラーレスポンスが返却されます。生成したクライアントコードでは、エラーレスポンスであった場合は例外として送出されます。ここでは、ユーザーコンテクストの利用者がエラーを扱いやすくするため、エラーを表現するオブジェクトに変換して返すようにします。
-
 ## ユーザーコンテクストを取得するフックの作成
 
-関数コンポーネントでコンテクストを使用するためのフックとして`useContext`が提供されています。`useContext`を使用することで、関数コンポーネントでコンテクストとして設定されている値（コンテクストオブジェクト）を取得することができます。（参考：[useContext | React](https://ja.react.dev/reference/react/useContext)）
+コンポーネントでコンテクストを使用するためのフックとして`useContext`が提供されています。  
+`useContext`を使用することで、コンポーネントでコンテクストとして設定されている値（コンテクストオブジェクト）を取得することができます。（参考：[useContext – React](https://ja.react.dev/reference/react/useContext)）
 
 各コンポーネントで`useContext`を使用してもよいですが、ここではユーザーコンテクストを明示的に取得するためのフックを作成します。ユーザーコンテクストに関わる実装は`UserContext.tsx`に集約するため、`UserContext.tsx`に次のような実装を追加します。
 
-```js
-import React, { useContext } from 'react';
+```jsx
+...
+import React, {useContext} from 'react';
+
 ...
 
 export const useUserContext = () => useContext(UserContext);
@@ -63,24 +69,26 @@ export const useUserContext = () => useContext(UserContext);
 
 ## コンテクストプロバイダの作成
 
-ユーザーコンテクストを各コンポーネントで使用できるようにするためには、プロパイダと呼ばれるコンポーネントを使用します。（参考：[SomeContext.Provider | React](https://ja.react.dev/reference/react/createContext#provider)）
+ユーザーコンテクストを各コンポーネントで使用できるようにするためには、プロバイダと呼ばれるコンポーネントを使用します。（参考：[SomeContext.Provider – React](https://ja.react.dev/reference/react/createContext#provider)）
 
-プロパイダコンポーネントの`value`属性に渡した値が、子要素のコンポーネントで使用できるようになります。ここでは、このプロパイダコンポーネントとそれに渡す値を、独立したコンポーネントとして使用できるようにするため、`UserContextProvider`コンポーネントを作成します。ユーザーコンテクストに関わる実装は`UserContext.tsx`にまとめます。
+プロバイダコンポーネントの`value`属性に渡した値が、子要素のコンポーネントで使用できるようになります。ここでは、このプロバイダコンポーネントとそれに渡す値を独立したコンポーネントとして使用できるようにするため、`UserContextProvider`コンポーネントを作成します。ユーザーコンテクストに関わる実装は`UserContext.tsx`にまとめます。
 
 ```jsx
-import React, { useContext, useState } from 'react';
-import { BackendService } from '../backend/BackendService';
+...
+import React, {useContext, useState} from 'react';
+import {BackendService} from '../backend/BackendService';
+
 ...
 
-export const UserContextProvider: React.FC<Props> = ({ children }) => {
+export const UserContextProvider: React.FC<Props> = ({children}) => {
   const [userName, setUserName] = useState<string>('');
 
   const contextValue: ContextValueType = {
     signup: async (userName, password) => {
       try {
         await BackendService.signup(userName, password);
-      } catch(error: any) {
-        if (error.status === 409) {
+      } catch (error: unknown) {
+        if (error instanceof Response && error.status === 409) {
           return new AccountConflictError();
         }
         throw error;
@@ -90,8 +98,8 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
       try {
         await BackendService.login(userName, password);
         setUserName(userName);
-      } catch(error: any) {
-        if (error.status === 401) {
+      } catch (error: unknown) {
+        if (error instanceof Response && error.status === 401) {
           return new AuthenticationFailedError();
         }
         throw error;
@@ -102,46 +110,39 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
       setUserName('');
     },
     userName: userName,
-    isLoggedIn: userName !== ''
+    isLoggedIn: userName !== '',
   };
 
-  return (
-    <UserContext.Provider value={contextValue}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 };
 ```
 
-## コンテクストプロパイダの配置
+## コンテクストプロバイダの配置
 
-ユーザーコンテクストはどのコンポーネントからでも使用できるようにするため、`UserContextProvider`コンポーネントを`App`コンポーネントに配置します。
+ユーザーコンテクストはどのコンポーネントからでも使用できるようにするため、  
+`UserContextProvider`を`layout.tsx`に配置します。
 
+`src/app/layout.tsx`
 ```jsx
-import { UserContextProvider } from './contexts/UserContext';
+...
+import {UserContextProvider} from '../contexts/UserContext';
+
 ...
 
-function App() {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <UserContextProvider>
-      <BrowserRouter>
-        <NavigationHeader />
-        <Switch>
-          <Route exact path="/board">
-            <TodoBoard />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/">
-            <Welcome />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </UserContextProvider>
+    <html lang='en'>
+      <body>
+        <UserContextProvider>
+          <NavigationHeader />
+          {children}
+        </UserContextProvider>
+      </body>
+    </html>
   );
 }
 ```

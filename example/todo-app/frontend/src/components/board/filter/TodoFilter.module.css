@@ -1,0 +1,30 @@
+.content {
+  text-align: right;
+}
+.content button {
+  margin-left: 5px;
+}
+.buttonSelected {
+  background-color: #31b3c7;
+  border-width: 0;
+  color: #fff;
+  cursor: pointer;
+  justify-content: center;
+  padding: 7px 16px;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 290486px;
+  outline: none;
+}
+.buttonUnselected {
+  background-color: lightgray;
+  border-width: 0;
+  color: gray;
+  cursor: pointer;
+  justify-content: center;
+  padding: 7px 16px;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 290486px;
+  outline: none;
+}

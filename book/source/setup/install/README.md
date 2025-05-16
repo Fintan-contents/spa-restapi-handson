@@ -4,9 +4,9 @@ ToDoアプリの開発で使用するツールをインストールします。
 
 ## Node.jsのインストール
 
-フロントエンドの開発ではCreate React AppやTypeScriptを使用するため、Node.jsをインストールします。Node.jsのバージョンには `20` を使用します。
+フロントエンドの開発では`create-next-app`やTypeScriptを使用するため、Node.jsをインストールします。Node.jsのバージョンには `22` を使用します。
 
-[公式サイト](https://nodejs.org/)の案内に沿って、インストールしてください。
+[公式サイト](https://nodejs.org/ja/download)の案内に沿って、インストールしてください。
 
 使用する環境が既に整っている場合は、この手順をスキップしてください。
 
@@ -36,10 +36,10 @@ JDKはいくつかありますが、ここでは、OpenJDKの1つであるEclips
 エディタが既に整っている場合は、この手順をスキップしてください。
 
 {% hint style='tip' %}
-Javaの開発ツールは[Eclipse](https://www.eclipse.org/)や[IntelliJ IDEA](https://www.jetbrains.com/idea/)があります。それ以外にもいくつかのツールがありますので、お好みに合わせてご利用してください。
+[Eclipse](https://www.eclipse.org/)や[IntelliJ IDEA](https://www.jetbrains.com/idea/)などのIDE（統合開発環境）も利用可能です。それ以外にもいくつかのエディタやIDEがありますので、お好みに合わせてご利用ください。
 {% endhint %}
 
-## Docker(Docker Compose)のインストール
+## Docker（Docker Compose）のインストール
 
 開発時にコンテナを使用するため、DockerとDocker Composeをインストールします。
 
@@ -48,11 +48,11 @@ WindowsでのDocker利用方法はいくつかありますが、ここではDock
 使用する環境が既に整っている場合は、この手順をスキップしてください。
 
 {% hint style='danger' %}
-本ハンズオンでは、Dockerコンテナ起動時にローカルディレクトリをマウントします。Docker Desktop for WindowsやDocker Desktop for Macでローカルディレクトリをマウントするためには事前にファイル共有を許可しておく必要があります。Docker Desktopの`Settings`→`Resources`→`FILE SHARING`から、本ハンズオンのプロジェクトを配置するドライブやディレクトリを共有可能に設定しておいてください。（参考：[File Sharing | Windows](https://docs.docker.com/desktop/settings/windows/#file-sharing)、[File Sharing | Mac](https://docs.docker.com/desktop/settings/mac/#file-sharing)）
+本ハンズオンでは、Dockerコンテナ起動時にローカルディレクトリをマウントします。Docker Desktop for WindowsやDocker Desktop for Macでローカルディレクトリをマウントするためには事前にファイル共有を許可しておく必要があります。Docker Desktopの`Settings`→`Resources`→`FILE SHARING`から、本ハンズオンのプロジェクトを配置するドライブやディレクトリを共有可能に設定しておいてください。（参考：[File Sharing | Docker Docs](https://docs.docker.com/desktop/settings-and-maintenance/settings/#file-sharing)）
 {% endhint %}
 
 ## Gitのインストール（オプション）
 
 ハンズオン資料のダウンロードでGitを利用することもできるため、Gitをインストールします。ただし、他の手段でもダウンロードが出来るため、インストールは必須ではなく任意となります。
 
-ここでは、Windows用にGitを使うための git fow windows をインストールします。[公式サイト](https://gitforwindows.org/)の案内に沿って、インストールしてください。
+ここでは、Windows用にGitを使うための git for windows をインストールします。[公式サイト](https://gitforwindows.org/)の案内に沿って、インストールしてください。

@@ -281,7 +281,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432->5432/t
 PostgreSQLが起動していることを確認できたら、Mavenでテストを実行します。
 
 ```
-mvn test
+$ mvn test
 ```
 
 特にエラーが発生せず、テストが成功することを確認します。
@@ -307,7 +307,7 @@ Nablarchは、`ValidatorUtil`で送出された例外をハンドリングし、
 PostgreSQLは先ほどのテスト実行時に起動しているため、Mavenでテストを実行します。
 
 ```
-mvn test
+$ mvn test
 ```
 
 特にエラーが発生せず、テストが成功することを確認します。

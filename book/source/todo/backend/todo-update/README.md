@@ -203,7 +203,7 @@ $ docker-compose -f docker/docker-compose.dev.yml up -d
 続いて、次のコマンドでコンテナが起動していることを確認します。
 
 ```
-mvn test
+$ mvn test
 ```
 
 特にエラーが発生せず、テストが成功することを確認します。

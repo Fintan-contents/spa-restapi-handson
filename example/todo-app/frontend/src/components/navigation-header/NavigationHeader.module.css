@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  border-bottom: solid 1px black;
+  background: black;
+}
+.title {
+  color: white;
+  font-size: 1.5rem;
+}
+.header a {
+  text-decoration: none;
+}
+.nav {
+  display: flex;
+  list-style: none;
+}
+.nav li {
+  margin-left: 30px;
+  color: white;
+}
+.nav a {
+  color: white;
+}
+.nav button,
+.nav button:active,
+.nav button:hover {
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  color: white;
+}
