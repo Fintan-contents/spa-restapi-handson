@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -813,8 +813,8 @@
 }
 </code></pre>
 <p>example-chatでは、セッションストアから独自の値を取得していますが、ここでは、スレッドコンテキストからユーザーIDを取得します。スレッドコンテキストからユーザーIDを取得するには、<code>ThreadContext#getUserId</code>を使用します。（参考：<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/common/thread_context_handler.html#thread-context-handler-attribute-access" target="_blank">スレッドコンテキストの属性値を設定/取得する | Nablarch</a>）</p>
-<p>スレッドコンテキストにユーザーIDがされていない場合は、<code>common.config</code>に設定されている次の環境依存値がユーザーIDとして使用されます。</p>
-<pre><code># 未ログイン時、ログに出力するユーザID
+<p>スレッドコンテキストにユーザーIDが設定されていない場合は、<code>common.config</code>に設定されている次の環境依存値がユーザーIDとして使用されます。</p>
+<pre><code># 未ログイン時、ログに出力するユーザーID
 nablarch.userIdAttribute.anonymousId=guest
 </code></pre><p>そのため、スレッドコンテキストのユーザーIDがここで設定している値であればログインしていないと判断するように変更します。</p>
 <p>example-chatではエラーレスポンスを独自の例外で表現していますが、ここでは、今までの実装と同様に、<code>HttpErrorResponse</code>を使用するように変更します。</p>
@@ -846,7 +846,7 @@ nablarch.userIdAttribute.anonymousId=guest
     HttpResponse response = sendRequestWithContext(request, executionContext);
 ...
 </code></pre>
-<p>Todo操作のテストではユーザーIDに<code>1001</code>を使用していますので、例えばTodo一覧取得のテストであれば、次のように修正します。</p>
+<p>ToDo操作のテストではユーザーIDに<code>1001</code>を使用していますので、例えばToDo一覧取得のテストであれば、次のように修正します。</p>
 <pre><code class="lang-java"><span class="hljs-meta">@Test</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> RESTAPIでToDo一覧が取得できる() <span class="hljs-keyword">throws</span> Exception {
     ExecutionContext executionContext = <span class="hljs-keyword">new</span> ExecutionContext();
@@ -901,7 +901,7 @@ nablarch.userIdAttribute.anonymousId=guest
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"REST APIへのアクセス制限","level":"1.8.2.4","depth":3,"next":{"title":"ToDo管理でのユーザー取得","level":"1.8.2.5","depth":3,"path":"auth/backend/todo/README.md","ref":"auth/backend/todo/README.md","articles":[]},"previous":{"title":"ログアウトのREST API","level":"1.8.2.3","depth":3,"path":"auth/backend/logout/README.md","ref":"auth/backend/logout/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/backend/check/README.md","mtime":"2023-11-06T02:43:38.337Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"REST APIへのアクセス制限","level":"1.8.2.4","depth":3,"next":{"title":"ToDo管理でのユーザー取得","level":"1.8.2.5","depth":3,"path":"auth/backend/todo/README.md","ref":"auth/backend/todo/README.md","articles":[]},"previous":{"title":"ログアウトのREST API","level":"1.8.2.3","depth":3,"path":"auth/backend/logout/README.md","ref":"auth/backend/logout/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/backend/check/README.md","mtime":"2025-05-16T02:27:53.227Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

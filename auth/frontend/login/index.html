@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -783,64 +783,64 @@
                                 <html><head></head><body><h1 id="ログイン"><a name="ログイン" class="plugin-anchor" href="#ログイン"><i class="fa fa-link" aria-hidden="true"></i></a>ログイン</h1>
 <p>ユーザーコンテクストを使用して、ログイン処理を実装します。</p>
 <h2 id="ログイン処理の実装"><a name="ログイン処理の実装" class="plugin-anchor" href="#ログイン処理の実装"><i class="fa fa-link" aria-hidden="true"></i></a>ログイン処理の実装</h2>
-<p><code>Login</code>コンポーネントにログイン処理を実装します。また、入力値のバリデーション、ユーザー認証が失敗した場合のエラーメッセージの表示についても、<code>Signup</code>コンポーネントと同様に実装します。</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> { useHistory } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-router-dom&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./Login.css&apos;</span>;
-<span class="hljs-keyword">import</span> { useInput } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../hooks/useInput&apos;</span>;
-<span class="hljs-keyword">import</span> { AuthenticationFailedError, useUserContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../contexts/UserContext&apos;</span>;
-<span class="hljs-keyword">import</span> { stringField, useValidation } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../validation&apos;</span>;
+<p><code>Login</code>コンポーネントにログイン処理を実装します。また、入力値のバリデーションやユーザー認証が失敗した場合のエラーメッセージの表示についても、<code>Signup</code>コンポーネントと同様に実装します。</p>
+<p><code>src/components/login/Login.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, {useState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> {useRouter} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;next/navigation&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./Login.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> {useInput} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../hooks/useInput&apos;</span>;
+<span class="hljs-keyword">import</span> {AuthenticationFailedError, useUserContext} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../contexts/UserContext&apos;</span>;
+<span class="hljs-keyword">import</span> {stringField, useValidation} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../validation&apos;</span>;
 
 type ValidationFields = {
-  <span class="hljs-attr">userName</span>: string
-  <span class="hljs-attr">password</span>: string
+  <span class="hljs-attr">userName</span>: string;
+  password: string;
 };
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Login: React.FC = <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-keyword">const</span> history = useHistory();
+  <span class="hljs-keyword">const</span> router = useRouter();
   <span class="hljs-keyword">const</span> [userName, userNameAttributes] = useInput(<span class="hljs-string">&apos;&apos;</span>);
   <span class="hljs-keyword">const</span> [password, passwordAttributes] = useInput(<span class="hljs-string">&apos;&apos;</span>);
   <span class="hljs-keyword">const</span> [formError, setFormError] = useState(<span class="hljs-string">&apos;&apos;</span>);
   <span class="hljs-keyword">const</span> userContext = useUserContext();
 
-  <span class="hljs-keyword">const</span> { error, handleSubmit } = useValidation&lt;ValidationFields&gt;({
-    <span class="hljs-attr">userName</span>: stringField()
-      .required(<span class="hljs-string">&apos;名前を入力してください&apos;</span>),
-    <span class="hljs-attr">password</span>: stringField()
-      .required(<span class="hljs-string">&apos;パスワードを入力してください&apos;</span>)
+  <span class="hljs-keyword">const</span> {error, handleSubmit} = useValidation&lt;ValidationFields&gt;({
+    <span class="hljs-attr">userName</span>: stringField().required(<span class="hljs-string">&apos;名前を入力してください&apos;</span>),
+    <span class="hljs-attr">password</span>: stringField().required(<span class="hljs-string">&apos;パスワードを入力してください&apos;</span>),
   });
 
-  <span class="hljs-keyword">const</span> login: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> (event) =&gt; {
+  <span class="hljs-keyword">const</span> login: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> event =&gt; {
     event.preventDefault();
     <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> userContext.login(userName, password);
     <span class="hljs-keyword">if</span> (result <span class="hljs-keyword">instanceof</span> AuthenticationFailedError) {
-      setFormError(<span class="hljs-string">&apos;ログインに失敗しました。名前またはパスワードが正しくありません。&apos;</span>)
+      setFormError(<span class="hljs-string">&apos;ログインに失敗しました。名前またはパスワードが正しくありません。&apos;</span>);
       <span class="hljs-keyword">return</span>;
     }
-    history.push(<span class="hljs-string">&apos;/board&apos;</span>);
+    router.push(<span class="hljs-string">&apos;/board&apos;</span>);
   };
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_box&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_title&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.box}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ログイン<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error&quot;</span>&gt;</span>{formError}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;error&apos;</span>&gt;</span>{formError}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_form&quot;</span>
-              <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit({</span> <span class="hljs-attr">userName</span>, <span class="hljs-attr">password</span> }, <span class="hljs-attr">login</span>, () =&gt;</span> setFormError(&apos;&apos;))}&gt;
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_label&quot;</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> {<span class="hljs-attr">...userNameAttributes</span>} /&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error&quot;</span>&gt;</span>{error.userName}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit({userName,</span> <span class="hljs-attr">password</span>}, <span class="hljs-attr">login</span>, () =&gt;</span> setFormError(&apos;&apos;))}&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> {<span class="hljs-attr">...userNameAttributes</span>} /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;error&apos;</span>&gt;</span>{error.userName}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_label&quot;</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> {<span class="hljs-attr">...passwordAttributes</span>} /&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error&quot;</span>&gt;</span>{error.password}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;password&apos;</span> {<span class="hljs-attr">...passwordAttributes</span>} /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;error&apos;</span>&gt;</span>{error.password}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_buttonGruop&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_button&quot;</span>&gt;</span>ログインする<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.buttonGroup}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;submit&apos;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+              ログインする
+            <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -850,7 +850,7 @@ type ValidationFields = {
 </code></pre>
 <p>フォームのサブミット時に、ユーザーコンテクストのログイン関数を実行するようにします。</p>
 <h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
-<p>単体での動作確認がしづらいため、最後にまてめて動作を確認します。</p>
+<p>単体での動作確認がしづらいため、最後にまとめて確認します。</p>
 </body></html>
                                 
                                 </section>
@@ -894,7 +894,7 @@ type ValidationFields = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ログイン","level":"1.8.1.6","depth":3,"next":{"title":"ログアウト","level":"1.8.1.7","depth":3,"path":"auth/frontend/logout/README.md","ref":"auth/frontend/logout/README.md","articles":[]},"previous":{"title":"サインアップ","level":"1.8.1.5","depth":3,"path":"auth/frontend/signup/README.md","ref":"auth/frontend/signup/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/login/README.md","mtime":"2023-11-06T02:43:38.342Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ログイン","level":"1.8.1.6","depth":3,"next":{"title":"ログアウト","level":"1.8.1.7","depth":3,"path":"auth/frontend/logout/README.md","ref":"auth/frontend/logout/README.md","articles":[]},"previous":{"title":"サインアップ","level":"1.8.1.5","depth":3,"path":"auth/frontend/signup/README.md","ref":"auth/frontend/signup/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/login/README.md","mtime":"2025-05-16T02:27:53.233Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

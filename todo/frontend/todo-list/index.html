@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -784,13 +784,13 @@
 <p>ToDoページで登録されているToDoを一覧表示できるように実装します。</p>
 <h2 id="stateの設計"><a name="stateの設計" class="plugin-anchor" href="#stateの設計"><i class="fa fa-link" aria-hidden="true"></i></a>stateの設計</h2>
 <p>登録されているToDoを表示するために、コンポーネントでどのような状態が必要になるかを考えていきます。</p>
-<p>Reactでは、stateを使用することで、状態の変化を表現することができます。（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state" target="_blank">React - Reactの流儀 ステップ 3</a>）</p>
-<p>コンポーネントのstateになりうるのは、ユーザーからの入力や時間の経過の中で変化したり、他のstate等を使って算出可能ではないものになります。画面に表示するToDoの一覧は、ユーザーからの入力で変化していくもので、算出することもできないため、stateとします。</p>
-<p>次に、そのstateをどのコンポーネントに配置するのかを考えていきます。（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-4-identify-where-your-state-should-live" target="_blank">React - Reactの流儀 ステップ 4</a>）</p>
-<p>このstateを表示するためのコンポーネントは、<code>TodoList</code>になります。<code>TodoItem</code>ではそれぞれのToDoの内容を表示しますが、一覧できるように表示するのは<code>TodoList</code>です。また、<code>TodoForm</code>ではこのToDo一覧に追加することができるため、<code>TodoForm</code>でもこのstateを扱うことになります。複数のコンポーネントでstateを必要とする場合、階層構造の中で共通の親コンポーネントがstateを持つことが適しているため、ここでは、<code>TodoBoard</code>にこのstateを持たせることにします。</p>
+<p>Reactでは、stateを使用することで状態の変化を表現することができます。<br>（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state" target="_blank">React の流儀 ステップ 3 – React</a>）</p>
+<p>コンポーネントのstateになりうるのは、ユーザーからの入力や時間の経過の中で変化するもの、他のstate等を使って算出可能ではないものになります。画面に表示するToDoの一覧は、ユーザーからの入力で変化していくもので、算出することもできないため、stateとします。</p>
+<p>次に、そのstateをどのコンポーネントに配置するのかを考えていきます。<br>（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-4-identify-where-your-state-should-live" target="_blank">React の流儀 ステップ 4 – React</a>）</p>
+<p>stateの配置場所を決めるために、stateとして管理することにしたToDo一覧がどこで利用されるかを確認します。まず、ToDo一覧は<code>TodoList</code>で表示されます。それぞれのToDoの内容を表示するのは<code>TodoItem</code>ですが、一覧できるように表示するのは<code>TodoList</code>です。また、<code>TodoForm</code>ではこのToDo一覧に追加できる必要があるため、<code>TodoForm</code>でもこのstateを扱うことになります。複数のコンポーネントでstateを必要とする場合、階層構造の中で共通の親コンポーネントがstateを持つことに適しているため、ここでは<code>TodoBoard</code>にこのstateを持たせることとします。</p>
 <h2 id="コンポーネントの実装"><a name="コンポーネントの実装" class="plugin-anchor" href="#コンポーネントの実装"><i class="fa fa-link" aria-hidden="true"></i></a>コンポーネントの実装</h2>
 <p>現時点では、ToDoの表示内容は<code>TodoList</code>に静的に定義していますが、これを<code>TodoBoard</code>でstateを使って実装します。</p>
-<p>Reactの関数コンポーネントでは、様々な機能を実装するためにフック（Hooks）と呼ばれる様々な機能が提供されており、useStateフックを使います。（<a href="https://ja.react.dev/learn/state-a-components-memory" target="_blank">参考</a>）</p>
+<p>Reactの関数コンポーネントでは、様々な機能を実装するためにフック（Hooks）と呼ばれる機能が提供されています。ToDoの表示内容にはuseStateフックを使います。<br>（参考：<a href="https://ja.react.dev/learn/state-a-components-memory" target="_blank">コンポーネントのメモリ – React</a>）</p>
 <p>useStateフックは<code>useState</code>を呼び出すことで使用できます。引数に初期値を指定し、返り値としてstateとそれを更新するための関数をペアで返します。例えば、0から始まるカウントをstateとし、ボタンをクリックするごとにstateを更新するような場合、次のように使用します。</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> [count, setCount] = useState(<span class="hljs-number">0</span>);
 
@@ -809,28 +809,28 @@
   { <span class="hljs-attr">id</span>: <span class="hljs-number">2003</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&apos;買い物へ行く&apos;</span>, <span class="hljs-attr">completed</span>: <span class="hljs-literal">false</span> }
 ]);
 </code></pre>
-<p>このstateを<code>TodoBoard</code>に配置し、<code>TodoList</code>で表示するため、<code>TodoList</code>でも<code>TodoItem</code>と同様にプロパティを定義し、<code>TodoBoard</code>からstateを受け取るようにする必要があります。<code>TodoItem</code>と同様に<code>type</code>でプロパティの型を定義して、<code>TodoList</code>にプロパティを追加します。</p>
+<p>このstateは<code>TodoBoard</code>に配置し、<code>TodoList</code>で表示します。そのため、<code>TodoList</code>でも<code>TodoItem</code>と同様にプロパティを定義し、<code>TodoBoard</code>からstateを受け取るようにする必要があります。<br>さらに、<code>TodoItem</code>と同様に<code>type</code>でプロパティの型を定義し、<code>TodoList</code>にプロパティを追加します。</p>
 <p>また、先ほどstateで扱うToDoデータに<code>id</code>を追加したため、プロパティでToDoデータを受け取っているコンポーネントの型定義に、次のように<code>id</code>を追加しておきます。</p>
 <pre><code class="lang-js">type Props = {
-  <span class="hljs-attr">id</span>: number
-  <span class="hljs-attr">text</span>: string
-  <span class="hljs-attr">completed</span>: boolean
-}
+  <span class="hljs-attr">id</span>: number;
+  text: string;
+  completed: boolean;
+};
 </code></pre>
-<p>また、state使用前は<code>TodoList</code>で静的データを定義していたため、<code>TodoList</code>内で<code>TodoItem</code>を固定で3つ定義していましたが、プロパティとして引数で受け取るようにしたことで、定義する<code>TodoItem</code>の数が動的になります。引数は配列で受け取るため、<code>map</code>を使用して動的に<code>TodoItem</code>を生成するようにしておきます。</p>
+<p>state使用前は<code>TodoList</code>で静的データを定義していたため、<code>TodoList</code>内で<code>TodoItem</code>を固定で3つ定義していました。プロパティとして引数で受け取るようにしたことで、定義する<code>TodoItem</code>の数が動的になります。引数は配列で受け取るため、<code>map</code>を使用して動的に<code>TodoItem</code>を生成するようにしておきます。</p>
 <p>これらを実装すると、<code>TodoBoard</code>と<code>TodoList</code>、<code>TodoItem</code>は次のとおりになります。</p>
-<p><code>src/components/TodoBoard.tsx</code></p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoBoard.css&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoForm } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoForm&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoFilter&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoList } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoList&apos;</span>;
+<p><code>src/components/board/TodoBoard.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, {useState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoBoard.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoForm} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./form/TodoForm&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoFilter} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./filter/TodoFilter&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoList} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./list/TodoList&apos;</span>;
 
 type Todo = {
-  <span class="hljs-attr">id</span>: number
-  <span class="hljs-attr">text</span>: string
-  <span class="hljs-attr">completed</span>: boolean
-}
+  <span class="hljs-attr">id</span>: number;
+  text: string;
+  completed: boolean;
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoBoard: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">const</span> [todos] = useState&lt;Todo[]&gt;([
@@ -840,84 +840,95 @@ type Todo = {
   ]);
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoBoard_content&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TodoForm</span> /&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TodoFilter</span> /&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">todos</span>=<span class="hljs-string">{todos}/</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">todos</span>=<span class="hljs-string">{todos}</span> /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
-<p><code>src/components/TodoList.tsx</code></p>
+<p><code>src/components/board/list/TodoList.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoList.css&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoItem } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoItem&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoList.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoItem} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./item/TodoItem&apos;</span>;
 
 type Todo = {
-  <span class="hljs-attr">id</span>: number
-  <span class="hljs-attr">text</span>: string
-  <span class="hljs-attr">completed</span>: boolean
-}
+  <span class="hljs-attr">id</span>: number;
+  text: string;
+  completed: boolean;
+};
 
 type Props = {
-  <span class="hljs-attr">todos</span>: Todo[]
-}
+  <span class="hljs-attr">todos</span>: Todo[];
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoList: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{todos}</span>) =&gt;</span> {
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoList_list&quot;</span>&gt;</span>
-      {todos.map(todo =&gt;
-        <span class="hljs-tag">&lt;<span class="hljs-name">TodoItem</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{todo.id}</span> <span class="hljs-attr">id</span>=<span class="hljs-string">{todo.id}</span> <span class="hljs-attr">text</span>=<span class="hljs-string">{todo.text}</span> <span class="hljs-attr">completed</span>=<span class="hljs-string">{todo.completed}</span> /&gt;</span>
-      )}
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.list}</span>&gt;</span>
+      {todos.map(todo =&gt; (
+        <span class="hljs-tag">&lt;<span class="hljs-name">TodoItem</span> 
+          <span class="hljs-attr">key</span>=<span class="hljs-string">{todo.id}</span>
+          <span class="hljs-attr">id</span>=<span class="hljs-string">{todo.id}</span>
+          <span class="hljs-attr">text</span>=<span class="hljs-string">{todo.text}</span>
+          <span class="hljs-attr">completed</span>=<span class="hljs-string">{todo.completed}</span>
+        /&gt;</span>
+      ))}
     <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
   );
 };
 </code></pre>
-<p><code>src/components/TodoItem.tsx</code></p>
+<p><code>src/components/board/list/item/TodoItem.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoItem.css&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoItem.module.css&apos;</span>;
 
 type Props = {
-  <span class="hljs-attr">id</span>: number
-  <span class="hljs-attr">text</span>: string
-  <span class="hljs-attr">completed</span>: boolean
-}
+  <span class="hljs-attr">id</span>: number;
+  text: string;
+  completed: boolean;
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoItem: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{id, text, completed}</span>) =&gt;</span> {
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_item&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_todo&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.todo}</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_checkbox&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">{completed}</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;checkbox&apos;</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.checkbox}</span>
+            <span class="hljs-attr">checked</span>=<span class="hljs-string">{completed}</span>
+          /&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{text}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_delete&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_button&quot;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.delete}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+          x
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
   );
 };
 </code></pre>
-<p>なお、<code>TodoList</code>のJSXで<code>TodoItem</code>を宣言しているところで、<code>key</code>プロパティを使用します。これは、コンポーネントのレンダリング要否を判定するためにReactが使うプロパティで、<code>map</code>で繰り返してコンポーネントを使用したりする場合、個々のコンポーネントを識別するために一意となる値を設定しておきます。（参考：<a href="https://ja.react.dev/learn/rendering-lists" target="_blank">React - リストのレンダー</a>）</p>
+<p>なお、<code>TodoList</code>のJSXで<code>TodoItem</code>を宣言しているところで、<code>key</code>プロパティを使用します。これは、コンポーネントのレンダリング要否を判定するためにReactが使うプロパティで、<code>map</code>で繰り返してコンポーネントを使用したりする場合、個々のコンポーネントを識別するために一意となる値を設定する必要があります。（参考：<a href="https://ja.react.dev/learn/rendering-lists" target="_blank">リストのレンダー – React</a>）</p>
 <h2 id="rest-apiの呼び出しとstateの更新"><a name="rest-apiの呼び出しとstateの更新" class="plugin-anchor" href="#rest-apiの呼び出しとstateの更新"><i class="fa fa-link" aria-hidden="true"></i></a>REST APIの呼び出しとstateの更新</h2>
 <p>次に、stateを更新するため、REST APIを呼び出すタイミングを考えます。</p>
 <p>ページを表示したタイミングでToDo一覧を表示したいので、<code>TodoBoard</code>コンポーネントを最初にレンダーしたタイミングで、REST APIを呼び出し、その結果からstateを更新するようにします。</p>
-<p>関数コンポーネントでは、このようにデータの取得や更新によりコンポーネントに影響を与えることを副作用と呼び、副作用を起こす処理を実装するためのフックとして、useEffectフックが提供されています。（参考：<a href="https://ja.react.dev/reference/react/useEffect" target="_blank">React - useEffect</a>）</p>
-<p>useEffectフックは<code>useEffect</code>を呼び出すことで使用します。第1引数に副作用を起こす関数と、第2引数にこの副作用が依存するstateを配列で渡します。第2引数に渡したstateが更新されると、第1引数の関数が実行されます。ここでのREST API呼び出しは他のstateに依存せず、最初のレンダー後に呼び出したいため、そのような場合には空の配列（<code>[]</code>）を渡します。（参考：<a href="https://ja.react.dev/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies" target="_blank">React - エフェクトの依存配列を指定する（落とし穴）</a>）</p>
+<p>関数コンポーネントでは、このようにデータの取得や更新によりコンポーネントに影響を与えることを副作用と呼び、副作用を起こす処理を実装するためのフックとして、useEffectフックが提供されています。（参考：<a href="https://ja.react.dev/reference/react/useEffect" target="_blank">useEffect – React</a>）</p>
+<p>useEffectフックは<code>useEffect</code>を呼び出すことで使用します。第1引数に副作用を起こす関数と、第2引数にこの副作用が依存するstateを配列で渡します。第2引数に渡したstateが更新されると、第1引数の関数が実行されます。ここでのREST API呼び出しは他のstateに依存せず、最初のレンダー後に呼び出したいため、そのような場合には空の配列（<code>[]</code>）を渡します。<br>（参考：<a href="https://ja.react.dev/learn/synchronizing-with-effects#step-2-specify-the-effect-dependencies" target="_blank">エフェクトの依存配列を指定する（落とし穴） – React</a>）</p>
 <p>useStateフックの初期値で静的データを渡していましたが、REST APIの呼び出しを想定し、まずはuseEffectフックを使用して静的データでstateを更新するように実装してみます。stateの初期値としては、空の配列を渡しておきます。</p>
-<p><code>src/components/TodoBoard.tsx</code></p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, { useEffect, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoBoard.css&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoForm } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoForm&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoFilter&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoList } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoList&apos;</span>;
+<p><code>src/components/board/TodoBoard.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, {useEffect, useState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoBoard.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoForm} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./form/TodoForm&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoFilter} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./filter/TodoFilter&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoList} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./list/TodoList&apos;</span>;
 
 type Todo = {
-  <span class="hljs-attr">id</span>: number
-  <span class="hljs-attr">text</span>: string
-  <span class="hljs-attr">completed</span>: boolean
-}
+  <span class="hljs-attr">id</span>: number;
+  text: string;
+  completed: boolean;
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoBoard: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">const</span> [todos, setTodos] = useState&lt;Todo[]&gt;([]);
@@ -931,49 +942,48 @@ type Todo = {
   }, []);
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoBoard_content&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TodoForm</span> /&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TodoFilter</span> /&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">todos</span>=<span class="hljs-string">{todos}/</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">todos</span>=<span class="hljs-string">{todos}</span> /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
 <p>ページの表示内容を確認すると、何も変わらず表示されています。いまは静的データで設定しているだけでuseEffectの処理も瞬時に完了するため、目に見えるような影響はありません。</p>
 <p>useEffectフックで更新する準備ができたため、次に、生成したクライアントコードを使用してREST APIを呼び出すように実装します。事前に作成した<code>BackendService</code>の関数を使用して、REST APIを呼び出します。結果は<code>Promise</code>で返ってくるため、<code>then</code>を呼び出してレスポンスが返ってきたタイミングでstateの更新関数を呼び出すように実装します。</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, { useEffect, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoBoard.css&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoForm } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoForm&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoFilter&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoList } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoList&apos;</span>;
-<span class="hljs-keyword">import</span> { BackendService } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../backend/BackendService&apos;</span>;
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, {useEffect, useState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoBoard.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoForm} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./form/TodoForm&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoFilter} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./filter/TodoFilter&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoList} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./list/TodoList&apos;</span>;
+<span class="hljs-keyword">import</span> {BackendService} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../backend/BackendService&apos;</span>;
 
 type Todo = {
-  <span class="hljs-attr">id</span>: number
-  <span class="hljs-attr">text</span>: string
-  <span class="hljs-attr">completed</span>: boolean
-}
+  <span class="hljs-attr">id</span>: number;
+  text: string;
+  completed: boolean;
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoBoard: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">const</span> [todos, setTodos] = useState&lt;Todo[]&gt;([]);
 
   useEffect(<span class="hljs-function">() =&gt;</span> {
-    BackendService.getTodos()
-      .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> setTodos(response));
+    BackendService.getTodos().then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> setTodos(response));
   }, []);
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoBoard_content&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TodoForm</span> /&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TodoFilter</span> /&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">todos</span>=<span class="hljs-string">{todos}/</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">todos</span>=<span class="hljs-string">{todos}</span> /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
 <h2 id="モックを使用した動作確認"><a name="モックを使用した動作確認" class="plugin-anchor" href="#モックを使用した動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>モックを使用した動作確認</h2>
 <p>ページを表示したら、モックサーバから取得したデータが一覧で表示されることを確認します。</p>
-<p>確認ができたら、フロントエンドの実装は完了です。</p>
+<p>確認ができたら、フロントエンドのToDoの一覧表示の実装は完了です。</p>
 </body></html>
                                 
                                 </section>
@@ -1017,7 +1027,7 @@ type Todo = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"next":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},"previous":{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-list/README.md","mtime":"2023-12-25T02:59:13.976Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"next":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},"previous":{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-list/README.md","mtime":"2025-05-16T02:27:53.263Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

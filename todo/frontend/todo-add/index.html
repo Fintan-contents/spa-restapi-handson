@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -784,7 +784,7 @@
 <p>ToDoページで新しいToDoを登録できるように実装します。</p>
 <h2 id="stateの設計"><a name="stateの設計" class="plugin-anchor" href="#stateの設計"><i class="fa fa-link" aria-hidden="true"></i></a>stateの設計</h2>
 <p>ToDoの一覧表示の時と同様に、ToDoを登録するコンポーネントで、どのような状態が必要になるかを考えていきます。</p>
-<p>ここでは、ToDoを登録するためのフォームを作成します。フォームの作成についてはReactからガイドされており、フォーム自身が保持する独自のstateをReactが管理するstateに統合し、Reactのstateのみで制御する「制御されたコンポーネント」として作成することを推奨しています。（参考：<a href="https://ja.react.dev/reference/react-dom/components/input" target="_blank">input</a>、<a href="https://ja.react.dev/reference/react-dom/components/select" target="_blank">select</a>、<a href="https://ja.react.dev/reference/react-dom/components/textarea" target="_blank">textarea</a>）</p>
+<p>ここでは、ToDoを登録するためのフォームを作成します。フォームの作成についてはReactからガイドされており、フォーム自身が保持する独自のstateをReactが管理するstateに統合し、Reactのstateのみで制御する「制御されたコンポーネント」として作成することを推奨しています。<br>（参考：<a href="https://ja.react.dev/reference/react-dom/components/input" target="_blank">input</a>、<a href="https://ja.react.dev/reference/react-dom/components/select" target="_blank">select</a>、<a href="https://ja.react.dev/reference/react-dom/components/textarea" target="_blank">textarea</a>）</p>
 <p>ここからわかるとおり、フォームでは入力中の状態を保持するstateが必要になります。ここでは、ToDoの内容を入力するフォームであるため、入力中のToDoの内容を保持するstateが必要になります。</p>
 <p>このstateは、ToDoを登録するコンポーネントである<code>TodoForm</code>でしか必要ないため、stateはこのコンポーネントに配置します。</p>
 <p>登録完了したToDoは一覧に表示しますが、一覧で表示するためのToDoを保持するstateは<code>TodoBoard</code>に配置しています。そのため、<code>TodoForm</code>でToDoを登録した際に<code>TodoBoard</code>のstateを更新するようにします。</p>
@@ -793,7 +793,8 @@
 <p>このようなテキスト入力ボックスを実装するために、example-chatのフロントエンドでは<code>useInput</code>という独自のフックを実装していますので、その実装を流用します。</p>
 <p>まず、<code>src/hooks</code>ディレクトリを作成し、そこに<code>useInput.ts</code>ファイルを作成します。
 example-chatの<code>src/framework/hooks/index.ts</code>に<code>useInput</code>が定義されているため、このコードを<code>useInput.ts</code>ファイルに持ってきます。</p>
-<pre><code class="lang-js"><span class="hljs-keyword">import</span> { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<p><code>src/hooks/useInput.ts</code></p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> {useState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
 
 <span class="hljs-comment">/**
  * input要素のステートフックとステート更新をラッピングした独自フック。
@@ -801,7 +802,9 @@ example-chatの<code>src/framework/hooks/index.ts</code>に<code>useInput</code>
  * <span class="hljs-doctag">@param </span>initialState 初期値
  * <span class="hljs-doctag">@return </span>[input要素のステート, input要素の属性, ステート更新の関数]
  */</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> useInput = (initialState: string = <span class="hljs-string">&apos;&apos;</span>): [string, React.InputHTMLAttributes&lt;HTMLInputElement&gt;, React.Dispatch&lt;React.SetStateAction&lt;string&gt;&gt;] =&gt; {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> useInput = (
+  initialState: string = <span class="hljs-string">&apos;&apos;</span>,
+): [string, React.InputHTMLAttributes&lt;HTMLInputElement&gt;, React.Dispatch&lt;React.SetStateAction&lt;string&gt;&gt;] =&gt; {
   <span class="hljs-keyword">const</span> [value, setValue] = useState&lt;string&gt;(initialState);
 
   <span class="hljs-keyword">const</span> onChange = <span class="hljs-function">(<span class="hljs-params">event: React.FormEvent&lt;HTMLInputElement&gt;</span>) =&gt;</span> {
@@ -812,16 +815,17 @@ example-chatの<code>src/framework/hooks/index.ts</code>に<code>useInput</code>
     value,
     {
       value,
-      onChange
+      onChange,
     },
-    setValue
+    setValue,
   ];
 };
 </code></pre>
 <p><code>TodoForm</code>では、この<code>useInput</code>を使用して、次のように実装します。</p>
+<p><code>src/components/board/form/TodoForm.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoForm.css&apos;</span>;
-<span class="hljs-keyword">import</span> { useInput } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../hooks/useInput&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoForm.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> {useInput} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../../hooks/useInput&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoForm: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">const</span> [text, textAttributes, setText] = useInput(<span class="hljs-string">&apos;&apos;</span>);
@@ -833,30 +837,30 @@ example-chatの<code>src/framework/hooks/index.ts</code>に<code>useInput</code>
   };
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_form&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_input&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> {<span class="hljs-attr">...textAttributes</span>} <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;タスクを入力してください&quot;</span>/&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.input}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> {<span class="hljs-attr">...textAttributes</span>} <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&apos;タスクを入力してください&apos;</span> /&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_button&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span>追加<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;submit&apos;</span>&gt;</span>追加<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
-<p><code>useInput</code>では、<code>useState</code>と同様に呼び出し時に初期値を渡します。戻り値としては、state自体や、<code>input</code>に渡すためのプロパティが設定されたオブジェクト等が返されます。</p>
+<p><code>useInput</code>では、<code>useState</code>と同様に呼び出し時に初期値を渡します。戻り値としては、state自体や<code>input</code>に渡すためのプロパティが設定されたオブジェクト等が返されます。</p>
 <p><code>input</code>のプロパティを個別に設定してもよいですが、ここでは<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax" target="_blank">スプレッド構文</a>を使用して、そのオブジェクトに設定されているプロパティを展開して一気に設定します。</p>
-<pre><code class="lang-jsx">&lt;input type=<span class="hljs-string">&quot;text&quot;</span> {...textAttributes} placeholder=<span class="hljs-string">&quot;タスクを入力してください&quot;</span>/&gt;
+<pre><code class="lang-jsx">&lt;input type=<span class="hljs-string">&apos;text&apos;</span> {...textAttributes} placeholder=<span class="hljs-string">&apos;タスクを入力してください&apos;</span> /&gt;
 </code></pre>
 <p><code>textAttributes</code>には<code>value</code>と<code>onChange</code>プロパティがあるため、これは次の実装と同じ意味になります。</p>
-<pre><code class="lang-jsx">&lt;input type=<span class="hljs-string">&quot;text&quot;</span> value={textAttributes.value} onChange={textAttributes.onChange} placeholder=<span class="hljs-string">&quot;タスクを入力してください&quot;</span>/&gt;
+<pre><code class="lang-jsx">&lt;input type=<span class="hljs-string">&apos;text&apos;</span> value={textAttributes.value} onChange={textAttributes.onChange} placeholder=<span class="hljs-string">&apos;タスクを入力してください&apos;</span> /&gt;
 </code></pre>
 <p>フォームのサブミットで登録処理を行うように、「追加」ボタンの<code>type</code>を<code>submit</code>に設定します。これで、「追加」ボタンをクリックするとサブミットされるようになります。</p>
-<p>サブミット時に登録処理を実行するようにするため、登録処理を<code>handleSubmit</code>関数として実装し、<code>form</code>の<code>onSubmit</code>に設定します。これで、サブミット時にこの関数がコールバックされます。
+<p>サブミット時に登録処理を実行するため、登録処理を<code>handleSubmit</code>関数として実装し、<br><code>form</code>の<code>onSubmit</code>に設定します。これで、サブミット時にこの関数がコールバックされます。
 また、サブミット時に関数がコールバックされた後、そのままだとサブミットイベントによりフォームをサーバに送信しようとしてしまうので、次のように関数内で<code>event.preventDefault()</code>を呼び、サブミットイベントをキャンセルしておきます。</p>
-<pre><code class="lang-js"><span class="hljs-keyword">const</span> handleSubmit = <span class="hljs-function">(<span class="hljs-params">event: React.FormEvent&lt;HTMLFormElement&gt;</span>) =&gt;</span> {
+<pre><code class="lang-js">  <span class="hljs-keyword">const</span> handleSubmit = <span class="hljs-function">(<span class="hljs-params">event: React.FormEvent&lt;HTMLFormElement&gt;</span>) =&gt;</span> {
     event.preventDefault();
 ...
 </code></pre>
@@ -864,50 +868,52 @@ example-chatの<code>src/framework/hooks/index.ts</code>に<code>useInput</code>
 <h2 id="rest-apiの呼び出しとstateの更新"><a name="rest-apiの呼び出しとstateの更新" class="plugin-anchor" href="#rest-apiの呼び出しとstateの更新"><i class="fa fa-link" aria-hidden="true"></i></a>REST APIの呼び出しとstateの更新</h2>
 <p>先ほど作成したサブミット用のコールバック関数では、イベントをキャンセルするだけでしたが、生成したクライアントコードでREST APIを呼び出すように実装していきます。</p>
 <p>REST APIを呼び出すと登録した結果のToDoがレスポンスとして返されるので、それを一覧に表示されるようにします。ただ、一覧に表示するためのstateは、<code>TodoForm</code>の親コンポーネントである<code>TodoBoard</code>に配置しているため、<code>TodoForm</code>の実装では更新することができません。このような場合、stateを配置しているコンポーネントでstateを更新するためのコールバック関数を定義し、それをプロパティで渡してもらうようにします。</p>
-<p>また、ToDoを登録した後は入力したテキストもクリアするため、テキスト入力のstateも更新するようにします。</p>
+<p>また、ToDoを登録した後は入力したテキストもクリアさせるため、テキスト入力のstateも更新します。
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function" target="_blank">async/await</a>を使うことで、非同期処理の結果を受け取るまで実行を待機します。この方法により、フォームのテキストが確実にサーバーに送られてレスポンスを受け取った後にクリアされるため、データの消失を防ぐことができます。</p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoForm.css&apos;</span>;
-<span class="hljs-keyword">import</span> { useInput } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../hooks/useInput&apos;</span>;
-<span class="hljs-keyword">import</span> { BackendService } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../backend/BackendService&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoForm.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> {useInput} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../../hooks/useInput&apos;</span>;
+<span class="hljs-keyword">import</span> {BackendService} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../../backend/BackendService&apos;</span>;
 
 type Todo = {
-  <span class="hljs-attr">id</span>: number
-  <span class="hljs-attr">text</span>: string
-  <span class="hljs-attr">completed</span>: boolean
-}
+  <span class="hljs-attr">id</span>: number;
+  text: string;
+  completed: boolean;
+};
 
 type Props = {
-  <span class="hljs-attr">addTodo</span>: <span class="hljs-function">(<span class="hljs-params">todo: Todo</span>) =&gt;</span> <span class="hljs-keyword">void</span>
-}
+  <span class="hljs-attr">addTodo</span>: <span class="hljs-function">(<span class="hljs-params">todo: Todo</span>) =&gt;</span> <span class="hljs-keyword">void</span>;
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoForm: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{addTodo}</span>) =&gt;</span> {
   <span class="hljs-keyword">const</span> [text, textAttributes, setText] = useInput(<span class="hljs-string">&apos;&apos;</span>);
 
-  <span class="hljs-keyword">const</span> handleSubmit = <span class="hljs-function">(<span class="hljs-params">event: React.FormEvent&lt;HTMLFormElement&gt;</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> handleSubmit = <span class="hljs-keyword">async</span> (event: React.FormEvent&lt;HTMLFormElement&gt;) =&gt; {
     event.preventDefault();
     <span class="hljs-keyword">if</span> (!text) {
       <span class="hljs-keyword">return</span>;
     }
-    BackendService.postTodo(text)
-      .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> addTodo(response));
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> BackendService.postTodo(text);
+    addTodo(response);
     setText(<span class="hljs-string">&apos;&apos;</span>);
   };
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_form&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_input&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> {<span class="hljs-attr">...textAttributes</span>} <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;タスクを入力してください&quot;</span>/&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit}</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.input}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> {<span class="hljs-attr">...textAttributes</span>} <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&apos;タスクを入力してください&apos;</span> /&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_button&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span>追加<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;submit&apos;</span>&gt;</span>追加<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
-<p><code>TodoBoard</code>では、次のように、引数のToDoをstateのToDoに結合させる関数を作成し、それを<code>TodoForm</code>に渡すように実装します。</p>
+<p><code>TodoBoard</code>では、次のように、引数のToDoをstateのToDoに結合させる関数を作成し、<br>それを<code>TodoForm</code>に渡すように実装します。</p>
+<p><code>src/components/board/TodoBoard.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoBoard: React.FC = <span class="hljs-function">() =&gt;</span> {
 ...
   <span class="hljs-keyword">const</span> addTodo = <span class="hljs-function">(<span class="hljs-params">todo: Todo</span>) =&gt;</span> {
@@ -915,15 +921,15 @@ type Props = {
   };
 ...
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoBoard_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">TodoForm</span> <span class="hljs-attr">addTodo</span>=<span class="hljs-string">{addTodo}/</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoForm</span> <span class="hljs-attr">addTodo</span>=<span class="hljs-string">{addTodo}</span> /&gt;</span>
 ...
 </span></code></pre>
 <p>このようにすることで、<code>TodoBoard</code>のstateの管理は<code>TodoBoard</code>に残したまま、<code>TodoForm</code>から更新することができるようになります。</p>
 <h2 id="モックを使用した動作確認"><a name="モックを使用した動作確認" class="plugin-anchor" href="#モックを使用した動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>モックを使用した動作確認</h2>
 <p>ToDoページを表示して、ToDoが登録できることを確認します。ToDo登録フォームのテキスト入力に適当な値を入力して「追加」ボタンをクリックし、モックサーバからのレスポンスで取得したToDoが一覧に追加されるのを確認します。</p>
-<p>モックサーバの起動時にも説明しましたが、モックサーバからはOpenAPIドキュメントのexampleに設定した値がレスポンスとして返されます。そのため、ここでは常に同じToDoが追加されることになり、実際に入力したToDoが追加されるわけではありませんので、注意してください。</p>
-<p>確認ができたら、フロントエンドの実装は完了です。</p>
+<p>モックサーバの起動時にも説明しましたが、モックサーバからはOpenAPIドキュメントのexampleに設定した値がレスポンスとして返されます。そのため、ここでは常に同じToDo（やること３）が追加されることになり、実際に入力したToDoが追加されるわけではありませんので、注意してください。</p>
+<p>確認ができたら、フロントエンドのToDoの登録の実装は完了です。</p>
 </body></html>
                                 
                                 </section>
@@ -967,7 +973,7 @@ type Props = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"next":{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},"previous":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-add/README.md","mtime":"2023-12-25T02:59:13.973Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"next":{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},"previous":{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-add/README.md","mtime":"2025-05-16T02:27:53.263Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

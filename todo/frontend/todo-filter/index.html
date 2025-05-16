@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -785,69 +785,74 @@
 <h2 id="stateの設計"><a name="stateの設計" class="plugin-anchor" href="#stateの設計"><i class="fa fa-link" aria-hidden="true"></i></a>stateの設計</h2>
 <p>ToDoの表示対象を絞り込むために、どのようなstateが必要になるかを考えていきます。</p>
 <p>ボタンを押すとどれか1つが選択された状態にするため、どのボタンが選択されているかのstateは必要そうです。</p>
-<p>他に、絞り込んだ後のToDoの一覧は、stateとして保持する必要があるかを考えます。これは、全てのToDoを保持するstateと、どのボタンが選択されているかのstateで算出可能なため、stateにはなりません。（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state" target="_blank">React - Reactの流儀 ステップ 3</a>）</p>
-<p><code>TodoBoard</code>のstateを使用して算出するためには、どのボタンが選択されているかのstateも、<code>TodoFilter</code>ではなく<code>TodoBoard</code>まで引き上げた方が簡単そうです。</p>
+<p>他に、絞り込んだ後のToDoの一覧は、stateとして保持する必要があるかを考えます。これは、<code>TodoList</code>で使用している全てのToDoを保持するstateと、どのボタンが選択されているかのstateで算出可能なため、stateにはなりません。（参考：<a href="https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state" target="_blank">React の流儀 ステップ 3 – React</a>）</p>
+<p>全てのToDoを保持するstateが<code>TodoBoard</code>にあること、<code>TodoBoard</code>が<code>TodoList</code>と<code>TodoFilter</code>の共通の親であることから、どのボタンが選択されているのかのstateも<code>TodoBoard</code>に定義します。こうすることで、<code>TodoBoard</code>が全体の状態を一元管理することができ、メンテナンスが容易になります。</p>
 <h2 id="コンポーネントの実装"><a name="コンポーネントの実装" class="plugin-anchor" href="#コンポーネントの実装"><i class="fa fa-link" aria-hidden="true"></i></a>コンポーネントの実装</h2>
 <p>コンポーネントの実装では、TypeScriptの型を利用した実装にしていきます。</p>
 <h3 id="todofilterの実装"><a name="todofilterの実装" class="plugin-anchor" href="#todofilterの実装"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoFilter</code>の実装</h3>
-<p>表示対象を選択するボタンを表示する<code>TodoFilter</code>コンポーネントを実装します。stateの設計であったとおり、現在どのボタンが押されているかはを<code>TodoBoard</code>にstateとして保持させます。そのため、ここではプロパティでstateと更新関数を受け取るようにします。</p>
-<p>また、<code>TodoBoard</code>で管理した場合、<code>TodoBoard</code>でもどういったボタンがあるかを知っている必要があります。ただし、どういうボタンがあるかは<code>TodoFilter</code>が決めるため、<code>TodoFilter</code>で選択可能な種類を<code>TodoBoard</code>に知らせるため、型として宣言することにします。</p>
+<p>表示対象を選択するボタンを表示する<code>TodoFilter</code>コンポーネントを実装します。stateの設計であったとおり、現在どのボタンが押されているかを<code>TodoBoard</code>にstateとして保持させます。そのため、ここではプロパティでstateと更新関数を受け取るようにします。</p>
+<p>また、<code>TodoBoard</code>で管理した場合、<code>TodoBoard</code>でもどういったボタンがあるのかを知っている必要があります。ただし、どういうボタンがあるのかは<code>TodoFilter</code>が決めるため、<code>TodoFilter</code>で選択可能な種類を<code>TodoBoard</code>に知らせる型を宣言します。</p>
+<p><code>src/components/board/filter/TodoFilter.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoFilter.css&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoFilter.module.css&apos;</span>;
 
 <span class="hljs-keyword">export</span> type FilterType = <span class="hljs-string">&apos;ALL&apos;</span> | <span class="hljs-string">&apos;INCOMPLETE&apos;</span> | <span class="hljs-string">&apos;COMPLETED&apos;</span>;
 
 type Props = {
-  <span class="hljs-attr">filterType</span>: FilterType
-  <span class="hljs-attr">setFilterType</span>: <span class="hljs-function">(<span class="hljs-params">filter: FilterType</span>) =&gt;</span> <span class="hljs-keyword">void</span>
-}
+  <span class="hljs-attr">filterType</span>: FilterType;
+  setFilterType: <span class="hljs-function">(<span class="hljs-params">filter: FilterType</span>) =&gt;</span> <span class="hljs-keyword">void</span>;
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoFilter: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{filterType, setFilterType}</span>) =&gt;</span> {
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoFilter_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;ALL&apos;</span> ? &apos;<span class="hljs-attr">TodoFilter_buttonSelected</span>&apos; <span class="hljs-attr">:</span> &apos;<span class="hljs-attr">TodoFilter_buttonUnselected</span>&apos;}
-              <span class="hljs-attr">disabled</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;ALL&apos;</span>}
-              <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setFilterType(&apos;ALL&apos;)}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+        <span class="hljs-attr">className</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;ALL&apos;</span> ? `${<span class="hljs-attr">styles.buttonSelected</span>}` <span class="hljs-attr">:</span> `${<span class="hljs-attr">styles.buttonUnselected</span>}`}
+        <span class="hljs-attr">disabled</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;ALL&apos;</span>}
+        <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setFilterType(&apos;ALL&apos;)}
+      &gt;
         全て
       <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;INCOMPLETE&apos;</span> ? &apos;<span class="hljs-attr">TodoFilter_buttonSelected</span>&apos; <span class="hljs-attr">:</span> &apos;<span class="hljs-attr">TodoFilter_buttonUnselected</span>&apos;}
-              <span class="hljs-attr">disabled</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;INCOMPLETE&apos;</span>}
-              <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setFilterType(&apos;INCOMPLETE&apos;)}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+        <span class="hljs-attr">className</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;INCOMPLETE&apos;</span> ? `${<span class="hljs-attr">styles.buttonSelected</span>}` <span class="hljs-attr">:</span> `${<span class="hljs-attr">styles.buttonUnselected</span>}`}
+        <span class="hljs-attr">disabled</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;INCOMPLETE&apos;</span>}
+        <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setFilterType(&apos;INCOMPLETE&apos;)}
+      &gt;
         未完了のみ
       <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;COMPLETED&apos;</span> ? &apos;<span class="hljs-attr">TodoFilter_buttonSelected</span>&apos; <span class="hljs-attr">:</span> &apos;<span class="hljs-attr">TodoFilter_buttonUnselected</span>&apos;}
-              <span class="hljs-attr">disabled</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;COMPLETED&apos;</span>}
-              <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setFilterType(&apos;COMPLETED&apos;)}&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+        <span class="hljs-attr">className</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;COMPLETED&apos;</span> ? `${<span class="hljs-attr">styles.buttonSelected</span>}` <span class="hljs-attr">:</span> `${<span class="hljs-attr">styles.buttonUnselected</span>}`}
+        <span class="hljs-attr">disabled</span>=<span class="hljs-string">{filterType</span> === <span class="hljs-string">&apos;COMPLETED&apos;</span>}
+        <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setFilterType(&apos;COMPLETED&apos;)}
+      &gt;
         完了のみ
       <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
-<p>このコンポーネントで扱う種類を知らせるため、次のように<code>FilterType</code>という型を宣言し、<code>export</code>しています。</p>
+<p>このコンポーネントで扱うボタンの種類を知らせるため、次のように<code>FilterType</code>という型を宣言し、<code>export</code>しています。</p>
 <pre><code class="lang-js"><span class="hljs-keyword">export</span> type FilterType = <span class="hljs-string">&apos;ALL&apos;</span> | <span class="hljs-string">&apos;INCOMPLETE&apos;</span> | <span class="hljs-string">&apos;COMPLETED&apos;</span>;
 </code></pre>
-<p>これはUnion Types（共用体型）と呼ばれるTypeScriptの型で、型を<code>|</code>で区切ると、その型のどれか（or条件）が代入可能になります。（参考：<a href="https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types" target="_blank">TypeScript - Union Types</a>）</p>
-<p>ここでは、このUnion Typesと固定の文字列を組み合わせることで、FilterType型にはこの文字列のどれかのみ代入することが可能にしています。
-<code>TodoBoard</code>ではこの型を使用することで、間違いなく<code>TodoFilter</code>が受け入れられる値を使用することができます。もしこれらの文字列以外を代入しようとするとコンパイルエラーになるため、<code>TodoBoard</code>側のミスを防いだり、<code>FilterType</code>で種類が変わって問題が発生した場合等にコンパイルエラーで検知できるようになります。</p>
+<p>これはUnion Types（共用体型）と呼ばれるTypeScriptの型で、型を<code>|</code>で区切ると、その型のどれか（or条件）が代入可能になります。（参考：<a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types" target="_blank">TypeScript - Union Types</a>）</p>
+<p>ここでは、このUnion Typesと固定の文字列を組み合わせることで、FilterType型にはこの文字列のどれかのみ代入することを可能にしています。
+<code>TodoBoard</code>ではこの型によって、<code>TodoFilter</code>が受け入れられる値を確実に使用できます。もしこれらの文字列以外を代入しようとするとコンパイルエラーになるため、<br><code>TodoBoard</code>側のミスを防ぎ、さらに<code>FilterType</code>で種類が変わった際に問題を検知できるようになります。</p>
 <h3 id="todoboardの実装"><a name="todoboardの実装" class="plugin-anchor" href="#todoboardの実装"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoBoard</code>の実装</h3>
-<p>続いて、<code>TodoBoard</code>を実装します。ここでは、先ほど実装した<code>FilterType</code>型のstateを配置し、現在どれが選択されているかを保持するようにします。
-現在保持されている<code>FilterType</code>のstateにより、<code>TodoList</code>にToDoデータを渡す前にフィルタ処理を行い、絞り込んだ後のToDoデータを<code>TodoList</code>のプロパティに渡すようにします。</p>
-<pre><code class="lang-js"><span class="hljs-keyword">import</span> { FilterType, TodoFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoFilter&apos;</span>;
-
+<p>続いて、<code>TodoBoard</code>を実装します。ここでは、先ほど実装した<code>FilterType</code>型のstateを配置し、現在どれが選択されているかを保持するようにします。<br>現在保持されている<code>FilterType</code>のstateにより<code>TodoList</code>にToDoデータを渡す前にフィルタ処理を行い、絞り込んだ後のToDoデータを<code>TodoList</code>のプロパティに渡すようにします。</p>
+<p><code>src/components/board/TodoBoard.tsx</code></p>
+<pre><code class="lang-js">...
+<span class="hljs-keyword">import</span> {FilterType, TodoFilter} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./filter/TodoFilter&apos;</span>;
 ...
 
 type ShowFilter = {
-  [K <span class="hljs-keyword">in</span> FilterType]: <span class="hljs-function">(<span class="hljs-params">todo: Todo</span>) =&gt;</span> boolean
-}
-
-<span class="hljs-keyword">const</span> showFilter: ShowFilter = {
-  <span class="hljs-attr">ALL</span>: <span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> <span class="hljs-literal">true</span>,
-  <span class="hljs-attr">INCOMPLETE</span>: <span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> !todo.completed,
-  <span class="hljs-attr">COMPLETED</span>: <span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> todo.completed,
+  [K <span class="hljs-keyword">in</span> FilterType]: <span class="hljs-function">(<span class="hljs-params">todo: Todo</span>) =&gt;</span> boolean;
 };
 
-...
+<span class="hljs-keyword">const</span> showFilter: ShowFilter = {
+  <span class="hljs-attr">ALL</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">INCOMPLETE</span>: <span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> !todo.completed,
+  <span class="hljs-attr">COMPLETED</span>: <span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> todo.completed,
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoBoard: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">const</span> [todos, setTodos] = useState&lt;Todo[]&gt;([]);
@@ -856,34 +861,34 @@ type ShowFilter = {
   <span class="hljs-keyword">const</span> showTodos = todos.filter(showFilter[filterType]);
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoBoard_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">TodoForm</span> <span class="hljs-attr">addTodo</span>=<span class="hljs-string">{addTodo}/</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoForm</span> <span class="hljs-attr">addTodo</span>=<span class="hljs-string">{addTodo}</span> /&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">TodoFilter</span> <span class="hljs-attr">filterType</span>=<span class="hljs-string">{filterType}</span> <span class="hljs-attr">setFilterType</span>=<span class="hljs-string">{setFilterType}</span> /&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">todos</span>=<span class="hljs-string">{showTodos}</span> <span class="hljs-attr">toggleTodoCompletion</span>=<span class="hljs-string">{toggleTodoCompletion}/</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">todos</span>=<span class="hljs-string">{showTodos}</span> <span class="hljs-attr">toggleTodoCompletion</span>=<span class="hljs-string">{toggleTodoCompletion}</span> /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
 <p>ここでは、<code>TodoFilter</code>が定義している<code>FilterType</code>型に対応したフィルタ処理を必ず宣言するように、次のような型を定義しています。</p>
 <pre><code class="lang-js">type ShowFilter = {
-  [K <span class="hljs-keyword">in</span> FilterType]: <span class="hljs-function">(<span class="hljs-params">todo: Todo</span>) =&gt;</span> boolean
-}
+  [K <span class="hljs-keyword">in</span> FilterType]: <span class="hljs-function">(<span class="hljs-params">todo: Todo</span>) =&gt;</span> boolean;
+};
 </code></pre>
 <p>これは、Mapped typesと呼ばれるTypeScriptの型で、オブジェクトのプロパティ名や値の型を制限することができます。<code>[K in FilterType]</code>部分はオブジェクトのプロパティ名の型を表しています。<code>K</code>は型引数であり、ここでは<code>FilterType</code>に含まれる文字列のどれかがプロパティ名として使用できるようにしています。<code>: (todo: Todo) =&gt; boolean</code>部分は、プロパティ値の型を表しています。</p>
 <p>この型を使い、ボタンの種類に対応するフィルタ関数を定義したオブジェクトを生成しています。</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> showFilter: ShowFilter = {
-  <span class="hljs-attr">ALL</span>: <span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> <span class="hljs-literal">true</span>,
-  <span class="hljs-attr">INCOMPLETE</span>: <span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> !todo.completed,
-  <span class="hljs-attr">COMPLETED</span>: <span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> todo.completed,
+  <span class="hljs-attr">ALL</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">INCOMPLETE</span>: <span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> !todo.completed,
+  <span class="hljs-attr">COMPLETED</span>: <span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> todo.completed,
 };
 </code></pre>
-<p>先ほどの型により、ここでのプロパティ名には<code>FilterType</code>に代入可能な文字列のどれかである必要があり、それ以外のプロパティ名であればコンパイルエラーになります。そのため、確実にボタンの種類に対応しているフィルタ関数を宣言されるようにしています。</p>
+<p>先ほどの型により、ここでのプロパティ名は<code>FilterType</code>に代入可能な文字列のどれかである必要があり、それ以外のプロパティ名であればコンパイルエラーになります。そのため、確実にボタンの種類に対応しているフィルタ関数を宣言されるようにしています。</p>
 <p>ここで定義した<code>FilterType</code>に対応した関数を使用するため、次のように宣言しています。現在のstateに応じたフィルタ関数が取得され、<code>filter</code>に適用されるようにしています。</p>
 <pre><code class="lang-js"><span class="hljs-keyword">const</span> showTodos = todos.filter(showFilter[filterType]);
 </code></pre>
-<h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
-<p>フロントエンドのみで実装しているため、バックエンドと接続する必要はありません。フロントエンドアプリを起動し、ToDoページが表示されたら、ボタンをクリックしてToDo一覧を絞り込んで表示することができることを確認します。</p>
-<p>確認できたら、フロントエンドの開発は完了です。</p>
+<h2 id="モックを使用した動作確認"><a name="モックを使用した動作確認" class="plugin-anchor" href="#モックを使用した動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>モックを使用した動作確認</h2>
+<p>ToDoページを表示して、ボタンをクリックしてToDo一覧を絞り込んで表示できることを確認します。</p>
+<p>確認できたら、フロントエンドのToDo一覧の絞り込みの実装は完了です。</p>
 </body></html>
                                 
                                 </section>
@@ -927,7 +932,7 @@ type ShowFilter = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"next":{"title":"バックエンド","level":"1.6.2","depth":2,"path":"todo/backend/README.md","ref":"todo/backend/README.md","articles":[{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]}]},"previous":{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-filter/README.md","mtime":"2023-12-25T02:59:13.973Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"next":{"title":"バックエンド","level":"1.6.2","depth":2,"path":"todo/backend/README.md","ref":"todo/backend/README.md","articles":[{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]}]},"previous":{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-filter/README.md","mtime":"2025-05-16T02:27:53.263Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

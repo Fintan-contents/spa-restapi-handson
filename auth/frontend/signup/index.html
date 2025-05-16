@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -784,41 +784,44 @@
 <p>ユーザーコンテクストを使用して、サインアップ処理を実装します。</p>
 <h2 id="サインアップ処理の実装"><a name="サインアップ処理の実装" class="plugin-anchor" href="#サインアップ処理の実装"><i class="fa fa-link" aria-hidden="true"></i></a>サインアップ処理の実装</h2>
 <p><code>Signup</code>コンポーネントにサインアップ処理を実装します。</p>
+<p><code>src/components/signup/Signup.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> { useHistory } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-router-dom&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./Signup.css&apos;</span>;
-<span class="hljs-keyword">import</span> { useInput } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../hooks/useInput&apos;</span>;
-<span class="hljs-keyword">import</span> { useUserContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../contexts/UserContext&apos;</span>;
+<span class="hljs-keyword">import</span> {useRouter} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;next/navigation&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./Signup.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> {useInput} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../hooks/useInput&apos;</span>;
+<span class="hljs-keyword">import</span> {useUserContext} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../contexts/UserContext&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Signup: React.FC = <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-keyword">const</span> history = useHistory();
+  <span class="hljs-keyword">const</span> router = useRouter();
   <span class="hljs-keyword">const</span> [userName, userNameAttributes] = useInput(<span class="hljs-string">&apos;&apos;</span>);
   <span class="hljs-keyword">const</span> [password, passwordAttributes] = useInput(<span class="hljs-string">&apos;&apos;</span>);
   <span class="hljs-keyword">const</span> userContext = useUserContext();
 
-  <span class="hljs-keyword">const</span> signup: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> (event) =&gt; {
+  <span class="hljs-keyword">const</span> signup: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> event =&gt; {
     event.preventDefault();
     <span class="hljs-keyword">await</span> userContext.signup(userName, password);
-    history.push(<span class="hljs-string">&apos;/&apos;</span>);
+    router.push(<span class="hljs-string">&apos;/&apos;</span>);
   };
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_box&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_title&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.box}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ユーザー登録<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_form&quot;</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{signup}</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_label&quot;</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> {<span class="hljs-attr">...userNameAttributes</span>} /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{signup}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> {<span class="hljs-attr">...userNameAttributes</span>} /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_label&quot;</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> {<span class="hljs-attr">...passwordAttributes</span>} /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;password&apos;</span> {<span class="hljs-attr">...passwordAttributes</span>} /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_buttonGroup&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_button&quot;</span>&gt;</span>登録する<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.buttonGroup}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;submit&apos;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+              登録する
+            <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -826,7 +829,7 @@
   );
 };
 </code></pre>
-<p>フォームには名前とパスワードのテキストボックスがあるため、ToDo登録と同様に<code>useInput</code>を使用してstateとプロパティ用オブジェクトを作成し、フォームのJSXで各項目のプロパティとして展開します。</p>
+<p>フォームには名前とパスワードのテキストボックスがあります。ToDo登録と同様に<code>useInput</code>を使用してstateとプロパティ用オブジェクトを作成し、フォームのJSXで各項目のプロパティとして展開します。</p>
 <p>フォームのサブミット時には、ユーザーコンテクストのサインアップ関数に入力値を渡して実行するようにします。</p>
 <h2 id="入力値のバリデーション"><a name="入力値のバリデーション" class="plugin-anchor" href="#入力値のバリデーション"><i class="fa fa-link" aria-hidden="true"></i></a>入力値のバリデーション</h2>
 <p>ToDoを登録する際には入力値のバリデーションを行いませんでしたが、ここでは入力値に対して次のバリデーションを実装します。</p>
@@ -835,106 +838,110 @@
 <li>パスワードが入力されているか</li>
 <li>パスワードが4文字以上であるか</li>
 </ul>
-<p>example-chatのバックエンドでもこのような入力値のバリデーションを実装していますので、その実装を流用します。</p>
-<p>example-chatの<code>src/framework/validation</code>ディレクトリに、入力値のバリデーションを実装したファイルが格納されているため、このディレクトリを、<code>src/validation</code>としてコピーします。</p>
-<p>この中にバリデーション用のフックである<code>useValidation</code>が実装されているため、これを使用して<code>Signup</code>コンポーネントでバリデーションを実装します。</p>
+<p>example-chatのフロントエンドでもこのような入力値のバリデーションを実装していますので、その実装を流用します。（starter-kitに元から用意しています。）</p>
+<p><code>src/validation</code>ディレクトリの中に入力値のバリデーションを実装したファイルが格納されています。</p>
+<p>バリデーション用のフックである<code>useValidation</code>が実装されているため、これを使用して<code>Signup</code>でバリデーションを実装します。</p>
 <pre><code class="lang-jsx">...
-<span class="hljs-keyword">import</span> { stringField, useValidation } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../validation&apos;</span>;
+<span class="hljs-keyword">import</span> {stringField, useValidation} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../validation&apos;</span>;
 
 type ValidationFields = {
-  <span class="hljs-attr">userName</span>: string
-  <span class="hljs-attr">password</span>: string
+  <span class="hljs-attr">userName</span>: string;
+  password: string;
 };
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Signup: React.FC = <span class="hljs-function">() =&gt;</span> {
 ...
-  <span class="hljs-keyword">const</span> { error, handleSubmit } = useValidation&lt;ValidationFields&gt;({
-    <span class="hljs-attr">userName</span>: stringField()
-      .required(<span class="hljs-string">&apos;名前を入力してください&apos;</span>),
+  <span class="hljs-keyword">const</span> {error, handleSubmit} = useValidation&lt;ValidationFields&gt;({
+    <span class="hljs-attr">userName</span>: stringField().required(<span class="hljs-string">&apos;名前を入力してください&apos;</span>),
     <span class="hljs-attr">password</span>: stringField()
       .required(<span class="hljs-string">&apos;パスワードを入力してください&apos;</span>)
       .minLength(<span class="hljs-number">4</span>, <span class="hljs-string">&apos;パスワードは4桁以上入力してください&apos;</span>),
   });
 ...
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_box&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_title&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.box}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ユーザー登録<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_form&quot;</span>
-              <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit({</span> <span class="hljs-attr">userName</span>, <span class="hljs-attr">password</span> }, <span class="hljs-attr">signup</span>)}&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_label&quot;</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> {<span class="hljs-attr">...userNameAttributes</span>} /&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error&quot;</span>&gt;</span>{error.userName}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit({userName,</span> <span class="hljs-attr">password</span>}, <span class="hljs-attr">signup</span>)}&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> {<span class="hljs-attr">...userNameAttributes</span>} /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;error&apos;</span>&gt;</span>{error.userName}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_label&quot;</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> {<span class="hljs-attr">...passwordAttributes</span>} /&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;error&quot;</span>&gt;</span>{error.password}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;password&apos;</span> {<span class="hljs-attr">...passwordAttributes</span>} /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;error&apos;</span>&gt;</span>{error.password}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_buttonGroup&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_button&quot;</span>&gt;</span>登録する<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.buttonGroup}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;submit&apos;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+              登録する
+            <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
+};
 </code></pre>
-<p>ここではエラーメッセージのスタイル用に、クラス名として<code>error</code>を使用します。これは他のコンポーネントでも使用するため、<code>App.css</code>に次のスタイル定義を追加します。</p>
-<p><code>src/App.css</code></p>
+<p>ここではエラーメッセージのスタイル用に、クラス名として<code>error</code>を使用します。これは他のコンポーネントでも使用するため、<code>globals.css</code>に次のスタイル定義を追加します。</p>
+<p><code>src/app/globals.css</code></p>
 <pre><code class="lang-css"><span class="hljs-selector-class">.error</span> {
   <span class="hljs-attribute">color</span>: red;
 }
 </code></pre>
 <p><code>useValidation</code>では、型引数により各項目で使用できるバリデーションを切り替えます。そのため、まずはバリデーション対象になる項目を定義した<code>ValidationFields</code>型を定義します。</p>
 <p><code>useValidation</code>の型引数に<code>ValidationFields</code>を指定し、引数にバリデーションを定義したオブジェクトを生成して渡します。プロパティのキーは<code>ValidationFields</code>に対応し、各項目でどのようなバリデーションを行うかを定義します。</p>
-<p><code>string</code>型の項目を検証するための<code>stringFields</code>が用意されているので、これを起点にバリデーションを指定していきます。<code>stringFields</code>では、必須入力をチェックするための<code>required</code>や、最小文字数をチェックするための<code>minLength</code>等が用意されており、ここでのバリデーションはそれらを使用します。</p>
-<p><code>useValidation</code>の戻り値として、バリデーションエラーが格納される<code>error</code>と、サブミット時に自動で実行するための<code>handleSubmit</code>を受け取ります。</p>
+<p><code>string</code>型の項目を検証するための<code>stringField</code>が用意されているので、これを起点にバリデーションを指定していきます。<code>stringField</code>では、必須入力をチェックするための<code>required</code>や最小文字数をチェックするための<code>minLength</code>等が用意されており、ここでのバリデーションにはそれらを使用します。</p>
+<p><code>useValidation</code>の戻り値として、バリデーションエラーが格納される<code>error</code>とサブミット時に自動で実行するための<code>handleSubmit</code>を受け取ります。</p>
 <p><code>error</code>は実際には<code>useState</code>によるstateであり、バリデーションでエラーになるとこのstateにメッセージが設定されます。<code>error</code>のプロパティは<code>useValidation</code>のプロパティに一対一で対応しています。例えば、<code>userName</code>に対するバリデーションでエラーとなった場合、<code>error.userName</code>にエラーメッセージが設定されます。</p>
 <p>ここでは、各テキストボックスの下にエラーメッセージを表示するように、JSXで<code>input</code>の直後に<code>div</code>でエラーメッセージを表示するようにします。</p>
-<p><code>handleSubmit</code>は関数であり、第1引数に入力値と、第2引数にエラーが発生しなかった場合のコールバック関数を渡します。</p>
+<p><code>handleSubmit</code>は関数であり、第1引数に入力値を渡し、第2引数にエラーが発生しなかった場合のコールバック関数を渡します。</p>
 <h2 id="サインアップ失敗時のハンドリング"><a name="サインアップ失敗時のハンドリング" class="plugin-anchor" href="#サインアップ失敗時のハンドリング"><i class="fa fa-link" aria-hidden="true"></i></a>サインアップ失敗時のハンドリング</h2>
-<p>サインアップのREST APIでは、登録する名前と同じ名前がすでにが登録されていたら、ステータスコードが<code>409</code>であるエラーレスポンスが返却されます。</p>
-<p>ユーザーコンテクストのサインアップ関数を実装した際、そのエラーレスポンスであれば<code>AccountConflictError</code>オブジェクトを返却するように実装しましたので、ここでは、サインアップ関数の実行結果からエラーであるかを判断し、エラーであればフォームの上にエラーメッセージを表示するようにします。</p>
-<p><code>useValidation</code>ではこのようなサーバーサイドのエラーについてはハンドリングできないため、エラーメッセージを表すstateを新しく作成するため、次のように実装します。</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<p>サインアップのREST APIでは、登録する名前と同じ名前がすでに登録されている場合、ステータスコードが<code>409</code>であるエラーレスポンスが返却されます。</p>
+<p>ユーザーコンテクストのサインアップ関数を実装した際、そのエラーレスポンスであれば<br><code>AccountConflictError</code>クラスのインスタンスを返却するように実装しました。そのため、ここではサインアップ関数の実行結果からエラーであるかを判断し、エラーであればフォームの上にエラーメッセージを表示するようにします。</p>
+<p><code>useValidation</code>ではこのようなサーバサイドのエラーについてはハンドリングできないため、エラーメッセージを表すstateを新しく作成し、次のように実装します。</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React, {useState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
 ...
-<span class="hljs-keyword">import</span> { AccountConflictError, useUserContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../contexts/UserContext&apos;</span>;
+<span class="hljs-keyword">import</span> {AccountConflictError, useUserContext} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../contexts/UserContext&apos;</span>;
 ...
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Signup: React.FC = <span class="hljs-function">() =&gt;</span> {
 ...
   <span class="hljs-keyword">const</span> [formError, setFormError] = useState(<span class="hljs-string">&apos;&apos;</span>);
 ...
-  <span class="hljs-keyword">const</span> signup: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> (event) =&gt; {
+  <span class="hljs-keyword">const</span> signup: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> event =&gt; {
     event.preventDefault();
     <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> userContext.signup(userName, password);
     <span class="hljs-keyword">if</span> (result <span class="hljs-keyword">instanceof</span> AccountConflictError) {
       setFormError(<span class="hljs-string">&apos;サインアップに失敗しました。同じ名前が登録されています。&apos;</span>);
       <span class="hljs-keyword">return</span>;
     }
-    history.push(<span class="hljs-string">&apos;/&apos;</span>);
+    router.push(<span class="hljs-string">&apos;/&apos;</span>);
   };
 
   <span class="hljs-keyword">return</span> (
-    &lt;div className=&quot;Signup_content&quot;&gt;
-      &lt;div className=&quot;Signup_box&quot;&gt;
-        &lt;div className=&quot;Signup_title&quot;&gt;
-          &lt;h1&gt;ユーザー登録&lt;/h1&gt;
-          &lt;div className=&quot;error&quot;&gt;{formError}&lt;/div&gt;
-        &lt;/div&gt;
-        &lt;form className=&quot;Signup_form&quot;
-              onSubmit={handleSubmit({ userName, password }, signup, () =&gt; setFormError(&apos;&apos;))}&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.box}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ユーザー登録<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;error&apos;</span>&gt;</span>{formError}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit({userName,</span> <span class="hljs-attr">password</span>}, <span class="hljs-attr">signup</span>, () =&gt;</span> setFormError(&apos;&apos;))}&gt;
 ...
+        <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+};
 </code></pre>
-<p>サインアップ関数の戻り値が<code>AccountConflictError</code>のオブジェクトであれば、サインアップ失敗としてエラーメッセージをstateに設定します。フォームの上にエラーメッセージを表示するように、JSXで<code>form</code>の直前に<code>div</code>でエラーメッセージを表示するようにします。</p>
-<p>なお、フォーム上のエラーメッセージが表示された状態で再度フォームに入力し、入力値のバリデーションでエラーとなった場合には、フォーム上のエラーメッセージは表示されないようにしたいです。</p>
-<p><code>handleSubmit</code>の第3引数には、バリデーションを実行する前に呼び出されるコールバック関数を渡すことができるため、ここではエラーメッセージを初期化する関数を渡すようにします。</p>
+<p>サインアップ関数の戻り値が<code>AccountConflictError</code>クラスのインスタンスであれば、サインアップ失敗としてエラーメッセージをstateに設定します。フォームの上にエラーメッセージを表示するように、<br>JSXで<code>form</code>の直前に<code>div</code>でエラーメッセージを表示するようにします。</p>
+<p>なお、フォーム上のエラーメッセージが表示された状態で再度フォームに入力し、入力値のバリデーションでエラーとなった場合、フォーム上のエラーメッセージは非表示にします。<br>そのために、<code>handleSubmit</code>の第3引数として、バリデーション実行前にエラーメッセージを初期化するコールバック関数を渡します。</p>
 <p>これで、サインアップ失敗時のハンドリングの実装は完了です。</p>
 <h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
-<p>単体での動作確認がしづらいため、最後にまとめて動作を確認します。</p>
+<p>単体での動作確認がしづらいため、最後にまとめて確認します。</p>
 </body></html>
                                 
                                 </section>
@@ -978,7 +985,7 @@ type ValidationFields = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"サインアップ","level":"1.8.1.5","depth":3,"next":{"title":"ログイン","level":"1.8.1.6","depth":3,"path":"auth/frontend/login/README.md","ref":"auth/frontend/login/README.md","articles":[]},"previous":{"title":"ナビゲーションメニューの切替","level":"1.8.1.4","depth":3,"path":"auth/frontend/header/README.md","ref":"auth/frontend/header/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/signup/README.md","mtime":"2023-11-06T02:43:38.344Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"サインアップ","level":"1.8.1.5","depth":3,"next":{"title":"ログイン","level":"1.8.1.6","depth":3,"path":"auth/frontend/login/README.md","ref":"auth/frontend/login/README.md","articles":[]},"previous":{"title":"ナビゲーションメニューの切替","level":"1.8.1.4","depth":3,"path":"auth/frontend/header/README.md","ref":"auth/frontend/header/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/signup/README.md","mtime":"2025-05-16T02:27:53.242Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

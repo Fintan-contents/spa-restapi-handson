@@ -105,7 +105,7 @@
                 <a href="../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -779,19 +779,23 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="csrf対策"><a name="csrf対策" class="plugin-anchor" href="#csrf対策"><i class="fa fa-link" aria-hidden="true"></i></a>CSRF対策</h1>
-<p>REST API一覧の説明時にも紹介しましたが、Nablarchでは、クロスサイト・リクエスト・フォージェリ（以下CSRF）に対策するための機能が提供されています。（参考：<a href="https://www.ipa.go.jp/security/vuln/websecurity-HTML-1_6.html" target="_blank">CSRF | 安全なウェブサイトの作り方</a>）</p>
-<p>CSRFトークンを発行してリクエスト毎にサーバーサイド側で保持してるCSRFトークンと突き合わせる方式であり、CSRFトークンを発行するためのユーティリティと、CSRFトークンを検証するためのハンドラが提供されています。（参考：<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/web/csrf_token_verification_handler.html" target="_blank">CSRFトークン検証ハンドラ | Nablarch</a>）</p>
+<p>REST API一覧の説明時にも紹介しましたが、Nablarchではクロスサイト・リクエスト・フォージェリ（以下CSRF）に対策するための機能が提供されています。<br>（参考：<a href="https://www.ipa.go.jp/security/vuln/websecurity-HTML-1_6.html" target="_blank">CSRF | 安全なウェブサイトの作り方</a>）</p>
+<p>CSRFトークンを発行してリクエスト毎にサーバサイドで保持しているCSRFトークンと突き合わせる方式であり、
+CSRFトークンを発行するためのユーティリティとCSRFトークンを検証するためのハンドラが提供されています。
+（参考：<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/web/csrf_token_verification_handler.html" target="_blank">CSRFトークン検証ハンドラ — Nablarch</a>）</p>
 <p>ここでは、CSRF対策を実現するために、バックエンドでCSRFトークンを取得するREST APIを提供し、フロントエンドからはREST APIで取得したCSRFトークンを使用するように実装していきます。</p>
 <h2 id="バックエンド"><a name="バックエンド" class="plugin-anchor" href="#バックエンド"><i class="fa fa-link" aria-hidden="true"></i></a>バックエンド</h2>
-<p>example-chatのバックエンドでも同様の実装をしているため、その実装を流用します。</p>
-<p>バックエンドでは、CSRFトークンを取得するREST APIと、それを検証するためのハンドラを実装します。</p>
+<p>example-chatのバックエンドでも同様の実装をしているため、その実装を流用します。  </p>
+<p>バックエンドではCSRFトークンを取得するREST APIと、それを検証するためのハンドラを実装します。</p>
 <h3 id="csrfトークンを取得するrest-apiの作成"><a name="csrfトークンを取得するrest-apiの作成" class="plugin-anchor" href="#csrfトークンを取得するrest-apiの作成"><i class="fa fa-link" aria-hidden="true"></i></a>CSRFトークンを取得するREST APIの作成</h3>
-<p>CSRFトークンを取得するREST APIについては、example-chatの<code>com.example.presentation.restapi.system.CsrfTokenAction</code>クラスで同様の実装をしているため、このクラスをコピーして持ってきます。</p>
+<p>CSRFトークンを取得するREST APIについては、example-chatの<code>com.example.presentation.restapi.system.CsrfTokenAction</code>クラスで同様の実装をしているため、このクラスを流用します。<code>backend/src/main/java/com/example</code>配下に<code>presentation/restapi/system</code>ディレクトリを作成し<code>CsrfTokenAction.java</code>をコピーします。</p>
 <h3 id="csrfトークン検証ハンドラの設定"><a name="csrfトークン検証ハンドラの設定" class="plugin-anchor" href="#csrfトークン検証ハンドラの設定"><i class="fa fa-link" aria-hidden="true"></i></a>CSRFトークン検証ハンドラの設定</h3>
 <p>CSRFトークンを検証するハンドラについては、Nablarchから提供されているため、これもコンポーネント定義に追加します。CSRFトークンを検証するハンドラではセッションを使用するため、セッション変数保存ハンドラ（ここでは<code>sessionStoreHandler</code>）より後で実行されるように定義します。</p>
+<p><code>backend/src/main/resources/rest-component-configuration.xml</code></p>
 <pre><code class="lang-xml"><span class="hljs-comment">&lt;!-- CSRFトークン検証ハンドラ --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;csrfTokenVerificationHandler&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nablarch.fw.web.handler.CsrfTokenVerificationHandler&quot;</span> /&gt;</span>
 
+<span class="hljs-comment">&lt;!-- ハンドラキュー構成 --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;webFrontController&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nablarch.fw.web.servlet.WebFrontController&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;handlerQueue&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">list</span>&gt;</span>
@@ -811,6 +815,7 @@
 </code></pre>
 <h3 id="ログインチェックハンドラの修正"><a name="ログインチェックハンドラの修正" class="plugin-anchor" href="#ログインチェックハンドラの修正"><i class="fa fa-link" aria-hidden="true"></i></a>ログインチェックハンドラの修正</h3>
 <p>CSRFトークンを取得するREST APIは、ログインしていなくてもアクセスできる必要があります。ログインしていなくてもアクセスできるパスは、ユーザー認証の実装時に作成した<code>com.example.system.nablarch.handler.LoginCheckHandler</code>クラスのコンストラクタで設定しているため、<code>/api/csrf_token</code>のパスを追加します。</p>
+<p><code>backend/src/main/java/com/example/system/nablarch/handler/LoginCheckHandler.java</code></p>
 <pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LoginCheckHandler</span><span class="hljs-params">()</span> </span>{
     whitePatterns
             .add(<span class="hljs-string">&quot;/api/signup&quot;</span>, HttpMethod.POST)
@@ -820,11 +825,12 @@
 </code></pre>
 <h3 id="バックエンドのテスト"><a name="バックエンドのテスト" class="plugin-anchor" href="#バックエンドのテスト"><i class="fa fa-link" aria-hidden="true"></i></a>バックエンドのテスト</h3>
 <p>次に、バックエンドのテストを実行してみます。</p>
-<pre><code>mvn test
+<pre><code>$ mvn test
 </code></pre><p>すると、更新系の操作をするREST APIのテストが失敗します。これは、CSRFトークン検証ハンドラにより、リクエスト時にCSRFトークンが無ければ、ステータスコードが<code>400 Bad Request</code>のエラーレスポンスとして返却されるためです。</p>
 <p>そのため、テスト時にCSRFトークンを使用するように、テストクラスを修正します。</p>
 <p>CSRFトークンを使用するには、先ほど実装したREST APIを使用してCSRFトークンとHTTPヘッダ属性名を取得し、リクエスト時のHTTPヘッダに設定する必要があります。</p>
 <p>まず、テストクラスに次のようなprivateメソッドを実装します。</p>
+<p><code>backend/src/test/java/com/example/authentication/api/AuthenticationRestApiTest.java</code></p>
 <pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">attachCsrfToken</span><span class="hljs-params">(RestMockHttpRequest request, ExecutionContext context)</span> </span>{
     HttpResponse response = sendRequest(get(<span class="hljs-string">&quot;/api/csrf_token&quot;</span>));
     assertStatusCode(<span class="hljs-string">&quot;CSRFトークンの取得&quot;</span>, HttpResponse.Status.OK, response);
@@ -845,11 +851,18 @@
     }
 }
 </code></pre>
-<p>このメソッドでは、CSRFトークンを取得するREST APIを呼び出し、引数のリクエストオブジェクトへの設定と、サーバーサイドで比較元が保存されるセッションストアへの設定を実装しています。<code>ExecutionContext</code>を使用したセッションストアへの設定については、ユーザー認証でのテストクラスへの実装と同様に実装します。</p>
+<p>このメソッドでは以下の実装をしています。</p>
+<ul>
+<li>CSRFトークンを取得するREST APIを呼び出す</li>
+<li>リクエストヘッダーにCSRFトークンをセットする</li>
+<li>セッションストアにトークンをセットする</li>
+</ul>
+<p>セッションストアにも保存するのは、サーバサイドで比較元として使用するためです。
+<code>ExecutionContext</code>を使用したセッションストアへの設定については、ユーザー認証でのテストクラスへの実装と同様に実装します。</p>
 <p>各REST APIのテストで、REST APIにアクセスする前にこの<code>attachCsrfToken</code>メソッドを呼び出すように修正します。</p>
 <p>例えばサインアップのテストであれば、次のように修正します。</p>
 <pre><code class="lang-java"><span class="hljs-meta">@Test</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> RESTAPIでサインアップできる() {
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> RESTAPIでサインアップできる() <span class="hljs-keyword">throws</span> Exception {
     ExecutionContext executionContext = <span class="hljs-keyword">new</span> ExecutionContext();
     RestMockHttpRequest request = post(<span class="hljs-string">&quot;/api/signup&quot;</span>)
             .setHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, MediaType.APPLICATION_JSON)
@@ -857,7 +870,6 @@
                     <span class="hljs-string">&quot;userName&quot;</span>, <span class="hljs-string">&quot;signup-test&quot;</span>,
                     <span class="hljs-string">&quot;password&quot;</span>, <span class="hljs-string">&quot;pass&quot;</span>));
     attachCsrfToken(request, executionContext);
-
     HttpResponse response = sendRequestWithContext(request, executionContext);
 ...
 </code></pre>
@@ -869,7 +881,6 @@
 
     RestMockHttpRequest request = post(<span class="hljs-string">&quot;/api/logout&quot;</span>);
     attachCsrfToken(request, executionContext);
-
     HttpResponse response = sendRequestWithContext(request, executionContext);
 ...
 </code></pre>
@@ -884,11 +895,12 @@
   ...
   FetchParams,
   HTTPMethod,
-  RequestContext
+  RequestContext,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./generated-rest-client&apos;</span>;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CsrfTokenAttachment</span> <span class="hljs-title">implements</span> <span class="hljs-title">Middleware</span> </span>{
+...
 
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CsrfTokenAttachment</span> <span class="hljs-title">implements</span> <span class="hljs-title">Middleware</span> </span>{
   private readonly targetMethod: ReadonlyArray&lt;HTTPMethod&gt; = [<span class="hljs-string">&apos;POST&apos;</span>, <span class="hljs-string">&apos;PUT&apos;</span>, <span class="hljs-string">&apos;DELETE&apos;</span>, <span class="hljs-string">&apos;PATCH&apos;</span>];
   private headerName = <span class="hljs-string">&apos;&apos;</span>;
   private tokenValue = <span class="hljs-string">&apos;&apos;</span>;
@@ -908,19 +920,19 @@
       <span class="hljs-attr">url</span>: context.url,
       <span class="hljs-attr">init</span>: {
         ...context.init,
-        <span class="hljs-attr">headers</span> : {
+        <span class="hljs-attr">headers</span>: {
           ...context.init.headers,
-          [<span class="hljs-built_in">this</span>.headerName]: <span class="hljs-built_in">this</span>.tokenValue
-        }
-      }
+          [<span class="hljs-built_in">this</span>.headerName]: <span class="hljs-built_in">this</span>.tokenValue,
+        },
+      },
     };
-  }
+  };
 }
 
 <span class="hljs-keyword">const</span> csrfTokenAttachment = <span class="hljs-keyword">new</span> CsrfTokenAttachment();
 
 <span class="hljs-keyword">const</span> configuration = <span class="hljs-keyword">new</span> Configuration({
-  <span class="hljs-attr">middleware</span>: [csrfTokenAttachment, corsHandler, requestLogger]
+  <span class="hljs-attr">middleware</span>: [csrfTokenAttachment, corsHandler, requestLogger],
 });
 
 ...
@@ -930,39 +942,73 @@
   csrfTokenAttachment.setCsrfToken(response.csrfTokenHeaderName, response.csrfTokenValue);
 };
 
-...
-
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> BackendService = {
 ...
-  refreshCsrfToken
+  refreshCsrfToken,
 };
 </code></pre>
 <p>すでに説明したとおり、生成したREST APIのクライアントコードでは、Middlewareと呼ばれる部品を作成することで、リクエストやレスポンスに対する共通的な処理を実装することができます。</p>
 <p>まず、CSRFトークンをヘッダに設定する<code>CsrfTokenAttachment</code>クラスを、Middlewareとして実装します。（CSRFトークンを状態として保持しやすくするよう、クラスとして実装します）</p>
-<p>Middlewareに追加するため、<code>CsrfTokenAttachment</code>のオブジェクトを生成し、<code>middleware</code>プロパティに追加します。</p>
-<p>次に、CSRFトークン取得のREST APIを呼び出して<code>CsrfTokenAttachment</code>に設定する<code>refreshCsrfToken</code>関数を実装します。CSRFトークンはセッションストアに紐付いており、セッションが切り替わるタイミングでCSRFトークンも変更になるため、ログインやログアウト等のセッション切替タイミングで、この関数を実行してCSRFトークンを最新化します。</p>
+<p>Middlewareに追加するため、<code>CsrfTokenAttachment</code>クラスのインスタンスを生成し、<code>middleware</code>プロパティに追加します。</p>
+<p>次に、CSRFトークン取得のREST APIを呼び出して<code>CsrfTokenAttachment</code>に設定する<code>refreshCsrfToken</code>関数を実装します。
+CSRFトークンはセッションストアに紐付いており、セッションが切り替わるタイミングでCSRFトークンも変更されます。
+そのため、ログインやログアウト等のセッション切替タイミングで、この関数を実行してCSRFトークンを最新化します。</p>
 <h3 id="アプリ起動時のcsrfトークン設定"><a name="アプリ起動時のcsrfトークン設定" class="plugin-anchor" href="#アプリ起動時のcsrfトークン設定"><i class="fa fa-link" aria-hidden="true"></i></a>アプリ起動時のCSRFトークン設定</h3>
-<p>アプリ起動時にCSRFトークンを設定するため、<code>App</code>コンポーネントで先ほど作成した<code>refreshCsrfToken</code>関数を実行するように実装します。</p>
-<pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+<p>この関数を実行してCSRFトークンを最新化するため、共通の部品として実装します。<br>具体的には、CSRFトークンを最新化する部品を作成し、それを<code>layout.tsx</code>で呼び出します。</p>
+<p><code>src</code>ディレクトリ配下に<code>initializer</code>ディレクトリを作成し、その中に<code>AppInitializer.tsx</code>を作成して、下記のコードを実装します。</p>
+<p><code>src/initializer/AppInitializer.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-string">&apos;use client&apos;</span>;
+<span class="hljs-keyword">import</span> React, {useEffect, useState} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> {BackendService} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../backend/BackendService&apos;</span>;
+
+<span class="hljs-keyword">const</span> AppInitializer: React.FC&lt;{<span class="hljs-attr">children</span>: React.ReactNode}&gt; = <span class="hljs-function">(<span class="hljs-params">{children}</span>) =&gt;</span> {
   <span class="hljs-keyword">const</span> [initialized, setInitialized] = useState(<span class="hljs-literal">false</span>);
 
   useEffect(<span class="hljs-function">() =&gt;</span> {
-    BackendService.refreshCsrfToken()
-      .finally(<span class="hljs-function">() =&gt;</span> setInitialized(<span class="hljs-literal">true</span>));
+    BackendService.refreshCsrfToken().finally(<span class="hljs-function">() =&gt;</span> setInitialized(<span class="hljs-literal">true</span>));
   }, []);
 
   <span class="hljs-keyword">if</span> (!initialized) {
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span> /&gt;</span></span>
-    );
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span> /&gt;</span></span>;
   }
-...
+
+  <span class="hljs-keyword">return</span> children;
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> AppInitializer;
 </code></pre>
-<p><code>refreshCsrfToken</code>関数によるCSRFトークン取得が完了するまでは、他のコンポーネントを処理したくないため、それを制御するためのフラグとして<code>initialized</code>stateを作成します。<code>refreshCsrfToken</code>の処理が終わるまでは、JSXで空要素を返すようにし、<code>refreshCsrfToken</code>の処理が完了して<code>initialized</code>が<code>true</code>になったタイミングで、今までと同様のコンポーネント処理を実行するようにします。</p>
+<p><code>refreshCsrfToken</code>関数によるCSRFトークン取得が完了するまでは、他のコンポーネントを処理したくないため、それを制御するためのフラグとして<code>initialized</code>stateを作成します。<br><code>refreshCsrfToken</code>の処理が終わるまではJSXで空要素を返すようにし、<code>refreshCsrfToken</code>の処理が完了して<code>initialized</code>が<code>true</code>になったタイミングで、今までと同様のコンポーネント処理を実行するようにします。</p>
+<p>return文で<code>children</code>を返すことにより、<code>AppInitializer</code>でラップするコンポーネントをレンダリングする実装になっています。
+作成した<code>AppInitializer</code>を共通の部品として使用するために、<code>layout.tsx</code>で呼び出します。</p>
+<p><code>src/app/layout.tsx</code></p>
+<pre><code class="lang-jsx">...
+<span class="hljs-keyword">import</span> AppInitializer <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../initializer/AppInitializer&apos;</span>;
+
+...
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&apos;en&apos;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">AppInitializer</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">UserContextProvider</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">NavigationHeader</span> /&gt;</span>
+            {children}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">UserContextProvider</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">AppInitializer</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span>
+  );
+}
+</code></pre>
+<p>この実装により、セッション切替のタイミングでCSRFトークンを最新化できるようになりました。</p>
 <h3 id="ログイン・ログアウト時のcsrfトークン設定"><a name="ログイン・ログアウト時のcsrfトークン設定" class="plugin-anchor" href="#ログイン・ログアウト時のcsrfトークン設定"><i class="fa fa-link" aria-hidden="true"></i></a>ログイン・ログアウト時のCSRFトークン設定</h3>
-<p>ログイン、ログアウト時に、セッションを破棄して新しく開始するようにしているため、ユーザーコンテクストにある<code>login</code>、<code>logout</code>関数内で、先ほど作成した<code>refreshCsrfToken</code>関数を実行するように実装します。</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserContextProvider: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{ children }</span>) =&gt;</span> {
+<p>ログイン、ログアウト時に、セッションを破棄して新しく開始するようにします。
+<code>UserContext</code>にある<code>login</code>、<code>logout</code>関数内で、先ほど作成した<code>refreshCsrfToken</code>関数を実行するように実装します。</p>
+<p><code>src/contexts/UserContext.tsx</code></p>
+<pre><code class="lang-jsx">...
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> UserContextProvider: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{children}</span>) =&gt;</span> {
   ...
+
   <span class="hljs-keyword">const</span> contextValue: ContextValueType = {
     ...
     <span class="hljs-attr">login</span>: <span class="hljs-keyword">async</span> (userName, password) =&gt; {
@@ -976,18 +1022,35 @@
       <span class="hljs-keyword">await</span> BackendService.logout();
       <span class="hljs-keyword">await</span> BackendService.refreshCsrfToken();
       setUserName(<span class="hljs-string">&apos;&apos;</span>);
-      ...
+    },
+    ...
 </code></pre>
 <p>これで、フロントエンドの実装は完了です。</p>
 <h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
 <p>いままでと同じように、フロントエンドアプリとバックエンドアプリを起動し、動作を確認します。</p>
 <p>内部的な処理であるため、ページの動作や見た目については、何も影響がありません。</p>
 <p>CSRFトークンの取得や設定時には<code>console.log</code>でログを出力していますので、ブラウザの開発者ツールでコンソールを確認してみましょう。次のようなログが出力され、正常に動作していることが確認できます。</p>
-<pre><code>&gt;&gt; GET /api/csrf_token 
-Object { method: &quot;GET&quot;, headers: {}, body: undefined, credentials: undefined }
-</code></pre><pre><code>&lt;&lt; 200 /api/csrf_token 
-Response { type: &quot;basic&quot;, url: &quot;http://localhost:3000/api/csrf_token&quot;, redirected: false, status: 200, ok: true, statusText: &quot;OK&quot;, headers: Headers, body: ReadableStream, bodyUsed: false }
-</code></pre><pre><code>setCsrfToken: X-CSRF-TOKEN cb5a3ec0-c32f-47f7-b4a0-149f8ba41341
+<pre><code>&gt;&gt; GET http://localhost:9080/api/csrf_token 
+Object
+body: undefined
+credentials: &quot;include&quot;
+headers: {}
+method: &quot;GET&quot;
+mode: &quot;cors&quot;
+[[Prototype]]: Object
+</code></pre><pre><code>&lt;&lt; 200 http://localhost:9080/api/csrf_token 
+Response
+body: ReadableStream
+bodyUsed: false
+headers: Headers {}
+ok: true
+redirected: false
+status: 200
+statusText: &quot;OK&quot;
+type: &quot;cors&quot;
+url: &quot;http://localhost:9080/api/csrf_token&quot;
+[[Prototype]]: Response
+</code></pre><pre><code>setCsrfToken: X-CSRF-TOKEN fe709dd4-ed6a-4436-ab6d-63dce1291b05
 </code></pre><p>これで、CSRF対策の実装は完了です。</p>
 </body></html>
                                 
@@ -1028,7 +1091,7 @@ Response { type: &quot;basic&quot;, url: &quot;http://localhost:3000/api/csrf_to
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"CSRF対策","level":"1.9","depth":1,"previous":{"title":"動作確認","level":"1.8.3","depth":2,"path":"auth/e2e/README.md","ref":"auth/e2e/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"csrf/README.md","mtime":"2023-12-25T02:59:13.956Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"CSRF対策","level":"1.9","depth":1,"previous":{"title":"動作確認","level":"1.8.3","depth":2,"path":"auth/e2e/README.md","ref":"auth/e2e/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"csrf/README.md","mtime":"2025-05-16T02:27:53.242Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -1006,7 +1006,7 @@
 ----------------------------------------------------------------------------------
 docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;5432/tcp
 </code></pre><p>PostgreSQLが起動していることを確認できたら、Mavenでテストを実行します。</p>
-<pre><code>mvn test
+<pre><code>$ mvn test
 </code></pre><p>特にエラーが発生せず、テストが成功することを確認します。</p>
 <h3 id="bean-validationでエラーになるテストを作成"><a name="bean-validationでエラーになるテストを作成" class="plugin-anchor" href="#bean-validationでエラーになるテストを作成"><i class="fa fa-link" aria-hidden="true"></i></a>Bean Validationでエラーになるテストを作成</h3>
 <p>続いて、<code>ValidatorUtil</code>を使用したBean Validationが実行されていることを確認するため、リクエストに<code>text</code>項目を含めずに送信するテストを <code>TodoRegisterRestApiTest</code> クラスに追加します。</p>
@@ -1022,7 +1022,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
 </code></pre>
 <p>Nablarchは、<code>ValidatorUtil</code>で送出された例外をハンドリングし、レスポンスのステータスコードを<code>400 Bad Request</code>に設定します。そのため、レスポンスのステータスコードを検証します。</p>
 <p>PostgreSQLは先ほどのテスト実行時に起動しているため、Mavenでテストを実行します。</p>
-<pre><code>mvn test
+<pre><code>$ mvn test
 </code></pre><p>特にエラーが発生せず、テストが成功することを確認します。</p>
 <p>これで、ToDo登録のREST APIの実装は完了です。</p>
 </body></html>
@@ -1068,7 +1068,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"next":{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},"previous":{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/backend/todo-add/README.md","mtime":"2023-12-25T02:59:13.963Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"next":{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},"previous":{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/backend/todo-add/README.md","mtime":"2025-05-16T02:27:53.258Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

@@ -107,7 +107,7 @@
                 <a href="../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -794,15 +794,15 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
 </code></pre><h2 id="バックエンドアプリの起動"><a name="バックエンドアプリの起動" class="plugin-anchor" href="#バックエンドアプリの起動"><i class="fa fa-link" aria-hidden="true"></i></a>バックエンドアプリの起動</h2>
 <p>バックエンドアプリを起動するため、<code>backend</code>ディレクトリで次のコマンドを実行します。</p>
 <pre><code>$ mvn jetty:run
-</code></pre><p>次のように<code>Started</code>と出力され、バックエンドアプリが起動されているこを確認します。</p>
+</code></pre><p>次のように<code>Started</code>と出力され、バックエンドアプリが起動されていることを確認します。</p>
 <pre><code>[INFO] Started ServerConnector@2299f6d7{HTTP/1.1,[http/1.1]}{0.0.0.0:9080}
 [INFO] Started Server@3751acd7{STARTING}[10.0.0.alpha1] @7133ms
 </code></pre><p></p><div class="alert alert-danger hints-alert"><div class="hints-icon"><i class="fa fa-exclamation-circle"></i></div><div class="hints-container"><p>フロントエンド開発時に使用するモックサーバは、バックエンドアプリと同じ<code>9080</code>ポートを使用しています。そのため、モックサーバが起動している状態でアプリを起動すると、<code>Error starting jetty: Failed to bind to 0.0.0.0/0.0.0.0:9080: Address already in use</code>といったようにアドレスが使用済みである旨のエラーが発生します。もし発生した場合は、モックサーバを停止してから、再度バックエンドアプリを起動してください。</p>
 </div></div><p></p>
 <h2 id="フロントエンドアプリの起動"><a name="フロントエンドアプリの起動" class="plugin-anchor" href="#フロントエンドアプリの起動"><i class="fa fa-link" aria-hidden="true"></i></a>フロントエンドアプリの起動</h2>
 <p>フロントエンドアプリを起動するため、<code>frontend</code>ディレクトリで、次のコマンドを実行します。</p>
-<pre><code>$ npm start
-</code></pre><p>フロントエンドアプリが起動されたら、ブラウザが起動し、自動で<a href="http://localhost:3000/" target="_blank">トップページ</a>が開きます。</p>
+<pre><code>$ npm run dev
+</code></pre><p>フロントエンドアプリが起動されたら、ブラウザで<a href="http://localhost:3000/" target="_blank">トップページ</a>を開きます。</p>
 <h2 id="todoページの表示内容を確認する"><a name="todoページの表示内容を確認する" class="plugin-anchor" href="#todoページの表示内容を確認する"><i class="fa fa-link" aria-hidden="true"></i></a>ToDoページの表示内容を確認する</h2>
 <p>ToDoページが表示され、ToDoを登録したり表示したりすることが問題なくできることを確認します。</p>
 </body></html>
@@ -848,7 +848,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"動作確認","level":"1.6.3","depth":2,"next":{"title":"ToDoを削除する（演習）","level":"1.7","depth":1,"path":"todo-delete/README.md","ref":"todo-delete/README.md","articles":[]},"previous":{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/e2e/README.md","mtime":"2023-11-06T02:43:38.354Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"動作確認","level":"1.6.3","depth":2,"next":{"title":"ToDoを削除する（演習）","level":"1.7","depth":1,"path":"todo-delete/README.md","ref":"todo-delete/README.md","articles":[]},"previous":{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/e2e/README.md","mtime":"2025-05-16T02:27:53.258Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

@@ -107,7 +107,7 @@
                 <a href="../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -783,8 +783,8 @@
                                 <html><head></head><body><h1 id="開発環境の準備"><a name="開発環境の準備" class="plugin-anchor" href="#開発環境の準備"><i class="fa fa-link" aria-hidden="true"></i></a>開発環境の準備</h1>
 <p>ToDoアプリの開発で使用するツールをインストールします。</p>
 <h2 id="nodejsのインストール"><a name="nodejsのインストール" class="plugin-anchor" href="#nodejsのインストール"><i class="fa fa-link" aria-hidden="true"></i></a>Node.jsのインストール</h2>
-<p>フロントエンドの開発ではCreate React AppやTypeScriptを使用するため、Node.jsをインストールします。Node.jsのバージョンには <code>20</code> を使用します。</p>
-<p><a href="https://nodejs.org/" target="_blank">公式サイト</a>の案内に沿って、インストールしてください。</p>
+<p>フロントエンドの開発では<code>create-next-app</code>やTypeScriptを使用するため、Node.jsをインストールします。Node.jsのバージョンには <code>22</code> を使用します。</p>
+<p><a href="https://nodejs.org/ja/download" target="_blank">公式サイト</a>の案内に沿って、インストールしてください。</p>
 <p>使用する環境が既に整っている場合は、この手順をスキップしてください。</p>
 <h2 id="jdkのインストール"><a name="jdkのインストール" class="plugin-anchor" href="#jdkのインストール"><i class="fa fa-link" aria-hidden="true"></i></a>JDKのインストール</h2>
 <p>バックエンドの開発ではJavaを使用するため、JDKをインストールします。Javaのバージョンには <code>11</code> を使用します。</p>
@@ -799,17 +799,17 @@
 <p>開発時に使用するエディタをインストールします。</p>
 <p>エディタは使い慣れたものなら何でもよいですが、何もインストールしていなければ、今回のハンズオンで使用するコードに対応できるVisual Studio Codeをインストールします。<a href="https://azure.microsoft.com/ja-jp/products/visual-studio-code/" target="_blank">公式サイト</a>の案内に沿って、インストールしてください。</p>
 <p>エディタが既に整っている場合は、この手順をスキップしてください。</p>
-<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>Javaの開発ツールは<a href="https://www.eclipse.org/" target="_blank">Eclipse</a>や<a href="https://www.jetbrains.com/idea/" target="_blank">IntelliJ IDEA</a>があります。それ以外にもいくつかのツールがありますので、お好みに合わせてご利用してください。</p>
+<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p><a href="https://www.eclipse.org/" target="_blank">Eclipse</a>や<a href="https://www.jetbrains.com/idea/" target="_blank">IntelliJ IDEA</a>などのIDE（統合開発環境）も利用可能です。それ以外にもいくつかのエディタやIDEがありますので、お好みに合わせてご利用ください。</p>
 </div></div><p></p>
-<h2 id="dockerdocker-composeのインストール"><a name="dockerdocker-composeのインストール" class="plugin-anchor" href="#dockerdocker-composeのインストール"><i class="fa fa-link" aria-hidden="true"></i></a>Docker(Docker Compose)のインストール</h2>
+<h2 id="docker（docker-compose）のインストール"><a name="docker（docker-compose）のインストール" class="plugin-anchor" href="#docker（docker-compose）のインストール"><i class="fa fa-link" aria-hidden="true"></i></a>Docker（Docker Compose）のインストール</h2>
 <p>開発時にコンテナを使用するため、DockerとDocker Composeをインストールします。</p>
 <p>WindowsでのDocker利用方法はいくつかありますが、ここではDocker Desktop for Windowsをインストールします。<a href="https://docs.docker.com/docker-for-windows/install/" target="_blank">公式サイト</a>の案内に沿って、インストールしてください。</p>
 <p>使用する環境が既に整っている場合は、この手順をスキップしてください。</p>
-<p></p><div class="alert alert-danger hints-alert"><div class="hints-icon"><i class="fa fa-exclamation-circle"></i></div><div class="hints-container"><p>本ハンズオンでは、Dockerコンテナ起動時にローカルディレクトリをマウントします。Docker Desktop for WindowsやDocker Desktop for Macでローカルディレクトリをマウントするためには事前にファイル共有を許可しておく必要があります。Docker Desktopの<code>Settings</code>→<code>Resources</code>→<code>FILE SHARING</code>から、本ハンズオンのプロジェクトを配置するドライブやディレクトリを共有可能に設定しておいてください。（参考：<a href="https://docs.docker.com/desktop/settings/windows/#file-sharing" target="_blank">File Sharing | Windows</a>、<a href="https://docs.docker.com/desktop/settings/mac/#file-sharing" target="_blank">File Sharing | Mac</a>）</p>
+<p></p><div class="alert alert-danger hints-alert"><div class="hints-icon"><i class="fa fa-exclamation-circle"></i></div><div class="hints-container"><p>本ハンズオンでは、Dockerコンテナ起動時にローカルディレクトリをマウントします。Docker Desktop for WindowsやDocker Desktop for Macでローカルディレクトリをマウントするためには事前にファイル共有を許可しておく必要があります。Docker Desktopの<code>Settings</code>→<code>Resources</code>→<code>FILE SHARING</code>から、本ハンズオンのプロジェクトを配置するドライブやディレクトリを共有可能に設定しておいてください。（参考：<a href="https://docs.docker.com/desktop/settings-and-maintenance/settings/#file-sharing" target="_blank">File Sharing | Docker Docs</a>）</p>
 </div></div><p></p>
 <h2 id="gitのインストール（オプション）"><a name="gitのインストール（オプション）" class="plugin-anchor" href="#gitのインストール（オプション）"><i class="fa fa-link" aria-hidden="true"></i></a>Gitのインストール（オプション）</h2>
 <p>ハンズオン資料のダウンロードでGitを利用することもできるため、Gitをインストールします。ただし、他の手段でもダウンロードが出来るため、インストールは必須ではなく任意となります。</p>
-<p>ここでは、Windows用にGitを使うための git fow windows をインストールします。<a href="https://gitforwindows.org/" target="_blank">公式サイト</a>の案内に沿って、インストールしてください。</p>
+<p>ここでは、Windows用にGitを使うための git for windows をインストールします。<a href="https://gitforwindows.org/" target="_blank">公式サイト</a>の案内に沿って、インストールしてください。</p>
 </body></html>
                                 
                                 </section>
@@ -853,7 +853,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"開発環境の準備","level":"1.3.1","depth":2,"next":{"title":"資料のダウンロード","level":"1.3.2","depth":2,"path":"setup/download/README.md","ref":"setup/download/README.md","articles":[]},"previous":{"title":"ハンズオンの準備","level":"1.3","depth":1,"path":"setup/README.md","ref":"setup/README.md","articles":[{"title":"開発環境の準備","level":"1.3.1","depth":2,"path":"setup/install/README.md","ref":"setup/install/README.md","articles":[]},{"title":"資料のダウンロード","level":"1.3.2","depth":2,"path":"setup/download/README.md","ref":"setup/download/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"setup/install/README.md","mtime":"2023-12-25T02:59:13.958Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"開発環境の準備","level":"1.3.1","depth":2,"next":{"title":"資料のダウンロード","level":"1.3.2","depth":2,"path":"setup/download/README.md","ref":"setup/download/README.md","articles":[]},"previous":{"title":"ハンズオンの準備","level":"1.3","depth":1,"path":"setup/README.md","ref":"setup/README.md","articles":[{"title":"開発環境の準備","level":"1.3.1","depth":2,"path":"setup/install/README.md","ref":"setup/install/README.md","articles":[]},{"title":"資料のダウンロード","level":"1.3.2","depth":2,"path":"setup/download/README.md","ref":"setup/download/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"setup/install/README.md","mtime":"2025-05-16T02:27:53.242Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

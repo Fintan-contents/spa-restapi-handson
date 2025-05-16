@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -892,7 +892,7 @@
     }
 }
 </code></pre>
-<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>コンストラクタでのみ状態を設定し、生成後に状態を変更できないオブジェクトは、一般的に「イミュータブル（不変）」なオブジェクトと呼ばれます。オブジェクトをやり取りする中で、意図せずオブジェクトの状態を更新されてしまうといったバグを防ぎやすくしたりします。</p>
+<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>コンストラクタでのみ状態を設定し、生成後に状態を変更できないオブジェクトは、一般的に「イミュータブル（不変）」なオブジェクトと呼ばれます。オブジェクトをやり取りする中で、意図せずオブジェクトの状態を更新されてしまう等のバグを防ぎやすくします。</p>
 </div></div><p></p>
 <h3 id="comexampletodoapplicationパッケージの作成"><a name="comexampletodoapplicationパッケージの作成" class="plugin-anchor" href="#comexampletodoapplicationパッケージの作成"><i class="fa fa-link" aria-hidden="true"></i></a><code>com.example.todo.application</code>パッケージの作成</h3>
 <p>ToDo管理の機能を表すクラスを配置するための、<code>com.example.todo.application</code>パッケージを作成します。</p>
@@ -1022,7 +1022,7 @@
 <p><code>@GET</code>アノテーションをメソッドに付与することで、HTTPメソッドが<code>GET</code>の場合にそのメソッドが呼び出されるようになります。</p>
 <p><code>@Produces</code>アノテーションは、レスポンスを返す際の<code>Content-Type</code>を指定します。レスポンスはJSONで返すため、<code>MediaType.APPLICATION_JSON</code>を指定します。</p>
 <p>メソッドの実装としては、さきほど作成した<code>TodoService</code>クラスの<code>list(UserId)</code>メソッドを呼び出します。DBから取得するためのユーザーIDを渡す必要がありますが、今はまだユーザー認証を実装していないため、とりあえずダミーのユーザーIDを生成して渡しておきます。</p>
-<p>レスポンスのオブジェクトがJSONに変換されるため、OpenAPIドキュメントに沿った値に変換されるように<code>TodoResponse</code>クラスを内部で定義し、<code>TodoSerivce</code>から取得したオブジェクトを変換します。また、<code>java.util.List</code>で返すことで配列形式に変換されるため、<code>TodoResponse</code>型のオブジェクトをListで返すことで、OpenAPIの定義時に想定していた次のようなJSONに変換されます。</p>
+<p>レスポンスのオブジェクトがJSONに変換されるため、OpenAPIドキュメントに沿った値に変換されるように<code>TodoResponse</code>クラスを内部で定義し、<code>TodoService</code>から取得したオブジェクトを変換します。また、<code>java.util.List</code>で返すことで配列形式に変換されるため、<code>TodoResponse</code>型のオブジェクトをListで返すことで、OpenAPIの定義時に想定していた次のようなJSONに変換されます。</p>
 <pre><code class="lang-json">{
   [
     {
@@ -1076,7 +1076,7 @@
 ----------------------------------------------------------------------------------
 docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;5432/tcp
 </code></pre><p>Mavenでテストを実行するため、次のコマンドを実行します。</p>
-<pre><code>mvn test
+<pre><code>$ mvn test
 </code></pre><p>出力された内容から、<code>TodoListRestApiTest</code>テストが実行され、テストが成功していることを確認します。</p>
 <h3 id="レスポンスボディのjsonの検証"><a name="レスポンスボディのjsonの検証" class="plugin-anchor" href="#レスポンスボディのjsonの検証"><i class="fa fa-link" aria-hidden="true"></i></a>レスポンスボディのJSONの検証</h3>
 <p>次は、ダミーデータのToDoが想定通りJSONに変換されていることを確認します。先ほどのテストメソッドを、次のように変更します。</p>
@@ -1125,8 +1125,8 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
 <p>なお、ダミーデータを変えてみることでテストを失敗させることができるため、想定どおりに検証できるかやテスト失敗時の挙動を確認するために、わざと失敗するようにダミーデータを変更してテストを実行してみるのもよいです。</p>
 <h3 id="openapiドキュメントによる型の検証"><a name="openapiドキュメントによる型の検証" class="plugin-anchor" href="#openapiドキュメントによる型の検証"><i class="fa fa-link" aria-hidden="true"></i></a>OpenAPIドキュメントによる型の検証</h3>
 <p>次に、OpenAPIドキュメントに記述したレスポンスの定義と、実際のレスポンスの内容が一致しているか検証します。</p>
-<p>OpenAPIによりフロントエンドとREST APIに対する認識を合わせているため、OpenAPIドキュメントの定義と実際の実装が一致することを検証するのは重要になります。</p>
-<p>ここでは、OpenAPIドキュメントを解析したり検証することができるOSSの<a href="https://www.openapi4j.org/" target="_blank">OpenAPI4J</a>を使用します。</p>
+<p>OpenAPIによりフロントエンドとREST APIに対する認識を合わせているため、OpenAPIドキュメントの定義と実装が一致していることの検証は重要です。</p>
+<p>ここでは、OpenAPIドキュメントの解析や検証ができるOSSの<a href="https://www.openapi4j.org/" target="_blank">OpenAPI4J</a>を使用します。</p>
 <p>OpenAPI4Jを使用するための設定は済んだ状態になっているため、事前準備は必要ありません。（<a href="https://www.openapi4j.org/operation-validator.html#installation" target="_blank">Operation validator | OpenAPI4J</a>）</p>
 <p>OpenAPIドキュメントによる検証を実装するには、OpenAPI4Jから提供されているValidatorを使用します。example-chatのバックエンドでは、Nablarchで使いやすくするためにValidatorをラッピングしたクラスを実装しているため、その実装を流用します。</p>
 <p>example-chatのテストソースに<code>com.example.openapi.OpenApiValidator</code>クラスがあるため、これをそのまま同じパッケージに持ってきます。</p>
@@ -1275,7 +1275,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
 <p>ここでは、ユーザーIDに紐づくToDoを取得しますが、ユーザーIDは<code>todo</code>テーブルの主キーではありません。ユニバーサルDAOでは、主キーを使用しない検索にはSQLファイルを使用します。（参考：<a href="https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/database/universal_dao.html#sql-sql" target="_blank">Nablarch - 任意のSQLで検索する</a>）</p>
 <p>SQLファイルは後ほど作成しますので、使用するSQLのIDを<code>FIND_BY_USERID</code>、パラメータを<code>userId</code>として実装します。</p>
 <h3 id="comexampletodoinfrastructureentityディレクトリの作成"><a name="comexampletodoinfrastructureentityディレクトリの作成" class="plugin-anchor" href="#comexampletodoinfrastructureentityディレクトリの作成"><i class="fa fa-link" aria-hidden="true"></i></a><code>com/example/todo/infrastructure/entity</code>ディレクトリの作成</h3>
-<p>ユニバーサルDAOで使用するSQLファイルを使用するためには、Entityクラスと同じクラスパス上にSQLファイルを配置する必要がある。
+<p>ユニバーサルDAOで使用するSQLファイルを使用するためには、Entityクラスと同じクラスパス上にSQLファイルを配置する必要があります。
 そのため、まずは<code>src/main/resources</code>の下に<code>com/example/todo/infrastructure/entity</code>ディレクトリを作成します。</p>
 <h3 id="todoentitysqlファイルの作成"><a name="todoentitysqlファイルの作成" class="plugin-anchor" href="#todoentitysqlファイルの作成"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoEntity.sql</code>ファイルの作成</h3>
 <p>作成した<code>com/example/todo/infrastructure/entity</code>ディレクトリ内に、<code>TodoEntity</code>クラスに対応する<code>TodoEntity.sql</code>ファイルを作成します。</p>
@@ -1354,7 +1354,7 @@ ORDER BY
 }
 </code></pre>
 <p>テストが成功することを確認するため、再度Mavenでテストを実行してみます。</p>
-<pre><code>mvn test
+<pre><code>$ mvn test
 </code></pre><p>特にエラーが発生せず、テストが成功することを確認します。</p>
 <p>これで、ToDo一覧取得のREST APIの実装は完了です。</p>
 </body></html>
@@ -1400,7 +1400,7 @@ ORDER BY
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"next":{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},"previous":{"title":"バックエンド","level":"1.6.2","depth":2,"path":"todo/backend/README.md","ref":"todo/backend/README.md","articles":[{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/backend/todo-list/README.md","mtime":"2023-12-25T02:59:13.965Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"next":{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},"previous":{"title":"バックエンド","level":"1.6.2","depth":2,"path":"todo/backend/README.md","ref":"todo/backend/README.md","articles":[{"title":"ToDo一覧取得のREST API","level":"1.6.2.1","depth":3,"path":"todo/backend/todo-list/README.md","ref":"todo/backend/todo-list/README.md","articles":[]},{"title":"ToDo登録のREST API","level":"1.6.2.2","depth":3,"path":"todo/backend/todo-add/README.md","ref":"todo/backend/todo-add/README.md","articles":[]},{"title":"ToDo状態更新のREST API","level":"1.6.2.3","depth":3,"path":"todo/backend/todo-update/README.md","ref":"todo/backend/todo-update/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.2.4","depth":3,"path":"todo/backend/cors/README.md","ref":"todo/backend/cors/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/backend/todo-list/README.md","mtime":"2025-05-16T02:27:53.258Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
