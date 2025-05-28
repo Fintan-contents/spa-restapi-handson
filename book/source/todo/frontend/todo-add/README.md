@@ -6,7 +6,8 @@ ToDoページで新しいToDoを登録できるように実装します。
 
 ToDoの一覧表示の時と同様に、ToDoを登録するコンポーネントで、どのような状態が必要になるかを考えていきます。
 
-ここでは、ToDoを登録するためのフォームを作成します。フォームの作成についてはReactからガイドされており、フォーム自身が保持する独自のstateをReactが管理するstateに統合し、Reactのstateのみで制御する「制御されたコンポーネント」として作成することを推奨しています。（参考：[input](https://ja.react.dev/reference/react-dom/components/input)、[select](https://ja.react.dev/reference/react-dom/components/select)、[textarea](https://ja.react.dev/reference/react-dom/components/textarea)）
+ここでは、ToDoを登録するためのフォームを作成します。フォームの作成についてはReactからガイドされており、フォーム自身が保持する独自のstateをReactが管理するstateに統合し、Reactのstateのみで制御する「制御されたコンポーネント」として作成することを推奨しています。  
+（参考：[input](https://ja.react.dev/reference/react-dom/components/input)、[select](https://ja.react.dev/reference/react-dom/components/select)、[textarea](https://ja.react.dev/reference/react-dom/components/textarea)）
 
 ここからわかるとおり、フォームでは入力中の状態を保持するstateが必要になります。ここでは、ToDoの内容を入力するフォームであるため、入力中のToDoの内容を保持するstateが必要になります。
 
@@ -23,8 +24,9 @@ ToDoの一覧表示の時と同様に、ToDoを登録するコンポーネント
 まず、`src/hooks`ディレクトリを作成し、そこに`useInput.ts`ファイルを作成します。
 example-chatの`src/framework/hooks/index.ts`に`useInput`が定義されているため、このコードを`useInput.ts`ファイルに持ってきます。
 
+`src/hooks/useInput.ts`
 ```js
-import { useState } from 'react';
+import {useState} from 'react';
 
 /**
  * input要素のステートフックとステート更新をラッピングした独自フック。
@@ -32,7 +34,9 @@ import { useState } from 'react';
  * @param initialState 初期値
  * @return [input要素のステート, input要素の属性, ステート更新の関数]
  */
-export const useInput = (initialState: string = ''): [string, React.InputHTMLAttributes<HTMLInputElement>, React.Dispatch<React.SetStateAction<string>>] => {
+export const useInput = (
+  initialState: string = '',
+): [string, React.InputHTMLAttributes<HTMLInputElement>, React.Dispatch<React.SetStateAction<string>>] => {
   const [value, setValue] = useState<string>(initialState);
 
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -43,19 +47,20 @@ export const useInput = (initialState: string = ''): [string, React.InputHTMLAtt
     value,
     {
       value,
-      onChange
+      onChange,
     },
-    setValue
+    setValue,
   ];
 };
 ```
 
 `TodoForm`では、この`useInput`を使用して、次のように実装します。
 
+`src/components/board/form/TodoForm.tsx`
 ```jsx
 import React from 'react';
-import './TodoForm.css';
-import { useInput } from '../hooks/useInput';
+import styles from './TodoForm.module.css';
+import {useInput} from '../../../hooks/useInput';
 
 export const TodoForm: React.FC = () => {
   const [text, textAttributes, setText] = useInput('');
@@ -67,13 +72,13 @@ export const TodoForm: React.FC = () => {
   };
   
   return (
-    <div className="TodoForm_content">
-      <form onSubmit={handleSubmit} className="TodoForm_form">
-        <div className="TodoForm_input">
-          <input type="text" {...textAttributes} placeholder="タスクを入力してください"/>
+    <div className={styles.content}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.input}>
+          <input type='text' {...textAttributes} placeholder='タスクを入力してください' />
         </div>
-        <div className="TodoForm_button">
-          <button type="submit">追加</button>
+        <div className={styles.button}>
+          <button type='submit'>追加</button>
         </div>
       </form>
     </div>
@@ -81,27 +86,28 @@ export const TodoForm: React.FC = () => {
 };
 ```
 
-`useInput`では、`useState`と同様に呼び出し時に初期値を渡します。戻り値としては、state自体や、`input`に渡すためのプロパティが設定されたオブジェクト等が返されます。
+`useInput`では、`useState`と同様に呼び出し時に初期値を渡します。戻り値としては、state自体や`input`に渡すためのプロパティが設定されたオブジェクト等が返されます。
 
 `input`のプロパティを個別に設定してもよいですが、ここでは[スプレッド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax)を使用して、そのオブジェクトに設定されているプロパティを展開して一気に設定します。
 
 ```jsx
-<input type="text" {...textAttributes} placeholder="タスクを入力してください"/>
+<input type='text' {...textAttributes} placeholder='タスクを入力してください' />
 ```
 
 `textAttributes`には`value`と`onChange`プロパティがあるため、これは次の実装と同じ意味になります。
 
 ```jsx
-<input type="text" value={textAttributes.value} onChange={textAttributes.onChange} placeholder="タスクを入力してください"/>
+<input type='text' value={textAttributes.value} onChange={textAttributes.onChange} placeholder='タスクを入力してください' />
 ```
 
 フォームのサブミットで登録処理を行うように、「追加」ボタンの`type`を`submit`に設定します。これで、「追加」ボタンをクリックするとサブミットされるようになります。
 
-サブミット時に登録処理を実行するようにするため、登録処理を`handleSubmit`関数として実装し、`form`の`onSubmit`に設定します。これで、サブミット時にこの関数がコールバックされます。
+サブミット時に登録処理を実行するため、登録処理を`handleSubmit`関数として実装し、  
+`form`の`onSubmit`に設定します。これで、サブミット時にこの関数がコールバックされます。
 また、サブミット時に関数がコールバックされた後、そのままだとサブミットイベントによりフォームをサーバに送信しようとしてしまうので、次のように関数内で`event.preventDefault()`を呼び、サブミットイベントをキャンセルしておきます。
 
 ```js
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 ...
 ```
@@ -114,45 +120,46 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 
 REST APIを呼び出すと登録した結果のToDoがレスポンスとして返されるので、それを一覧に表示されるようにします。ただ、一覧に表示するためのstateは、`TodoForm`の親コンポーネントである`TodoBoard`に配置しているため、`TodoForm`の実装では更新することができません。このような場合、stateを配置しているコンポーネントでstateを更新するためのコールバック関数を定義し、それをプロパティで渡してもらうようにします。
 
-また、ToDoを登録した後は入力したテキストもクリアするため、テキスト入力のstateも更新するようにします。
+また、ToDoを登録した後は入力したテキストもクリアさせるため、テキスト入力のstateも更新します。
+[async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)を使うことで、非同期処理の結果を受け取るまで実行を待機します。この方法により、フォームのテキストが確実にサーバーに送られてレスポンスを受け取った後にクリアされるため、データの消失を防ぐことができます。
 
 ```jsx
 import React from 'react';
-import './TodoForm.css';
-import { useInput } from '../hooks/useInput';
-import { BackendService } from '../backend/BackendService';
+import styles from './TodoForm.module.css';
+import {useInput} from '../../../hooks/useInput';
+import {BackendService} from '../../../backend/BackendService';
 
 type Todo = {
-  id: number
-  text: string
-  completed: boolean
-}
+  id: number;
+  text: string;
+  completed: boolean;
+};
 
 type Props = {
-  addTodo: (todo: Todo) => void
-}
+  addTodo: (todo: Todo) => void;
+};
 
 export const TodoForm: React.FC<Props> = ({addTodo}) => {
   const [text, textAttributes, setText] = useInput('');
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!text) {
       return;
     }
-    BackendService.postTodo(text)
-      .then(response => addTodo(response));
+    const response = await BackendService.postTodo(text);
+    addTodo(response);
     setText('');
   };
 
   return (
-    <div className="TodoForm_content">
-      <form onSubmit={handleSubmit} className="TodoForm_form">
-        <div className="TodoForm_input">
-          <input type="text" {...textAttributes} placeholder="タスクを入力してください"/>
+    <div className={styles.content}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.input}>
+          <input type='text' {...textAttributes} placeholder='タスクを入力してください' />
         </div>
-        <div className="TodoForm_button">
-          <button type="submit">追加</button>
+        <div className={styles.button}>
+          <button type='submit'>追加</button>
         </div>
       </form>
     </div>
@@ -160,8 +167,10 @@ export const TodoForm: React.FC<Props> = ({addTodo}) => {
 };
 ```
 
-`TodoBoard`では、次のように、引数のToDoをstateのToDoに結合させる関数を作成し、それを`TodoForm`に渡すように実装します。
+`TodoBoard`では、次のように、引数のToDoをstateのToDoに結合させる関数を作成し、  
+それを`TodoForm`に渡すように実装します。
 
+`src/components/board/TodoBoard.tsx`
 ```jsx
 export const TodoBoard: React.FC = () => {
 ...
@@ -170,8 +179,8 @@ export const TodoBoard: React.FC = () => {
   };
 ...
   return (
-    <div className="TodoBoard_content">
-      <TodoForm addTodo={addTodo}/>
+    <div className={styles.content}>
+      <TodoForm addTodo={addTodo} />
 ...
 ```
 
@@ -181,6 +190,6 @@ export const TodoBoard: React.FC = () => {
 
 ToDoページを表示して、ToDoが登録できることを確認します。ToDo登録フォームのテキスト入力に適当な値を入力して「追加」ボタンをクリックし、モックサーバからのレスポンスで取得したToDoが一覧に追加されるのを確認します。
 
-モックサーバの起動時にも説明しましたが、モックサーバからはOpenAPIドキュメントのexampleに設定した値がレスポンスとして返されます。そのため、ここでは常に同じToDoが追加されることになり、実際に入力したToDoが追加されるわけではありませんので、注意してください。
+モックサーバの起動時にも説明しましたが、モックサーバからはOpenAPIドキュメントのexampleに設定した値がレスポンスとして返されます。そのため、ここでは常に同じToDo（やること３）が追加されることになり、実際に入力したToDoが追加されるわけではありませんので、注意してください。
 
-確認ができたら、フロントエンドの実装は完了です。
+確認ができたら、フロントエンドのToDoの登録の実装は完了です。

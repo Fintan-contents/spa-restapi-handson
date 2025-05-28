@@ -4,7 +4,7 @@ ToDo一覧を実装する際には、バックエンドのREST APIにアクセ�
 
 ## OpenAPIドキュメントの確認
 
-REST APIをOpenAPI仕様で記述したOpenAPIドキュメントは、プロジェクト作成時に作成しています。（参考：[OpenAPI - Specification](https://swagger.io/specification/)）
+REST APIをOpenAPI仕様で記述したOpenAPIドキュメントは、プロジェクト作成時に作成しています。（参考：[OpenAPI Specification | Swagger](https://swagger.io/specification/)）
 
 バックエンドの`rest-api-specification/openapi.yaml`ファイルがOpenAPIドキュメントになるため、内容を確認します。
 
@@ -78,7 +78,8 @@ components:
       additionalProperties: false
 ```
 
-`properties`には、このコンポーネントの項目を定義します。全ての項目が必ず必要であるため、`required`には全ての項目を定義します。ここで定義していない項目が追加で返却されることは想定していないため、`additionalProperties`には`false`を定義します。
+`properties`には、このコンポーネントの項目を定義します。全ての項目が必ず必要であるため、  
+`required`には全ての項目を定義します。ここで定義していない項目が追加で返却されることは想定していないため、`additionalProperties`には`false`を定義します。
 
 `content`内の`examples`に、実際に返却される例を定義します。
 
@@ -121,7 +122,7 @@ $ docker-compose -f docker/docker-compose.api-gen.yml up
 
 ## クライアントコードのラッパーを作成
 
-OpenAPIドキュメントからREST APIのクライアントコードを生成しましたが、使用時には同じ設定を行うことが多くなります。そこで、共通的な設定がされたクライアントコードを使用するために、生成したクライアントコードをラッピングした`BackendSerivce`を作成します。コンポーネントからREST APIにアクセスする際には、生成したクライアントコードは直接使用せずに、この`BackendSerivce`を使用するようにします。
+OpenAPIドキュメントからREST APIのクライアントコードを生成しましたが、使用時には同じ設定を行うことが多くなります。そこで、共通的な設定がされたクライアントコードを使用するために、生成したクライアントコードをラッピングした`BackendService`を作成します。コンポーネントからREST APIにアクセスする際には、生成したクライアントコードは直接使用せずに、この`BackendService`を使用するようにします。
 
 `src/backend`ディレクトリに`BackendService.ts`を作成します。
 
@@ -131,20 +132,20 @@ import {
   Configuration,
   TodosApi,
   Middleware,
-  UsersApi
+  UsersApi,
 } from './generated-rest-client';
 
 const requestLogger: Middleware = {
-  pre: async (context) => {
+  pre: async context => {
     console.log(`>> ${context.init.method} ${context.url}`, context.init);
   },
-  post: async (context) => {
+  post: async context => {
     console.log(`<< ${context.response.status} ${context.url}`, context.response);
-  }
+  },
 };
 
 const configuration = new Configuration({
-  middleware: [requestLogger]
+  middleware: [requestLogger],
 });
 
 const todosApi = new TodosApi(configuration);
@@ -152,11 +153,11 @@ const todosApi = new TodosApi(configuration);
 const usersApi = new UsersApi(configuration);
 
 const signup = async (userName: string, password: string) => {
-  return usersApi.signup({ inlineObject2 : { userName, password }});
+  return usersApi.signup({inlineObject2: {userName, password}});
 };
 
 const login = async (userName: string, password: string) => {
-  return usersApi.login({ inlineObject3: { userName, password }});
+  return usersApi.login({inlineObject3: {userName, password}});
 };
 
 const logout = async () => {
@@ -168,11 +169,11 @@ const getTodos = async () => {
 };
 
 const postTodo = async (text: string) => {
-  return todosApi.postTodo({ inlineObject: { text }});
+  return todosApi.postTodo({inlineObject: {text}});
 };
 
 const putTodo = async (todoId: number, completed: boolean) => {
-  return todosApi.putTodo({ todoId, inlineObject1: { completed }});
+  return todosApi.putTodo({todoId, inlineObject1: {completed}});
 };
 
 export const BackendService = {
@@ -181,7 +182,7 @@ export const BackendService = {
   logout,
   getTodos,
   postTodo,
-  putTodo
+  putTodo,
 };
 ```
 

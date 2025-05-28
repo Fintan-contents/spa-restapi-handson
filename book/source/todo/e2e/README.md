@@ -29,7 +29,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432->5432/t
 $ mvn jetty:run
 ```
 
-次のように`Started`と出力され、バックエンドアプリが起動されているこを確認します。
+次のように`Started`と出力され、バックエンドアプリが起動されていることを確認します。
 
 ```
 [INFO] Started ServerConnector@2299f6d7{HTTP/1.1,[http/1.1]}{0.0.0.0:9080}
@@ -45,10 +45,10 @@ $ mvn jetty:run
 フロントエンドアプリを起動するため、`frontend`ディレクトリで、次のコマンドを実行します。
 
 ```
-$ npm start
+$ npm run dev
 ```
 
-フロントエンドアプリが起動されたら、ブラウザが起動し、自動で[トップページ](http://localhost:3000/)が開きます。
+フロントエンドアプリが起動されたら、ブラウザで[トップページ](http://localhost:3000/)を開きます。
 
 ## ToDoページの表示内容を確認する
 

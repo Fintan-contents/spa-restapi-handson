@@ -6,7 +6,7 @@ ToDoページで、ToDoを削除できるように実装します。
 
 ## 機能説明
 
-ToDoページで一覧表示しているToDoの右側にあるxボタンをクリックすると、対象のToDoを一覧から削除します。
+ToDoページで一覧表示しているToDoの右側にある「x」ボタンをクリックすると、対象のToDoを一覧から削除します。
 
 ## 実装のヒント
 
@@ -16,9 +16,10 @@ ToDoページで一覧表示しているToDoの右側にあるxボタンをク�
   - チェックボックスでToDoの状態を更新する実装を参考にしてください
 - バックエンド
   - ToDo状態更新のREST APIの実装を参考にしてください。
-  - 主キーによるDELETEをする場合は、ユニバーサルDAOのCRUD機能が利用できます。（[参考](https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/database/universal_dao.html#sqlcrud)）
+  - 主キーによるDELETEをする場合は、ユニバーサルDAOのCRUD機能が利用できます。  
+（参考：[ユニバーサルDAO — Nablarch](https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/database/universal_dao.html#sqlcrud)）
 
-## Nablarch(5u18)での注意点
+## Nablarch（5u18）での注意点
 
 バックエンドで使用しているNablarchのバージョンは`5u18`ですが、このバージョンではCORSのプリフライトリクエストに`Access-Control-Request-Headers`ヘッダが必須になります。
 

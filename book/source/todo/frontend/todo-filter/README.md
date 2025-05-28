@@ -8,9 +8,9 @@ ToDoの表示対象を絞り込むために、どのようなstateが必要に�
 
 ボタンを押すとどれか1つが選択された状態にするため、どのボタンが選択されているかのstateは必要そうです。
 
-他に、絞り込んだ後のToDoの一覧は、stateとして保持する必要があるかを考えます。これは、全てのToDoを保持するstateと、どのボタンが選択されているかのstateで算出可能なため、stateにはなりません。（参考：[React - Reactの流儀 ステップ 3](https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state)）
+他に、絞り込んだ後のToDoの一覧は、stateとして保持する必要があるかを考えます。これは、`TodoList`で使用している全てのToDoを保持するstateと、どのボタンが選択されているかのstateで算出可能なため、stateにはなりません。（参考：[React の流儀 ステップ 3 – React](https://ja.react.dev/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state)）
 
-`TodoBoard`のstateを使用して算出するためには、どのボタンが選択されているかのstateも、`TodoFilter`ではなく`TodoBoard`まで引き上げた方が簡単そうです。
+全てのToDoを保持するstateが`TodoBoard`にあること、`TodoBoard`が`TodoList`と`TodoFilter`の共通の親であることから、どのボタンが選択されているのかのstateも`TodoBoard`に定義します。こうすることで、`TodoBoard`が全体の状態を一元管理することができ、メンテナンスが容易になります。
 
 ## コンポーネントの実装
 
@@ -18,37 +18,44 @@ ToDoの表示対象を絞り込むために、どのようなstateが必要に�
 
 ### `TodoFilter`の実装
 
-表示対象を選択するボタンを表示する`TodoFilter`コンポーネントを実装します。stateの設計であったとおり、現在どのボタンが押されているかはを`TodoBoard`にstateとして保持させます。そのため、ここではプロパティでstateと更新関数を受け取るようにします。
+表示対象を選択するボタンを表示する`TodoFilter`コンポーネントを実装します。stateの設計であったとおり、現在どのボタンが押されているかを`TodoBoard`にstateとして保持させます。そのため、ここではプロパティでstateと更新関数を受け取るようにします。
 
-また、`TodoBoard`で管理した場合、`TodoBoard`でもどういったボタンがあるかを知っている必要があります。ただし、どういうボタンがあるかは`TodoFilter`が決めるため、`TodoFilter`で選択可能な種類を`TodoBoard`に知らせるため、型として宣言することにします。
+また、`TodoBoard`で管理した場合、`TodoBoard`でもどういったボタンがあるのかを知っている必要があります。ただし、どういうボタンがあるのかは`TodoFilter`が決めるため、`TodoFilter`で選択可能な種類を`TodoBoard`に知らせる型を宣言します。
 
+`src/components/board/filter/TodoFilter.tsx`
 ```jsx
 import React from 'react';
-import './TodoFilter.css';
+import styles from './TodoFilter.module.css';
 
 export type FilterType = 'ALL' | 'INCOMPLETE' | 'COMPLETED';
 
 type Props = {
-  filterType: FilterType
-  setFilterType: (filter: FilterType) => void
-}
+  filterType: FilterType;
+  setFilterType: (filter: FilterType) => void;
+};
 
 export const TodoFilter: React.FC<Props> = ({filterType, setFilterType}) => {
   return (
-    <div className="TodoFilter_content">
-      <button className={filterType === 'ALL' ? 'TodoFilter_buttonSelected' : 'TodoFilter_buttonUnselected'}
-              disabled={filterType === 'ALL'}
-              onClick={() => setFilterType('ALL')}>
+    <div className={styles.content}>
+      <button
+        className={filterType === 'ALL' ? `${styles.buttonSelected}` : `${styles.buttonUnselected}`}
+        disabled={filterType === 'ALL'}
+        onClick={() => setFilterType('ALL')}
+      >
         全て
       </button>
-      <button className={filterType === 'INCOMPLETE' ? 'TodoFilter_buttonSelected' : 'TodoFilter_buttonUnselected'}
-              disabled={filterType === 'INCOMPLETE'}
-              onClick={() => setFilterType('INCOMPLETE')}>
+      <button
+        className={filterType === 'INCOMPLETE' ? `${styles.buttonSelected}` : `${styles.buttonUnselected}`}
+        disabled={filterType === 'INCOMPLETE'}
+        onClick={() => setFilterType('INCOMPLETE')}
+      >
         未完了のみ
       </button>
-      <button className={filterType === 'COMPLETED' ? 'TodoFilter_buttonSelected' : 'TodoFilter_buttonUnselected'}
-              disabled={filterType === 'COMPLETED'}
-              onClick={() => setFilterType('COMPLETED')}>
+      <button
+        className={filterType === 'COMPLETED' ? `${styles.buttonSelected}` : `${styles.buttonUnselected}`}
+        disabled={filterType === 'COMPLETED'}
+        onClick={() => setFilterType('COMPLETED')}
+      >
         完了のみ
       </button>
     </div>
@@ -56,38 +63,38 @@ export const TodoFilter: React.FC<Props> = ({filterType, setFilterType}) => {
 };
 ```
 
-このコンポーネントで扱う種類を知らせるため、次のように`FilterType`という型を宣言し、`export`しています。
+このコンポーネントで扱うボタンの種類を知らせるため、次のように`FilterType`という型を宣言し、`export`しています。
 
 ```js
 export type FilterType = 'ALL' | 'INCOMPLETE' | 'COMPLETED';
 ```
 
-これはUnion Types（共用体型）と呼ばれるTypeScriptの型で、型を`|`で区切ると、その型のどれか（or条件）が代入可能になります。（参考：[TypeScript - Union Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)）
+これはUnion Types（共用体型）と呼ばれるTypeScriptの型で、型を`|`で区切ると、その型のどれか（or条件）が代入可能になります。（参考：[TypeScript - Union Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)）
 
-ここでは、このUnion Typesと固定の文字列を組み合わせることで、FilterType型にはこの文字列のどれかのみ代入することが可能にしています。
-`TodoBoard`ではこの型を使用することで、間違いなく`TodoFilter`が受け入れられる値を使用することができます。もしこれらの文字列以外を代入しようとするとコンパイルエラーになるため、`TodoBoard`側のミスを防いだり、`FilterType`で種類が変わって問題が発生した場合等にコンパイルエラーで検知できるようになります。
+ここでは、このUnion Typesと固定の文字列を組み合わせることで、FilterType型にはこの文字列のどれかのみ代入することを可能にしています。
+`TodoBoard`ではこの型によって、`TodoFilter`が受け入れられる値を確実に使用できます。もしこれらの文字列以外を代入しようとするとコンパイルエラーになるため、  
+`TodoBoard`側のミスを防ぎ、さらに`FilterType`で種類が変わった際に問題を検知できるようになります。
 
 ### `TodoBoard`の実装
 
-続いて、`TodoBoard`を実装します。ここでは、先ほど実装した`FilterType`型のstateを配置し、現在どれが選択されているかを保持するようにします。
-現在保持されている`FilterType`のstateにより、`TodoList`にToDoデータを渡す前にフィルタ処理を行い、絞り込んだ後のToDoデータを`TodoList`のプロパティに渡すようにします。
+続いて、`TodoBoard`を実装します。ここでは、先ほど実装した`FilterType`型のstateを配置し、現在どれが選択されているかを保持するようにします。  
+現在保持されている`FilterType`のstateにより`TodoList`にToDoデータを渡す前にフィルタ処理を行い、絞り込んだ後のToDoデータを`TodoList`のプロパティに渡すようにします。
 
+`src/components/board/TodoBoard.tsx`
 ```js
-import { FilterType, TodoFilter } from './TodoFilter';
-
+...
+import {FilterType, TodoFilter} from './filter/TodoFilter';
 ...
 
 type ShowFilter = {
-  [K in FilterType]: (todo: Todo) => boolean
-}
-
-const showFilter: ShowFilter = {
-  ALL: (todo) => true,
-  INCOMPLETE: (todo) => !todo.completed,
-  COMPLETED: (todo) => todo.completed,
+  [K in FilterType]: (todo: Todo) => boolean;
 };
 
-...
+const showFilter: ShowFilter = {
+  ALL: () => true,
+  INCOMPLETE: todo => !todo.completed,
+  COMPLETED: todo => todo.completed,
+};
 
 export const TodoBoard: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -96,10 +103,10 @@ export const TodoBoard: React.FC = () => {
   const showTodos = todos.filter(showFilter[filterType]);
 
   return (
-    <div className="TodoBoard_content">
-      <TodoForm addTodo={addTodo}/>
+    <div className={styles.content}>
+      <TodoForm addTodo={addTodo} />
       <TodoFilter filterType={filterType} setFilterType={setFilterType} />
-      <TodoList todos={showTodos} toggleTodoCompletion={toggleTodoCompletion}/>
+      <TodoList todos={showTodos} toggleTodoCompletion={toggleTodoCompletion} />
     </div>
   );
 };
@@ -109,8 +116,8 @@ export const TodoBoard: React.FC = () => {
 
 ```js
 type ShowFilter = {
-  [K in FilterType]: (todo: Todo) => boolean
-}
+  [K in FilterType]: (todo: Todo) => boolean;
+};
 ```
 
 これは、Mapped typesと呼ばれるTypeScriptの型で、オブジェクトのプロパティ名や値の型を制限することができます。`[K in FilterType]`部分はオブジェクトのプロパティ名の型を表しています。`K`は型引数であり、ここでは`FilterType`に含まれる文字列のどれかがプロパティ名として使用できるようにしています。`: (todo: Todo) => boolean`部分は、プロパティ値の型を表しています。
@@ -119,13 +126,13 @@ type ShowFilter = {
 
 ```js
 const showFilter: ShowFilter = {
-  ALL: (todo) => true,
-  INCOMPLETE: (todo) => !todo.completed,
-  COMPLETED: (todo) => todo.completed,
+  ALL: () => true,
+  INCOMPLETE: todo => !todo.completed,
+  COMPLETED: todo => todo.completed,
 };
 ```
 
-先ほどの型により、ここでのプロパティ名には`FilterType`に代入可能な文字列のどれかである必要があり、それ以外のプロパティ名であればコンパイルエラーになります。そのため、確実にボタンの種類に対応しているフィルタ関数を宣言されるようにしています。
+先ほどの型により、ここでのプロパティ名は`FilterType`に代入可能な文字列のどれかである必要があり、それ以外のプロパティ名であればコンパイルエラーになります。そのため、確実にボタンの種類に対応しているフィルタ関数を宣言されるようにしています。
 
 ここで定義した`FilterType`に対応した関数を使用するため、次のように宣言しています。現在のstateに応じたフィルタ関数が取得され、`filter`に適用されるようにしています。
 
@@ -133,8 +140,8 @@ const showFilter: ShowFilter = {
 const showTodos = todos.filter(showFilter[filterType]);
 ```
 
-## 動作確認
+## モックを使用した動作確認
 
-フロントエンドのみで実装しているため、バックエンドと接続する必要はありません。フロントエンドアプリを起動し、ToDoページが表示されたら、ボタンをクリックしてToDo一覧を絞り込んで表示することができることを確認します。
+ToDoページを表示して、ボタンをクリックしてToDo一覧を絞り込んで表示できることを確認します。
 
-確認できたら、フロントエンドの開発は完了です。
+確認できたら、フロントエンドのToDo一覧の絞り込みの実装は完了です。

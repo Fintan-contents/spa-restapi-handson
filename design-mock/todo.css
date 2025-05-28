@@ -30,8 +30,7 @@ body {
 }
 .PageHeader_nav button,
 .PageHeader_nav button:active,
-.PageHeader_nav button:hover
-{
+.PageHeader_nav button:hover {
   cursor: pointer;
   border: 0;
   background-color: transparent;
@@ -56,7 +55,7 @@ body {
 .TodoForm_input {
   width: 86%;
 }
-.TodoForm_input input{
+.TodoForm_input input {
   float: left;
   width: 95%;
   border-radius: 5px;
@@ -92,7 +91,7 @@ body {
 .TodoFilter_content {
   text-align: right;
 }
-.TodoFilter_content button{
+.TodoFilter_content button {
   margin-left: 5px;
 }
 .TodoFilter_buttonSelected {

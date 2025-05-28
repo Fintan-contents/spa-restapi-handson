@@ -27,24 +27,54 @@
 
 ## コンポーネントの作成
 
-Todoページを作成した時と同じように、`spa-restapi-handson/design-mock`に配置されているデザインモックを元に、それぞれのコンポーネントを作成していきます。
+ToDoページを作成した時と同じように、`spa-restapi-handson/design-mock`に配置されているデザインモックを元に、それぞれのコンポーネントを作成していきます。
 
-### `Welcome`コンポーネント
+### Welcome
 
-まず、`Welcome`コンポーネントを作成します。
+まず、`components`の下に`welcome`ディレクトリを作成し、そこにCSS Modulesファイルと`Welcome`コンポーネントを作成します。
 
-`src/components/Welcome.tsx`
+`src/components/welcome/Welcome.module.css`
+```css
+.content {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+.title {
+  font-size: 60px;
+}
+.buttonGroup {
+  text-align: center;
+}
+.button {
+  width: 175px;
+  cursor: pointer;
+  line-height: 1;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  background-color: darkgreen;
+  border-radius: 5px;
+  padding: 15px 30px;
+}
+.button:hover {
+  background-color: green;
+}
+```
+`src/components/welcome/Welcome.tsx`
 ```js
 import React from 'react';
-import './Welcome.css';
+import styles from './Welcome.module.css';
 
 export const Welcome: React.FC = () => {
   return (
-    <div className="Welcome_content">
+    <div className={styles.content}>
       <div>
-        <h1 className="Welcome_title">Welcome</h1>
-        <div className="Welcome_buttonGroup">
-          <button className="Welcome_button">登録する</button>
+        <h1 className={styles.title}>Welcome</h1>
+        <div className={styles.buttonGroup}>
+          <button className={styles.button}>登録する</button>
         </div>
       </div>
     </div>
@@ -52,23 +82,58 @@ export const Welcome: React.FC = () => {
 };
 ```
 
-`src/components/Welcome.css`
+### Signup
+
+続いて、`components`の下に`signup`ディレクトリを作成し、そこにCSS Modulesファイルと`Signup`コンポーネントを作成します。
+
+`src/components/signup/Signup.module.css`
 ```css
-.Welcome_content {
+.content {
   height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: auto;
-}
-.Welcome_title {
-  font-size: 60px;
-}
-
-.Welcome_buttonGroup {
   text-align: center;
 }
-.Welcome_button {
+.box {
+  width: 50%;
+}
+.title {
+  height: 70px;
+}
+.title h1 {
+  margin: 10px 0;
+}
+.form {
+  width: 50%;
+  padding: 0 25%;
+}
+.item {
+  margin: 20px 0;
+  height: 75px;
+}
+.item input {
+  width: 100%;
+  border-radius: 5px;
+  padding: 8px;
+  border: solid 1px lightgray;
+  background-color: #fafbfc;
+  font-size: 16px;
+  margin-top: 10px;
+  outline: none;
+}
+.item input:focus {
+  background-color: white;
+}
+.label {
+  text-align: left;
+}
+.buttonGroup {
+  text-align: center;
+  margin-top: 40px;
+}
+.button {
   width: 175px;
   cursor: pointer;
   line-height: 1;
@@ -79,37 +144,36 @@ export const Welcome: React.FC = () => {
   border-radius: 5px;
   padding: 15px 30px;
 }
-.Welcome_button:hover {
+.button:hover {
   background-color: green;
 }
 ```
-
-### `Signup`コンポーネント
-
-続いて、`Signup`コンポーネントを作成します。
-
-`src/components/Signup.tsx`
+`src/components/signup/Signup.tsx`
 ```jsx
 import React from 'react';
-import './Signup.css';
+import styles from './Signup.module.css';
 
 export const Signup: React.FC = () => {
   return (
-    <div className="Signup_content">
-      <div className="Signup_box">
-        <div className="Signup_title">
+    <div className={styles.content}>
+      <div className={styles.box}>
+        <div className={styles.title}>
           <h1>ユーザー登録</h1>
         </div>
-        <div className="Signup_item">
-          <div className="Signup_label">名前</div>
-          <input type="text"/>
-        </div>
-        <div className="Signup_item">
-          <div className="Signup_label">パスワード</div>
-          <input type="password" />
-        </div>
-        <div className="Signup_buttonGroup">
-          <button className="Signup_button">登録する</button>
+        <div className={styles.form}>
+          <div className={styles.item}>
+            <div className={styles.label}>名前</div>
+            <input type='text' />
+          </div>
+          <div className={styles.item}>
+            <div className={styles.label}>パスワード</div>
+            <input type='password' />
+          </div>
+          <div className={styles.buttonGroup}>
+            <button className={styles.button}>
+              登録する
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -117,9 +181,13 @@ export const Signup: React.FC = () => {
 };
 ```
 
-`src/components/Signup.css`
+### Login
+
+続いて、`components`の下に`login`ディレクトリを作成し、そこにCSS Modulesファイルと`Login`コンポーネントを作成します。
+
+`src/components/login/Login.module.css`
 ```css
-.Signup_content {
+.content {
   height: 90vh;
   display: flex;
   justify-content: center;
@@ -127,25 +195,24 @@ export const Signup: React.FC = () => {
   overflow: auto;
   text-align: center;
 }
-.Signup_box {
+.box {
   width: 50%;
 }
-.Signup_title {
+.title {
   height: 70px;
 }
-.Signup_title h1 {
+.title h1 {
   margin: 10px 0;
 }
-.Signup_form {
+.form {
   width: 50%;
   padding: 0 25%;
 }
-
-.Signup_item {
+.item {
   margin: 20px 0;
   height: 75px;
 }
-.Signup_item input {
+.item input {
   width: 100%;
   border-radius: 5px;
   padding: 8px;
@@ -155,18 +222,17 @@ export const Signup: React.FC = () => {
   margin-top: 10px;
   outline: none;
 }
-.Signup_item input:focus {
+.item input:focus {
   background-color: white;
 }
-.Signup_label {
+.label {
   text-align: left;
 }
-
-.Signup_buttonGroup {
+.buttonGroup {
   text-align: center;
   margin-top: 40px;
 }
-.Signup_button {
+.button {
   width: 175px;
   cursor: pointer;
   line-height: 1;
@@ -177,108 +243,43 @@ export const Signup: React.FC = () => {
   border-radius: 5px;
   padding: 15px 30px;
 }
-.Signup_button:hover {
+.button:hover {
   background-color: green;
 }
 ```
-
-### `Login`コンポーネント
-
-続いて、`Login`コンポーネントを作成します。
-
-`src/components/Login.tsx`
+`src/components/login/Login.tsx`
 ```jsx
-import React  from 'react';
-import './Login.css';
+import React from 'react';
+import styles from './Login.module.css';
 
 export const Login: React.FC = () => {
   return (
-    <div className="Login_content">
-      <div className="Login_box">
-        <div className="Login_title">
+    <div className={styles.content}>
+      <div className={styles.box}>
+        <div className={styles.title}>
           <h1>ログイン</h1>
         </div>
-        <div className="Login_item">
-          <div className="Login_label">名前</div>
-          <input type="text" />
-        </div>
-        <div className="Login_item">
-          <div className="Login_label">パスワード</div>
-          <input type="password" />
-        </div>
-        <div className="Login_buttonGruop">
-          <button className="Login_button">ログインする</button>
+        <div className={styles.form}>
+          <div className={styles.item}>
+            <div className={styles.label}>名前</div>
+            <input type='text' />
+          </div>
+          <div className={styles.item}>
+            <div className={styles.label}>パスワード</div>
+            <input type='password' />
+          </div>
+          <div className={styles.buttonGroup}>
+            <button className={styles.button}>
+              ログインする
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
-```
-`src/components/Login.css`
-```css
-.Login_content {
-  height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
-  text-align: center;
-}
-.Login_box {
-  width: 50%;
-}
-.Login_title {
-  height: 70px;
-}
-.Login_title h1 {
-  margin: 10px 0;
-}
-.Login_form {
-  width: 50%;
-  padding: 0 25%;
-}
-
-.Login_item {
-  margin: 20px 0;
-  height: 75px;
-}
-.Login_item input {
-  width: 100%;
-  border-radius: 5px;
-  padding: 8px;
-  border: solid 1px lightgray;
-  background-color: #fafbfc;
-  font-size: 16px;
-  margin-top: 10px;
-  outline: none;
-}
-.Login_item input:focus {
-  background-color: white;
-}
-.Login_label {
-  text-align: left;
-}
-
-.Login_buttonGruop {
-  text-align: center;
-  margin-top: 40px;
-}
-.Login_button {
-  width: 175px;
-  cursor: pointer;
-  line-height: 1;
-  border: none;
-  font-size: 1rem;
-  color: white;
-  background-color: darkgreen;
-  border-radius: 5px;
-  padding: 15px 30px;
-}
-.Login_button:hover {
-  background-color: green;
-}
 ```
 
 ## 動作確認
 
-ページを表示して確認したいところですが、複数のページをそれぞれ確認しづらいため、次に実装するURLルーティングが終わってから確認することにします。
+ページを表示して確認したいところですが、複数のページをそれぞれ確認しづらいため、次の章であるルーティングの設定の最後に動作を確認します。

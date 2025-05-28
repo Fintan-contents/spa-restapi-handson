@@ -10,7 +10,7 @@
 
 ### [ルーティングの設定](routing/README.md)
 
-React Routerを使用して、URLによるルーティングができるように設定します。
+Next.jsのApp Routerを使用して、URLによるルーティングができるように設定します。
 
 ### [ユーザーコンテクストの作成](context/README.md)
 

@@ -1,0 +1,59 @@
+.content {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  text-align: center;
+}
+.box {
+  width: 50%;
+}
+.title {
+  height: 70px;
+}
+.title h1 {
+  margin: 10px 0;
+}
+.form {
+  width: 50%;
+  padding: 0 25%;
+}
+.item {
+  margin: 20px 0;
+  height: 75px;
+}
+.item input {
+  width: 100%;
+  border-radius: 5px;
+  padding: 8px;
+  border: solid 1px lightgray;
+  background-color: #fafbfc;
+  font-size: 16px;
+  margin-top: 10px;
+  outline: none;
+}
+.item input:focus {
+  background-color: white;
+}
+.label {
+  text-align: left;
+}
+.buttonGroup {
+  text-align: center;
+  margin-top: 40px;
+}
+.button {
+  width: 175px;
+  cursor: pointer;
+  line-height: 1;
+  border: none;
+  font-size: 1rem;
+  color: white;
+  background-color: darkgreen;
+  border-radius: 5px;
+  padding: 15px 30px;
+}
+.button:hover {
+  background-color: green;
+}

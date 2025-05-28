@@ -6,53 +6,75 @@
 
 `frontend`ディレクトリが、フロントエンド開発プロジェクトになります。
 
-このプロジェクトは、Create React App（以下CRA）のTypeScript用テンプレートで作成しています。（参考：[CRA - Adding TypeScript](https://create-react-app.dev/docs/adding-typescript)）
+このプロジェクトは、`create-next-app`のデフォルトのテンプレートで作成しています。  
+（参考：[create-next-app | Next.js](https://nextjs.org/docs/app/api-reference/cli/create-next-app#with-the-default-template)）
 
-実装を小さくするために、CRAで生成されたプロジェクトに次のような修正を加えた状態です。
+実装を小さくするために、`create-next-app`で生成されたプロジェクトに次のような修正を加えた状態です。
 
-- 開発に使用するDockerCompose定義ファイルを追加
+- 開発に使用するDocker Composeの定義ファイルを追加
 - HelloWorldを表示するだけの簡易なページに変更
-- ページ変更に伴う不要ファイルの削除
-- アプリの実行時には使用しないライブラリをpackage.jsonのdependenciesからdevDependenciesに移動
-
+- 不要ファイルの削除
+- バリデーション用の共通部品を追加
 
 ディレクトリ構造は、次のようになっています。
 
 ```
 frontend
 ├── .gitignore
+├── next.config.ts
+├── package-lock.json
 ├── package.json
 ├── tsconfig.json
 ├── docker
 │   ├── docker-compose.api-gen.yml
 │   └── docker-compose.api-mock.yml
-├── public
-│   ├── favicon.ico
-│   └── index.html
 └── src
-    ├── index.tsx
-    ├── App.tsx
-    ├── react-app-env.d.ts
-    └── setupTests.ts
+    ├── app
+    │   ├── favicon.ico
+    │   ├── globals.css
+    │   ├── layout.tsx
+    │   └── page.tsx
+    └── validation
+        ├── index.ts
+        ├── Validation.tsx
+        └── field
+            ├── FieldConstraint.ts
+            ├── NumberFieldConstraint.ts
+            ├── StringArrayFieldConstraint.ts
+            └── StringFieldConstraint.ts
 ```
 
 #### `.gitignore`
 
 Gitで管理対象外とするファイルを定義するためのファイルです。
 
-CRAでアプリ作成時に生成されたものを使用しています。
+`create-next-app`でアプリ作成時に生成されたものを使用しています。
+
+#### `next.config.ts`
+
+Next.jsの設定ファイルです。
+
+`create-next-app`でアプリ作成時に生成されたものにReactのStrictModeを明示的に適用しています。
+
+StrictModeとは、出力されるページのコンテンツには影響を与えることなく、開発時に有用となる警告等を表示してくれる機能です。（参考：[next.config.js Options: reactStrictMode | Next.js](https://nextjs.org/docs/pages/api-reference/config/next-config-js/reactStrictMode)）
+
+#### `package-lock.json`
+
+プロジェクトの依存関係を正確に記録し、ビルドを再現可能に保証するためのファイルです。
+
+`create-next-app`でアプリ作成時に生成されたものを使用しています。
 
 #### `package.json`
 
 フロントエンドアプリのプロジェクト定義ファイルです。
 
-CRAでアプリ作成時に生成されたものを使用しています。
+`create-next-app`でアプリ作成時に生成されたものを使用しています。
 
 #### `tsconfig.json`
 
 TypeScript用のプロジェクト定義ファイルです。
 
-CRAでアプリ作成時に生成されたものを使用しています。
+`create-next-app`でアプリ作成時に生成されたものを使用しています。
 
 #### `docker/docker-compose.api-gen.yml`
 
@@ -62,99 +84,47 @@ OpenAPI定義ファイルからクライアント実装を生成するための�
 
 OpenAPI定義ファイルからモックサーバを起動するための、Docker Composeの定義ファイルです。
 
-#### `public/favicon.ico`
+#### `src/app/favicon.ico`
 
-ファビコン用のアイコン。
+ファビコン用のアイコンです。
 
-CRAでアプリ作成時に生成されたものを使用しています。
+`create-next-app`でアプリ作成時に生成されたものを使用しています。
 
-#### `public/index.html`
+#### `src/app/globals.css`
 
-CRAで作成したアプリでページ表示のエントリポイントとなるHTMLファイルです。コンテンツは動的に生成するため、`<div>`タグのみ定義しています。
+アプリケーション全体にスタイルを適用するためのCSSファイルです。  
+（参考：[Getting Started: Global CSS | Next.js](https://nextjs.org/docs/app/getting-started/css#global-css)）
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Todo App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
-```
+`create-next-app`でアプリ作成時に生成されたものですが、生成時のコードは使用しないため、削除して空のファイルにしています。
 
-#### `src/index.tsx`
+#### `src/app/layout.tsx`
 
-CRAで作成したアプリでJavaScript実行のエントリポイントとなる`src/index.js`のTypeScript実装です。
+複数のページで共有されるUIです。
 
-この実装の中では、JSXと呼ばれるJavaScript構文の拡張を使用しています。JSXを使用することで、React要素をHTMLのマークアップに近しいイメージで記述することができます。（参考：[React - JSX でマークアップを記述する]](https://ja.react.dev/learn/writing-markup-with-jsx)）
+`create-next-app`でアプリ作成時に生成されたものから、今回作成するToDoアプリに必要のない部分を削除し、ハンズオンの初期状態にしています。
+
+この実装の中では、JSXと呼ばれるJavaScript構文の拡張を使用しています。JSXを使用することで、React要素をHTMLのマークアップに近しいイメージで記述することができます。  
+（参考：[JSX でマークアップを記述する – React](https://ja.react.dev/learn/writing-markup-with-jsx)）
 
 なお、TypeScriptファイルの拡張子は通常`ts`ですが、後述のJSXを使用する場合は`tsx`とする必要があります。（参考：[TypeScript - JSX](https://www.typescriptlang.org/docs/handbook/jsx.html)）
 
-```jsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+#### `src/app/page.tsx`
 
-const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container!);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+インデックスページ（`/`）でレンダリングされるUIです。  
+（参考：[Layouts and Pages | Next.js](https://nextjs.org/docs/app/getting-started/layouts-and-pages)）
 
-```
+`create-next-app`でアプリ作成時に生成されたものを、`<h1>Hello, world</h1>`というHTML要素を表すReact要素を返すように変更しています。
 
-`ReactDOM.createRoot()`を使用してアプリのルートコンポーネントを作成しています。（参考：[createRoot](https://ja.react.dev/reference/react-dom/client/createRoot)）
+#### `src/validation`
 
-`ReactDOM.createRoot()`の引数にはレンダー先のDOM要素を指定します。ここでは[`Document.getElementById()`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById)の実行結果を渡しています。
+入力値バリデーション用の共通部品を格納しているディレクトリです。
 
-ここでの`document`は前述の`public/index.html`を指しており、そこで定義されている`<div id="root"></div>`を表すDOMに、引数に渡したReact要素がレンダーされることになります。
-
-`public/index.html`の`<body>`には`<div id="root"></div>`しか無いため、コンテンツを全て更新していることになります。
-
-`root.render()`を使用してReactコンポーネントを指定されたDOMにレンダリングします。（参考：[root.render(reactNode)](https://ja.react.dev/reference/react-dom/client/createRoot#root-render)）
-
-`root.render()`の引数にはReactコンポーネントを指定します。ここでは、上で説明したJSXを使用して、`<React.StrictMode>`とその子要素に`<App>`があるReact要素を定義しています。
-
-`<React.StrictMode>`は`React.StrictMode`のコンポーネントを指しており、`React.StrictMode`コンポーネントはReactが提供するコンポーネントです。このコンポーネントは、子要素でReactのstrictモードを有効にするためのコンポーネントになります。出力されるページのコンテンツには影響しませんが、開発時に有用となる警告等を表示してくれるようになります。（参考：[StrictMode](https://ja.react.dev/reference/react/StrictMode)）
-
-同様に、`<App />`は`App`コンポーネントを指しています。このコンポーネントについては後述します。
-
-#### `src/App.tsx`
-
-`App`コンポーネントを実装しています。このコンポーネントは、`<h1>Hello, world</h1>`というHTML要素を表すReact要素を返します。
-
-```jsx
-import React from 'react';
-
-function App() {
-  return (
-    <h1>Hello, world</h1>
-  );
-}
-
-export default App;
-```
-
-#### `src/react-app-env.d.ts`
-
-TypeScript用の定義ファイルです。
-
-CRAでアプリ作成時に生成されたものを使用しています。
-
-#### `src/setupTests.ts`
-
-テスト用の定義ファイルです。
-
-CRAでアプリ作成時に生成されたものを使用しています。
+example-chatの`frontend/src/framework/validation`からコピーして追加しました。今回はこれを流用します。
 
 ## フロントエンドのアプリを起動する
 
-CRAでは、開発モードとしてアプリを起動することができます。（参考：[CRA - Available Scripts](https://create-react-app.dev/docs/available-scripts)）
+`create-next-app`では、開発モードとしてアプリを起動することができます。  
+（参考：[Run the development server | Next.js](https://nextjs.org/docs/app/getting-started/installation#run-the-development-server)）
 
 まず、依存モジュールをインストールするため、`frontend`ディレクトリで次のコマンドを実行します。実行時にはいくつかの警告（`npm WARN 〜`）が出力されますが、ここでは無視してください。
 
@@ -165,10 +135,10 @@ $ npm install
 続いて、アプリを起動するため次のコマンドを実行します。
 
 ```
-$ npm start
+$ npm run dev
 ```
 
-起動が完了したら、自動的にデフォルトブラウザで[トップページ](http://localhost:3000/)が開きますので、次の画面が表示されていることを確認します。
+起動が完了したら、ブラウザで[トップページ](http://localhost:3000/)を開き、次の画面が表示されていることを確認します。
 
 ![frontend-test](img/frontend-test.png)
 

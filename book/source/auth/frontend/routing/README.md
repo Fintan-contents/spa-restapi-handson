@@ -1,96 +1,177 @@
 # ルーティングの設定
 
-SPAでは1つのページを動的に書き換えるため、ページ内容が書き換わってもそのままではURLは変わりません。しかし、ブックマークやページ履歴を利用したい場合等、ページ内容に応じてURLを変更したい場面があります。ToDoアプリでも、ユーザー認証を作成したことで目的が異なるページ内容が複数できたため、URLでページ内容が切り替わるように実装します。
+ルーティングとは、ユーザーが特定のURLを訪れた際に、どのコンテンツを表示するかを決定する仕組みです。
+SPAでは1つのページを動的に書き換えるため、何もしない限りページ内容が書き換わってもURLは変更されません。しかし、ブックマークやページ履歴を利用したい場合等、ページ内容に応じてURLを変更したい場面があります。ToDoアプリでも、ユーザー認証を作成したことで目的が異なるページ内容が複数できたため、URLでページ内容が切り替わるように実装します。
 
 ページは次の4つに分類し、それぞれにパスを割り当てます。
 
 - `/` ：トップページ
+- `/board` ：ToDoページ
 - `/signup` ：サインアップページ
 - `/login` ：ログインページ
-- `/board` ：ToDoページ
 
 {% hint style='tip' %}
-URLと同様に、ページの[題名要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/title)もそのままでは変わりません。本ハンズオンでは実装しませんが、変更が必要な場合には`useEffect`等を利用して実装する必要があります。
+URLと同様に、ページの[title要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/title)もそのままでは変わりません。本ハンズオンでは実装しませんが、変更が必要な場合には`useEffect`等を利用して実装する必要があります。
 {% endhint %}
 
-## React Routerの導入
+## App Router
 
-ルーティングを実現するために、React用のルーティングライブラリである[React Router](https://v5.reactrouter.com/)を導入します。
+ルーティングを実現するために、Next.jsのルーティング機能である[App Router](https://nextjs.org/docs/app)を使用します。
 
-React Routerを使用することで、URLごとに使用するコンポーネントを制御したり異なるURLへ移動したりといったことを、簡単に実装することができます。
+App Routerはファイルシステムに基づいてルーティングを管理する機能です。
+各URLはディレクトリ構造に対応し、URLごとに使用するコンポーネントの制御や、異なるURLへの遷移などを簡単に実装できます。
+具体的には、`src/app`配下にディレクトリを作成した後、そのディレクトリ配下に`page.tsx`を作成します。`page.tsx`と命名したファイルを配置することで、そのディレクトリがルーティングの対象となります。例えば、`src/app/board/page.tsx`は`/board`のパスに対応します。
 
-React RouterとTypeScript用の型定義をインストールするため、`frontend`ディレクトリで次のコマンドを実行します。
+## pageファイルの作成
 
-```
-npm install --save react-router-dom@5 @types/react-router-dom@5
-```
+URLごとに使用するコンポーネントが切り替わるように実装します。
+割り当てたパスを基に、それぞれのコンポーネントに対応するディレクトリとファイルを作成します。
 
-## ルーティングの設定
+### トップページ
 
-URLごとに使用するコンポーネントが切り替わるように実装するため、`App`コンポーネントを次のように実装します。
+URLパスで`/`にあたるディレクトリとファイルを実装します。
 
+URLパスの`/`にあたるファイルは`src/app/page.tsx`です。
+作成済みの`page.tsx`で、ページ外観の作成時に実装した`Welcome`コンポーネントを呼び出します。
+
+`src/app/page.tsx`
 ```jsx
+'use client';
 import React from 'react';
-import './App.css';
-import { NavigationHeader } from './components/NavigationHeader';
-import { TodoBoard } from './components/TodoBoard';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Signup } from './components/Signup';
-import { Login } from './components/Login';
-import { Welcome } from './components/Welcome';
+import {Welcome} from '../components/welcome/Welcome';
 
-function App() {
+export default function Home() {
+  return <Welcome />;
+}
+```
+
+`src/app/page.tsx`にもともと実装していた`<NavigationHeader />`を、どの画面でも使用できるようにするために`layout.tsx`に配置します。
+
+`src/app/layout.tsx`
+```jsx
+...
+import {NavigationHeader} from '../components/navigation-header/NavigationHeader';
+...
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <BrowserRouter>
-      <NavigationHeader />
-      <Switch>
-        <Route exact path="/board">
-          <TodoBoard />
-        </Route>
-        <Route exact path="/signup">
-          <Signup />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/">
-          <Welcome />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <html lang='en'>
+      <body>
+        <NavigationHeader />
+        {children}
+      </body>
+    </html>
   );
 }
-
-export default App;
 ```
-まず、React Routerを有効にするため、`BrowserRouter`コンポーネントを使用します。
 
-次に、URLによるルーティングを行うため、`Switch`コンポーネントと`Route`コンポーネントを使用します。（参考：[Basic Routing | React Router](https://v5.reactrouter.com/web/guides/quick-start/1st-example-basic-routing)）
+`layout.tsx`の`body`タグ内に`{children}`を記述しています。
 
-`Switch`コンポーネントの中でURLルーティングが有効になり、`Route`コンポーネントの`path`プロパティに指定されたURLにマッチしたら、子要素のコンポーネントが実行されます。
+`layout.tsx`は、Next.jsアプリケーションのルートレイアウトとして機能します。ルートレイアウトはアプリケーション全体で共有される`<html>`タグや`<body>`タグ、その他のグローバルなUIを定義するために使用されます。
+そのため、`layout.tsx`で定義されたレイアウトは、`src/app`配下の全てのページ（`page.tsx`）に適用されます。
 
-URLとのマッチングは、デフォルトでは部分一致で判定されるため、ここでは、完全一致を使用するために`exact`プロパティを指定します。
+`{children}`は、レイアウトがラップしているページや子レイアウトなどを動的に挿入するための特別なプロパティです。
+この実装により、`<NavigationHeader />`の下に各ページの内容が表示されるようになります。
+
+`src/app/page.tsx`にもともと実装していた`TodoBoard`コンポーネントは、`src/app`配下に`board`ディレクトリを作成し、その中の`page.tsx`で呼び出します。
+これにより、`{children}`の位置に表示されるようになります。
+（参考：[layout.js | Next.js](https://nextjs.org/docs/app/api-reference/file-conventions/layout)） 
+
+`use client`はコンポーネントをクライアントサイドでレンダリングすることを指定できるReactのディレクティブです。
+（参考：['use client' directive – React](https://react.dev/reference/rsc/use-client)）  
+Next.jsではデフォルトで全てのコンポーネントが[サーバコンポーネント](https://nextjs.org/docs/app/building-your-application/rendering/server-components)になっています。
+`use client`を1行目に記述することで、そのコンポーネントと子コンポーネントがクライアントコンポーネントとして動作します。
+
+クライアントコンポーネントは、コンポーネントの状態管理やエフェクト、イベントリスナーを使用してインタラクティブなUIを作成できます。
+ハンズオンで実装したToDoの状態管理や入力、ボタンのクリックを実現するためには、それらがクライアントコンポーネントである必要があります。
+したがって、  `src/app/layout.tsx`の`body`タグ内で呼び出されるコンポーネントには、1行目に`use client`を記述します。
+
+### ToDoページ
+
+URLパスの`/board`にあたるディレクトリとファイルを実装します。
+
+`src/app`配下に`board`ディレクトリを作成します。
+作成後、`board`ディレクトリ配下に`page.tsx`を作成し、ToDo管理で実装した`TodoBoard`を呼び出します。
+
+`src/app/board/page.tsx`
+```jsx
+'use client';
+import React from 'react';
+import {TodoBoard} from '../../components/board/TodoBoard';
+
+const TodoBoardPage: React.FC = () => {
+  return <TodoBoard />;
+};
+
+export default TodoBoardPage;
+```
+
+### サインアップページ
+
+URLパスの`/signup`にあたるディレクトリとファイルを実装します。
+
+`src/app`配下に`signup`ディレクトリを作成します。
+作成後、`signup`ディレクトリ配下に`page.tsx`を作成し、ページ外観の作成で実装した`Signup`コンポーネントを呼び出します。
+
+`src/app/signup/page.tsx`
+```jsx
+'use client';
+import React from 'react';
+import {Signup} from '../../components/signup/Signup';
+
+const SignupPage: React.FC = () => {
+  return <Signup />;
+};
+
+export default SignupPage;
+```
+
+### ログインページ
+
+URLパスの`/login`にあたるディレクトリとファイルを実装します。
+
+`src/app`配下に`login`ディレクトリを作成します。
+作成後、`login`ディレクトリ配下に`page.tsx`を作成し、ページ外観の作成で実装した`Login`コンポーネントを呼び出します。
+
+`src/app/login/page.tsx`
+```jsx
+'use client';
+import React from 'react';
+import {Login} from '../../components/login/Login';
+
+const LoginPage: React.FC = () => {
+  return <Login />;
+};
+
+export default LoginPage;
+```
 
 ## ページ遷移の実装
 
+各pageファイルの作成ができたため、ページ遷移を実装します。
+
 ### トップページからサインアップページへの遷移
 
-トップページからサインアップページへ遷移するため、`Welcome`コンポーネントを次のように実装します。
+トップページからサインアップページへ遷移させるため、`Welcome`を次のように実装します。
 
-`src/components/Welcome.tsx`
+`src/components/welcome/Welcome.tsx`
 ```js
 import React from 'react';
-import {Link} from 'react-router-dom';
-import './Welcome.css';
+import Link from 'next/link';
+import styles from './Welcome.module.css';
 
 export const Welcome: React.FC = () => {
   return (
-    <div className="Welcome_content">
+    <div className={styles.content}>
       <div>
-        <h1 className="Welcome_title">Welcome</h1>
-        <div className="Welcome_buttonGroup">
-          <Link to="/signup">
-            <button className="Welcome_button">登録する</button>
+        <h1 className={styles.title}>Welcome</h1>
+        <div className={styles.buttonGroup}>
+          <Link href='/signup'>
+            <button className={styles.button}>登録する</button>
           </Link>
         </div>
       </div>
@@ -99,43 +180,48 @@ export const Welcome: React.FC = () => {
 };
 ```
 
-「登録する」ボタンがクリックされたら`/signup`URLへ遷移するように、`Link`コンポーネントを使用します。`to`プロパティには、遷移先のURLを指定します。（参考：[Basic Routing | React Router](https://v5.reactrouter.com/web/guides/quick-start/1st-example-basic-routing)）
+「登録する」ボタンがクリックされたらサインアップページ（`/signup`）へ遷移するように、`Link`コンポーネントを使用します。
+`Link`はクライアントサイドでのナビゲーションを提供するコンポーネントで、Next.jsでルート間を移動する際の推奨される方法です。
+`href`プロパティには、遷移先のURLを指定します。  
+（参考：[Link | Next.js](https://nextjs.org/docs/app/api-reference/components/link)）
 
 ### サインアップ後のトップページへの遷移
 
-サインアップしたらトップページへ遷移するため、`Signup`コンポーネントを次のように実装します。
+サインアップしたらトップページへ遷移させるため、`Signup`を次のように実装します。
 
-`src/components/Signup.tsx`
+`src/components/signup/Signup.tsx`
 ```jsx
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import './Signup.css';
+import {useRouter} from 'next/navigation';
+import styles from './Signup.module.css';
 
 export const Signup: React.FC = () => {
-  const history = useHistory();
-  
-  const signup: React.FormEventHandler<HTMLFormElement> = async (event) => {
+  const router = useRouter();
+
+  const signup: React.FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault();
-    history.push('/');
+    router.push('/');
   };
 
   return (
-    <div className="Signup_content">
-      <div className="Signup_box">
-        <div className="Signup_title">
+    <div className={styles.content}>
+      <div className={styles.box}>
+        <div className={styles.title}>
           <h1>ユーザー登録</h1>
         </div>
-        <form className="Signup_form" onSubmit={signup}>
-          <div className="Signup_item">
-            <div className="Signup_label">名前</div>
-            <input type="text" />
+        <form className={styles.form} onSubmit={signup}>
+          <div className={styles.item}>
+            <div className={styles.label}>名前</div>
+            <input type='text' />
           </div>
-          <div className="Signup_item">
-            <div className="Signup_label">パスワード</div>
-            <input type="password" />
+          <div className={styles.item}>
+            <div className={styles.label}>パスワード</div>
+            <input type='password' />
           </div>
-          <div className="Signup_buttonGroup">
-            <button type="submit" className="Signup_button">登録する</button>
+          <div className={styles.buttonGroup}>
+            <button type='submit' className={styles.button}>
+              登録する
+            </button>
           </div>
         </form>
       </div>
@@ -144,18 +230,20 @@ export const Signup: React.FC = () => {
 };
 ```
 
-ReactRouterが提供しているフックの`useHistory`を使うことで、コンポーネントの処理中にURL遷移を行うことができます。（参考：[useHistory](https://v5.reactrouter.com/web/api/Hooks/usehistory)）
+Next.jsが提供している`useRouter`というフックを使うことで、コンポーネントの処理中にURL遷移を行うことができます。（参考：[useRouter | Next.js](https://nextjs.org/docs/app/api-reference/functions/use-router)）
 
-ここでは、「登録する」ボタンをクリックしたら、トップページに遷移するようにします。最終的にはアカウントの登録処理が完了したら遷移するように実装しますが、ここではまず遷移のみ実装しておきます。
+ここでは、「登録する」ボタンをクリックしたらトップページ（`/`）へ遷移させます。最終的にはアカウントの登録処理が完了したら遷移するように実装しますが、ここではまず遷移のみ実装しておきます。
 
 ### ナビゲーションメニューからの遷移
 
-ヘッダの「ログイン」リンクからログインページへ遷移するのと、同じくヘッダの「ログアウト」からトップページへ遷移するため、`NavigationHeader`コンポーネントを次のように実装します。
+ヘッダの「ログイン」リンクをクリックするとログインページへ遷移し、同様にヘッダの「ログアウト」ボタンをクリックしたときにトップページへ遷移させるため、`NavigationHeader`コンポーネントを次のように実装します。
 
+`src/components/navigation-header/NavigationHeader.tsx`
 ```jsx
+'use client';
 import React from 'react';
-import './NavigationHeader.css';
-import { Link } from 'react-router-dom';
+import styles from './NavigationHeader.module.css';
+import Link from 'next/link';
 
 export const NavigationHeader: React.FC = () => {
 
@@ -164,16 +252,18 @@ export const NavigationHeader: React.FC = () => {
   };
 
   return (
-    <header className="PageHeader_header">
-      <h1 className="PageHeader_title">Todoアプリ</h1>
+    <header className={styles.header}>
+      <h1 className={styles.title}>ToDoアプリ</h1>
       <nav>
-        <ul className="PageHeader_nav">
+        <ul className={styles.nav}>
           <li>
-            <Link to="/login">ログイン</Link>
+            <Link href='/login'>ログイン</Link>
           </li>
-          <li>テストユーザさん</li>
+          <li>テストユーザーさん</li>
           <li>
-            <button type="button" onClick={logout}>ログアウト</button>
+            <button type='button' onClick={logout}>
+              ログアウト
+            </button>
           </li>
         </ul>
       </nav>
@@ -182,43 +272,45 @@ export const NavigationHeader: React.FC = () => {
 };
 ```
 
-ここでは、ログアウト時にページを読み込み直してReactの状態を安全に破棄するよう、ReactRouterではなく`windows.location.href`を使用します。
+ここでは、ログアウト時にページを読み込み直してReactの状態を安全に破棄するよう、useRouterではなく`window.location.href`を使用します。
 
 ### ログイン後のToDoページへの遷移
 
-ログインしたらToDoページへ遷移するため、`Login`コンポーネントを次のように実装します。
+ログインしたらToDoページへ遷移させるため、`Login`を次のように実装します。
 
-`src/components/Login.tsx`
+`src/components/login/Login.tsx`
 ```jsx
-import React  from 'react';
-import { useHistory } from 'react-router-dom';
-import './Login.css';
+import React from 'react';
+import {useRouter} from 'next/navigation';
+import styles from './Login.module.css';
 
 export const Login: React.FC = () => {
-  const history = useHistory();
+  const router = useRouter();
 
-  const login: React.FormEventHandler<HTMLFormElement> = async (event) => {
+  const login: React.FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault();
-    history.push('/board');
+    router.push('/board');
   };
 
   return (
-    <div className="Login_content">
-      <div className="Login_box">
-        <div className="Login_title">
+    <div className={styles.content}>
+      <div className={styles.box}>
+        <div className={styles.title}>
           <h1>ログイン</h1>
         </div>
-        <form className="Login_form" onSubmit={login}>
-          <div className="Login_item">
-            <div className="Login_label">名前</div>
-            <input type="text" />
+        <form className={styles.form} onSubmit={login}>
+          <div className={styles.item}>
+            <div className={styles.label}>名前</div>
+            <input type='text' />
           </div>
-          <div className="Login_item">
-            <div className="Login_label">パスワード</div>
-            <input type="password" />
+          <div className={styles.item}>
+            <div className={styles.label}>パスワード</div>
+            <input type='password' />
           </div>
-          <div className="Login_buttonGruop">
-            <button type="submit" className="Login_button">ログインする</button>
+          <div className={styles.buttonGroup}>
+            <button type='submit' className={styles.button}>
+              ログインする
+            </button>
           </div>
         </form>
       </div>
@@ -229,12 +321,9 @@ export const Login: React.FC = () => {
 
 ## 動作確認
 
-サインアップやログイン等の処理はまだ実装していませんが、ページを表示してページ遷移することができるようになりましたので、一度フロントエンドアプリを起動して、動作確認をしてみましょう。
-
-フロントエンドアプリを起動していない場合は、`frontend`ディレクトリで次のコマンドを実行します。
-
+サインアップやログイン等の処理はまだ実装していませんが、ページ遷移が可能になりました。  
+`frontend`ディレクトリで次のコマンドを実行します。
 ```
-npm start
+$ npm run dev
 ```
-
-フロントエンドアプリが起動したら、ページを操作して動作を確認します。
+フロントエンドアプリを起動して、動作を確認します。

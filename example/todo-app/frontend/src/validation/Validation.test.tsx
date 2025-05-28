@@ -1,10 +1,10 @@
 import React from 'react';
-import { useValidation } from './Validation';
-import { stringField } from './field/StringFieldConstraint';
-import { stringArrayField } from './field/StringArrayFieldConstraint';
-import { numberField } from './field/NumberFieldConstraint';
+import {useValidation} from './Validation';
+import {stringField} from './field/StringFieldConstraint';
+import {stringArrayField} from './field/StringArrayFieldConstraint';
+import {numberField} from './field/NumberFieldConstraint';
 import '@testing-library/jest-dom/extend-expect';
-import { render, fireEvent, screen } from '@testing-library/react';
+import {render, fireEvent, screen} from '@testing-library/react';
 
 type Field = {
   str: string;
@@ -12,16 +12,16 @@ type Field = {
   email: string;
   array: string[];
   custom: string;
-}
+};
 const Validation: React.FC<Field> = (props: Field) => {
-  const { error, validator, resetError } = useValidation<Field>({
+  const {error, validator, resetError} = useValidation<Field>({
     str: stringField().required('missing').minLength(4, 'short').maxLength(6, 'long'),
     num: numberField().required('missing'),
     email: stringField().email('invalid format'),
     array: stringArrayField().required('missing'),
-    custom: stringField().define((value) => {
+    custom: stringField().define(value => {
       if (value === 'error') return 'error';
-    })
+    }),
   });
   const validate = () => {
     resetError();
@@ -30,12 +30,12 @@ const Validation: React.FC<Field> = (props: Field) => {
       num: props.num,
       email: props.email,
       array: props.array,
-      custom: props.custom
+      custom: props.custom,
     });
   };
   return (
     <React.Fragment>
-      <button data-testid='validate' onClick={validate}/>
+      <button data-testid='validate' onClick={validate} />
       <ul>
         <li data-testid='str'>{error.str ? error.str : 'OK'}</li>
         <li data-testid='num'>{error.num ? error.num : 'OK'}</li>
@@ -48,9 +48,7 @@ const Validation: React.FC<Field> = (props: Field) => {
 };
 
 describe('useValidation', () => {
-
   test('エラー無し', () => {
-
     const value: Field = {
       str: 'test',
       num: '100',
@@ -58,9 +56,7 @@ describe('useValidation', () => {
       array: ['test'],
       custom: 'no error',
     };
-    render(
-      <Validation {...value} />
-    );
+    render(<Validation {...value} />);
 
     fireEvent.click(screen.getByTestId('validate'));
 
@@ -78,11 +74,9 @@ describe('useValidation', () => {
 
     const custom = screen.getByTestId('custom');
     expect(custom).toHaveTextContent('OK');
-
   });
 
   test('必須エラー', () => {
-
     const value: Field = {
       str: '',
       num: '',
@@ -90,9 +84,7 @@ describe('useValidation', () => {
       array: [],
       custom: '',
     };
-    render(
-      <Validation {...value} />
-    );
+    render(<Validation {...value} />);
 
     fireEvent.click(screen.getByTestId('validate'));
 
@@ -113,7 +105,6 @@ describe('useValidation', () => {
   });
 
   test('最小文字列数エラー', () => {
-
     const value: Field = {
       str: '1',
       num: '100',
@@ -121,9 +112,7 @@ describe('useValidation', () => {
       array: ['test'],
       custom: '',
     };
-    render(
-      <Validation {...value} />
-    );
+    render(<Validation {...value} />);
 
     fireEvent.click(screen.getByTestId('validate'));
 
@@ -132,7 +121,6 @@ describe('useValidation', () => {
   });
 
   test('最大文字列数エラー', () => {
-
     const value: Field = {
       str: '1234567',
       num: '100',
@@ -140,9 +128,7 @@ describe('useValidation', () => {
       array: ['test'],
       custom: '',
     };
-    render(
-      <Validation {...value} />
-    );
+    render(<Validation {...value} />);
 
     fireEvent.click(screen.getByTestId('validate'));
 
@@ -151,7 +137,6 @@ describe('useValidation', () => {
   });
 
   test('サロゲートペア文字を1文字でカウントできる', () => {
-
     const value: Field = {
       str: '12345𩸽',
       num: '100',
@@ -159,9 +144,7 @@ describe('useValidation', () => {
       array: ['test'],
       custom: '',
     };
-    render(
-      <Validation {...value} />
-    );
+    render(<Validation {...value} />);
 
     fireEvent.click(screen.getByTestId('validate'));
 
@@ -170,7 +153,6 @@ describe('useValidation', () => {
   });
 
   test('絵文字を1文字でカウントできる', () => {
-
     const value: Field = {
       str: '12345😭',
       num: '100',
@@ -178,9 +160,7 @@ describe('useValidation', () => {
       array: ['test'],
       custom: '',
     };
-    render(
-      <Validation {...value} />
-    );
+    render(<Validation {...value} />);
 
     fireEvent.click(screen.getByTestId('validate'));
 
@@ -189,7 +169,6 @@ describe('useValidation', () => {
   });
 
   test('結合文字は1文字としてカウントしない', () => {
-
     const value: Field = {
       str: '12345ǖ',
       num: '100',
@@ -197,9 +176,7 @@ describe('useValidation', () => {
       array: ['test'],
       custom: '',
     };
-    render(
-      <Validation {...value} />
-    );
+    render(<Validation {...value} />);
 
     fireEvent.click(screen.getByTestId('validate'));
 
@@ -208,7 +185,6 @@ describe('useValidation', () => {
   });
 
   test('ZWJの結合文字は1文字としてカウントしない', () => {
-
     const value: Field = {
       str: '12345👨‍👩‍👧‍👦',
       num: '100',
@@ -216,9 +192,7 @@ describe('useValidation', () => {
       array: ['test'],
       custom: '',
     };
-    render(
-      <Validation {...value} />
-    );
+    render(<Validation {...value} />);
 
     fireEvent.click(screen.getByTestId('validate'));
 
@@ -227,7 +201,6 @@ describe('useValidation', () => {
   });
 
   test('メールアドレス形式エラー', () => {
-
     const value: Field = {
       str: 'test',
       num: '100',
@@ -235,9 +208,7 @@ describe('useValidation', () => {
       array: ['test'],
       custom: 'no error',
     };
-    render(
-      <Validation {...value} />
-    );
+    render(<Validation {...value} />);
 
     fireEvent.click(screen.getByTestId('validate'));
 
