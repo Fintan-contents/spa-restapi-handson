@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -784,32 +784,32 @@
 <p>ToDoページの外観を作成します。</p>
 <h2 id="todoページの表示"><a name="todoページの表示" class="plugin-anchor" href="#todoページの表示"><i class="fa fa-link" aria-hidden="true"></i></a>ToDoページの表示</h2>
 <p>まず、フロントエンドのアプリでデザインモックと同様のページを表示できることを確認します。</p>
-<p>前述のとおり、Todoアプリのデザインモックは<code>spa-restapi-handson/design-mock</code>に配置しており、その中の<code>todo.html</code>と<code>todo.css</code>がTodoページのデザインモックになります。デザインモックを確認すると、以下のような画面デザインになっています。</p>
+<p>前述のとおり、ToDoアプリのデザインモックは<code>spa-restapi-handson/design-mock</code>に配置しており、その中の<code>todo.html</code>と<code>todo.css</code>がToDoページのデザインモックになります。デザインモックを確認すると、以下のような画面デザインになっています。</p>
 <p><img src="img/mock.png" alt="mock"></p>
-<p>現時点では<code>App</code>コンポーネントのみ作成されており、<code>&lt;h1&gt;Hello, world&lt;/h1&gt;</code>を返しています。これを置き換え、デザインモックのHTMLと同等のReact要素を返すようにします。デザインモックからHTMLのbody部を抽出し、JSXでReact要素を定義します。</p>
-<p>その前に、確認をしやすいようにアプリを起動しておきます。起動中はファイルの状態が監視され、ファイルが更新されると即座にコンパイルしてページに反映してくれるため、エラーがあった場合にもすぐに確認することができます。</p>
+<p>現時点ではアプリケーションのルート（<code>src/app/page.tsx</code>）に対応する<code>Home</code>コンポーネントのみ作成されており、
+<code>&lt;h1&gt;Hello, world&lt;/h1&gt;</code>を返しています。<code>todo.html</code>からbody部を抽出し、JSXでデザインモックのHTMLと同等のReact要素をここに定義します。</p>
+<p>その前に、変更結果の確認をしやすいようにアプリを起動しておきます。起動中はファイルの状態が監視され、ファイルが更新されると即座にコンパイルしてページに反映してくれるため、エラーがあった場合にもすぐに確認することができます。</p>
 <p>アプリを起動するには、起動テストの時と同様、次のコマンドを実行します。</p>
-<pre><code>$ npm start
-</code></pre><p>アプリが起動したら、<code>App</code>にJSXを記述していきます。HTMLを確認しながら順にJSXを記述していくこともできますが、ここでは、デザインモックのHTMLのbody部をそのまま持ってきて同じように表示できることをまず確認してみます。また、HTMLをそのまま持ってきた際に、HTMLとJSXの違いによりいくつかのエラーが発生しますので、それについても確認していきます。</p>
-<p>それでは、ToDoページのデザインモックである<code>todo.html</code>のbody部をコピーして、<code>App</code>のJSXとしてそのまま持ってきます。</p>
-<pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+<pre><code>$ npm run dev
+</code></pre><p>アプリが起動したら、<code>Home</code>にJSXを記述していきます。HTMLを確認しながら順にJSXを記述していくこともできますが、ここでは、<code>design-mock/todo.html</code>のbody部をそのまま持ってきて同じように表示できることをまず確認してみます。また、HTMLをそのまま持ってきた際に、HTMLとJSXの違いによりいくつかのエラーが発生しますので、それについても確認していきます。</p>
+<p>それでは、ToDoページのデザインモックである<code>todo.html</code>のbody部をコピーして、<code>Home</code>のJSXとしてそのまま持ってきます。このとき、returnする内容を括弧<code>()</code>で囲みます。</p>
+<p><code>src/app/page.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Home</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;PageHeader_header&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&apos;PageHeader_header&apos;</span>&gt;</span>
     ...
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }
 </code></pre>
 <p>すると、次のようなエラーが発生します。</p>
-<pre><code>Failed to compile.
-
-./src/App.tsx
-  SyntaxError: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment &lt;&gt;...&lt;/&gt;?
-</code></pre><p>エラーメッセージを確認すると、JSXは必ず1の親要素を持つ必要がある、とあります。これは、JSXではトップレベルの要素として複数の要素を返すことはできず、必ず1つの要素として返さなければいけないためです。デザインモックのHTMLをそのまま持ってくると、<code>header</code>タグと<code>div</code>タグがトップレベルで並んだ状態になるため、このルールに違反してしまいます。ダミーの親要素として<code>&lt;div&gt;</code>等で囲って返すといったこともできますが、意味を持たない余分な要素をページに出力することになってしまいます。そのため、ここではフラグメントというReactが提供するコンポーネントを使用します。次のようにReact要素のトップレベルで使用することで、出力結果には影響させずに、複数の要素を1つの要素として返すことができます。</p>
-<pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+<pre><code>JSX 式には 1 つの親要素が必要です。ts(2657)
+</code></pre><p>エラーメッセージを確認すると、JSX式には1つの親要素が必要、とあります。これは、JSXではトップレベルの要素として複数の要素を返すことはできず、必ず1つの要素として返さなければいけないためです。デザインモックのHTMLをそのまま持ってくると、<code>header</code>タグと<code>div</code>タグがトップレベルで並んだ状態になるため、このルールに違反してしまいます。ダミーの親要素として<code>&lt;div&gt;</code>等で囲って返すといったこともできますが、意味を持たない余分な要素をページに出力することになってしまいます。そのため、ここではフラグメントというReactが提供するコンポーネントを使用します。ハンズオンでは分かりやすさのために、<code>&lt;React.Fragment&gt;</code>と記述しますが、一般的には<code>&lt;&gt;</code>と記述します。
+次のようにReact要素のトップレベルで使用することで、出力結果には影響させずに、複数の要素を1つの要素として返すことができます。</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Home</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;PageHeader_header&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&apos;PageHeader_header&apos;</span>&gt;</span>
       ...
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">React.Fragment</span>&gt;</span></span>
@@ -817,112 +817,91 @@
 }
 </code></pre>
 <p>このエラーを解消すると、次のようなエラーが発生します。</p>
-<pre><code>Failed to compile.
-
-/Users/xxx/work/todo-app/frontend/src/App.tsx
-TypeScript error in /Users/xxx/work/todo-app/frontend/src/App.tsx(15,15):
-Type &apos;{ children: Element[]; class: string; }&apos; is not assignable to type &apos;DetailedHTMLProps&lt;HTMLAttributes&lt;HTMLElement&gt;, HTMLElement&gt;&apos;.
-  Property &apos;class&apos; does not exist on type &apos;DetailedHTMLProps&lt;HTMLAttributes&lt;HTMLElement&gt;, HTMLElement&gt;&apos;.  TS2322
-
-    13 |   return (
-    14 |     &lt;React.Fragment&gt;
-  &gt; 15 |       &lt;header class=&quot;PageHeader_header&quot;&gt;
-       |               ^
-    16 |         &lt;h1 class=&quot;PageHeader_title&quot;&gt;Todoアプリ&lt;/h1&gt;
-    17 |         &lt;nav&gt;
-    18 |           &lt;ul class=&quot;PageHeader_nav&quot;&gt;
-</code></pre><p>エラーメッセージを確認すると、<code>class</code>プロパティはその型に存在しない、とあります。これは、JSXでは<code>class</code>属性が無いためです。このように、JSXはHTMLと完全に同じというわけではないため、属性がそのまま使えない場合があります。JSXでは、<code>class</code>属性と同等の属性が<code>className</code>属性として提供されているため、次のように<code>className</code>属性を使うように修正します。</p>
-<pre><code class="lang-jsx"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+<pre><code>型 &apos;{ children: string; class: string; }&apos; を型 &apos;DetailedHTMLProps&lt;ButtonHTMLAttributes&lt;HTMLButtonElement&gt;, HTMLButtonElement&gt;&apos; に割り当てることはできません。
+  プロパティ &apos;class&apos; は型 &apos;DetailedHTMLProps&lt;ButtonHTMLAttributes&lt;HTMLButtonElement&gt;, HTMLButtonElement&gt;&apos; に存在していません。&apos;className&apos; ですか?ts(2322)
+</code></pre><p>エラーメッセージを確認すると、<code>class</code>プロパティはその型に存在しない、とあります。これは、JSXでは<code>class</code>属性が無いためです。このように、JSXはHTMLと完全に同じというわけではないため、属性がそのまま使えない場合があります。JSXでは、<code>class</code>属性と同等の属性が<code>className</code>属性として提供されているため、次のように<code>className</code>属性を使うように修正します。Visual Studio Codeを使用している場合、<code>addCursorsAtSearchResults</code>ショートカット（<code>Ctrl</code>+<code>Shift</code>+<code>L</code>）を使うと、修正箇所をすべて選択して一度に編集することができます。</p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Home</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_header&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;PageHeader_header&apos;</span>&gt;</span>
       ...
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">React.Fragment</span>&gt;</span></span>
   );
 }
 </code></pre>
-<p>このエラーを解消すると、最後に次のようなエラーが発生します。</p>
-<pre><code>/Users/xxx/work/todo-app/frontend/src/App.tsx
-TypeScript error in /Users/xxx/work/todo-app/frontend/src/App.tsx(44,70):
-Type &apos;string&apos; is not assignable to type &apos;boolean | undefined&apos;.  TS2322
-
-    42 |             &lt;div className=&quot;TodoItem_todo&quot;&gt;
-    43 |               &lt;label&gt;
-  &gt; 44 |                 &lt;input type=&quot;checkbox&quot; className=&quot;TodoItem_checkbox&quot; checked=&quot;checked&quot; /&gt;
-       |                                                                      ^
-    45 |                 &lt;span&gt;洗い物をする&lt;/span&gt;
-    46 |               &lt;/label&gt;
-    47 |             &lt;/div&gt;
+<p>このエラーを解消すると、<code>checked=&apos;checked&apos;</code>の部分に次のようなエラーが発生します。</p>
+<pre><code>型 &apos;string&apos; を型 &apos;boolean | undefined&apos; に割り当てることはできません。ts(2322)
 </code></pre><p>これは、JSXでは<code>checked</code>属性には<code>boolean</code>値を設定する必要があるためです。</p>
-<p>JSXでは、中括弧で囲うことで式を埋め込むことができますので、<code>&quot;checked&quot;</code>と同等である<code>true</code>を設定するよう、次のように修正します。（参考：<a href="https://ja.react.dev/learn/javascript-in-jsx-with-curly-braces#using-curly-braces-a-window-into-the-javascript-world" target="_blank">React - 波括弧は JavaScript 世界への窓口</a>）</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_checkbox&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">{true}</span> /&gt;</span>
+<p>JSXでは、中括弧で囲うことで式を埋め込むことができますので、<code>&apos;checked&apos;</code>と同等である<code>true</code>を設定するよう、次のように修正します。（参考：<a href="https://ja.react.dev/learn/javascript-in-jsx-with-curly-braces#using-curly-braces-a-window-into-the-javascript-world" target="_blank">波括弧は JavaScript 世界への窓口 - React</a>）</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;checkbox&apos;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_checkbox&apos;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">{true}</span> /&gt;</span>
 </code></pre>
 <p>ちなみに、スクリプトを実行したタイミングでエラーになるのではなく、このようにコンパイルされるタイミングでエラーを検知してくれるのは、型を利用できるTypeScriptのメリットでもあります。</p>
-<p>これらのエラーを解消した後、<code>App</code>は次のようになります。</p>
-<p><code>src/App.tsx</code></p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<p>これらのエラーを解消した後、<code>Home</code>は次のようになります。</p>
+<p><code>src/app/page.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-string">&apos;use client&apos;</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Home</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_header&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_title&quot;</span>&gt;</span>Todoアプリ<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_title&quot;</span>&gt;</span>ToDoアプリ<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_nav&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>テストユーザさん<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>テストユーザーさん<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>ログアウト<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoBoard_content&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_content&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_form&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_input&quot;</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;タスクを入力してください&quot;</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoBoard_content&apos;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoForm_content&apos;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoForm_form&apos;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoForm_input&apos;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&apos;タスクを入力してください&apos;</span> /&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoForm_button&quot;</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span>&gt;</span>追加<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoForm_button&apos;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;button&apos;</span>&gt;</span>追加<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoFilter_content&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoFilter_buttonSelected&quot;</span>&gt;</span>全て<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoFilter_buttonUnselected&quot;</span>&gt;</span>未完了のみ<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoFilter_buttonUnselected&quot;</span>&gt;</span>完了のみ<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoFilter_content&apos;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoFilter_buttonSelected&apos;</span>&gt;</span>全て<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoFilter_buttonUnselected&apos;</span>&gt;</span>未完了のみ<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoFilter_buttonUnselected&apos;</span>&gt;</span>完了のみ<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoList_list&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_todo&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoList_list&apos;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_item&apos;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_todo&apos;</span>&gt;</span>
               <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_checkbox&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">{true}</span> /&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;checkbox&apos;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_checkbox&apos;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">{true}</span> /&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>洗い物をする<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
               <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_delete&quot;</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_button&quot;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_delete&apos;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_button&apos;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_todo&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_item&apos;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_todo&apos;</span>&gt;</span>
               <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_checkbox&quot;</span> /&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;checkbox&apos;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_checkbox&apos;</span> /&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>洗濯物を干す<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
               <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_delete&quot;</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_button&quot;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_delete&apos;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_button&apos;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_todo&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_item&apos;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_todo&apos;</span>&gt;</span>
               <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_checkbox&quot;</span> /&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;checkbox&apos;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_checkbox&apos;</span> /&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>買い物へ行く<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
               <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_delete&quot;</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_button&quot;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_delete&apos;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&apos;TodoItem_button&apos;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
@@ -930,17 +909,19 @@ Type &apos;string&apos; is not assignable to type &apos;boolean | undefined&apos
     <span class="hljs-tag">&lt;/<span class="hljs-name">React.Fragment</span>&gt;</span></span>
   );
 }
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
 </code></pre>
-<p>この状態で、エラーは発生せずにページが表示されますが、以下のようにスタイルが適用されていない状態となっています。</p>
+<p>しかし、画面に次のようなエラーが発生しています。</p>
+<pre><code>Console Error
+
+You provided a `checked` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultChecked`. Otherwise, set either `onChange` or `readOnly`.
+</code></pre><p>エラーメッセージを確認すると、<code>checked</code> プロパティを持つフォームフィールドに <code>onChange</code> ハンドラがない、とあります。最終的なコードが完成するまでにこのエラーは解消されますので、ここではエラーの解消はしません。</p>
+<p>この状態でページが表示されますが、以下のようにスタイルが適用されていない状態となっています。</p>
 <p><img src="img/page-nocss.png" alt="page-nocss"></p>
-<p><code>App</code>ではCSSファイルを取り込む実装をしていないため、スタイルが適用されていない状態になっています。そのため、次はCSSファイルを取り込む実装を追加していきます。</p>
+<p><code>Home</code>ではToDoページに必要なCSSを記述しておらず、スタイルが適用されていません。そのため、次はCSSファイルにスタイルを実装していきます。</p>
 <h2 id="cssファイルの作成"><a name="cssファイルの作成" class="plugin-anchor" href="#cssファイルの作成"><i class="fa fa-link" aria-hidden="true"></i></a>CSSファイルの作成</h2>
-<p>Reactでは、スタイルの記述方法がいくつか提供されていますが、ここではデザインモックのCSSファイルを使うために、<code>className</code>属性とCSSファイルを使ってスタイルを定義します。（参考：<a href="https://ja.react.dev/reference/react-dom/components/common#applying-css-styles" target="_blank">React - CSS スタイルの適用</a>）</p>
-<p>CRAに含まれる<a href="https://webpack.js.org/" target="_blank">webpack</a>では、<code>import</code>を使用してCSSファイルを読み込むことが出来るため、その方法でコンポーネントにCSSファイルを読み込みます。（参考：<a href="https://create-react-app.dev/docs/adding-a-stylesheet" target="_blank">CRA - Adding a Stylesheet</a>）</p>
-<p><code>App</code>用のCSSのファイルとして、<code>App.css</code>を作成します。CSSファイルの中身は、ToDoページのデザインモックのCSSをそのまま持ってきます。</p>
-<p><code>src/App.css</code></p>
+<p>Reactでは、スタイルの記述方法がいくつか提供されていますが、ここではデザインモックのCSSファイルを使うために、<code>className</code>属性とCSSファイルを使ってスタイルを定義します。<br>（参考：<a href="https://ja.react.dev/reference/react-dom/components/common#applying-css-styles" target="_blank">CSS スタイルの適用 - React</a>）</p>
+<p><code>Home</code>に適用するCSSは一旦<code>globals.css</code>に定義します。<code>globals.css</code>は本来アプリケーション全体に適用するCSSを定義するものですが、各コンポーネント用のCSSファイルに分割していく作業はこの後の章で行うため、ここでは<code>globals.css</code>に一旦全て定義します。CSSファイルの中身は、デザインモックの<code>todo.css</code>をそのまま持ってきます。</p>
+<p><code>src/app/globals.css</code></p>
 <pre><code class="lang-css"><span class="hljs-selector-tag">body</span> {
   <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
 }
@@ -1099,10 +1080,8 @@ Type &apos;string&apos; is not assignable to type &apos;boolean | undefined&apos
   <span class="hljs-attribute">outline</span>: none;
 }
 </code></pre>
-<p>作成したCSSファイルを<code>App</code>コンポーネントに取り込むため、<code>App.tsx</code>に以下の<code>import</code>を追加します。</p>
-<p><code>src/App.tsx</code></p>
-<pre><code class="lang-js"><span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./App.css&apos;</span>;
-</code></pre>
+<p>CSSファイルをコンポーネントに取り込むためには通常importが必要ですが、
+<code>create-next-app</code>を実行した時点で生成される<code>layout.tsx</code>に既に<code>globals.css</code>のimportが追加されています。<code>layout.tsx</code>は複数のページで共有されるUIのため、そこでimportされていれば<code>Home</code>コンポーネントにCSSが適用されます。そのため、手動で追加する必要はありません。</p>
 <p>ページの表示内容を確認し、スタイルが適用されてデザインモックと同等の表示内容になっていることを確認します。</p>
 <p><img src="img/page-css.png" alt="page-css"></p>
 <p>これで、ページの作成は完了です。</p>
@@ -1149,7 +1128,7 @@ Type &apos;string&apos; is not assignable to type &apos;boolean | undefined&apos
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"next":{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},"previous":{"title":"フロントエンド","level":"1.6.1","depth":2,"path":"todo/frontend/README.md","ref":"todo/frontend/README.md","articles":[{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"path":"todo/frontend/todo-page/README.md","ref":"todo/frontend/todo-page/README.md","articles":[]},{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"path":"todo/frontend/todo-filter/README.md","ref":"todo/frontend/todo-filter/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-page/README.md","mtime":"2023-12-25T02:59:13.979Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"next":{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},"previous":{"title":"フロントエンド","level":"1.6.1","depth":2,"path":"todo/frontend/README.md","ref":"todo/frontend/README.md","articles":[{"title":"ページ外観の作成","level":"1.6.1.1","depth":3,"path":"todo/frontend/todo-page/README.md","ref":"todo/frontend/todo-page/README.md","articles":[]},{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"path":"todo/frontend/api/README.md","ref":"todo/frontend/api/README.md","articles":[]},{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},{"title":"モックサーバの起動","level":"1.6.1.5","depth":3,"path":"todo/frontend/mock/README.md","ref":"todo/frontend/mock/README.md","articles":[]},{"title":"ToDoの一覧表示","level":"1.6.1.6","depth":3,"path":"todo/frontend/todo-list/README.md","ref":"todo/frontend/todo-list/README.md","articles":[]},{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"path":"todo/frontend/todo-update/README.md","ref":"todo/frontend/todo-update/README.md","articles":[]},{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"path":"todo/frontend/todo-filter/README.md","ref":"todo/frontend/todo-filter/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-page/README.md","mtime":"2025-05-16T02:27:53.263Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

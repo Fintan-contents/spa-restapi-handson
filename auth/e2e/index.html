@@ -107,7 +107,7 @@
                 <a href="../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -785,7 +785,8 @@
 <h2 id="モックサーバの停止"><a name="モックサーバの停止" class="plugin-anchor" href="#モックサーバの停止"><i class="fa fa-link" aria-hidden="true"></i></a>モックサーバの停止</h2>
 <p>モックサーバが起動している場合は、起動したコンソールで<code>Ctrl</code>+<code>C</code>を押して、モックサーバを停止させます。</p>
 <h2 id="dbコンテナの起動"><a name="dbコンテナの起動" class="plugin-anchor" href="#dbコンテナの起動"><i class="fa fa-link" aria-hidden="true"></i></a>DBコンテナの起動</h2>
-<p>PostgreSQLのDockerコンテナを起動していない場合は、バックエンドアプリを起動する前に起動します。既に起動している場合は、この手順はスキップしてください。</p>
+<p>PostgreSQLのDockerコンテナは、バックエンドアプリより先に起動します。
+既に起動している場合は、この手順はスキップしてください。</p>
 <p>PostgreSQLをDockerコンテナで起動するため、<code>backend</code>ディレクトリで次のコマンドを実行します。</p>
 <pre><code>$ docker-compose -f docker/docker-compose.dev.yml up -d
 </code></pre><p>次のコマンドを実行し、コンテナが起動していることを確認します。</p>
@@ -796,16 +797,16 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
 </code></pre><h2 id="バックエンドアプリの起動"><a name="バックエンドアプリの起動" class="plugin-anchor" href="#バックエンドアプリの起動"><i class="fa fa-link" aria-hidden="true"></i></a>バックエンドアプリの起動</h2>
 <p>バックエンドアプリが起動していない場合は、<code>backend</code>ディレクトリで次のコマンドを実行します。</p>
 <pre><code>$ mvn jetty:run
-</code></pre><p>次のように<code>Started</code>と出力され、バックエンドアプリが起動されているこを確認します。</p>
+</code></pre><p>次のように<code>Started</code>と出力され、バックエンドアプリが起動されていることを確認します。</p>
 <pre><code>[INFO] Started ServerConnector@2299f6d7{HTTP/1.1,[http/1.1]}{0.0.0.0:9080}
 [INFO] Started Server@3751acd7{STARTING}[10.0.0.alpha1] @7133ms
 </code></pre><h2 id="フロントエンドアプリの起動"><a name="フロントエンドアプリの起動" class="plugin-anchor" href="#フロントエンドアプリの起動"><i class="fa fa-link" aria-hidden="true"></i></a>フロントエンドアプリの起動</h2>
 <p>フロントエンドアプリが起動していない場合は、<code>frontend</code>ディレクトリで、次のコマンドを実行します。</p>
-<pre><code>$ npm start
-</code></pre><p>フロントエンドアプリが起動されたら、ブラウザが起動し、自動で<a href="http://localhost:3000/" target="_blank">トップページ</a>が開きます。</p>
+<pre><code>$ npm run dev
+</code></pre><p>フロントエンドアプリが起動されたら、ブラウザで<a href="http://localhost:3000/" target="_blank">トップページ</a>を開きます。</p>
 <h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
 <p>アカウントを登録し、ログイン、ログアウトが動作することを確認します。</p>
-<p>スクリプトでエラーが発生していないかを確認するため、ブラウザの開発者ツール（Chromeの場合は<code>F12</code>）を開きます。コンソール（<code>Console</code>タブ）を確認し、エラーが出力されていないことも確認します。</p>
+<p>また、スクリプトでエラーが発生していないことを確認するため、ブラウザの開発者ツール（Chromeの場合は<code>F12</code>）を開きます。コンソール（<code>Console</code>タブ）で、エラーが出力されていないことを確認します。</p>
 <p>これで、動作確認は完了です。</p>
 </body></html>
                                 
@@ -850,7 +851,7 @@ docker_postgres_1   docker-entrypoint.sh postgres   Up      0.0.0.0:5432-&gt;543
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"動作確認","level":"1.8.3","depth":2,"next":{"title":"CSRF対策","level":"1.9","depth":1,"path":"csrf/README.md","ref":"csrf/README.md","articles":[]},"previous":{"title":"ToDo管理でのユーザー取得","level":"1.8.2.5","depth":3,"path":"auth/backend/todo/README.md","ref":"auth/backend/todo/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/e2e/README.md","mtime":"2023-11-06T02:43:38.341Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"動作確認","level":"1.8.3","depth":2,"next":{"title":"CSRF対策","level":"1.9","depth":1,"path":"csrf/README.md","ref":"csrf/README.md","articles":[]},"previous":{"title":"ToDo管理でのユーザー取得","level":"1.8.2.5","depth":3,"path":"auth/backend/todo/README.md","ref":"auth/backend/todo/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/e2e/README.md","mtime":"2025-05-16T02:27:53.233Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

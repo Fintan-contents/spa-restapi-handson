@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -781,76 +781,135 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="ルーティングの設定"><a name="ルーティングの設定" class="plugin-anchor" href="#ルーティングの設定"><i class="fa fa-link" aria-hidden="true"></i></a>ルーティングの設定</h1>
-<p>SPAでは1つのページを動的に書き換えるため、ページ内容が書き換わってもそのままではURLは変わりません。しかし、ブックマークやページ履歴を利用したい場合等、ページ内容に応じてURLを変更したい場面があります。ToDoアプリでも、ユーザー認証を作成したことで目的が異なるページ内容が複数できたため、URLでページ内容が切り替わるように実装します。</p>
+<p>ルーティングとは、ユーザーが特定のURLを訪れた際に、どのコンテンツを表示するかを決定する仕組みです。
+SPAでは1つのページを動的に書き換えるため、何もしない限りページ内容が書き換わってもURLは変更されません。しかし、ブックマークやページ履歴を利用したい場合等、ページ内容に応じてURLを変更したい場面があります。ToDoアプリでも、ユーザー認証を作成したことで目的が異なるページ内容が複数できたため、URLでページ内容が切り替わるように実装します。</p>
 <p>ページは次の4つに分類し、それぞれにパスを割り当てます。</p>
 <ul>
 <li><code>/</code> ：トップページ</li>
+<li><code>/board</code> ：ToDoページ</li>
 <li><code>/signup</code> ：サインアップページ</li>
 <li><code>/login</code> ：ログインページ</li>
-<li><code>/board</code> ：ToDoページ</li>
 </ul>
-<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>URLと同様に、ページの<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/title" target="_blank">題名要素</a>もそのままでは変わりません。本ハンズオンでは実装しませんが、変更が必要な場合には<code>useEffect</code>等を利用して実装する必要があります。</p>
+<p></p><div class="alert alert-success hints-alert"><div class="hints-icon"><i class="fa fa-mortar-board"></i></div><div class="hints-container"><p>URLと同様に、ページの<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/title" target="_blank">title要素</a>もそのままでは変わりません。本ハンズオンでは実装しませんが、変更が必要な場合には<code>useEffect</code>等を利用して実装する必要があります。</p>
 </div></div><p></p>
-<h2 id="react-routerの導入"><a name="react-routerの導入" class="plugin-anchor" href="#react-routerの導入"><i class="fa fa-link" aria-hidden="true"></i></a>React Routerの導入</h2>
-<p>ルーティングを実現するために、React用のルーティングライブラリである<a href="https://v5.reactrouter.com/" target="_blank">React Router</a>を導入します。</p>
-<p>React Routerを使用することで、URLごとに使用するコンポーネントを制御したり異なるURLへ移動したりといったことを、簡単に実装することができます。</p>
-<p>React RouterとTypeScript用の型定義をインストールするため、<code>frontend</code>ディレクトリで次のコマンドを実行します。</p>
-<pre><code>npm install --save react-router-dom@5 @types/react-router-dom@5
-</code></pre><h2 id="ルーティングの設定"><a name="ルーティングの設定" class="plugin-anchor" href="#ルーティングの設定"><i class="fa fa-link" aria-hidden="true"></i></a>ルーティングの設定</h2>
-<p>URLごとに使用するコンポーネントが切り替わるように実装するため、<code>App</code>コンポーネントを次のように実装します。</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./App.css&apos;</span>;
-<span class="hljs-keyword">import</span> { NavigationHeader } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./components/NavigationHeader&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoBoard } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./components/TodoBoard&apos;</span>;
-<span class="hljs-keyword">import</span> { BrowserRouter, Route, Switch } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-router-dom&apos;</span>;
-<span class="hljs-keyword">import</span> { Signup } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./components/Signup&apos;</span>;
-<span class="hljs-keyword">import</span> { Login } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./components/Login&apos;</span>;
-<span class="hljs-keyword">import</span> { Welcome } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./components/Welcome&apos;</span>;
+<h2 id="app-router"><a name="app-router" class="plugin-anchor" href="#app-router"><i class="fa fa-link" aria-hidden="true"></i></a>App Router</h2>
+<p>ルーティングを実現するために、Next.jsのルーティング機能である<a href="https://nextjs.org/docs/app" target="_blank">App Router</a>を使用します。</p>
+<p>App Routerはファイルシステムに基づいてルーティングを管理する機能です。
+各URLはディレクトリ構造に対応し、URLごとに使用するコンポーネントの制御や、異なるURLへの遷移などを簡単に実装できます。
+具体的には、<code>src/app</code>配下にディレクトリを作成した後、そのディレクトリ配下に<code>page.tsx</code>を作成します。<code>page.tsx</code>と命名したファイルを配置することで、そのディレクトリがルーティングの対象となります。例えば、<code>src/app/board/page.tsx</code>は<code>/board</code>のパスに対応します。</p>
+<h2 id="pageファイルの作成"><a name="pageファイルの作成" class="plugin-anchor" href="#pageファイルの作成"><i class="fa fa-link" aria-hidden="true"></i></a>pageファイルの作成</h2>
+<p>URLごとに使用するコンポーネントが切り替わるように実装します。
+割り当てたパスを基に、それぞれのコンポーネントに対応するディレクトリとファイルを作成します。</p>
+<h3 id="トップページ"><a name="トップページ" class="plugin-anchor" href="#トップページ"><i class="fa fa-link" aria-hidden="true"></i></a>トップページ</h3>
+<p>URLパスで<code>/</code>にあたるディレクトリとファイルを実装します。</p>
+<p>URLパスの<code>/</code>にあたるファイルは<code>src/app/page.tsx</code>です。
+作成済みの<code>page.tsx</code>で、ページ外観の作成時に実装した<code>Welcome</code>コンポーネントを呼び出します。</p>
+<p><code>src/app/page.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-string">&apos;use client&apos;</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> {Welcome} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../components/welcome/Welcome&apos;</span>;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Home</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Welcome</span> /&gt;</span></span>;
+}
+</code></pre>
+<p><code>src/app/page.tsx</code>にもともと実装していた<code>&lt;NavigationHeader /&gt;</code>を、どの画面でも使用できるようにするために<code>layout.tsx</code>に配置します。</p>
+<p><code>src/app/layout.tsx</code></p>
+<pre><code class="lang-jsx">...
+<span class="hljs-keyword">import</span> {NavigationHeader} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../components/navigation-header/NavigationHeader&apos;</span>;
+...
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">RootLayout</span>(<span class="hljs-params">{
+  children,
+}: Readonly&lt;{
+  children: React.ReactNode;
+}&gt;</span>) </span>{
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BrowserRouter</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">NavigationHeader</span> /&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">Switch</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/board&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">TodoBoard</span> /&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/signup&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">Signup</span> /&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/login&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">Login</span> /&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">Welcome</span> /&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">Switch</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">BrowserRouter</span>&gt;</span></span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&apos;en&apos;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">NavigationHeader</span> /&gt;</span>
+        {children}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span>
   );
 }
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
 </code></pre>
-<p>まず、React Routerを有効にするため、<code>BrowserRouter</code>コンポーネントを使用します。</p>
-<p>次に、URLによるルーティングを行うため、<code>Switch</code>コンポーネントと<code>Route</code>コンポーネントを使用します。（参考：<a href="https://v5.reactrouter.com/web/guides/quick-start/1st-example-basic-routing" target="_blank">Basic Routing | React Router</a>）</p>
-<p><code>Switch</code>コンポーネントの中でURLルーティングが有効になり、<code>Route</code>コンポーネントの<code>path</code>プロパティに指定されたURLにマッチしたら、子要素のコンポーネントが実行されます。</p>
-<p>URLとのマッチングは、デフォルトでは部分一致で判定されるため、ここでは、完全一致を使用するために<code>exact</code>プロパティを指定します。</p>
+<p><code>layout.tsx</code>の<code>body</code>タグ内に<code>{children}</code>を記述しています。</p>
+<p><code>layout.tsx</code>は、Next.jsアプリケーションのルートレイアウトとして機能します。ルートレイアウトはアプリケーション全体で共有される<code>&lt;html&gt;</code>タグや<code>&lt;body&gt;</code>タグ、その他のグローバルなUIを定義するために使用されます。
+そのため、<code>layout.tsx</code>で定義されたレイアウトは、<code>src/app</code>配下の全てのページ（<code>page.tsx</code>）に適用されます。</p>
+<p><code>{children}</code>は、レイアウトがラップしているページや子レイアウトなどを動的に挿入するための特別なプロパティです。
+この実装により、<code>&lt;NavigationHeader /&gt;</code>の下に各ページの内容が表示されるようになります。</p>
+<p><code>src/app/page.tsx</code>にもともと実装していた<code>TodoBoard</code>コンポーネントは、<code>src/app</code>配下に<code>board</code>ディレクトリを作成し、その中の<code>page.tsx</code>で呼び出します。
+これにより、<code>{children}</code>の位置に表示されるようになります。
+（参考：<a href="https://nextjs.org/docs/app/api-reference/file-conventions/layout" target="_blank">layout.js | Next.js</a>） </p>
+<p><code>use client</code>はコンポーネントをクライアントサイドでレンダリングすることを指定できるReactのディレクティブです。
+（参考：<a href="https://react.dev/reference/rsc/use-client" target="_blank">&apos;use client&apos; directive – React</a>）<br>Next.jsではデフォルトで全てのコンポーネントが<a href="https://nextjs.org/docs/app/building-your-application/rendering/server-components" target="_blank">サーバコンポーネント</a>になっています。
+<code>use client</code>を1行目に記述することで、そのコンポーネントと子コンポーネントがクライアントコンポーネントとして動作します。</p>
+<p>クライアントコンポーネントは、コンポーネントの状態管理やエフェクト、イベントリスナーを使用してインタラクティブなUIを作成できます。
+ハンズオンで実装したToDoの状態管理や入力、ボタンのクリックを実現するためには、それらがクライアントコンポーネントである必要があります。
+したがって、  <code>src/app/layout.tsx</code>の<code>body</code>タグ内で呼び出されるコンポーネントには、1行目に<code>use client</code>を記述します。</p>
+<h3 id="todoページ"><a name="todoページ" class="plugin-anchor" href="#todoページ"><i class="fa fa-link" aria-hidden="true"></i></a>ToDoページ</h3>
+<p>URLパスの<code>/board</code>にあたるディレクトリとファイルを実装します。</p>
+<p><code>src/app</code>配下に<code>board</code>ディレクトリを作成します。
+作成後、<code>board</code>ディレクトリ配下に<code>page.tsx</code>を作成し、ToDo管理で実装した<code>TodoBoard</code>を呼び出します。</p>
+<p><code>src/app/board/page.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-string">&apos;use client&apos;</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoBoard} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../components/board/TodoBoard&apos;</span>;
+
+<span class="hljs-keyword">const</span> TodoBoardPage: React.FC = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TodoBoard</span> /&gt;</span></span>;
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> TodoBoardPage;
+</code></pre>
+<h3 id="サインアップページ"><a name="サインアップページ" class="plugin-anchor" href="#サインアップページ"><i class="fa fa-link" aria-hidden="true"></i></a>サインアップページ</h3>
+<p>URLパスの<code>/signup</code>にあたるディレクトリとファイルを実装します。</p>
+<p><code>src/app</code>配下に<code>signup</code>ディレクトリを作成します。
+作成後、<code>signup</code>ディレクトリ配下に<code>page.tsx</code>を作成し、ページ外観の作成で実装した<code>Signup</code>コンポーネントを呼び出します。</p>
+<p><code>src/app/signup/page.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-string">&apos;use client&apos;</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> {Signup} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../components/signup/Signup&apos;</span>;
+
+<span class="hljs-keyword">const</span> SignupPage: React.FC = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Signup</span> /&gt;</span></span>;
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> SignupPage;
+</code></pre>
+<h3 id="ログインページ"><a name="ログインページ" class="plugin-anchor" href="#ログインページ"><i class="fa fa-link" aria-hidden="true"></i></a>ログインページ</h3>
+<p>URLパスの<code>/login</code>にあたるディレクトリとファイルを実装します。</p>
+<p><code>src/app</code>配下に<code>login</code>ディレクトリを作成します。
+作成後、<code>login</code>ディレクトリ配下に<code>page.tsx</code>を作成し、ページ外観の作成で実装した<code>Login</code>コンポーネントを呼び出します。</p>
+<p><code>src/app/login/page.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-string">&apos;use client&apos;</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> {Login} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../components/login/Login&apos;</span>;
+
+<span class="hljs-keyword">const</span> LoginPage: React.FC = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Login</span> /&gt;</span></span>;
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> LoginPage;
+</code></pre>
 <h2 id="ページ遷移の実装"><a name="ページ遷移の実装" class="plugin-anchor" href="#ページ遷移の実装"><i class="fa fa-link" aria-hidden="true"></i></a>ページ遷移の実装</h2>
+<p>各pageファイルの作成ができたため、ページ遷移を実装します。</p>
 <h3 id="トップページからサインアップページへの遷移"><a name="トップページからサインアップページへの遷移" class="plugin-anchor" href="#トップページからサインアップページへの遷移"><i class="fa fa-link" aria-hidden="true"></i></a>トップページからサインアップページへの遷移</h3>
-<p>トップページからサインアップページへ遷移するため、<code>Welcome</code>コンポーネントを次のように実装します。</p>
-<p><code>src/components/Welcome.tsx</code></p>
+<p>トップページからサインアップページへ遷移させるため、<code>Welcome</code>を次のように実装します。</p>
+<p><code>src/components/welcome/Welcome.tsx</code></p>
 <pre><code class="lang-js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> {Link} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-router-dom&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./Welcome.css&apos;</span>;
+<span class="hljs-keyword">import</span> Link <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;next/link&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./Welcome.module.css&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Welcome: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Welcome_content&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Welcome_title&quot;</span>&gt;</span>Welcome<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Welcome_buttonGroup&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/signup&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Welcome_button&quot;</span>&gt;</span>登録する<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>Welcome<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.buttonGroup}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&apos;/signup&apos;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>登録する<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -858,39 +917,43 @@
   );
 };
 </code></pre>
-<p>「登録する」ボタンがクリックされたら<code>/signup</code>URLへ遷移するように、<code>Link</code>コンポーネントを使用します。<code>to</code>プロパティには、遷移先のURLを指定します。（参考：<a href="https://v5.reactrouter.com/web/guides/quick-start/1st-example-basic-routing" target="_blank">Basic Routing | React Router</a>）</p>
+<p>「登録する」ボタンがクリックされたらサインアップページ（<code>/signup</code>）へ遷移するように、<code>Link</code>コンポーネントを使用します。
+<code>Link</code>はクライアントサイドでのナビゲーションを提供するコンポーネントで、Next.jsでルート間を移動する際の推奨される方法です。
+<code>href</code>プロパティには、遷移先のURLを指定します。<br>（参考：<a href="https://nextjs.org/docs/app/api-reference/components/link" target="_blank">Link | Next.js</a>）</p>
 <h3 id="サインアップ後のトップページへの遷移"><a name="サインアップ後のトップページへの遷移" class="plugin-anchor" href="#サインアップ後のトップページへの遷移"><i class="fa fa-link" aria-hidden="true"></i></a>サインアップ後のトップページへの遷移</h3>
-<p>サインアップしたらトップページへ遷移するため、<code>Signup</code>コンポーネントを次のように実装します。</p>
-<p><code>src/components/Signup.tsx</code></p>
+<p>サインアップしたらトップページへ遷移させるため、<code>Signup</code>を次のように実装します。</p>
+<p><code>src/components/signup/Signup.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> { useHistory } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-router-dom&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./Signup.css&apos;</span>;
+<span class="hljs-keyword">import</span> {useRouter} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;next/navigation&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./Signup.module.css&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Signup: React.FC = <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-keyword">const</span> history = useHistory();
+  <span class="hljs-keyword">const</span> router = useRouter();
 
-  <span class="hljs-keyword">const</span> signup: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> (event) =&gt; {
+  <span class="hljs-keyword">const</span> signup: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> event =&gt; {
     event.preventDefault();
-    history.push(<span class="hljs-string">&apos;/&apos;</span>);
+    router.push(<span class="hljs-string">&apos;/&apos;</span>);
   };
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_box&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_title&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.box}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ユーザー登録<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_form&quot;</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{signup}</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_label&quot;</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{signup}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_label&quot;</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;password&apos;</span> /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_buttonGroup&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_button&quot;</span>&gt;</span>登録する<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.buttonGroup}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;submit&apos;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+              登録する
+            <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -898,13 +961,15 @@
   );
 };
 </code></pre>
-<p>ReactRouterが提供しているフックの<code>useHistory</code>を使うことで、コンポーネントの処理中にURL遷移を行うことができます。（参考：<a href="https://v5.reactrouter.com/web/api/Hooks/usehistory" target="_blank">useHistory</a>）</p>
-<p>ここでは、「登録する」ボタンをクリックしたら、トップページに遷移するようにします。最終的にはアカウントの登録処理が完了したら遷移するように実装しますが、ここではまず遷移のみ実装しておきます。</p>
+<p>Next.jsが提供している<code>useRouter</code>というフックを使うことで、コンポーネントの処理中にURL遷移を行うことができます。（参考：<a href="https://nextjs.org/docs/app/api-reference/functions/use-router" target="_blank">useRouter | Next.js</a>）</p>
+<p>ここでは、「登録する」ボタンをクリックしたらトップページ（<code>/</code>）へ遷移させます。最終的にはアカウントの登録処理が完了したら遷移するように実装しますが、ここではまず遷移のみ実装しておきます。</p>
 <h3 id="ナビゲーションメニューからの遷移"><a name="ナビゲーションメニューからの遷移" class="plugin-anchor" href="#ナビゲーションメニューからの遷移"><i class="fa fa-link" aria-hidden="true"></i></a>ナビゲーションメニューからの遷移</h3>
-<p>ヘッダの「ログイン」リンクからログインページへ遷移するのと、同じくヘッダの「ログアウト」からトップページへ遷移するため、<code>NavigationHeader</code>コンポーネントを次のように実装します。</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./NavigationHeader.css&apos;</span>;
-<span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-router-dom&apos;</span>;
+<p>ヘッダの「ログイン」リンクをクリックするとログインページへ遷移し、同様にヘッダの「ログアウト」ボタンをクリックしたときにトップページへ遷移させるため、<code>NavigationHeader</code>コンポーネントを次のように実装します。</p>
+<p><code>src/components/navigation-header/NavigationHeader.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-string">&apos;use client&apos;</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./NavigationHeader.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> Link <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;next/link&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NavigationHeader: React.FC = <span class="hljs-function">() =&gt;</span> {
 
@@ -913,16 +978,18 @@
   };
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_header&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_title&quot;</span>&gt;</span>Todoアプリ<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.header}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>ToDoアプリ<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_nav&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.nav}</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/login&quot;</span>&gt;</span>ログイン<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&apos;/login&apos;</span>&gt;</span>ログイン<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>テストユーザさん<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>テストユーザーさん<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{logout}</span>&gt;</span>ログアウト<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;button&apos;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{logout}</span>&gt;</span>
+              ログアウト
+            <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
@@ -930,39 +997,41 @@
   );
 };
 </code></pre>
-<p>ここでは、ログアウト時にページを読み込み直してReactの状態を安全に破棄するよう、ReactRouterではなく<code>windows.location.href</code>を使用します。</p>
+<p>ここでは、ログアウト時にページを読み込み直してReactの状態を安全に破棄するよう、useRouterではなく<code>window.location.href</code>を使用します。</p>
 <h3 id="ログイン後のtodoページへの遷移"><a name="ログイン後のtodoページへの遷移" class="plugin-anchor" href="#ログイン後のtodoページへの遷移"><i class="fa fa-link" aria-hidden="true"></i></a>ログイン後のToDoページへの遷移</h3>
-<p>ログインしたらToDoページへ遷移するため、<code>Login</code>コンポーネントを次のように実装します。</p>
-<p><code>src/components/Login.tsx</code></p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React  <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> { useHistory } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-router-dom&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./Login.css&apos;</span>;
+<p>ログインしたらToDoページへ遷移させるため、<code>Login</code>を次のように実装します。</p>
+<p><code>src/components/login/Login.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> {useRouter} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;next/navigation&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./Login.module.css&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Login: React.FC = <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-keyword">const</span> history = useHistory();
+  <span class="hljs-keyword">const</span> router = useRouter();
 
-  <span class="hljs-keyword">const</span> login: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> (event) =&gt; {
+  <span class="hljs-keyword">const</span> login: React.FormEventHandler&lt;HTMLFormElement&gt; = <span class="hljs-keyword">async</span> event =&gt; {
     event.preventDefault();
-    history.push(<span class="hljs-string">&apos;/board&apos;</span>);
+    router.push(<span class="hljs-string">&apos;/board&apos;</span>);
   };
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_box&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_title&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.box}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ログイン<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_form&quot;</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{login}</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_label&quot;</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{login}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_item&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_label&quot;</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;password&apos;</span> /&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_buttonGruop&quot;</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_button&quot;</span>&gt;</span>ログインする<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.buttonGroup}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;submit&apos;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+              ログインする
+            <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -971,10 +1040,9 @@
 };
 </code></pre>
 <h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
-<p>サインアップやログイン等の処理はまだ実装していませんが、ページを表示してページ遷移することができるようになりましたので、一度フロントエンドアプリを起動して、動作確認をしてみましょう。</p>
-<p>フロントエンドアプリを起動していない場合は、<code>frontend</code>ディレクトリで次のコマンドを実行します。</p>
-<pre><code>npm start
-</code></pre><p>フロントエンドアプリが起動したら、ページを操作して動作を確認します。</p>
+<p>サインアップやログイン等の処理はまだ実装していませんが、ページ遷移が可能になりました。<br><code>frontend</code>ディレクトリで次のコマンドを実行します。</p>
+<pre><code>$ npm run dev
+</code></pre><p>フロントエンドアプリを起動して、動作を確認します。</p>
 </body></html>
                                 
                                 </section>
@@ -1018,7 +1086,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ルーティングの設定","level":"1.8.1.2","depth":3,"next":{"title":"ユーザーコンテクストの作成","level":"1.8.1.3","depth":3,"path":"auth/frontend/context/README.md","ref":"auth/frontend/context/README.md","articles":[]},"previous":{"title":"ページ外観の作成","level":"1.8.1.1","depth":3,"path":"auth/frontend/page/README.md","ref":"auth/frontend/page/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/routing/README.md","mtime":"2023-12-25T02:59:13.952Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ルーティングの設定","level":"1.8.1.2","depth":3,"next":{"title":"ユーザーコンテクストの作成","level":"1.8.1.3","depth":3,"path":"auth/frontend/context/README.md","ref":"auth/frontend/context/README.md","articles":[]},"previous":{"title":"ページ外観の作成","level":"1.8.1.1","depth":3,"path":"auth/frontend/page/README.md","ref":"auth/frontend/page/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/routing/README.md","mtime":"2025-05-16T02:27:53.233Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

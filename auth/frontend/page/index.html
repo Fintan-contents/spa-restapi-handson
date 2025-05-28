@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -808,42 +808,104 @@
 </li>
 </ul>
 <h2 id="コンポーネントの作成"><a name="コンポーネントの作成" class="plugin-anchor" href="#コンポーネントの作成"><i class="fa fa-link" aria-hidden="true"></i></a>コンポーネントの作成</h2>
-<p>Todoページを作成した時と同じように、<code>spa-restapi-handson/design-mock</code>に配置されているデザインモックを元に、それぞれのコンポーネントを作成していきます。</p>
-<h3 id="welcomeコンポーネント"><a name="welcomeコンポーネント" class="plugin-anchor" href="#welcomeコンポーネント"><i class="fa fa-link" aria-hidden="true"></i></a><code>Welcome</code>コンポーネント</h3>
-<p>まず、<code>Welcome</code>コンポーネントを作成します。</p>
-<p><code>src/components/Welcome.tsx</code></p>
+<p>ToDoページを作成した時と同じように、<code>spa-restapi-handson/design-mock</code>に配置されているデザインモックを元に、それぞれのコンポーネントを作成していきます。</p>
+<h3 id="welcome"><a name="welcome" class="plugin-anchor" href="#welcome"><i class="fa fa-link" aria-hidden="true"></i></a>Welcome</h3>
+<p>まず、<code>components</code>の下に<code>welcome</code>ディレクトリを作成し、そこにCSS Modulesファイルと<code>Welcome</code>コンポーネントを作成します。</p>
+<p><code>src/components/welcome/Welcome.module.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.content</span> {
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">90vh</span>;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">overflow</span>: auto;
+}
+<span class="hljs-selector-class">.title</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">60px</span>;
+}
+<span class="hljs-selector-class">.buttonGroup</span> {
+  <span class="hljs-attribute">text-align</span>: center;
+}
+<span class="hljs-selector-class">.button</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">175px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1</span>;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">background-color</span>: darkgreen;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">15px</span> <span class="hljs-number">30px</span>;
+}
+<span class="hljs-selector-class">.button</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: green;
+}
+</code></pre>
+<p><code>src/components/welcome/Welcome.tsx</code></p>
 <pre><code class="lang-js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./Welcome.css&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./Welcome.module.css&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Welcome: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Welcome_content&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Welcome_title&quot;</span>&gt;</span>Welcome<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Welcome_buttonGroup&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Welcome_button&quot;</span>&gt;</span>登録する<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>Welcome<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.buttonGroup}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>登録する<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
-<p><code>src/components/Welcome.css</code></p>
-<pre><code class="lang-css"><span class="hljs-selector-class">.Welcome_content</span> {
+<h3 id="signup"><a name="signup" class="plugin-anchor" href="#signup"><i class="fa fa-link" aria-hidden="true"></i></a>Signup</h3>
+<p>続いて、<code>components</code>の下に<code>signup</code>ディレクトリを作成し、そこにCSS Modulesファイルと<code>Signup</code>コンポーネントを作成します。</p>
+<p><code>src/components/signup/Signup.module.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.content</span> {
   <span class="hljs-attribute">height</span>: <span class="hljs-number">90vh</span>;
   <span class="hljs-attribute">display</span>: flex;
   <span class="hljs-attribute">justify-content</span>: center;
   <span class="hljs-attribute">align-items</span>: center;
   <span class="hljs-attribute">overflow</span>: auto;
-}
-<span class="hljs-selector-class">.Welcome_title</span> {
-  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">60px</span>;
-}
-
-<span class="hljs-selector-class">.Welcome_buttonGroup</span> {
   <span class="hljs-attribute">text-align</span>: center;
 }
-<span class="hljs-selector-class">.Welcome_button</span> {
+<span class="hljs-selector-class">.box</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;
+}
+<span class="hljs-selector-class">.title</span> {
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">70px</span>;
+}
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-tag">h1</span> {
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-selector-class">.form</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">25%</span>;
+}
+<span class="hljs-selector-class">.item</span> {
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">75px</span>;
+}
+<span class="hljs-selector-class">.item</span> <span class="hljs-selector-tag">input</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">border</span>: solid <span class="hljs-number">1px</span> lightgray;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fafbfc</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">outline</span>: none;
+}
+<span class="hljs-selector-class">.item</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-pseudo">:focus</span> {
+  <span class="hljs-attribute">background-color</span>: white;
+}
+<span class="hljs-selector-class">.label</span> {
+  <span class="hljs-attribute">text-align</span>: left;
+}
+<span class="hljs-selector-class">.buttonGroup</span> {
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">40px</span>;
+}
+<span class="hljs-selector-class">.button</span> {
   <span class="hljs-attribute">width</span>: <span class="hljs-number">175px</span>;
   <span class="hljs-attribute">cursor</span>: pointer;
   <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1</span>;
@@ -854,41 +916,45 @@
   <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
   <span class="hljs-attribute">padding</span>: <span class="hljs-number">15px</span> <span class="hljs-number">30px</span>;
 }
-<span class="hljs-selector-class">.Welcome_button</span><span class="hljs-selector-pseudo">:hover</span> {
+<span class="hljs-selector-class">.button</span><span class="hljs-selector-pseudo">:hover</span> {
   <span class="hljs-attribute">background-color</span>: green;
 }
 </code></pre>
-<h3 id="signupコンポーネント"><a name="signupコンポーネント" class="plugin-anchor" href="#signupコンポーネント"><i class="fa fa-link" aria-hidden="true"></i></a><code>Signup</code>コンポーネント</h3>
-<p>続いて、<code>Signup</code>コンポーネントを作成します。</p>
-<p><code>src/components/Signup.tsx</code></p>
+<p><code>src/components/signup/Signup.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./Signup.css&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./Signup.module.css&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Signup: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_box&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_title&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.box}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ユーザー登録<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_item&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_label&quot;</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>/&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_item&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_label&quot;</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> /&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_buttonGroup&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Signup_button&quot;</span>&gt;</span>登録する<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> /&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;password&apos;</span> /&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.buttonGroup}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+              登録する
+            <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
-<p><code>src/components/Signup.css</code></p>
-<pre><code class="lang-css"><span class="hljs-selector-class">.Signup_content</span> {
+<h3 id="login"><a name="login" class="plugin-anchor" href="#login"><i class="fa fa-link" aria-hidden="true"></i></a>Login</h3>
+<p>続いて、<code>components</code>の下に<code>login</code>ディレクトリを作成し、そこにCSS Modulesファイルと<code>Login</code>コンポーネントを作成します。</p>
+<p><code>src/components/login/Login.module.css</code></p>
+<pre><code class="lang-css"><span class="hljs-selector-class">.content</span> {
   <span class="hljs-attribute">height</span>: <span class="hljs-number">90vh</span>;
   <span class="hljs-attribute">display</span>: flex;
   <span class="hljs-attribute">justify-content</span>: center;
@@ -896,25 +962,24 @@
   <span class="hljs-attribute">overflow</span>: auto;
   <span class="hljs-attribute">text-align</span>: center;
 }
-<span class="hljs-selector-class">.Signup_box</span> {
+<span class="hljs-selector-class">.box</span> {
   <span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;
 }
-<span class="hljs-selector-class">.Signup_title</span> {
+<span class="hljs-selector-class">.title</span> {
   <span class="hljs-attribute">height</span>: <span class="hljs-number">70px</span>;
 }
-<span class="hljs-selector-class">.Signup_title</span> <span class="hljs-selector-tag">h1</span> {
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-tag">h1</span> {
   <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
 }
-<span class="hljs-selector-class">.Signup_form</span> {
+<span class="hljs-selector-class">.form</span> {
   <span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;
   <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">25%</span>;
 }
-
-<span class="hljs-selector-class">.Signup_item</span> {
+<span class="hljs-selector-class">.item</span> {
   <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;
   <span class="hljs-attribute">height</span>: <span class="hljs-number">75px</span>;
 }
-<span class="hljs-selector-class">.Signup_item</span> <span class="hljs-selector-tag">input</span> {
+<span class="hljs-selector-class">.item</span> <span class="hljs-selector-tag">input</span> {
   <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
   <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
   <span class="hljs-attribute">padding</span>: <span class="hljs-number">8px</span>;
@@ -924,18 +989,17 @@
   <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10px</span>;
   <span class="hljs-attribute">outline</span>: none;
 }
-<span class="hljs-selector-class">.Signup_item</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-pseudo">:focus</span> {
+<span class="hljs-selector-class">.item</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-pseudo">:focus</span> {
   <span class="hljs-attribute">background-color</span>: white;
 }
-<span class="hljs-selector-class">.Signup_label</span> {
+<span class="hljs-selector-class">.label</span> {
   <span class="hljs-attribute">text-align</span>: left;
 }
-
-<span class="hljs-selector-class">.Signup_buttonGroup</span> {
+<span class="hljs-selector-class">.buttonGroup</span> {
   <span class="hljs-attribute">text-align</span>: center;
   <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">40px</span>;
 }
-<span class="hljs-selector-class">.Signup_button</span> {
+<span class="hljs-selector-class">.button</span> {
   <span class="hljs-attribute">width</span>: <span class="hljs-number">175px</span>;
   <span class="hljs-attribute">cursor</span>: pointer;
   <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1</span>;
@@ -946,104 +1010,43 @@
   <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
   <span class="hljs-attribute">padding</span>: <span class="hljs-number">15px</span> <span class="hljs-number">30px</span>;
 }
-<span class="hljs-selector-class">.Signup_button</span><span class="hljs-selector-pseudo">:hover</span> {
+<span class="hljs-selector-class">.button</span><span class="hljs-selector-pseudo">:hover</span> {
   <span class="hljs-attribute">background-color</span>: green;
 }
 </code></pre>
-<h3 id="loginコンポーネント"><a name="loginコンポーネント" class="plugin-anchor" href="#loginコンポーネント"><i class="fa fa-link" aria-hidden="true"></i></a><code>Login</code>コンポーネント</h3>
-<p>続いて、<code>Login</code>コンポーネントを作成します。</p>
-<p><code>src/components/Login.tsx</code></p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React  <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./Login.css&apos;</span>;
+<p><code>src/components/login/Login.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./Login.module.css&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Login: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_content&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_box&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_title&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.content}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.box}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ログイン<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_item&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_label&quot;</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> /&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_item&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_label&quot;</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> /&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_buttonGruop&quot;</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;Login_button&quot;</span>&gt;</span>ログインする<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.form}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>名前<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;text&apos;</span> /&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.label}</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;password&apos;</span> /&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.buttonGroup}</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+              ログインする
+            <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 };
 </code></pre>
-<p><code>src/components/Login.css</code></p>
-<pre><code class="lang-css"><span class="hljs-selector-class">.Login_content</span> {
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">90vh</span>;
-  <span class="hljs-attribute">display</span>: flex;
-  <span class="hljs-attribute">justify-content</span>: center;
-  <span class="hljs-attribute">align-items</span>: center;
-  <span class="hljs-attribute">overflow</span>: auto;
-  <span class="hljs-attribute">text-align</span>: center;
-}
-<span class="hljs-selector-class">.Login_box</span> {
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;
-}
-<span class="hljs-selector-class">.Login_title</span> {
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">70px</span>;
-}
-<span class="hljs-selector-class">.Login_title</span> <span class="hljs-selector-tag">h1</span> {
-  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
-}
-<span class="hljs-selector-class">.Login_form</span> {
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">25%</span>;
-}
-
-<span class="hljs-selector-class">.Login_item</span> {
-  <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">75px</span>;
-}
-<span class="hljs-selector-class">.Login_item</span> <span class="hljs-selector-tag">input</span> {
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
-  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
-  <span class="hljs-attribute">padding</span>: <span class="hljs-number">8px</span>;
-  <span class="hljs-attribute">border</span>: solid <span class="hljs-number">1px</span> lightgray;
-  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fafbfc</span>;
-  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
-  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10px</span>;
-  <span class="hljs-attribute">outline</span>: none;
-}
-<span class="hljs-selector-class">.Login_item</span> <span class="hljs-selector-tag">input</span><span class="hljs-selector-pseudo">:focus</span> {
-  <span class="hljs-attribute">background-color</span>: white;
-}
-<span class="hljs-selector-class">.Login_label</span> {
-  <span class="hljs-attribute">text-align</span>: left;
-}
-
-<span class="hljs-selector-class">.Login_buttonGruop</span> {
-  <span class="hljs-attribute">text-align</span>: center;
-  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">40px</span>;
-}
-<span class="hljs-selector-class">.Login_button</span> {
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">175px</span>;
-  <span class="hljs-attribute">cursor</span>: pointer;
-  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1</span>;
-  <span class="hljs-attribute">border</span>: none;
-  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>;
-  <span class="hljs-attribute">color</span>: white;
-  <span class="hljs-attribute">background-color</span>: darkgreen;
-  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
-  <span class="hljs-attribute">padding</span>: <span class="hljs-number">15px</span> <span class="hljs-number">30px</span>;
-}
-<span class="hljs-selector-class">.Login_button</span><span class="hljs-selector-pseudo">:hover</span> {
-  <span class="hljs-attribute">background-color</span>: green;
-}
-</code></pre>
 <h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
-<p>ページを表示して確認したいところですが、複数のページをそれぞれ確認しづらいため、次に実装するURLルーティングが終わってから確認することにします。</p>
+<p>ページを表示して確認したいところですが、複数のページをそれぞれ確認しづらいため、次の章であるルーティングの設定の最後に動作を確認します。</p>
 </body></html>
                                 
                                 </section>
@@ -1087,7 +1090,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ページ外観の作成","level":"1.8.1.1","depth":3,"next":{"title":"ルーティングの設定","level":"1.8.1.2","depth":3,"path":"auth/frontend/routing/README.md","ref":"auth/frontend/routing/README.md","articles":[]},"previous":{"title":"フロントエンド","level":"1.8.1","depth":2,"path":"auth/frontend/README.md","ref":"auth/frontend/README.md","articles":[{"title":"ページ外観の作成","level":"1.8.1.1","depth":3,"path":"auth/frontend/page/README.md","ref":"auth/frontend/page/README.md","articles":[]},{"title":"ルーティングの設定","level":"1.8.1.2","depth":3,"path":"auth/frontend/routing/README.md","ref":"auth/frontend/routing/README.md","articles":[]},{"title":"ユーザーコンテクストの作成","level":"1.8.1.3","depth":3,"path":"auth/frontend/context/README.md","ref":"auth/frontend/context/README.md","articles":[]},{"title":"ナビゲーションメニューの切替","level":"1.8.1.4","depth":3,"path":"auth/frontend/header/README.md","ref":"auth/frontend/header/README.md","articles":[]},{"title":"サインアップ","level":"1.8.1.5","depth":3,"path":"auth/frontend/signup/README.md","ref":"auth/frontend/signup/README.md","articles":[]},{"title":"ログイン","level":"1.8.1.6","depth":3,"path":"auth/frontend/login/README.md","ref":"auth/frontend/login/README.md","articles":[]},{"title":"ログアウト","level":"1.8.1.7","depth":3,"path":"auth/frontend/logout/README.md","ref":"auth/frontend/logout/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/page/README.md","mtime":"2023-11-06T02:43:38.342Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ページ外観の作成","level":"1.8.1.1","depth":3,"next":{"title":"ルーティングの設定","level":"1.8.1.2","depth":3,"path":"auth/frontend/routing/README.md","ref":"auth/frontend/routing/README.md","articles":[]},"previous":{"title":"フロントエンド","level":"1.8.1","depth":2,"path":"auth/frontend/README.md","ref":"auth/frontend/README.md","articles":[{"title":"ページ外観の作成","level":"1.8.1.1","depth":3,"path":"auth/frontend/page/README.md","ref":"auth/frontend/page/README.md","articles":[]},{"title":"ルーティングの設定","level":"1.8.1.2","depth":3,"path":"auth/frontend/routing/README.md","ref":"auth/frontend/routing/README.md","articles":[]},{"title":"ユーザーコンテクストの作成","level":"1.8.1.3","depth":3,"path":"auth/frontend/context/README.md","ref":"auth/frontend/context/README.md","articles":[]},{"title":"ナビゲーションメニューの切替","level":"1.8.1.4","depth":3,"path":"auth/frontend/header/README.md","ref":"auth/frontend/header/README.md","articles":[]},{"title":"サインアップ","level":"1.8.1.5","depth":3,"path":"auth/frontend/signup/README.md","ref":"auth/frontend/signup/README.md","articles":[]},{"title":"ログイン","level":"1.8.1.6","depth":3,"path":"auth/frontend/login/README.md","ref":"auth/frontend/login/README.md","articles":[]},{"title":"ログアウト","level":"1.8.1.7","depth":3,"path":"auth/frontend/logout/README.md","ref":"auth/frontend/logout/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/page/README.md","mtime":"2025-05-16T02:27:53.233Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

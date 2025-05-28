@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -782,15 +782,16 @@
                                 
                                 <html><head></head><body><h1 id="ナビゲーションメニューの切替"><a name="ナビゲーションメニューの切替" class="plugin-anchor" href="#ナビゲーションメニューの切替"><i class="fa fa-link" aria-hidden="true"></i></a>ナビゲーションメニューの切替</h1>
 <p>ユーザーコンテクストを使用して、ナビゲーションメニューが切り替わるように実装します。</p>
-<h2 id="ナビゲーションメニュー切替処理を実装"><a name="ナビゲーションメニュー切替処理を実装" class="plugin-anchor" href="#ナビゲーションメニュー切替処理を実装"><i class="fa fa-link" aria-hidden="true"></i></a>ナビゲーションメニュー切替処理を実装</h2>
+<h2 id="ナビゲーションメニュー切替処理の実装"><a name="ナビゲーションメニュー切替処理の実装" class="plugin-anchor" href="#ナビゲーションメニュー切替処理の実装"><i class="fa fa-link" aria-hidden="true"></i></a>ナビゲーションメニュー切替処理の実装</h2>
 <p><code>NavigationHeader</code>コンポーネントにナビゲーションメニューの切替処理を実装します。</p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./NavigationHeader.css&apos;</span>;
-<span class="hljs-keyword">import</span> { Link } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-router-dom&apos;</span>;
-<span class="hljs-keyword">import</span> { useUserContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../contexts/UserContext&apos;</span>;
+<p><code>src/components/navigation-header/NavigationHeader.tsx</code></p>
+<pre><code class="lang-jsx"><span class="hljs-string">&apos;use client&apos;</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./NavigationHeader.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> Link <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;next/link&apos;</span>;
+<span class="hljs-keyword">import</span> {useUserContext} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../../contexts/UserContext&apos;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> NavigationHeader: React.FC = <span class="hljs-function">() =&gt;</span> {
-
   <span class="hljs-keyword">const</span> userContext = useUserContext();
 
   <span class="hljs-keyword">const</span> logout = <span class="hljs-keyword">async</span> () =&gt; {
@@ -798,20 +799,22 @@
   };
 
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_header&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_title&quot;</span>&gt;</span>Todoアプリ<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.header}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.title}</span>&gt;</span>ToDoアプリ<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;PageHeader_nav&quot;</span>&gt;</span>
-          { userContext.isLoggedIn ? (
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.nav}</span>&gt;</span>
+          {userContext.isLoggedIn ? (
             <span class="hljs-tag">&lt;<span class="hljs-name">React.Fragment</span>&gt;</span>
               <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>{userContext.userName}さん<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
               <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{logout}</span>&gt;</span>ログアウト<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;button&apos;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{logout}</span>&gt;</span>
+                  ログアウト
+                <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
               <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">React.Fragment</span>&gt;</span>
           ) : (
             <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/login&quot;</span>&gt;</span>ログイン<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">Link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&apos;/login&apos;</span>&gt;</span>ログイン<span class="hljs-tag">&lt;/<span class="hljs-name">Link</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
           )}
         <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
@@ -820,9 +823,9 @@
   );
 };
 </code></pre>
-<p>ユーザーコンテクストは先ほど作成した<code>useUserContext</code>で取得します。ユーザーコンテクストからログイン済みであるかを取得し、それによりメニューを切り替えます。</p>
+<p>ユーザーコンテクストは前章で作成した<code>useUserContext</code>で取得します。ユーザーコンテクストからログイン済みであるかを取得し、その状態によりメニューを切り替えます。</p>
 <h2 id="動作確認"><a name="動作確認" class="plugin-anchor" href="#動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>動作確認</h2>
-<p>単体での動作確認がしづらいため、最後にまてめて動作を確認します。</p>
+<p>単体での動作確認がしづらいため、最後にまとめて動作を確認します。</p>
 </body></html>
                                 
                                 </section>
@@ -866,7 +869,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ナビゲーションメニューの切替","level":"1.8.1.4","depth":3,"next":{"title":"サインアップ","level":"1.8.1.5","depth":3,"path":"auth/frontend/signup/README.md","ref":"auth/frontend/signup/README.md","articles":[]},"previous":{"title":"ユーザーコンテクストの作成","level":"1.8.1.3","depth":3,"path":"auth/frontend/context/README.md","ref":"auth/frontend/context/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/header/README.md","mtime":"2023-11-06T02:43:38.341Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ナビゲーションメニューの切替","level":"1.8.1.4","depth":3,"next":{"title":"サインアップ","level":"1.8.1.5","depth":3,"path":"auth/frontend/signup/README.md","ref":"auth/frontend/signup/README.md","articles":[]},"previous":{"title":"ユーザーコンテクストの作成","level":"1.8.1.3","depth":3,"path":"auth/frontend/context/README.md","ref":"auth/frontend/context/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"auth/frontend/header/README.md","mtime":"2025-05-16T02:27:53.233Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

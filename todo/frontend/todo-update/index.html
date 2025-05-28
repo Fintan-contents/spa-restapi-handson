@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -785,70 +785,84 @@
 <h2 id="stateの設計"><a name="stateの設計" class="plugin-anchor" href="#stateの設計"><i class="fa fa-link" aria-hidden="true"></i></a>stateの設計</h2>
 <p>ToDoの状態を更新するコンポーネントで、どのような状態が必要になるかを考えていきます。</p>
 <p>ToDoの状態を更新するためのチェックボックスがあるコンポーネントは、<code>TodoItem</code>です。</p>
-<p>チェックするToDoのstateは<code>TodoBoard</code>に配置しているため、ToDoの登録と同じように、<code>TodoBoard</code>から更新用のコールバック関数をプロパティで渡すようにします。</p>
+<p>チェックするToDoのstateは<code>TodoBoard</code>に配置しているため、ToDoの登録と同様に、<code>TodoBoard</code>から更新用のコールバック関数をプロパティで渡します。</p>
 <h2 id="rest-apiの呼び出しとstateの更新"><a name="rest-apiの呼び出しとstateの更新" class="plugin-anchor" href="#rest-apiの呼び出しとstateの更新"><i class="fa fa-link" aria-hidden="true"></i></a>REST APIの呼び出しとstateの更新</h2>
-<p>登録のときと同様に、stateの更新用のコールバック関数をプロパティで渡すように実装します。</p>
-<p>登録のときは、<code>TodoForm</code>でREST APIを呼び出した後に、結果をコールバック関数に渡して実行していました。<code>TodoForm</code>での実装は簡易さを重視してそのようにしましたが、ToDoのstateと更新処理は関連が深く、本来は近いところにある方が望ましくもあります。そのため、ここでは<code>TodoBoard</code>で実装する関数内でREST APIの呼び出しも行うようにします。</p>
+<p>ToDoの登録のときと同様に、stateの更新用のコールバック関数をプロパティで渡すように実装します。</p>
+<p>登録の時は、実装の簡易さを重視して<code>TodoForm</code>内でREST APIを呼び出していました。
+しかし、フロントエンドのstateとバックエンドの永続化データが密接に関連している場合、stateの更新とREST APIの呼び出しを近くで扱うことが本来は望ましいです。そこで、今回は<code>TodoBoard</code>内でToDo更新のREST APIを呼び出すように実装します。</p>
 <h3 id="todoitemの実装"><a name="todoitemの実装" class="plugin-anchor" href="#todoitemの実装"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoItem</code>の実装</h3>
 <p><code>TodoItem</code>では、<code>TodoList</code>からチェックがされるたびに状態を反転して更新する関数を受け取るようプロパティを追加します。受け取った関数はチェックされるたびに実行したいため、チェックボックスの<code>onChange</code>で実行するようにします。</p>
+<p><code>src/components/board/list/item/TodoItem.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoItem.css&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoItem.module.css&apos;</span>;
 
 type Props = {
-  <span class="hljs-attr">id</span>: number
-  <span class="hljs-attr">text</span>: string
-  <span class="hljs-attr">completed</span>: boolean
-  <span class="hljs-attr">toggleTodoCompletion</span>: <span class="hljs-function">(<span class="hljs-params">id: number</span>) =&gt;</span> <span class="hljs-keyword">void</span>
-}
+  <span class="hljs-attr">id</span>: number;
+  text: string;
+  completed: boolean;
+  toggleTodoCompletion: <span class="hljs-function">(<span class="hljs-params">id: number</span>) =&gt;</span> <span class="hljs-keyword">void</span>;
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoItem: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{id, text, completed, toggleTodoCompletion}</span>) =&gt;</span> {
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_item&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_todo&quot;</span>&gt;</span>
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.item}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.todo}</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span>
-                 <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_checkbox&quot;</span>
-                 <span class="hljs-attr">checked</span>=<span class="hljs-string">{completed}</span>
-                 <span class="hljs-attr">onChange</span>=<span class="hljs-string">{()</span> =&gt;</span> toggleTodoCompletion(id)} /&gt;
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">&apos;checkbox&apos;</span>
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.checkbox}</span>
+            <span class="hljs-attr">checked</span>=<span class="hljs-string">{completed}</span>
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{()</span> =&gt;</span> toggleTodoCompletion(id)}
+          /&gt;
           <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{text}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_delete&quot;</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoItem_button&quot;</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.delete}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.button}</span>&gt;</span>
+          x
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
   );
 };
 </code></pre>
 <h3 id="todolistの実装"><a name="todolistの実装" class="plugin-anchor" href="#todolistの実装"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoList</code>の実装</h3>
-<p><code>TodoList</code>でも、同様に関数を受け取るためのプロパティを追加します。受け取った関数は<code>TodoItem</code>にそのまま渡すようにします。</p>
+<p><code>TodoList</code>でも、同様に関数を受け取るためのプロパティを追加します。受け取った関数は<code>TodoItem</code>にそのまま渡します。</p>
+<p><code>src/components/board/list/TodoList.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./TodoList.css&apos;</span>;
-<span class="hljs-keyword">import</span> { TodoItem } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoItem&apos;</span>;
+<span class="hljs-keyword">import</span> styles <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./TodoList.module.css&apos;</span>;
+<span class="hljs-keyword">import</span> {TodoItem} <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./item/TodoItem&apos;</span>;
 
 type Todo = {
-  <span class="hljs-attr">id</span>: number
-  <span class="hljs-attr">text</span>: string
-  <span class="hljs-attr">completed</span>: boolean
-}
+  <span class="hljs-attr">id</span>: number;
+  text: string;
+  completed: boolean;
+};
 
 type Props = {
-  <span class="hljs-attr">todos</span>: Todo[],
-  <span class="hljs-attr">toggleTodoCompletion</span>: <span class="hljs-function">(<span class="hljs-params">id: number</span>) =&gt;</span> <span class="hljs-keyword">void</span>
-}
+  <span class="hljs-attr">todos</span>: Todo[];
+  toggleTodoCompletion: <span class="hljs-function">(<span class="hljs-params">id: number</span>) =&gt;</span> <span class="hljs-keyword">void</span>;
+};
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoList: React.FC&lt;Props&gt; = <span class="hljs-function">(<span class="hljs-params">{todos, toggleTodoCompletion}</span>) =&gt;</span> {
   <span class="hljs-keyword">return</span> (
-    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;TodoList_list&quot;</span>&gt;</span>
-      {todos.map(todo =&gt;
-        <span class="hljs-tag">&lt;<span class="hljs-name">TodoItem</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{todo.id}</span> <span class="hljs-attr">id</span>=<span class="hljs-string">{todo.id}</span> <span class="hljs-attr">text</span>=<span class="hljs-string">{todo.text}</span> <span class="hljs-attr">completed</span>=<span class="hljs-string">{todo.completed}</span> <span class="hljs-attr">toggleTodoCompletion</span>=<span class="hljs-string">{toggleTodoCompletion}/</span>&gt;</span>
-      )}
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{styles.list}</span>&gt;</span>
+      {todos.map(todo =&gt; (
+        <span class="hljs-tag">&lt;<span class="hljs-name">TodoItem</span>
+          <span class="hljs-attr">key</span>=<span class="hljs-string">{todo.id}</span>
+          <span class="hljs-attr">id</span>=<span class="hljs-string">{todo.id}</span>
+          <span class="hljs-attr">text</span>=<span class="hljs-string">{todo.text}</span>
+          <span class="hljs-attr">completed</span>=<span class="hljs-string">{todo.completed}</span>
+          <span class="hljs-attr">toggleTodoCompletion</span>=<span class="hljs-string">{toggleTodoCompletion}</span>
+        /&gt;</span>
+      ))}
     <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
   );
 };
 </code></pre>
 <h3 id="todoboardの実装"><a name="todoboardの実装" class="plugin-anchor" href="#todoboardの実装"><i class="fa fa-link" aria-hidden="true"></i></a><code>TodoBoard</code>の実装</h3>
 <p><code>TodoBoard</code>では、ToDoの状態を更新するREST APIを呼び出し、その結果からstateを更新する関数を定義します。その関数は、先ほど追加した<code>TodoList</code>のプロパティに渡します。</p>
+<p><code>src/components/board/TodoBoard.tsx</code></p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodoBoard: React.FC = <span class="hljs-function">() =&gt;</span> {
 ...
   <span class="hljs-keyword">const</span> toggleTodoCompletion = <span class="hljs-function">(<span class="hljs-params">id: number</span>) =&gt;</span> {
@@ -856,21 +870,22 @@ type Props = {
     <span class="hljs-keyword">if</span> (!target) {
       <span class="hljs-keyword">return</span>;
     }
-    BackendService.putTodo(id, !target.completed)
-      .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> setTodos(
-        todos.map(<span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> todo.id === response.id ? response : todo)
-      ));
+    BackendService.putTodo(id, !target.completed).then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span>
+      setTodos(todos.map(<span class="hljs-function"><span class="hljs-params">todo</span> =&gt;</span> (todo.id === response.id ? response : todo))),
+    );
   };
 
   <span class="hljs-keyword">return</span> (
 ...
-      &lt;TodoList todos={todos} toggleTodoCompletion={toggleTodoCompletion}/&gt;
+      &lt;TodoList todos={todos} toggleTodoCompletion={toggleTodoCompletion} /&gt;
 ...
 </code></pre>
-<p><code>addTodo</code>とは違い、ToDoの更新手段についても<code>TodoBoard</code>まで引き上げた形になりました。</p>
+<p><code>setTodos</code>を実行するだけの<code>addTodo</code>とは違い、ToDo更新のREST API呼び出しについても<code>TodoBoard</code>まで引き上げた形になりました。</p>
+<p>上記の実装を進める中で<code>TodoItem.tsx</code>で<code>onChange</code>ハンドラを実装しました。
+そのため、ページ外観の作成から発生していたエラーはここで解消されます。</p>
 <h2 id="モックを使用した動作確認"><a name="モックを使用した動作確認" class="plugin-anchor" href="#モックを使用した動作確認"><i class="fa fa-link" aria-hidden="true"></i></a>モックを使用した動作確認</h2>
-<p>ToDoページを表示して、チェックボックスをクリックしてToDoを完了にできるか確認します。OpenAPIドキュメントの<code>example</code>には<code>id</code>が<code>2002</code>で定義しているため、二行目の「やること２」のチェックボックスにチェックを入れることができるかどうかを確認します。</p>
-<p>確認ができたら、フロントエンドの実装は完了です。</p>
+<p>ToDoページを表示して、チェックボックスをクリックしてToDoを完了にできるか確認します。OpenAPIドキュメントの<code>example</code>には<code>id</code>が<code>2002</code>で定義しているため、二行目の「やること２」のチェックボックスにチェックを入れることができるか確認します。（OpenAPIドキュメントで、<code>putTodo</code>の<code>example</code>には<code>completed: true</code>が設定されています。そのため、モックサーバを使用した動作確認ではチェックを外す操作はできません。）</p>
+<p>確認ができたら、フロントエンドのToDo状態の更新の実装は完了です。</p>
 </body></html>
                                 
                                 </section>
@@ -914,7 +929,7 @@ type Props = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"next":{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"path":"todo/frontend/todo-filter/README.md","ref":"todo/frontend/todo-filter/README.md","articles":[]},"previous":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-update/README.md","mtime":"2023-11-06T02:43:38.360Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ToDo状態の更新","level":"1.6.1.8","depth":3,"next":{"title":"ToDo一覧の絞り込み","level":"1.6.1.9","depth":3,"path":"todo/frontend/todo-filter/README.md","ref":"todo/frontend/todo-filter/README.md","articles":[]},"previous":{"title":"ToDoの登録","level":"1.6.1.7","depth":3,"path":"todo/frontend/todo-add/README.md","ref":"todo/frontend/todo-add/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/todo-update/README.md","mtime":"2025-05-16T02:27:53.274Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

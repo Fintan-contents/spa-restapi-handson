@@ -107,7 +107,7 @@
                 <a href="../../../">
             
                     
-                    この資料について
+                    SPA + REST API構成のハンズオン
             
                 </a>
             
@@ -783,7 +783,7 @@
                                 <html><head></head><body><h1 id="rest-apiクライアントの作成"><a name="rest-apiクライアントの作成" class="plugin-anchor" href="#rest-apiクライアントの作成"><i class="fa fa-link" aria-hidden="true"></i></a>REST APIクライアントの作成</h1>
 <p>ToDo一覧を実装する際には、バックエンドのREST APIにアクセスする必要があります。ここでは、OpenAPIドキュメントを利用してREST APIのクライアントを作成します。</p>
 <h2 id="openapiドキュメントの確認"><a name="openapiドキュメントの確認" class="plugin-anchor" href="#openapiドキュメントの確認"><i class="fa fa-link" aria-hidden="true"></i></a>OpenAPIドキュメントの確認</h2>
-<p>REST APIをOpenAPI仕様で記述したOpenAPIドキュメントは、プロジェクト作成時に作成しています。（参考：<a href="https://swagger.io/specification/" target="_blank">OpenAPI - Specification</a>）</p>
+<p>REST APIをOpenAPI仕様で記述したOpenAPIドキュメントは、プロジェクト作成時に作成しています。（参考：<a href="https://swagger.io/specification/" target="_blank">OpenAPI Specification | Swagger</a>）</p>
 <p>バックエンドの<code>rest-api-specification/openapi.yaml</code>ファイルがOpenAPIドキュメントになるため、内容を確認します。</p>
 <p>例えば、ToDoの一覧を取得するためのREST APIは、次のように定義されています。</p>
 <pre><code class="lang-yaml">  <span class="hljs-string">/api/todos:</span>
@@ -843,7 +843,7 @@
         <span class="hljs-bullet">-</span> <span class="hljs-string">completed</span>
       <span class="hljs-attr">additionalProperties:</span> <span class="hljs-literal">false</span>
 </code></pre>
-<p><code>properties</code>には、このコンポーネントの項目を定義します。全ての項目が必ず必要であるため、<code>required</code>には全ての項目を定義します。ここで定義していない項目が追加で返却されることは想定していないため、<code>additionalProperties</code>には<code>false</code>を定義します。</p>
+<p><code>properties</code>には、このコンポーネントの項目を定義します。全ての項目が必ず必要であるため、<br><code>required</code>には全ての項目を定義します。ここで定義していない項目が追加で返却されることは想定していないため、<code>additionalProperties</code>には<code>false</code>を定義します。</p>
 <p><code>content</code>内の<code>examples</code>に、実際に返却される例を定義します。</p>
 <p>これらから、REST APIで返却されるJSONは、次のようなイメージになります。</p>
 <pre><code class="lang-json">{
@@ -870,27 +870,27 @@
 </code></pre><p>実行が完了すると、<code>src</code>の下に<code>backend</code>ディレクトリが生成され、その配下に<code>generated-rest-client</code>ディレクトリが生成されます。この<code>generated-rest-client</code>配下に、自動生成されたクライアントコードが格納されています。</p>
 <p>フロントエンドでREST APIを呼び出す際には、このクライアントコードを使用していきます。</p>
 <h2 id="クライアントコードのラッパーを作成"><a name="クライアントコードのラッパーを作成" class="plugin-anchor" href="#クライアントコードのラッパーを作成"><i class="fa fa-link" aria-hidden="true"></i></a>クライアントコードのラッパーを作成</h2>
-<p>OpenAPIドキュメントからREST APIのクライアントコードを生成しましたが、使用時には同じ設定を行うことが多くなります。そこで、共通的な設定がされたクライアントコードを使用するために、生成したクライアントコードをラッピングした<code>BackendSerivce</code>を作成します。コンポーネントからREST APIにアクセスする際には、生成したクライアントコードは直接使用せずに、この<code>BackendSerivce</code>を使用するようにします。</p>
+<p>OpenAPIドキュメントからREST APIのクライアントコードを生成しましたが、使用時には同じ設定を行うことが多くなります。そこで、共通的な設定がされたクライアントコードを使用するために、生成したクライアントコードをラッピングした<code>BackendService</code>を作成します。コンポーネントからREST APIにアクセスする際には、生成したクライアントコードは直接使用せずに、この<code>BackendService</code>を使用するようにします。</p>
 <p><code>src/backend</code>ディレクトリに<code>BackendService.ts</code>を作成します。</p>
 <p><code>src/backend/BackendService.ts</code></p>
 <pre><code class="lang-js"><span class="hljs-keyword">import</span> {
   Configuration,
   TodosApi,
   Middleware,
-  UsersApi
+  UsersApi,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./generated-rest-client&apos;</span>;
 
 <span class="hljs-keyword">const</span> requestLogger: Middleware = {
-  <span class="hljs-attr">pre</span>: <span class="hljs-keyword">async</span> (context) =&gt; {
+  <span class="hljs-attr">pre</span>: <span class="hljs-keyword">async</span> context =&gt; {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`&gt;&gt; <span class="hljs-subst">${context.init.method}</span> <span class="hljs-subst">${context.url}</span>`</span>, context.init);
   },
-  <span class="hljs-attr">post</span>: <span class="hljs-keyword">async</span> (context) =&gt; {
+  <span class="hljs-attr">post</span>: <span class="hljs-keyword">async</span> context =&gt; {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`&lt;&lt; <span class="hljs-subst">${context.response.status}</span> <span class="hljs-subst">${context.url}</span>`</span>, context.response);
-  }
+  },
 };
 
 <span class="hljs-keyword">const</span> configuration = <span class="hljs-keyword">new</span> Configuration({
-  <span class="hljs-attr">middleware</span>: [requestLogger]
+  <span class="hljs-attr">middleware</span>: [requestLogger],
 });
 
 <span class="hljs-keyword">const</span> todosApi = <span class="hljs-keyword">new</span> TodosApi(configuration);
@@ -898,11 +898,11 @@
 <span class="hljs-keyword">const</span> usersApi = <span class="hljs-keyword">new</span> UsersApi(configuration);
 
 <span class="hljs-keyword">const</span> signup = <span class="hljs-keyword">async</span> (userName: string, <span class="hljs-attr">password</span>: string) =&gt; {
-  <span class="hljs-keyword">return</span> usersApi.signup({ <span class="hljs-attr">inlineObject2</span> : { userName, password }});
+  <span class="hljs-keyword">return</span> usersApi.signup({<span class="hljs-attr">inlineObject2</span>: {userName, password}});
 };
 
 <span class="hljs-keyword">const</span> login = <span class="hljs-keyword">async</span> (userName: string, <span class="hljs-attr">password</span>: string) =&gt; {
-  <span class="hljs-keyword">return</span> usersApi.login({ <span class="hljs-attr">inlineObject3</span>: { userName, password }});
+  <span class="hljs-keyword">return</span> usersApi.login({<span class="hljs-attr">inlineObject3</span>: {userName, password}});
 };
 
 <span class="hljs-keyword">const</span> logout = <span class="hljs-keyword">async</span> () =&gt; {
@@ -914,11 +914,11 @@
 };
 
 <span class="hljs-keyword">const</span> postTodo = <span class="hljs-keyword">async</span> (text: string) =&gt; {
-  <span class="hljs-keyword">return</span> todosApi.postTodo({ <span class="hljs-attr">inlineObject</span>: { text }});
+  <span class="hljs-keyword">return</span> todosApi.postTodo({<span class="hljs-attr">inlineObject</span>: {text}});
 };
 
 <span class="hljs-keyword">const</span> putTodo = <span class="hljs-keyword">async</span> (todoId: number, <span class="hljs-attr">completed</span>: boolean) =&gt; {
-  <span class="hljs-keyword">return</span> todosApi.putTodo({ todoId, <span class="hljs-attr">inlineObject1</span>: { completed }});
+  <span class="hljs-keyword">return</span> todosApi.putTodo({todoId, <span class="hljs-attr">inlineObject1</span>: {completed}});
 };
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> BackendService = {
@@ -927,7 +927,7 @@
   logout,
   getTodos,
   postTodo,
-  putTodo
+  putTodo,
 };
 </code></pre>
 <p>生成されたクライアントコードでは、REST APIを呼び出すためには<code>TodosApi</code>等のAPIクラスのオブジェクトを生成する必要があります。生成時には設定オブジェクトを渡すことで、様々な設定をすることができます。</p>
@@ -976,7 +976,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"next":{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},"previous":{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/api/README.md","mtime":"2023-11-06T02:43:38.355Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2023-12-25T02:59:49.855Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"REST APIクライアントの作成","level":"1.6.1.3","depth":3,"next":{"title":"CORSの設定","level":"1.6.1.4","depth":3,"path":"todo/frontend/cors/README.md","ref":"todo/frontend/cors/README.md","articles":[]},"previous":{"title":"コンポーネントの分割","level":"1.6.1.2","depth":3,"path":"todo/frontend/component/README.md","ref":"todo/frontend/component/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["page-toc-button","anchors","hints","search-pro-fixed","-lunr","-search","hide-published-with"],"root":"./source","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"README.md"},"variables":{},"gitbook":"*"},"file":{"path":"todo/frontend/api/README.md","mtime":"2025-05-16T02:27:53.263Z","type":"markdown"},"gitbook":{"version":"3.7.5","time":"2025-05-16T05:38:42.926Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
